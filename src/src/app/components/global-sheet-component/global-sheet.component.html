@@ -1,0 +1,46 @@
+<h1>GLOBAL SHEETS</h1>
+<div *ngIf="loaded">
+    <div class="row">
+        <div class="col-3">
+            <div (click)="onClickCurrentSheet($event, currentSheet.questionSheetId)">
+                <div class="card mb-2" style="border: 3px solid rgba(0, 0, 0, 0.6)">
+                    <div class="card-body">
+                        <h6 class="card-title">{{currentSheet.name}}</h6>
+                        <div *ngIf="isAdmin">
+                            <a href="#">Create Sheet</a> <br />
+                            <a href="#">Create Question</a> <br />
+                        </div>
+                        <div *ngIf="isUser">
+                            <a href="#">Copy Questions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div (click)="onClickChild($event, child.id)" *ngFor="let child of currentSheet.children">
+                <div class="card mb-2" style="border: 3px solid rgba(100, 100, 100, 0.6)">
+                    <div class="card-body">
+                        <h6 className="card-title">{{child.name}}</h6>
+                        <div *ngIf="isAdmin">
+                            <a href="#">Delete</a>
+                            <a href="#" class="ml-2">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div (click)="onClickQuestion($event, question.id)" *ngFor="let question of currentSheet.globalQuestions">
+                <div class="card mb-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                    <div class="card-body">
+                        <h6 className="card-title">{{question.name}}</h6>
+                        <p className="card-text">{{question.description}}</p>
+                        <div *ngIf="isAdmin">
+                            <a href="#" class="ml-1">Delete</a>
+                            <a href="#" class="ml-1">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
