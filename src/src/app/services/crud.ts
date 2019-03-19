@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
+import CrudResult from './models/other/crud-result';
+import { Response } from "@angular/http/src/static_response";
 
 const fetchRoot = "https://localhost:44384/api/";
 
@@ -8,16 +10,16 @@ export class Crud {
     constructor(private http: Http) {
     }
 
-    async get(path: string, data: string = "") {
-        return await this.handleResponse(
+    async get<type>(path: string, data: string = "") {
+        return await this.handleResponse<type>(
             this.http.get(fetchRoot + path + "/" + data, {
                 headers: this.generateHeaders()
             }).toPromise()
         );
     }
 
-    async post(path: string, data: object) {
-        return this.handleResponse(
+    async post<type>(path: string, data: object) {
+        return this.handleResponse<type>(
             this.http.post(fetchRoot + path, JSON.stringify(data), {
                 headers: this.generateHeaders()
             }).toPromise()
@@ -38,7 +40,7 @@ export class Crud {
         return headers;
     }
 
-    private async handleResponse(promise: Promise<any>) {
+    private async handleResponse<type>(promise: Promise<Response>): Promise<CrudResult<type>> {
         let result = await promise;
 
         let json;
@@ -48,12 +50,6 @@ export class Crud {
             json = "No Body";
         }
 
-        if (result.status === 200) {
-            return { status: 200, data: json};
-        } else if (result.status === 400) {
-            return { status: 400, message: json };
-        } else {
-            return { status: 500, result, json }
-        }
+        return new CrudResult<type>(result.status, json, json, result);
     }
 }

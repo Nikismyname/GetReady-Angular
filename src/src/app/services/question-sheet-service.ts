@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { Crud } from "./crud";
-import QsGlobalIndex from "./models/question-sheet/qsGlobalIndex"
+import QsGlobalIndex from "./models/question-sheet/qsGlobalIndex";
+//import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
 
 @Injectable()
 export class QuestionSheetService {
@@ -9,7 +10,7 @@ export class QuestionSheetService {
     
     async getGlobalIndex(id) { //x
         try {
-            let result = await this.crud.get("QuestionSheet/GetGlobalIndex", id);
+            let result = await this.crud.get<QsGlobalIndex>("QuestionSheet/GetGlobalIndex", id);
             return result;
         } catch (err) {
             this.handleError(err);
@@ -18,7 +19,7 @@ export class QuestionSheetService {
 
     async getPersonalIndex(id) { //x
         try {
-            let result = await this.crud.get("QuestionSheet/GetPersonalIndex", id)
+            let result = await this.crud.get("QuestionSheet/GetPersonalIndex", id);
             return result;
         } catch (err) {
             this.handleError(err);

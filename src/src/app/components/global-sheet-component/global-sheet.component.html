@@ -28,19 +28,59 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div (click)="onClickQuestion($event, question.id)" *ngFor="let question of currentSheet.globalQuestions">
-                <div class="card mb-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
-                    <div class="card-body">
-                        <h6 className="card-title">{{question.name}}</h6>
-                        <p className="card-text">{{question.description}}</p>
-                        <div *ngIf="isAdmin">
-                            <a href="#" class="ml-1">Delete</a>
-                            <a href="#" class="ml-1">Edit</a>
+
+        <div cdkDropListGroup class="col-9">
+
+            <div class="row">
+
+                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="1" class="col-4">
+                    <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngFor="let question of col1">
+                        <div class="card mb-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                            <div class="card-body">
+                                <h6 className="card-title">{{question.name}}</h6>
+                                <!-- <p className="card-text">{{question.description}}</p> -->
+                                <div *ngIf="isAdmin">
+                                    <a href="#" class="ml-1">Delete</a>
+                                    <a href="#" class="ml-1">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="2" class="col-4">
+                    <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngFor="let question of col2">
+                        <div class="card mb-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                            <div class="card-body">
+                                <h6 className="card-title">{{question.name}}</h6>
+                                <!-- <p className="card-text">{{question.description}}</p> -->
+                                <div *ngIf="isAdmin">
+                                    <a href="#" class="ml-1">Delete</a>
+                                    <a href="#" class="ml-1">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="3" class="col-4">
+                    <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngFor="let question of col3">
+                        <div class="card mb-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                            <div class="card-body">
+                                <h6 className="card-title">{{question.name}}</h6>
+                                <!-- <p className="card-text">{{question.description}}</p> -->
+                                <div *ngIf="isAdmin">
+                                    <a href="#" class="ml-1">Delete</a>
+                                    <a href="#" class="ml-1">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
+
     </div>
 </div>
