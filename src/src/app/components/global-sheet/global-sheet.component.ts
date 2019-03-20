@@ -3,16 +3,22 @@ import { QuestionSheetService } from "../../services/question-sheet-service";
 import QsGlobalIndex from "src/app/services/models/question-sheet/qsGlobalIndex";
 import QGlobalIndex from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
+import { ActivatedRoute } from "@angular/router";
+import * as c from "../../utilities/route-paths";
 
 @Component({
-    selector: "global-sheet",
+    selector: "getready-global-sheet",
     templateUrl: "./global-sheet.component.html",
 })
-export class GlobalSheet {
+export class GlobalSheetComponent {
     constructor(
         private questionSheetService: QuestionSheetService,
         private reorderService: ReorderService,
-    ) { }
+        private route: ActivatedRoute,
+    ) { 
+        let id = this.route.snapshot.paramMap.get("id");
+        this.fetchSheet(id);
+    }
 
     currentSheet: QsGlobalIndex;
     loaded: boolean = false;
@@ -23,7 +29,6 @@ export class GlobalSheet {
     col3: QGlobalIndex[];
 
     async ngOnInit() {
-        this.fetchSheet(-1);
     }
 
     async fetchSheet(id) {
@@ -33,6 +38,10 @@ export class GlobalSheet {
 
         let qsResult = await this.questionSheetService.getGlobalIndex(id);
         if (qsResult.status === 200) {
+
+            let newPath = c.globalQuestionSheetsPath + "/" + id;
+            window.history.pushState(null, null, newPath);
+
             let col1: QGlobalIndex[] = [];
             let col2: QGlobalIndex[] = [];
             let col3: QGlobalIndex[] = [];

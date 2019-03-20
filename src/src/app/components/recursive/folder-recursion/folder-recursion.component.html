@@ -1,0 +1,13 @@
+<div *ngIf="loaded">
+  {{currentNode.name}}
+  <div class="ml-4">
+      <getready-folder-recursion 
+        *ngFor="let folder of getChildFolders()"
+        (selected)="childEmited($event)"
+        [currentNode] ="folder"
+        [allNotes] = "allNotes"
+        (click)= "onClickNode(folder.id)"
+      >
+      </getready-folder-recursion>
+  </div>
+</div>

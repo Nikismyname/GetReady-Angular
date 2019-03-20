@@ -17,8 +17,19 @@ html *
    /* transition: transform 300ms ease; */
 }
 
-.cdk-drag-placeholder {
+/* .cdk-drag-placeholder {
    background-color: #32383e !important;
    color: #32383e !important; 
    z-index: 3000;
+} */
+
+/* custom placeholder */
+.box-custom-placeholder {
+   /* height: inherit !important;
+   width: inherit !important;
+   background: #32383e; */
+   /* transition: transform 200ms ease; */
+   background: #32383e;
+   min-height: 6em; 
+   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

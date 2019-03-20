@@ -1,0 +1,9 @@
+<getready-folder-recursion
+  *ngIf="loaded"
+  (selected)="itemSelected()"
+  [currentNode] ="root"
+  [allNotes] = "data"
+  (click) = "itemSelected(root.id)"
+>
+</getready-folder-recursion>
+

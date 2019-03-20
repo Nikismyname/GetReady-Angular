@@ -26,6 +26,24 @@ export class QuestionSheetService {
         }
     }
 
+    async getAllFoldersPersonal() { //x
+        try {
+            let result = await this.crud.get("QuestionSheet/GetAllPersonal");
+            return result;
+        } catch (err) {
+            this.handleError(err);
+        }
+    }
+
+    async getAllFoldersGlobal() { //x
+        try {
+            let result = await this.crud.get("QuestionSheet/GetAllFoldersGlobal");
+            return result;
+        } catch (err) {
+            this.handleError(err);
+        }
+    }
+
     private handleError(err) {
         console.log(err);
     }
