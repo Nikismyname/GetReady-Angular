@@ -37,7 +37,7 @@ export class QuestionSheetService {
 
     async getAllFoldersGlobal() { //x
         try {
-            let result = await this.crud.get("QuestionSheet/GetAllFoldersGlobal");
+            let result = await this.crud.get<any[]>("QuestionSheet/GetAllFoldersGlobal");
             return result;
         } catch (err) {
             this.handleError(err);

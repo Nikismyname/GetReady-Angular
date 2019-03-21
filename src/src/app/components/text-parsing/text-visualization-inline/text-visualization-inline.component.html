@@ -1,0 +1,25 @@
+<div *ngIf="loaded">
+    <span *ngFor="let section of formatetText">
+
+      <span 
+        class="m-0 p-0" 
+        style="background-color: purple;white-space: pre" 
+        *ngIf="section.type==='<<p>>'"
+      >{{section.text}}</span>
+
+      <span 
+        class="m-0 p-0" 
+        style="background-color: blue;white-space: pre" 
+        *ngIf="section.type==='text'"
+      >{{section.text}}</span>
+
+      <code 
+        class="m-0 p-0" 
+        style="white-space: pre" 
+        *ngIf="section.type==='<<s>>'"
+        [innerHTML] = "section.text"
+      ></code>
+
+      <br *ngIf="section.type==='<br>'" />
+    </span>
+</div>

@@ -1,9 +1,13 @@
+<h1> Folder Picker </h1>
 <getready-folder-recursion
   *ngIf="loaded"
-  (selected)="itemSelected()"
+  (selected)="folderSelected($event)"
+  (folded)="folderFolded($event)"
   [currentNode] ="root"
   [allNotes] = "data"
-  (click) = "itemSelected(root.id)"
+  [selectedId] = "selectedId"
+  [foldedFolders]= "foldedFolders"
 >
 </getready-folder-recursion>
+<button class="btn btn-primary" (click)="folderFinalChosen()" >Select Folder</button>
 

@@ -1,6 +1,7 @@
 /* GlobalSyles */
 @import url("../node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
 @import url("./app/css/bootstrap-slate-4-1-3.css");
+@import url("./app//components/text-parsing/text-visualization-inline/text-visualization-inline.component.css");
 
 html *
 {

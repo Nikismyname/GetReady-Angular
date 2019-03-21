@@ -7,6 +7,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
 import { FolderSelectorComponent } from "./components/folder-selector/folder-selector.component";
+import { CopyQuestionsComponent } from "./components/copy-questions/copy-questions.component";
+import { EditQuestionComponent } from "./components/edit-question/edit-question.component";
 
 import * as c from "./utilities/route-paths";
 
@@ -28,7 +30,7 @@ const routes: Routes = [
     component: RegisterComponent
   },{
     path: "tests",
-    component: FolderSelectorComponent
+    component: EditQuestionComponent
   }, {
     path: "**",
     component: NotFoundComponent

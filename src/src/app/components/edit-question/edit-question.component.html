@@ -1,0 +1,13 @@
+<textarea #textarea
+  class="form-control-black"
+  autosize
+></textarea>
+<button
+  class="btn btn-primary" 
+  (click)= "onCickDisplay(textarea.value)"
+>Display</button>
+<getready-text-visualization-inline
+  *ngIf="shouldDisplay&&PRLoaded"
+  [text]="text"
+>
+</getready-text-visualization-inline>

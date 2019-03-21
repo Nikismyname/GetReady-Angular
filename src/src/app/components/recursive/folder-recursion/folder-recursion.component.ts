@@ -7,19 +7,37 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FolderRecursionComponent implements OnInit {
 
-  constructor() {}
+  constructor() { 
+  }
+  
+  _foldedFolders: number[] = []; 
+  _selectedId: number = null;
            
   @Input() currentNode: any;
   @Input() allNotes: any;
+  @Input()
+  set foldedFolders(foldedFolders: number[]) {
+    this.isFolded = foldedFolders.includes(this.currentNode.id) ? true : false;
+    this._foldedFolders = foldedFolders;
+  }
+  @Input()
+  set selectedId(selectedId: number) {
+    this.isSelected = selectedId === this.currentNode.id ? true : false; 
+    this._selectedId = selectedId;
+  }
+
   @Output() selected: EventEmitter<number> = new EventEmitter();
+  @Output() folded: EventEmitter<number> = new EventEmitter();
+
   loaded: boolean = false;
-    
+  isSelected: boolean = false; 
+  isFolded: boolean = false;
   ngOnInit() {
     this.loaded = true;
   }
 
   getChildFolders() {
-    if (this.allNotes) {
+    if (this.loaded) {
       return this.allNotes.filter(x => x.questionSheetId === this.currentNode.id);
     } else {
       return [];
@@ -27,11 +45,16 @@ export class FolderRecursionComponent implements OnInit {
   }
 
   onClickNode() {
-    console.log(this.currentNode.name + " Clicked"); 
     this.selected.emit(this.currentNode.id);
   }
-
-  childEmited(e) {
+  childEmitedSelected(e) {    
     this.selected.emit(e);
   }
+
+  onClickFold() {
+    this.folded.emit(this.currentNode.id);
+  }
+  childEmitedFolded(e) {
+    this.folded.emit(e); 
+  } 
 }

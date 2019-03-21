@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuestionSheetService } from 'src/app/services/question-sheet-service';
 
 @Component({
@@ -7,29 +7,37 @@ import { QuestionSheetService } from 'src/app/services/question-sheet-service';
   styleUrls: ['./folder-selector.component.css']
 })
 export class FolderSelectorComponent implements OnInit {
+  constructor() {}
 
-  constructor(
-    private questionSheetService: QuestionSheetService
-  ) {
-    
-  }
+  @Input() data: any[];
+  @Output() folderSelectedOutput: EventEmitter<number> = new EventEmitter(); 
 
   loaded: boolean = false;
-
-  data: any;
+  //data: any;
   root: any;
+  selectedId: number = null;
+  foldedFolders: number[] = [];
 
-  async ngOnInit() {
-    let getResult = await this.questionSheetService.getAllFoldersGlobal();
-    if (getResult.status === 200) {
-      this.data = getResult.data;
-      this.root = this.data.filter(x => x.questionSheetId === null)[0];
-      this.loaded = true;
+  ngOnInit() {
+    this.root = this.data.filter(x => x.questionSheetId === null)[0]; 
+    this.loaded = true;
+  }
+
+  folderSelected(e) {
+    this.selectedId = e; 
+  }
+
+  folderFolded(id) { 
+    if (this.foldedFolders.includes(id)) {
+      this.foldedFolders = this.foldedFolders.filter(x=>x !== id);
+    } else {
+      this.foldedFolders = this.foldedFolders.concat(id);
     }
   }
 
-  itemSelected(e) {
-    console.log("Root event Here");
-    console.log(e);
-  }
+  folderFinalChosen() { 
+    if (this.selectedId !== null) {
+      this.folderSelectedOutput.emit(this.selectedId);
+    }
+  } 
 }

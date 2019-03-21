@@ -1,0 +1,19 @@
+<getready-folder-selector
+  *ngIf="loaded && selectingQuestions"
+  [data]="questionSelectionData"
+  (folderSelectedOutput)="questionsSelected($event)"
+>
+</getready-folder-selector>
+
+<getready-folder-selector
+  *ngIf="loaded && !selectingQuestions" 
+  [data]="folderSelectionData"
+  (folderSelectedOutput)="folderSelected($event)"
+>
+</getready-folder-selector>
+
+<getready-fixed-buttons>
+  <button #buttonRef>b1</button>
+  <button #buttonRef>b2</button>
+  <button #buttonRef>b3</button>
+</getready-fixed-buttons>
