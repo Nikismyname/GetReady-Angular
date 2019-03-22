@@ -17,7 +17,7 @@ export class EditQuestionComponent implements OnInit {
 
     let counter = 0;
     let interval = setInterval(() => {
-      if (typeof window.PR !== "undefined") {
+      if (typeof window["PR"] !== "undefined") {
         this.PRLoaded = true;
         clearInterval(interval);
         console.log("PR Loaded");

@@ -1,0 +1,37 @@
+<div class="row">
+
+  <div class="col-8">
+
+    <div class="text-center mb-4 offset-3 col-9">
+      <h1>Form Name Here</h1>
+    </div>
+
+    <div *ngFor="let input of inputData">
+      <div class="row">
+        <label class="col-3 col-form-label text-right">{{input.displayName}}</label>
+        <div class="col-9">
+          <textarea 
+            *ngIf="input.type === 'textarea'"   
+            [(ngModel)] = "submitData[input.name]"
+            (keydown)="handleKeyDown($event, input.name)"
+            class="form-control-black mb-4" 
+            autosize 
+            [minRows]="1"
+            ></textarea>
+          <input 
+            *ngIf="input.type !== 'textarea'" 
+            [(ngModel)] = "submitData[input.name]"
+            class="form-control-black mb-4" 
+            type="{{input.type}}" 
+            name="{{input.name}}"
+            />
+           
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    Something else here;
+  </div>
+  <button (click)="onSubmit()" class="btn btn-default">Submit</button>
+</div>

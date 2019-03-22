@@ -13,6 +13,7 @@ export class TextVisualizationInlineComponent implements OnInit {
   @Input() text: string;
   formatetText: any[] = [];
   loaded: boolean = false;
+  
   ngOnInit() {
     this.formatetText = this.parseInlineElements(this.text);
     console.log(this.formatetText);
@@ -84,7 +85,7 @@ export class TextVisualizationInlineComponent implements OnInit {
       specialText = replaceTags(specialText);
       specialText = trimEnds(specialText);
       if (currTag = "<<s>>") {
-        specialText = window.PR.prettyPrintOne(specialText); 
+        specialText = window["PR"].prettyPrintOne(specialText); 
       }
       result = result.concat({ text: specialText, type: currTag });
       let specialTextSymbolAfterTag = text.slice(endIndex + tagLength, endIndex + tagLength + 1)

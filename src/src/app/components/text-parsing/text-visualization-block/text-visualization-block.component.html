@@ -1,0 +1,18 @@
+<div *ngIf="loaded">
+    <span *ngFor="let section of formatetText">
+
+      <getready-text-visualization-inline 
+        *ngIf="section.type==='inline'"
+        [text]="section.text"
+      ></getready-text-visualization-inline>
+
+      <code 
+        class="m-0 p-0" 
+        style="white-space: pre" 
+        *ngIf="section.type==='<<c>>'"
+        [innerHTML] = "section.text"
+      ></code>
+
+      <br *ngIf="section.type==='<br>'" />
+    </span>
+</div>

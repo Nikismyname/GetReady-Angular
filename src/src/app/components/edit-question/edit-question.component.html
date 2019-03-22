@@ -6,8 +6,8 @@
   class="btn btn-primary" 
   (click)= "onCickDisplay(textarea.value)"
 >Display</button>
-<getready-text-visualization-inline
+<getready-text-visualization-block
   *ngIf="shouldDisplay&&PRLoaded"
   [text]="text"
 >
-</getready-text-visualization-inline>
+</getready-text-visualization-block>
