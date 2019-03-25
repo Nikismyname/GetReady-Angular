@@ -16,6 +16,16 @@ export const testPath = "test";
 export const filterQuestionsPath = "questions/filter";
 export const reviewQuestionsPath = "questions/review";
 
+export const textFormattingMappings = [
+    "<<c>> (A) -> Code Block",
+    "<<e>> (F) -> Emphasis Block",
+    "<<s>> (S) -> Code Inline",
+    "<<em>> (G) -> Emphasis Inline",
+    "<<p>> (D) -> Paragraph <T> Block",
+    "Ctrl+(key) -> puts the coresponding tags around the current selection!",
+    "<T> () -> Transperant, meaning inline formating can be done inside!",
+];
+
 import { Injectable } from "@angular/core";
 @Injectable()
 export default class RoutePaths {

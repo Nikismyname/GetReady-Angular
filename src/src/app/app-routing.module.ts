@@ -8,8 +8,9 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
 import { FolderSelectorComponent } from "./components/folder-selector/folder-selector.component";
 import { CopyQuestionsComponent } from "./components/copy-questions/copy-questions.component";
-import { EditQuestionComponent } from "./components/edit-question/edit-question.component";
 import { BindingFormComponent } from "./components/binding-form/binding-form.component";
+import { ViewGlobalQuestionComponent } from "./components/view-global-question/view-global-question.component";
+import { EditQuestionComponent } from "./components/common/crud/edit-question/edit-question.component";
 
 import * as c from "./utilities/route-paths";
 
@@ -20,6 +21,9 @@ const routes: Routes = [
   },{
     path: c.personalQuestionSheetsPath +"/:id",
     component: PersonalSheetComponent
+  },{
+    path: c.viewGlobalQuestion +"/:id",
+    component: ViewGlobalQuestionComponent
   }, {
     path: c.globalQuestionSheetsPath + "/:id",
     component: GlobalSheetComponent
@@ -29,6 +33,9 @@ const routes: Routes = [
   },{
     path: c.registerPath,
     component: RegisterComponent
+  },{
+    path: c.editQuestionPath+"/:id/:scope",
+    component: EditQuestionComponent
   },{
     path: "tests",
     component: BindingFormComponent

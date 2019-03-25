@@ -1,37 +1,51 @@
-<div class="row">
+<div class="row" *ngIf="loaded">
 
   <div class="col-8">
 
     <div class="text-center mb-4 offset-3 col-9">
-      <h1>Form Name Here</h1>
+      <h1>{{formData.formName}}</h1>
     </div>
 
-    <div *ngFor="let input of inputData">
-      <div class="row">
-        <label class="col-3 col-form-label text-right">{{input.displayName}}</label>
-        <div class="col-9">
-          <textarea 
-            *ngIf="input.type === 'textarea'"   
-            [(ngModel)] = "submitData[input.name]"
-            (keydown)="handleKeyDown($event, input.name)"
-            class="form-control-black mb-4" 
-            autosize 
-            [minRows]="1"
-            ></textarea>
-          <input 
-            *ngIf="input.type !== 'textarea'" 
-            [(ngModel)] = "submitData[input.name]"
-            class="form-control-black mb-4" 
-            type="{{input.type}}" 
-            name="{{input.name}}"
-            />
-           
+    <form (submit)="onSubmit($event)">
+
+      <div *ngFor="let input of formData.inputData">
+        <div class="row">
+          <label class="col-3 col-form-label text-right">{{input.displayName}}</label>
+          <div class="col-9">
+            <textarea *ngIf="input.type === 'textarea'" [(ngModel)]="submitData[input.name]"
+              (keydown)="handleKeyDown($event, input.name)" class="form-control-black mb-4"
+              autosize name="{{input.name}}"
+              [minRows]="1"></textarea>
+            <input *ngIf="input.type !== 'textarea'" [(ngModel)]="submitData[input.name]"
+              class="form-control-black mb-4" type="{{input.type}}" name="{{input.name}}" />
+          </div>
         </div>
       </div>
+
+      <div class="offset-3 col-9">
+        <div style="display: flex; justify-content: center">
+
+          <div style="transform: translateX(-56%)" class="bottom-fixed pb-4 pt-4">
+            <button class="btn btn-primary" type="submit">{{formData.submitButtonName}}</button>
+          </div>
+
+          <div style="transform: translateX(56%)" class="bottom-fixed pb-4 pt-4">
+            <button class="btn btn-primary" type="button" (click)="onClickBack()">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <!-- apacing for the buttons to fit down on the page -->
+    <div class="pt-5 pb-5"></div>
+
+  </div>
+  <div style="margin-top:5em" *ngIf="formData.shouldDisplayMappings" class="col-4">
+    <div class="top">
+      <p *ngFor="let mapping of mappings">
+        {{mapping}}
+      </p>
     </div>
   </div>
-  <div class="col-4">
-    Something else here;
-  </div>
-  <button (click)="onSubmit()" class="btn btn-default">Submit</button>
 </div>

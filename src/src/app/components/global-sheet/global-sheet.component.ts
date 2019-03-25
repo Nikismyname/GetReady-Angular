@@ -3,8 +3,9 @@ import { QuestionSheetService } from "../../services/question-sheet-service";
 import QsGlobalIndex from "src/app/services/models/question-sheet/qsGlobalIndex";
 import QGlobalIndex from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
-import { ActivatedRoute } from "@angular/router";
-import * as c from "../../utilities/route-paths";
+import { ActivatedRoute, Router } from "@angular/router";
+import RoutePaths, * as c from "../../utilities/route-paths";
+import { TrackingService } from "../../services/tracking.service";
 
 @Component({
     selector: "getready-global-sheet",
@@ -15,8 +16,14 @@ export class GlobalSheetComponent {
         private questionSheetService: QuestionSheetService,
         private reorderService: ReorderService,
         private route: ActivatedRoute,
+        private router: Router,
+        public routePaths: RoutePaths,
+        private trackingService: TrackingService,
     ) { 
         let id = this.route.snapshot.paramMap.get("id");
+        if (id === "-1") {
+            id = trackingService.getPublicSheetId().toString(); 
+        }
         this.fetchSheet(id);
     }
 
@@ -35,6 +42,9 @@ export class GlobalSheetComponent {
         if (id === null || id === undefined) {
             return;
         }
+
+        this.trackingService.setPublicSheetId(Number(id));
+        console.log(this.trackingService.getPublicSheetId());
 
         let qsResult = await this.questionSheetService.getGlobalIndex(id);
         if (qsResult.status === 200) {
@@ -107,6 +117,10 @@ export class GlobalSheetComponent {
         }
 
         this.setColumns(this.reorderService.reorderColumns(this.getColumns(), []));
+    }
+
+    onClickGlobalQuestion(id) { 
+        this.router.navigate([`/${c.viewGlobalQuestion}/${id}`]);
     }
 
     setColumns(array) {

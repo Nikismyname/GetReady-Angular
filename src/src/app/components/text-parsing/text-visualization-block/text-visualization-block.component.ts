@@ -1,13 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trimEnds } from "../../../utilities/text-formatting-helpers";
-
-class ParsingData {
-  constructor(
-    public text: string,
-    public done: boolean,
-    public type: string,
-  ) { }
-}
+import { ParsingData } from "../../../services/models/other";
 
 @Component({
   selector: 'getready-text-visualization-block',
@@ -19,12 +12,12 @@ export class TextVisualizationBlockComponent implements OnInit {
   constructor() { }
 
   @Input() text: string;
-  formatetText: ParsingData[] = [];
+  parsedData: ParsingData[];
   loaded: boolean = false;
 
   ngOnInit() {
-    this.formatetText = this.parseBlockElements(this.text);
     this.loaded = true;
+    this.parsedData = this.parseBlockElements(this.text);
   }
 
   parseBlockElements(text: string): ParsingData[] {

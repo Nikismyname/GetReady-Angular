@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
 import { Crud } from "./crud";
 import QsGlobalIndex from "./models/question-sheet/qsGlobalIndex";
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
-
+ 
 @Injectable()
 export class QuestionSheetService {
     constructor(private crud: Crud) {

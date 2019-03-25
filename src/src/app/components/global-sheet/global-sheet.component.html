@@ -39,13 +39,13 @@
                         <!-- puts a custom placeholder -->
                         <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
 
-                        <div class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                        <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
                             <div class="card-body">
                                 <h6 className="card-title">{{question.name}}</h6>
                                 <!-- <p className="card-text">{{question.description}}</p> -->
                                 <div *ngIf="isAdmin">
                                     <a href="#" class="ml-1">Delete</a>
-                                    <a href="#" class="ml-1">Edit</a>
+                                    <a class="ml-2" [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -55,15 +55,17 @@
 
                 <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="2" class="col-4">
                     <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngFor="let question of col2">
+                        
                         <!-- puts a custom placeholder -->
                         <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
-                        <div class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                        
+                        <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
                             <div class="card-body">
                                 <h6 className="card-title">{{question.name}}</h6>
                                 <!-- <p className="card-text">{{question.description}}</p> -->
                                 <div *ngIf="isAdmin">
                                     <a href="#" class="ml-1">Delete</a>
-                                    <a href="#" class="ml-1">Edit</a>
+                                    <a class="ml-2" [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -72,15 +74,17 @@
 
                 <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="3" class="col-4">
                     <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngFor="let question of col3">
+                        
                         <!-- puts a custom placeholder -->
                         <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
-                        <div class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
+                        
+                        <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2" style="border: 1px solid rgba(3, 91, 255, 0.6)">
                             <div class="card-body">
                                 <h6 className="card-title">{{question.name}}</h6>
                                 <!-- <p className="card-text">{{question.description}}</p> -->
                                 <div *ngIf="isAdmin">
                                     <a href="#" class="ml-1">Delete</a>
-                                    <a href="#" class="ml-1">Edit</a>
+                                    <a class="ml-2" [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
                                 </div>
                             </div>
                         </div>

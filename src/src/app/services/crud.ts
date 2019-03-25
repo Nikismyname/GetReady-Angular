@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import CrudResult from './models/other/crud-result';
+import { CrudResult } from './models/other';
 import { Response } from "@angular/http/src/static_response";
 
 const fetchRoot = "https://localhost:44384/api/";

@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
+import { FormData } from "../../services/models/other";
+import { textFormattingMappings } from "../../utilities/route-paths";
 
 @Component({
   selector: 'getready-binding-form',
@@ -7,40 +10,42 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class BindingFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
-  @Output() formOnSubmit: EventEmitter<any> = new EventEmitter();
-
+  @Input() formData: FormData;
+  @Output() onFormSubmit: EventEmitter<any> = new EventEmitter();
+  loaded: boolean = false;
   submitData: object = {};
-
-  public inputData: FormInputData[] = [
-    new FormInputData("username", "Username", "text"),
-    new FormInputData("password", "Password", "password"),
-    new FormInputData("textareaTest", "TextareaTest", "textarea", "somedata"),
-  ];
+  mappings: string[] = textFormattingMappings;
 
   ngOnInit() {
-    this.inputData.forEach(inputData => {
+    let inputData = this.formData.inputData; 
+
+    inputData.forEach(inputData => {
       if (inputData.data) {
         this.submitData[inputData.name] = inputData.data;
       } else {
         this.submitData[inputData.name] = "";
       }
     });
+
+    this.loaded = true;
   }
 
-  onSubmit() {
-    console.log(this.submitData);
-    this.formOnSubmit.emit(this.submitData);
+  onSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.onFormSubmit.emit(this.submitData);
   }
 
-  onKeyUp(e) {
-    this.submitData[e.target.name] = e.target.value;
-  }
+  onClickBack() {
+    this.location.back();
+  } 
 
+  /* #region  Tag ShortCuts */
   handleKeyDown(event, name) {
     console.log(this.submitData["textarea"]);
-    
+
     let shortCutEffects = {
         /*D*/ 68: function (selection) { return "<<p>>\n" + selection + "\n<<p>>" },
 
@@ -78,14 +83,5 @@ export class BindingFormComponent implements OnInit {
       }
     }
   }
+  /* #endregion */
 }
-
-class FormInputData {
-  constructor(
-    public name: string,
-    public displayName: string,
-    public type: string,
-    public data: any = null,
-    public placeholder: string = "",
-  ) { }
-} 

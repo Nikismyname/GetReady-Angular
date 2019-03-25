@@ -1,3 +1,27 @@
-<p>
-  text-visualisation-recursion works!
-</p>
+<div *ngIf="loaded">
+  <span *ngFor="let section of parsedData">
+
+    <div *ngIf="section.type==='<<p>>'">
+      <p>
+          <getready-text-visualization-block
+          [text]="section.text"
+          ></getready-text-visualization-block>
+      </p>
+    </div>
+
+    <span *ngIf="section.type==='<<y>>'">
+      <span style="background-color: yellow">
+        <getready-text-visualization-block
+        [text]="section.text"
+        ></getready-text-visualization-block>
+      </span>
+    </span>
+
+    <span *ngIf="section.type==='text'">
+        <getready-text-visualization-block
+        [text]="section.text"
+        ></getready-text-visualization-block>
+    </span>
+
+  </span>
+</div>

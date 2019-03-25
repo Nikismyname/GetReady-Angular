@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import RoutePaths from "../../utilities/route-paths";
+import { AuthService } from 'src/app/services/auth.service.ts';
 
 @Component({
   selector: 'getready-navbar',
@@ -7,25 +8,23 @@ import RoutePaths from "../../utilities/route-paths";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  constructor(public routePaths: RoutePaths) { }
-
-  @Input() user: any;
+  constructor(
+    public routePaths: RoutePaths,
+    public authService: AuthService,
+  ) { }
 
   isAdmin: boolean;
   isUser: boolean;
 
   ngOnInit() {
-    this.isAdmin = this.user ? this.user.role === "Admin" ? true : false : false;
-    this.isUser = this.user ? true : false;
+    this.authService.onUserChange.subscribe(() => { 
+      let user = this.authService.getUser();
+      this.isAdmin = user ? user.role === "Admin" ? true : false : false;
+      this.isUser = user ? true : false;
+    })
   }
 
   onClickLogout() {
-    alert("Logout");
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("user");
-    // props.setUser(null);
-    // props.setGlobalReturnId(0);
-    // props.setPersonalReturnId(0);
-    // props.history.push('/');
+    this.authService.deleteUser();
   }
 }
