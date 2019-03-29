@@ -1,5 +1,4 @@
 import { Component, OnInit, ContentChildren, QueryList, ElementRef } from '@angular/core';
-import { Button } from 'protractor';
 
 @Component({
   selector: 'getready-fixed-buttons',

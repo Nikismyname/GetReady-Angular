@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { trimEnds } from "../../../utilities/text-formatting-helpers";
-import { ParsingData } from "../../../services/models/other";
+import { trimEnds } from "../../../../utilities/text-formatting-helpers";
+import { ParsingData } from "../../../../services/models/other";
 
 @Component({
   selector: 'getready-text-visualisation-tblock',

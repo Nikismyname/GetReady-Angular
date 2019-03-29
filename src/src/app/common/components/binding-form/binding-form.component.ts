@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormData } from "../../services/models/other";
-import { textFormattingMappings } from "../../utilities/route-paths";
+import { FormData } from "../../../services/models/other";
+import { textFormattingMappings } from "../../../utilities/route-paths";
 
 @Component({
   selector: 'getready-binding-form',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { trimEnds, replaceTags } from "../../../utilities/text-formatting-helpers";
+import { trimEnds, replaceTags } from "../../../../utilities/text-formatting-helpers";
 
 @Component({
   selector: 'getready-text-visualization-inline',

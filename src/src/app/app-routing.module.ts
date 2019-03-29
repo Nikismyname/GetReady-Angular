@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PersonalSheetComponent } from "./components/personal-sheet/personal-sheet.component";
-import { GlobalSheetComponent } from "./components/global-sheet/global-sheet.component";
+import { GlobalSheetComponent } from "./global/components/global-sheet/global-sheet.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
-import { FolderSelectorComponent } from "./components/folder-selector/folder-selector.component";
-import { CopyQuestionsComponent } from "./components/copy-questions/copy-questions.component";
-import { BindingFormComponent } from "./components/binding-form/binding-form.component";
-import { ViewGlobalQuestionComponent } from "./components/view-global-question/view-global-question.component";
+import { FolderSelectorComponent } from "./common/components/folder-selector-dir/folder-selector/folder-selector.component";
+import { CopyQuestionsComponent } from "./global/components/copy-questions/copy-questions.component";
+import { BindingFormComponent } from "./common/components/binding-form/binding-form.component";
+import { ViewGlobalQuestionComponent } from "./global/components/view-global-question/view-global-question.component";
 import { EditQuestionComponent } from "./components/common/crud/edit-question/edit-question.component";
 
 import * as c from "./utilities/route-paths";

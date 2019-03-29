@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
-import { QuestionSheetService } from "../../services/question-sheet-service";
 import QsGlobalIndex from "src/app/services/models/question-sheet/qsGlobalIndex";
 import QGlobalIndex from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
 import { ActivatedRoute, Router } from "@angular/router";
-import RoutePaths, * as c from "../../utilities/route-paths";
-import { TrackingService } from "../../services/tracking.service";
+
+import { QuestionSheetService } from "../../../services/question-sheet-service";
+import RoutePaths, * as c from "../../../utilities/route-paths";
+import { TrackingService } from "../../../services/tracking.service";
 
 @Component({
     selector: "getready-global-sheet",
