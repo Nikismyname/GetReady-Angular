@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core"
-import { Crud } from "./crud";
-import QsGlobalIndex from "./models/question-sheet/qsGlobalIndex";
+import { Crud, CrudObs } from "./crud";
+import { QsGlobalIndex } from "./models/question-sheet/qsGlobalIndex";
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
  
 @Injectable()
 export class QuestionSheetService {
-    constructor(private crud: Crud) {
-    }
+    constructor(
+        private crud: Crud,
+        private crudObs: CrudObs,
+    ) {}
     
     async getGlobalIndex(id) { //x
         try {
@@ -15,6 +17,10 @@ export class QuestionSheetService {
         } catch (err) {
             this.handleError(err);
         }
+    }
+
+    getGlobalIndexObs(id) { 
+        return this.crudObs.get("QuestionSheet/GetGlobalIndex", id);
     }
 
     async getPersonalIndex(id) { //x

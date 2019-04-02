@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule as cm } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { AutosizeModule } from 'ngx-autosize'; // problems with name works otherwise
 
 import { BindingFormComponent } from "./components/binding-form/binding-form.component";
 import { FixedButtonsComponent } from "./components/fixed-buttons/fixed-buttons.component";
@@ -22,10 +25,13 @@ const components = [
 ];
 
 @NgModule({
-  declarations: components,
+  declarations: [components],
   imports: [
-    cm
+    cm, 
+    FormsModule,
+    ReactiveFormsModule,
+    AutosizeModule
   ],
-  exports: components,
+  exports: [components],
 })
 export class CommonModule { }

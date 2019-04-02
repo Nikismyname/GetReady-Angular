@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import RoutePaths from "../../utilities/route-paths";
+import { RoutePaths } from "../../utilities/route-paths";
 import { AuthService } from 'src/app/services/auth.service.ts';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import QGlobalIndex from "src/app/services/models/question/qGlobalIndex";
+import { QGlobalIndex } from "src/app/services/models/question/qGlobalIndex";
 
 @Injectable()
 export class ReorderService{
@@ -13,7 +13,7 @@ export class ReorderService{
         newArray = [...newArray.slice(0, newIndex), element, ...newArray.slice(newIndex)];
         return { old: oldArray, new: newArray };
     };
-
+ 
     reorderSameContainer(array, oldIndex, newIndex) {
         if (newIndex >= array.length) {
             var k = newIndex - array.length + 1;

@@ -1,23 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-
-import { AutosizeModule } from 'ngx-autosize'; // problems with name works otherwise
-import { FormsModule } from '@angular/forms'; //so you can use [(model)];
-//import {Autosize} from 'ng-autosize'; // does not work
 
 //Module Declarations
 import { CommonModule } from "./common/common.module";
 import { GlobalModule } from "./global/global.module";
 
-import { Crud } from "./services/crud";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects"; 
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { Crud, CrudObs } from "./services/crud";
 import { QuestionSheetService } from "./services/question-sheet-service";
 import { QuestionService } from "./services/question-service"
 import { ReorderService } from "./services/reorder-service";
-import RoutePaths from "./utilities/route-paths";
+import { RoutePaths } from "./utilities/route-paths";
 import { TrackingService } from "./services/tracking.service";
 import { UserService } from "./services/user-service";
 
@@ -51,16 +51,21 @@ import { EditQuestionComponent } from "./components/common/crud/edit-question/ed
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    DragDropModule,
     BrowserAnimationsModule,
-    AutosizeModule,
-    FormsModule,
 
-    GlobalModule,
     CommonModule,
-  ],
+    GlobalModule,
+
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      name: "Get Ready App",
+    }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+  ], 
   providers: [
     Crud,
+    CrudObs,
     QuestionSheetService,
     QuestionService,
     ReorderService,

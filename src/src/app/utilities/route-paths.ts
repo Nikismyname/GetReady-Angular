@@ -28,7 +28,7 @@ export const textFormattingMappings = [
 
 import { Injectable } from "@angular/core";
 @Injectable()
-export default class RoutePaths {
+export class RoutePaths {
     public loginPath = "/" + loginPath;
     public registerPath = "/" + registerPath;
     public createQuestionPath = "/" + createQuestionPath;

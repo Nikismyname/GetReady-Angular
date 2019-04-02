@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QuestionSheetService } from 'src/app/services/question-sheet-service';
 
 @Component({
   selector: 'getready-folder-selector',

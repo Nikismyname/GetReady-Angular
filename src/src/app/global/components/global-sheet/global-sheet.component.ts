@@ -1,26 +1,61 @@
 import { Component } from "@angular/core";
-import QsGlobalIndex from "src/app/services/models/question-sheet/qsGlobalIndex";
-import QGlobalIndex from "src/app/services/models/question/qGlobalIndex";
+import { QsGlobalIndex } from "src/app/services/models/question-sheet/qsGlobalIndex";
+import { QGlobalIndex } from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { QuestionSheetService } from "../../../services/question-sheet-service";
-import RoutePaths, * as c from "../../../utilities/route-paths";
+import * as c from "../../../utilities/route-paths";
 import { TrackingService } from "../../../services/tracking.service";
+
+import { Store, select } from "@ngrx/store";
+import { GlobalState } from "../../reducers"
+import { Observable } from "rxjs";
+
+import { GlobalSheetActions } from "../../actions/global-sheet.action";
+import { globalSheetReducer } from '../../reducers/global-sheets.reducer';
 
 @Component({
     selector: "getready-global-sheet",
     templateUrl: "./global-sheet.component.html",
 })
 export class GlobalSheetComponent {
+
+    public questionSheet$: Observable<QsGlobalIndex>;
+
     constructor(
+        private store: Store<GlobalState>,
+
         private questionSheetService: QuestionSheetService,
         private reorderService: ReorderService,
         private route: ActivatedRoute,
         private router: Router,
-        public routePaths: RoutePaths,
+        public routePaths: c.RoutePaths,
         private trackingService: TrackingService,
-    ) { 
+    ) {
+        let testValue: QsGlobalIndex = {
+            id: 15,
+            name: "bob",
+            description: "",
+            difficulty: 5,
+            importance: 5,
+            order: 1,
+            questionSheetId: 1,
+            children: [],
+            globalQuestions: [],
+        }
+
+        store.dispatch(new GlobalSheetActions.Loaded(testValue));
+        store.dispatch(new GlobalSheetActions.Load(3));
+
+        this.questionSheet$ = store.select(state => state.global.currentGlobalIndex);
+
+        console.log(this.questionSheet$);
+
+        this.questionSheet$.subscribe(v => { 
+            console.log(v);
+        });
+
         let id = this.route.snapshot.paramMap.get("id");
         if (id === "-1") {
             id = trackingService.getPublicSheetId().toString(); 
@@ -45,7 +80,6 @@ export class GlobalSheetComponent {
         }
 
         this.trackingService.setPublicSheetId(Number(id));
-        console.log(this.trackingService.getPublicSheetId());
 
         let qsResult = await this.questionSheetService.getGlobalIndex(id);
         if (qsResult.status === 200) {

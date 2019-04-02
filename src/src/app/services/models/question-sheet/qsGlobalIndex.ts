@@ -1,7 +1,7 @@
-import QsChildIndex from './qsChildIndex';
-import QGlobalIndex from '../question/qGlobalIndex';
+import { QsChildIndex } from './qsChildIndex';
+import { QGlobalIndex } from '../question/qGlobalIndex';
 
-export default class QsGlobalIndex {
+export class QsGlobalIndex {
     public id: number;
         
     public name: string;

@@ -1,4 +1,4 @@
-export default class QsChildIndex {
+export class QsChildIndex {
     public id: number;
 
     public name: string;
