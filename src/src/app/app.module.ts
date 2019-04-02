@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //Module Declarations
 import { CommonModule } from "./common/common.module";
@@ -20,6 +21,7 @@ import { ReorderService } from "./services/reorder-service";
 import { RoutePaths } from "./utilities/route-paths";
 import { TrackingService } from "./services/tracking.service";
 import { UserService } from "./services/user-service";
+import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 
 import { AppComponent } from './app.component';
 import { PersonalSheetComponent } from "./components/personal-sheet/personal-sheet.component";
@@ -51,6 +53,7 @@ import { EditQuestionComponent } from "./components/common/crud/edit-question/ed
     BrowserModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
 
     CommonModule,
@@ -72,6 +75,11 @@ import { EditQuestionComponent } from "./components/common/crud/edit-question/ed
     RoutePaths,
     TrackingService,
     UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,4 @@
 import { Action } from "@ngrx/store";
-import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
 import { GlobalSheetActionTypes } from "../actions/global-sheet.action"; 
 
 export function globalSheetReducer(
@@ -7,11 +6,15 @@ export function globalSheetReducer(
     action: Action,
 ) {
     switch (action.type) {
-        case GlobalSheetActionTypes.LOADED:
-            let payload = action["payload"];
+        case GlobalSheetActionTypes.LOAD_SUCCESS:
+            let lsPayload = action["payload"];
             console.log("reducer here");
-            console.log(payload);
-            return payload;
+            console.log(lsPayload);
+            return lsPayload;
+        case GlobalSheetActionTypes.QUESTIONS_REORDER:
+            let qrPayload = action["payload"];
+            console.log(qrPayload);
+            return state;
         default:
             return state;
     } 

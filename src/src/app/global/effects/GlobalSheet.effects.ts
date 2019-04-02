@@ -27,16 +27,12 @@ export class GlablEffects {
             switchMap(payload => {
                 return this.questionSheetService.getGlobalIndexObs(payload)
                     .pipe(
-                        // tap(x => {
-                        //     console.log("second pipe here");
-                        //     console.log(x);
-                        // }),
                         map((sheet) => {
                             console.log(sheet);
-                            return new GlobalSheetActions.Loaded(sheet.json());
+                            return new GlobalSheetActions.loadSuccess(sheet);
                         }),
                         catchError((error) => {
-                            return of(new GlobalSheetActions.Failed(error));
+                            return of(new GlobalSheetActions.loadFail(error));
                         }),
                     )
             })

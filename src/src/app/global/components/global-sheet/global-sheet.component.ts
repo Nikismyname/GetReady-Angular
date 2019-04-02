@@ -4,7 +4,6 @@ import { QGlobalIndex } from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { QuestionSheetService } from "../../../services/question-sheet-service";
 import * as c from "../../../utilities/route-paths";
 import { TrackingService } from "../../../services/tracking.service";
 
@@ -13,7 +12,8 @@ import { GlobalState } from "../../reducers"
 import { Observable } from "rxjs";
 
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
-import { globalSheetReducer } from '../../reducers/global-sheets.reducer';
+
+import { map } from "rxjs/operators"; 
 
 @Component({
     selector: "getready-global-sheet",
@@ -22,11 +22,18 @@ import { globalSheetReducer } from '../../reducers/global-sheets.reducer';
 export class GlobalSheetComponent {
 
     public questionSheet$: Observable<QsGlobalIndex>;
+    public col1$: Observable<QGlobalIndex[]>;
+    public col2$: Observable<QGlobalIndex[]>;
+    public col3$: Observable<QGlobalIndex[]>;
+    public col1: QGlobalIndex[];
+    public col2: QGlobalIndex[];
+    public col3: QGlobalIndex[];
+    private sub1;
+    private sub2;
+    private sub3;
 
     constructor(
         private store: Store<GlobalState>,
-
-        private questionSheetService: QuestionSheetService,
         private reorderService: ReorderService,
         private route: ActivatedRoute,
         private router: Router,
@@ -45,14 +52,25 @@ export class GlobalSheetComponent {
             globalQuestions: [],
         }
 
-        store.dispatch(new GlobalSheetActions.Loaded(testValue));
+        store.dispatch(new GlobalSheetActions.loadSuccess(testValue));
         store.dispatch(new GlobalSheetActions.Load(3));
 
         this.questionSheet$ = store.select(state => state.global.currentGlobalIndex);
+        this.col1$ = this.questionSheet$.pipe(
+            map(x=>x.globalQuestions.filter(x=> x.column===1).sort((a,b)=> a.order - b.order)),
+        );
+        this.sub1 = this.col1$.subscribe(v => this.col1 = v);
+        this.col2$ = this.questionSheet$.pipe(
+            map(x=>x.globalQuestions.filter(x=> x.column===2).sort((a,b)=> a.order - b.order)),
+        );
+        this.sub2 = this.col2$.subscribe(v => this.col2 = v);
+        this.col3$ = this.questionSheet$.pipe(
+            map(x=>x.globalQuestions.filter(x=> x.column===3).sort((a,b)=> a.order - b.order)),
+        );
+        this.sub3 = this.col3$.subscribe(v => this.col3 = v);
 
-        console.log(this.questionSheet$);
-
-        this.questionSheet$.subscribe(v => { 
+        this.questionSheet$.subscribe(v => {
+            console.log("Question sheet value here!");
             console.log(v);
         });
 
@@ -63,13 +81,9 @@ export class GlobalSheetComponent {
         this.fetchSheet(id);
     }
 
-    currentSheet: QsGlobalIndex;
     loaded: boolean = false;
     isAdmin: boolean = true;
     isUser: boolean = true;
-    col1: QGlobalIndex[];
-    col2: QGlobalIndex[];
-    col3: QGlobalIndex[];
 
     async ngOnInit() {
     }
@@ -79,44 +93,46 @@ export class GlobalSheetComponent {
             return;
         }
 
-        this.trackingService.setPublicSheetId(Number(id));
+        this.store.dispatch(new GlobalSheetActions.Load(id));
 
-        let qsResult = await this.questionSheetService.getGlobalIndex(id);
-        if (qsResult.status === 200) {
+        // this.trackingService.setPublicSheetId(Number(id));
 
-            let newPath = c.globalQuestionSheetsPath + "/" + id;
-            window.history.pushState(null, null, newPath);
+        // let qsResult = await this.questionSheetService.getGlobalIndex(id);
+        // if (qsResult.status === 200) {
 
-            let col1: QGlobalIndex[] = [];
-            let col2: QGlobalIndex[] = [];
-            let col3: QGlobalIndex[] = [];
+        //     let newPath = c.globalQuestionSheetsPath + "/" + id;
+        //     window.history.pushState(null, null, newPath);
 
-            this.currentSheet = qsResult.data;
-            let questions = qsResult.data.globalQuestions;
-            let unassigned: QGlobalIndex[] = [];
-            for (let i = 0; i < questions.length; i++) {
-                const question = questions[i];
-                switch (question.column) {
-                    case 1:
-                        col1.push(question);
-                        break;
-                    case 2:
-                        col2.push(question);
-                        break;
-                    case 3:
-                        col3.push(question);
-                        break;
-                    default:
-                        unassigned.push(question);
-                        break;
-                }
-            }
+        //     let col1: QGlobalIndex[] = [];
+        //     let col2: QGlobalIndex[] = [];
+        //     let col3: QGlobalIndex[] = [];
 
-            this.setColumns(this.reorderService.reorderColumns([col1, col2, col3],unassigned,true));
-            this.loaded = true;
-        } else {
-            alert(qsResult.json);
-        }
+        //     this.currentSheet = qsResult.data;
+        //     let questions = qsResult.data.globalQuestions;
+        //     let unassigned: QGlobalIndex[] = [];
+        //     for (let i = 0; i < questions.length; i++) {
+        //         const question = questions[i];
+        //         switch (question.column) {
+        //             case 1:
+        //                 col1.push(question);
+        //                 break;
+        //             case 2:
+        //                 col2.push(question);
+        //                 break;
+        //             case 3:
+        //                 col3.push(question);
+        //                 break;
+        //             default:
+        //                 unassigned.push(question);
+        //                 break;
+        //         }
+        //     }
+
+        //     this.setColumns(this.reorderService.reorderColumns([col1, col2, col3],unassigned,true));
+        //     this.loaded = true;
+        // } else {
+        //     alert(qsResult.json);
+        // }
     }
 
     onClickChild(e, id) {
@@ -166,5 +182,11 @@ export class GlobalSheetComponent {
 
     getColumns() {
         return [this.col1, this.col2, this.col3];
+    }
+
+    ngOnDestroy() {
+        this.sub1.unsucscribe();
+        this.sub2.unsucscribe();
+        this.sub3.unsucscribe();
     }
 }
