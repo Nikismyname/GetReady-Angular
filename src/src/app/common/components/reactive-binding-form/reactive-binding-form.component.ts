@@ -1,52 +1,42 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormData as myFormData } from "../../../services/models/other";
 import { Location } from '@angular/common';
-import { FormData } from "../../../services/models/other";
 import { textFormattingMappings } from "../../../utilities/route-paths";
 
 @Component({
-  selector: 'getready-binding-form',
-  templateUrl: './binding-form.component.html',
-  styleUrls: ['./binding-form.component.css']
+  selector: 'getready-reactive-binding-form',
+  templateUrl: './reactive-binding-form.component.html',
+  styleUrls: ['./reactive-binding-form.component.css']
 })
-export class BindingFormComponent implements OnInit {
+export class ReactiveBindingFormComponent implements OnInit {
+
+  form: FormGroup;
+  loaded: boolean = false;
+  mappings: string[] = textFormattingMappings;
+  @Input() formData: myFormData;
+  @Output() onFormSubmit: EventEmitter<any> = new EventEmitter();
 
   constructor(
+    private fb: FormBuilder,
     private location: Location,
   ) { }
 
-  @Input() formData: FormData;
-  @Output() onFormSubmit: EventEmitter<any> = new EventEmitter();
-  loaded: boolean = false;
-  submitData: object = {};
-  mappings: string[] = textFormattingMappings;
-
   ngOnInit() {
-    let inputData = this.formData.inputData; 
-
-    inputData.forEach(inputData => {
-      if (inputData.data) {
-        this.submitData[inputData.name] = inputData.data;
-      } else {
-        this.submitData[inputData.name] = "";
-      }
-    });
-
+    let formControlsGroup = {};
+    for (let i = 0; i < this.formData.inputData.length; i++) {
+      const input = this.formData.inputData[i];
+      formControlsGroup[input.name] = ["", Validators.nullValidator];
+    }
+    this.form = this.fb.group(formControlsGroup);
+    for (let i = 0; i < this.formData.inputData.length; i++) {
+      const input = this.formData.inputData[i];
+      this.form.patchValue({[input.name]: input.data});
+    }
     this.loaded = true;
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.onFormSubmit.emit(this.submitData);
-  }
-
-  onClickBack() {
-    this.location.back();
   } 
 
-  /* #region  Tag ShortCuts */
   handleKeyDown(event, name) {
-    console.log(this.submitData["textarea"]);
 
     let shortCutEffects = {
         /*D*/ 68: function (selection) { return "<<p>>\n" + selection + "\n<<p>>" },
@@ -64,26 +54,30 @@ export class BindingFormComponent implements OnInit {
         event.preventDefault();
         event.stopPropagation();
 
-        console.log(event);
-
         let action = shortCutEffects[event.keyCode];
 
         let start = event.target.selectionStart;
         let end = event.target.selectionEnd;
         let value = event.target.value;
-        //let name = event.target.name;
-
+        
         let prePart = value.slice(0, start);
         let selection = value.slice(start, end);
         let postPart = value.slice(end)
         selection = action(selection);
         let newVal = prePart + selection + postPart;
+        console.log(newVal);
 
-
-        this.submitData[name] = newVal;
-        console.log(this.submitData[name]);
+        this.form.patchValue({[name]: newVal}); 
       }
     }
   }
-  /* #endregion */
-} 
+
+  onClickBack() {
+    this.location.back();
+  }
+
+  onSubmit() { 
+    this.onFormSubmit.emit(this.form.value);
+  }
+
+}

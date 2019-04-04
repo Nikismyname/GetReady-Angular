@@ -5,7 +5,6 @@ import { ReorderService } from 'src/app/services/reorder-service';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import * as c from "../../../utilities/route-paths";
-import { TrackingService } from "../../../services/tracking.service";
 
 import { Store, select } from "@ngrx/store";
 import { GlobalState } from "../../reducers"
@@ -14,6 +13,7 @@ import { Observable } from "rxjs";
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 
 import { map } from "rxjs/operators"; 
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
     selector: "getready-global-sheet",
@@ -37,8 +37,8 @@ export class GlobalSheetComponent {
         private reorderService: ReorderService,
         private route: ActivatedRoute,
         private router: Router,
-        public routePaths: c.RoutePaths,
         private trackingService: TrackingService,
+        public routePaths: c.RoutePaths,
     ) {
         let testValue: QsGlobalIndex = {
             id: 15,
@@ -50,7 +50,11 @@ export class GlobalSheetComponent {
             questionSheetId: 1,
             children: [],
             globalQuestions: [],
-        }
+        } 
+
+        // store.subscribe(x => { 
+        //     console.log("GlobalSheet-StoreChange", x);
+        // });
 
         store.dispatch(new GlobalSheetActions.loadSuccess(testValue));
         store.dispatch(new GlobalSheetActions.Load(3));
@@ -68,11 +72,6 @@ export class GlobalSheetComponent {
             map(x=>x.globalQuestions.filter(x=> x.column===3).sort((a,b)=> a.order - b.order)),
         );
         this.sub3 = this.col3$.subscribe(v => this.col3 = v);
-
-        this.questionSheet$.subscribe(v => {
-            console.log("Question sheet value here!");
-            console.log(v);
-        });
 
         let id = this.route.snapshot.paramMap.get("id");
         if (id === "-1") {
@@ -185,8 +184,8 @@ export class GlobalSheetComponent {
     }
 
     ngOnDestroy() {
-        this.sub1.unsucscribe();
-        this.sub2.unsucscribe();
-        this.sub3.unsucscribe();
+        this.sub1.unsubscribe();
+        this.sub2.unsubscribe();
+        this.sub3.unsubscribe();
     }
 }

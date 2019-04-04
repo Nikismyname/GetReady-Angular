@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 //Module Declarations
 import { CommonModule } from "./common/common.module";
 import { GlobalModule } from "./global/global.module";
+import { CrudModule } from "./crud/crud.module"; 
 
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects"; 
@@ -30,10 +31,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
-import { CreateQuestionComponent } from './components/common/crud/create-question/create-question.component';
-import { CreateQuestionSheetComponent } from './components/common/crud/create-question-sheet/create-question-sheet.component';
-import { EditQuestionSheetComponent } from './components/common/crud/edit-question-sheet/edit-question-sheet.component'; 
-import { EditQuestionComponent } from "./components/common/crud/edit-question/edit-question.component";
 
 @NgModule({
   declarations: [
@@ -44,10 +41,6 @@ import { EditQuestionComponent } from "./components/common/crud/edit-question/ed
     RegisterComponent,
     NotFoundComponent,
     HomeComponent,
-    EditQuestionComponent,
-    CreateQuestionComponent,
-    CreateQuestionSheetComponent,
-    EditQuestionSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +51,7 @@ import { EditQuestionComponent } from "./components/common/crud/edit-question/ed
 
     CommonModule,
     GlobalModule,
+    CrudModule,
 
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({

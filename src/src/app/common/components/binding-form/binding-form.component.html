@@ -7,14 +7,15 @@
     </div>
 
     <form (submit)="onSubmit($event)">
-
+ 
       <div *ngFor="let input of formData.inputData">
         <div class="row">
           <label class="col-3 col-form-label text-right">{{input.displayName}}</label>
           <div class="col-9">
             <textarea *ngIf="input.type === 'textarea'" [(ngModel)]="submitData[input.name]"
               (keydown)="handleKeyDown($event, input.name)" class="form-control-black mb-4"
-              autosize name="{{input.name}}"
+              autosize 
+              name="{{input.name}}"
               [minRows]="1"></textarea>
             <input *ngIf="input.type !== 'textarea'" [(ngModel)]="submitData[input.name]"
               class="form-control-black mb-4" type="{{input.type}}" name="{{input.name}}" />
@@ -26,11 +27,11 @@
         <div style="display: flex; justify-content: center">
 
           <div style="transform: translateX(-56%)" class="bottom-fixed pb-4 pt-4">
-            <button class="btn btn-primary" type="submit">{{formData.submitButtonName}}</button>
+            <button class="btn btn-success" type="submit">{{formData.submitButtonName}}</button>
           </div>
 
           <div style="transform: translateX(56%)" class="bottom-fixed pb-4 pt-4">
-            <button class="btn btn-primary" type="button" (click)="onClickBack()">Back</button>
+            <button class="btn btn-warning" type="button" (click)="onClickBack()">Back</button>
           </div>
 
         </div>

@@ -10,7 +10,7 @@ import { FolderSelectorComponent } from "./common/components/folder-selector-dir
 import { CopyQuestionsComponent } from "./global/components/copy-questions/copy-questions.component";
 import { BindingFormComponent } from "./common/components/binding-form/binding-form.component";
 import { ViewGlobalQuestionComponent } from "./global/components/view-global-question/view-global-question.component";
-import { EditQuestionComponent } from "./components/common/crud/edit-question/edit-question.component";
+import { EditQuestionComponent } from "./crud/components/edit-question/edit-question.component";
 
 import * as c from "./utilities/route-paths";
 
