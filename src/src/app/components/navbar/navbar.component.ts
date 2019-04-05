@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { RoutePaths } from "../../utilities/route-paths";
-import { AuthService } from 'src/app/services/auth.service.ts';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'getready-navbar',

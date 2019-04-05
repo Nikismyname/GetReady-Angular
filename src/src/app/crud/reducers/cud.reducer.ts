@@ -10,7 +10,7 @@ export function cudReducer(
             let editQState = Object.assign({}, state);
             editQState.editQuestion.success = true;
             return editQState;
-        case CudActionTypes.EDIT_QUESTION_SUCCESS:
+        case CudActionTypes.EDIT_Q_SHEET_SUCCESS:
             let editQSState = Object.assign({}, state);
             editQSState.editQSheet.success = true;
             return editQSState;
@@ -21,7 +21,14 @@ export function cudReducer(
             return createQState;
         case CudActionTypes.CREATE_Q_SHEET_SUCCESS:
             let createQSState = Object.assign({}, state);
-            createQSState.createQSheet.success = true;
+            // createQSState.createQSheet.success = true;
+            // createQSState.createQSheet.createdId = Number(action["payload"]);
+            // createQSState.createQSheet.errors = ["test"];
+            createQSState.createQSheet = {
+                success: true,
+                createdId: Number(action["payload"]),
+                errors: ["test"],
+            };
             return createQSState;
         
         case CudActionTypes.DELETE_QUESTION_SUCCESS:
@@ -39,6 +46,7 @@ export function cudReducer(
             let newClearState = Object.assign({}, state);
             newClearState.createQSheet.success = false;
             newClearState.createQSheet.errors = [];
+            newClearState.createQSheet.createdId= null,
             newClearState.createQuestion.success = false;
             newClearState.createQuestion.errors = [];
 
@@ -59,19 +67,20 @@ export function cudReducer(
 interface IReducerState {
     editQuestion: {
         success: boolean,
-        errors: [],
+        errors: any[],
     },
     editQSheet: {
         success: boolean,
-        errors: [],
+        errors: any[],
     },
     createQuestion: {
         success: boolean,
-        errors: [],
+        errors: any[],
     },
     createQSheet: {
         success: boolean,
-        errors: [],
+        createdId: number,
+        errors: any[],
     },
     deleteQuestion: {
         success: boolean,
@@ -96,6 +105,7 @@ const initialCrudState: IReducerState = {
     },
     createQSheet: {
         success: false,
+        createdId: null,
         errors: [],
     },
     deleteQuestion: {

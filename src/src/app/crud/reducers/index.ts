@@ -23,6 +23,7 @@ export interface CrudState {
             },
             createQSheet: {
                 success: boolean,
+                createdId: number,
                 errors: any,
             },
             deleteQuestion: {
@@ -31,13 +32,17 @@ export interface CrudState {
             deleteQSheet: {
                 success: boolean,
             },
-        }
+        },
 
         read: {
             globalQuestion: {
                 success: boolean,
                 question: any,
-            }
+            },
+            questionSheet: {
+                success: boolean,
+                qSheet: any,
+            },
         }
     }
 }

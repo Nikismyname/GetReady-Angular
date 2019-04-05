@@ -3,13 +3,12 @@ import { QsGlobalIndex } from "src/app/services/models/question-sheet/qsGlobalIn
 import { QGlobalIndex } from "src/app/services/models/question/qGlobalIndex";
 import { ReorderService } from 'src/app/services/reorder-service';
 import { ActivatedRoute, Router } from "@angular/router";
-
+ 
 import * as c from "../../../utilities/route-paths";
 
 import { Store, select } from "@ngrx/store";
-import { GlobalState } from "../../reducers"
 import { Observable } from "rxjs";
-
+import { GlobalState } from "../../reducers"
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 
 import { map } from "rxjs/operators"; 
@@ -52,9 +51,9 @@ export class GlobalSheetComponent {
             globalQuestions: [],
         } 
 
-        // store.subscribe(x => { 
-        //     console.log("GlobalSheet-StoreChange", x);
-        // });
+        store.subscribe(x => { 
+            console.log("GlobalSheetStore", x);
+        });
 
         store.dispatch(new GlobalSheetActions.loadSuccess(testValue));
         store.dispatch(new GlobalSheetActions.Load(3));

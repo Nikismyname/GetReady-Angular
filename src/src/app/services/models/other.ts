@@ -34,6 +34,7 @@ export class FormData {
     public formName: string,
     public submitButtonName: string = "Submit",
     public shouldDisplayMappings: boolean = false,
+    public isDisabled: boolean = false,
   ) {
   }
 }

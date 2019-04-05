@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
 
 export namespace CudActionTypes {
     export const EDIT_QUESTION = "[crud] edit-question";
@@ -59,10 +60,10 @@ class EditQuestionFailedValidationAction implements Action {
 //QUESTION SHEET ACTIONS
 class EditQSheetAction implements Action {
     public type = CudActionTypes.EDIT_Q_SHEET;
-    public payload: any;
+    public payload: IScopedData;
 
     constructor(
-        public editDaya: any,
+        public editDaya: IScopedData,
     ) {
         this.payload = editDaya;
     }
@@ -116,10 +117,10 @@ class CreateQuestionValidationFailedAction implements Action {
 //QUESTION SHEET ACTIONS
 class CreateQSheetAction implements Action {
     public type = CudActionTypes.CREATE_Q_SHEET;
-    public payload: any;
+    public payload: IScopedData;
 
     constructor(
-        public createData: any,
+        public createData: IScopedData,
     ) {
         this.payload = createData;
     }
@@ -127,6 +128,13 @@ class CreateQSheetAction implements Action {
 
 class CreateQSheetSuccessAction implements Action {
     public type = CudActionTypes.CREATE_Q_SHEET_SUCCESS;
+    public payload: any;
+
+    constructor(
+        public createdId: any,
+    ) {
+        this.payload = createdId;
+    }
 }
 
 class CreateQSheetValidationFailedAction implements Action {

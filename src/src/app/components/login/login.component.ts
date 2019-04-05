@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData, User } from "../../services/models/other";
-import { AuthService } from 'src/app/services/auth.service.ts';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user-service';
 
 @Component({

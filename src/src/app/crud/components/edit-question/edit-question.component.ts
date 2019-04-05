@@ -9,7 +9,7 @@ import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { map } from 'rxjs/operators';
-
+ 
 @Component({
   selector: 'getready-edit-question',
   templateUrl: './edit-question.component.html',

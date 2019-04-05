@@ -6,8 +6,7 @@ export const registerPath = "register";
 export const createQuestionPath = "question/create";
 export const globalQuestionSheetsPath = "question-sheet/global";
 export const personalQuestionSheetsPath = "question-sheet/personal";
-export const createGlobalSheetPath = "question-sheet/global/create";
-export const createPersonalSheetPath = "question-sheet/personal/create";
+export const createSheetPath = "question-sheet/create";
 export const viewGlobalQuestion = "question/global/view";
 export const copyQuestionsPath = "question/copy";
 export const editQuestionPath = "question/edit";
@@ -15,6 +14,7 @@ export const editQuestionSheetPath = "question-sheet/edit";
 export const testPath = "test";
 export const filterQuestionsPath = "questions/filter";
 export const reviewQuestionsPath = "questions/review";
+import { Injectable } from "@angular/core";
 
 export const textFormattingMappings = [
     "<<c>> (A) -> Code Block",
@@ -26,7 +26,7 @@ export const textFormattingMappings = [
     "<T> () -> Transperant, meaning inline formating can be done inside!",
 ];
 
-import { Injectable } from "@angular/core";
+
 @Injectable()
 export class RoutePaths {
     public loginPath = "/" + loginPath;
@@ -34,8 +34,7 @@ export class RoutePaths {
     public createQuestionPath = "/" + createQuestionPath;
     public globalQuestionSheetsPath = "/" + globalQuestionSheetsPath;
     public personalQuestionSheetsPath = "/" + personalQuestionSheetsPath;
-    public createGlobalSheetPath = "/" + createGlobalSheetPath;
-    public createPersonalSheetPath = "/" + createPersonalSheetPath;
+    public createSheetPath = "/" + createSheetPath;
     public viewGlobalQuestion = "/" + viewGlobalQuestion;
     public copyQuestionsPath = "/" + copyQuestionsPath;
     public editQuestionPath = "/" + editQuestionPath;

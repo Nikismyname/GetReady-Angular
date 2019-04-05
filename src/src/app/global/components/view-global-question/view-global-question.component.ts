@@ -21,13 +21,13 @@ export class ViewGlobalQuestionComponent implements OnInit {
   PRLoaded: boolean = false;
 
   async ngOnInit() {
-    let id = this.route.snapshot.paramMap.get("id");
-    let getResult = await this.questionService.getGlobalQuestion(id); 
-    if (getResult.status === 200) {
-      this.question = getResult.data;
-      console.log(this.question);
-      this.loaded = true;
-    }
+    // let id = this.route.snapshot.paramMap.get("id");
+    // let getResult = await this.questionService.getGlobalQuestion(id); 
+    // if (getResult.status === 200) {
+    //   this.question = getResult.data;
+    //   console.log(this.question);
+    //   this.loaded = true;
+    // }
   }
 
   prLoaded() {

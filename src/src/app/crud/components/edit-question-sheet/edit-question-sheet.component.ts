@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormInputData } from "../../../services/models/other";
-import { QuestionService } from 'src/app/services/question-service';
+import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router"; 
+import { ISubscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import { CrudState } from '../../reducers';
+import { Location } from '@angular/common';
+import { map } from 'rxjs/operators';
+import { CudActions } from "../../actions/cud.actions";
+import { ReadActions } from "../../actions/read.actions";
+import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+
 
 @Component({
   selector: 'getready-edit-question-sheet',
@@ -10,37 +18,65 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class EditQuestionSheetComponent implements OnInit {
 
-  scope: string; 
+  global: boolean;
   id: string;
+  resultSub: ISubscription;
+  dataSub: ISubscription;
 
   constructor(
-    private questionService: QuestionService,
+    private store: Store<CrudState>,
     private route: ActivatedRoute,
-  ) { 
+    private location: Location,
+  ) {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.scope = this.route.snapshot.paramMap.get("scope");
-    console.log("id: "+this.id +" scope: "+ this.scope);
+    this.global = this.route.snapshot.paramMap.get("scope") == "global" ? true : false;
   }
 
-  inputData: FormInputData[];
+  formData: FormData;
   loaded: boolean = false;
 
   async ngOnInit() {
-    let getResult = await this.questionService.getGlobalQuestion(this.id);
-    if (getResult.status === 200) {
-      let question = getResult.data as any;
-      this.inputData = [
-        new FormInputData("name","Name", "text", question.name ),
-        new FormInputData("question","Question", "textarea", question.question),
-        new FormInputData("answer","Answer", "textarea", question.answer),
-        new FormInputData("comment", "Comment", "textarea", question.comment),
-        new FormInputData("difficulty","Difficulty", "number", question.difficulty),
-      ];
-      this.loaded = true;
-    }
+
+    this.resultSub = this.store.select(x => x.crud.cud.editQSheet.success).subscribe(done => {
+      if (done === true) {
+        this.location.back();
+      }
+    });
+
+    this.dataSub = this.store.pipe(map(x => x.crud.read.questionSheet)).subscribe(x => { 
+      if (x.success === true) {
+        let qs = x.qSheet;
+        let inputData = [
+
+          new FormInputData("name", "Name", "text", qs.name),
+          new FormInputData("description", "Description", "text", qs.description),
+          new FormInputData("difficulty", "Difficulty", "number", qs.difficulty),
+          new FormInputData("importance", "Importance", "number", qs.importance),
+        ];
+
+        this.formData = new FormData(
+          inputData, "Edit Sheet Form", "Edit", false
+        );
+        this.loaded = true;
+        this.store.dispatch(new ReadActions.ClearReadState());
+      }
+    });
+
+    let data: IScopedData = {data: Number(this.id),global: this.global};
+    this.store.dispatch(new ReadActions.QuestionSheet(data));
   }
 
-  onFormSubmit(data) {
-    console.log(data);
-  } 
+  async onFormSubmit(input) {
+    input["id"] = this.id;
+    let data: IScopedData = { data: input, global: this.global };
+    this.store.dispatch(new CudActions.editQSheet(data));
+  }
+
+  ngOnDestroy() {
+    this.resultSub.unsubscribe();
+    this.dataSub.unsubscribe();
+    //just in case reseting the state after component has been destroyed; 
+    this.store.dispatch(new CudActions.ClearState());
+    this.store.dispatch(new ReadActions.ClearReadState());
+  }
 } 

@@ -54,13 +54,13 @@ export class QuestionService {
     //     }
     // }
 
-    editQuestionObs(data, global) {
+    editQuestionObs(data, global: boolean) {
         let path = global ? "Question/EditGlobal" : "Question/EditPersonal";
         return this.http.post(path, JSON.stringify(data));
     }
 
-    editPersonalQuestionObs(data) {
-        return this.http.post("Question/EditPersonal", JSON.stringify(data));
-    }
+    // editPersonalQuestionObs(data) {
+    //     return this.http.post("Question/EditPersonal", JSON.stringify(data));
+    // }
     /* #endregion */
 }
