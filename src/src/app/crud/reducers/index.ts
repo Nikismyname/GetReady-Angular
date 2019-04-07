@@ -11,20 +11,16 @@ export interface CrudState {
         {
             editQuestion: {
                 success: boolean,
-                errors: any,
             },
             editQSheet: {
                 success: boolean,
-                errors: any,
             },
             createQuestion: {
                 success: boolean,
-                errors: any,
             },
             createQSheet: {
                 success: boolean,
                 createdId: number,
-                errors: any,
             },
             deleteQuestion: {
                 success: boolean,
@@ -32,10 +28,11 @@ export interface CrudState {
             deleteQSheet: {
                 success: boolean,
             },
+            validationErrors: {},
         },
 
         read: {
-            globalQuestion: {
+            question: {
                 success: boolean,
                 question: any,
             },

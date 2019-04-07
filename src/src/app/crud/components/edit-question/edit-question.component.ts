@@ -49,7 +49,7 @@ export class EditQuestionComponent implements OnInit {
     //   console.log("NO_SELECT subscription", x["crud"]["read"]["globalQuestion"]);
     // });
 
-    this.dataSub = this.store.pipe(map(x => x.crud.read.globalQuestion)).subscribe(x => { 
+    this.dataSub = this.store.pipe(map(x => x.crud.read.question)).subscribe(x => { 
       console.log("GLOBAL QUESTION HERE: ", x);
       if (x.success === true) {
         console.log("recieved the question");
@@ -77,7 +77,7 @@ export class EditQuestionComponent implements OnInit {
       
     // });
 
-    this.store.dispatch(new ReadActions.GlobalQuestion(Number(this.id)));
+    this.store.dispatch(new ReadActions.Question(Number(this.id)));
   }
 
   async onFormSubmit(input) {
@@ -91,7 +91,7 @@ export class EditQuestionComponent implements OnInit {
     this.resultSub.unsubscribe();
     this.dataSub.unsubscribe();
     //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.ClearState());
+    this.store.dispatch(new CudActions.clearState());
     this.store.dispatch(new ReadActions.ClearReadState());
   }
 

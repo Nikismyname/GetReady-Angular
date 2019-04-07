@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { RoutePaths } from "../../utilities/route-paths";
 import { AuthService } from 'src/app/services/auth.service';
+import { Store } from '@ngrx/store';
+import { IAuthState } from "../../authentication/reducers";
+import { AuthActions } from "../../authentication/actions/auth.actions";
 
 @Component({
   selector: 'getready-navbar',
@@ -10,21 +13,21 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
   constructor(
     public routePaths: RoutePaths,
-    public authService: AuthService,
+    private store: Store<IAuthState> 
   ) { }
 
   isAdmin: boolean;
   isUser: boolean;
 
   ngOnInit() {
-    this.authService.onUserChange.subscribe(() => { 
-      let user = this.authService.getUser();
+    this.store.select(x=>x.auth.user).subscribe((x) => { 
+      let user = x;
       this.isAdmin = user ? user.role === "Admin" ? true : false : false;
       this.isUser = user ? true : false;
     })
   }
 
   onClickLogout() {
-    this.authService.deleteUser();
+    this.store.dispatch(new AuthActions.logout());
   }
 }

@@ -1,40 +1,63 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormData as myFormData } from "../../../services/models/other";
 import { Location } from '@angular/common';
 import { textFormattingMappings } from "../../../utilities/route-paths";
+import { Store } from '@ngrx/store';
+import { CrudState } from 'src/app/crud/reducers';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'getready-reactive-binding-form',
   templateUrl: './reactive-binding-form.component.html',
   styleUrls: ['./reactive-binding-form.component.css']
 })
-export class ReactiveBindingFormComponent implements OnInit {
+export class ReactiveBindingFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   loaded: boolean = false;
   mappings: string[] = textFormattingMappings;
   @Input() formData: myFormData;
   @Output() onFormSubmit: EventEmitter<any> = new EventEmitter();
+  errorSub: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private location: Location,
+    private store: Store<CrudState>,
   ) { }
 
   ngOnInit() {
+
+    this.errorSub = this.store.select(x => x.crud.cud.validationErrors).subscribe(errors => { 
+        //Reseting the errors;
+        for (let i = 0; i < this.formData.inputData.length; i++) {
+          this.formData.inputData[i].errors = [];
+        }
+    
+        let keys = Object.keys(errors);
+        for (let i = 0; i < keys.length; i++) {
+          let fixedKey = jsLcfirst(keys[i]);
+          this.formData.inputData.filter(x => x.name === fixedKey)[0].errors = errors[keys[i]];
+        };
+    
+        function jsLcfirst(string) {
+          return string.charAt(0).toLowerCase() + string.slice(1);
+        }
+    });
+
     let formControlsGroup = {};
     for (let i = 0; i < this.formData.inputData.length; i++) {
       const input = this.formData.inputData[i];
-      formControlsGroup[input.name] = ["", Validators.nullValidator];
+      formControlsGroup[input.name] = ["", input.validations];
     }
     this.form = this.fb.group(formControlsGroup);
     for (let i = 0; i < this.formData.inputData.length; i++) {
       const input = this.formData.inputData[i];
-      this.form.patchValue({[input.name]: input.data});
+      this.form.patchValue({ [input.name]: input.data });
     }
     this.loaded = true;
-  } 
+  }
 
   handleKeyDown(event, name) {
 
@@ -59,7 +82,7 @@ export class ReactiveBindingFormComponent implements OnInit {
         let start = event.target.selectionStart;
         let end = event.target.selectionEnd;
         let value = event.target.value;
-        
+
         let prePart = value.slice(0, start);
         let selection = value.slice(start, end);
         let postPart = value.slice(end)
@@ -67,7 +90,7 @@ export class ReactiveBindingFormComponent implements OnInit {
         let newVal = prePart + selection + postPart;
         console.log(newVal);
 
-        this.form.patchValue({[name]: newVal}); 
+        this.form.patchValue({ [name]: newVal });
       }
     }
   }
@@ -76,8 +99,16 @@ export class ReactiveBindingFormComponent implements OnInit {
     this.location.back();
   }
 
-  onSubmit() { 
+  onSubmit() {
     this.onFormSubmit.emit(this.form.value);
+  }
+
+  get controls() {
+    return this.form.controls;
+  }
+
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
   }
 
 }

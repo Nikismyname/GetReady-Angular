@@ -9,13 +9,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "./common/common.module";
 import { GlobalModule } from "./global/global.module";
 import { CrudModule } from "./crud/crud.module"; 
-
+import { AuthenticationModule } from "./authentication/authentication.module";
+ 
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects"; 
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { Crud, CrudObs } from "./services/crud";
 import { QuestionSheetService } from "./services/question-sheet-service";
 import { QuestionService } from "./services/question-service"
 import { ReorderService } from "./services/reorder-service";
@@ -23,22 +23,20 @@ import { RoutePaths } from "./utilities/route-paths";
 import { TrackingService } from "./services/tracking.service";
 import { UserService } from "./services/user-service";
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
-
+  
 import { AppComponent } from './app.component';
 import { PersonalSheetComponent } from "./components/personal-sheet/personal-sheet.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { LoginComponent } from "./components/login/login.component";
-import { RegisterComponent } from "./components/register/register.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
+
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonalSheetComponent,
     NavbarComponent,
-    LoginComponent,
-    RegisterComponent,
     NotFoundComponent,
     HomeComponent,
   ],
@@ -52,6 +50,7 @@ import { HomeComponent } from "./components/home/home.component";
     CommonModule,
     GlobalModule,
     CrudModule,
+    AuthenticationModule,
 
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
@@ -59,10 +58,10 @@ import { HomeComponent } from "./components/home/home.component";
     }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+
+    ToastrModule.forRoot(),
   ], 
   providers: [
-    Crud,
-    CrudObs,
     QuestionSheetService,
     QuestionService,
     ReorderService,
@@ -74,7 +73,7 @@ import { HomeComponent } from "./components/home/home.component";
       useClass: AppHttpInterceptor,
       multi: true,
     },
-  ],
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,10 +5,8 @@ import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { CrudState } from '../../reducers';
 import { Location } from '@angular/common';
-import { map, distinctUntilChanged } from 'rxjs/operators';
 import { CudActions } from "../../actions/cud.actions";
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
-import { select } from "@ngrx/store";
 
 @Component({
   selector: 'getready-create-question-sheet',
@@ -45,28 +43,11 @@ export class CreateQuestionSheetComponent implements OnInit {
     );
     this.loaded = true;
 
-    // this.resultSub = this.store.pipe(map(x=> x.crud.cud.createQSheet)).subscribe(data => {
-    //   if (data.success === true) {
-    //     alert(data.createdId);
-    //     this.location.back();
-    //   }
-    // });
-
-    // this.store.pipe(map(x=> x.crud.cud.createQSheet.createdId),distinctUntilChanged()).subscribe(data => {
-    //   console.log("TEST DATA HERE", data);
-    //   // if (data.success === true) {
-    //   //   alert(data.createdId);
-    //   //   //this.location.back();
-    //   // }
-    // });
-
-    this.store.select(x => x.crud.cud.createQSheet).subscribe(data => {
-      alert(JSON.stringify(data));
-      console.log("TEST DATA HERE", data);
-      // if (data.success === true) {
-      //   alert(data.createdId);
-      //   //this.location.back();
-      // }
+    this.resultSub = this.store.select(x => x.crud.cud.createQSheet).subscribe(data => {
+      console.log("QS SUCCESS DATA HERE: ", data);
+      if (data.success === true) {
+        this.location.back();
+      }
     });
   }
 
@@ -80,6 +61,6 @@ export class CreateQuestionSheetComponent implements OnInit {
   ngOnDestroy() {
     this.resultSub.unsubscribe();
     //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.ClearState());
+    this.store.dispatch(new CudActions.clearState());
   }
 } 

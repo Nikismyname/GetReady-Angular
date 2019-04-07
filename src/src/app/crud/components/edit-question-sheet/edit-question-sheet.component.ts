@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
-
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'getready-edit-question-sheet',
@@ -22,6 +22,7 @@ export class EditQuestionSheetComponent implements OnInit {
   id: string;
   resultSub: ISubscription;
   dataSub: ISubscription;
+  errors: object = {};
 
   constructor(
     private store: Store<CrudState>,
@@ -45,13 +46,48 @@ export class EditQuestionSheetComponent implements OnInit {
 
     this.dataSub = this.store.pipe(map(x => x.crud.read.questionSheet)).subscribe(x => { 
       if (x.success === true) {
+        
         let qs = x.qSheet;
         let inputData = [
+          new FormInputData(
+            "name", "Name", "text", qs.name,
+            [
+              Validators.required,
+              Validators.minLength(3),
+            ],
+            {
+              minLength: "Name must be at least 3 characters long!"
+            }),
+          
+          new FormInputData(
+            "description", "Description", "text", qs.description,
+            [Validators.nullValidator]),
+          
+          new FormInputData(
+            "difficulty", "Difficulty", "number", qs.difficulty,
+            [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(10),
+            ],
+            {
+              min: "Diffuculty must be between 1 and 10!",
+              max: "Diffuculty must be between 1 and 10!",
+            }
+          ),
 
-          new FormInputData("name", "Name", "text", qs.name),
-          new FormInputData("description", "Description", "text", qs.description),
-          new FormInputData("difficulty", "Difficulty", "number", qs.difficulty),
-          new FormInputData("importance", "Importance", "number", qs.importance),
+          new FormInputData(
+            "importance", "Importance", "number", qs.importance,
+            [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(10),
+            ],
+            {
+              min: "Importance must be between 1 and 10!",
+              max: "Importance must be between 1 and 10!",
+            }
+          ),
         ];
 
         this.formData = new FormData(
@@ -76,7 +112,7 @@ export class EditQuestionSheetComponent implements OnInit {
     this.resultSub.unsubscribe();
     this.dataSub.unsubscribe();
     //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.ClearState());
+    this.store.dispatch(new CudActions.clearState());
     this.store.dispatch(new ReadActions.ClearReadState());
   }
 } 

@@ -25,6 +25,27 @@
                 class="form-control-black mb-4" 
                 type="{{input.type}}" 
                 />
+                <div 
+                  class="Server-Errors alert alert-danger"
+                  *ngFor="let error of input.errors"
+                >{{error}}</div>
+                <div class="Client Side Validations">
+                  <div 
+                    class="Required-Error-Handling alert alert-warning"
+                    *ngIf="controls[input.name]?.hasError('required') && controls[input.name].touched">
+                    This field is required!
+                  </div>
+                  <div 
+                    class="Min-Error-Handling alert alert-warning"
+                    *ngIf="controls[input.name]?.hasError('min') && controls[input.name].touched">
+                    {{input.messages['min']}}
+                  </div>
+                  <div 
+                    class="MinLength-Error-Handling alert alert-warning"
+                    *ngIf="controls[input.name]?.hasError('minlength') && controls[input.name].touched">
+                    {{input.messages['minLength']}}
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -33,7 +54,10 @@
           <div style="display: flex; justify-content: center">
   
             <div style="transform: translateX(-56%)" class="bottom-fixed pb-4 pt-4">
-              <button class="btn btn-success" type="submit">{{formData.submitButtonName}}</button>
+              <button 
+                class="btn btn-success" 
+                [disabled]="form.invalid"
+                type="submit">{{formData.submitButtonName}}</button>
             </div>
   
             <div style="transform: translateX(56%)" class="bottom-fixed pb-4 pt-4">

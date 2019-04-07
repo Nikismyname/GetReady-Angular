@@ -1,26 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Crud } from "./crud";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    constructor(private crud: Crud) {
+    constructor(private http: HttpClient) {
     }
 
-    async register(data) {//x
-        try {
-            return await this.crud.post("User/Register", data);
-        } catch (err) {
-            console.log("ERROR: " + err);
-        }
+    registerObs = (data) => {
+        return this.http.post("User/Register", JSON.stringify(data));
     }
 
-    async login(data) {//x
-        try {
-            return await this.crud.post("User/Login", data);
-        } catch (err) {
-            console.log("ERROR: " + err);
-        }
-    }
+    loginObs = (data) => {
+        return this.http.post("User/Login", JSON.stringify(data));
+    } 
 }

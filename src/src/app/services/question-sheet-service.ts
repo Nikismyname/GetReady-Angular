@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core"
-import { Crud } from "./crud";
 import { QsGlobalIndex } from "./models/question-sheet/qsGlobalIndex";
 import { HttpClient } from '@angular/common/http';
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
@@ -7,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class QuestionSheetService {
     constructor(
-        private crud: Crud,
         private http: HttpClient,
     ) {}
     
@@ -24,32 +22,32 @@ export class QuestionSheetService {
         return this.http.get(`QuestionSheet/GetGlobalIndex/${id}`);
     }
 
-    async getPersonalIndex(id) { //x
-        try {
-            let result = await this.crud.get("QuestionSheet/GetPersonalIndex", id);
-            return result;
-        } catch (err) {
-            this.handleError(err);
-        }
-    }
+    // async getPersonalIndex(id) { //x
+    //     try {
+    //         let result = await this.crud.get("QuestionSheet/GetPersonalIndex", id);
+    //         return result;
+    //     } catch (err) {
+    //         this.handleError(err);
+    //     }
+    // }
 
-    async getAllFoldersPersonal() { //x
-        try {
-            let result = await this.crud.get("QuestionSheet/GetAllPersonal");
-            return result;
-        } catch (err) {
-            this.handleError(err);
-        }
-    }
+    // async getAllFoldersPersonal() { //x
+    //     try {
+    //         let result = await this.crud.get("QuestionSheet/GetAllPersonal");
+    //         return result;
+    //     } catch (err) {
+    //         this.handleError(err);
+    //     }
+    // }
 
-    async getAllFoldersGlobal() { //x
-        try {
-            let result = await this.crud.get<any[]>("QuestionSheet/GetAllFoldersGlobal");
-            return result;
-        } catch (err) {
-            this.handleError(err);
-        }
-    }
+    // async getAllFoldersGlobal() { //x
+    //     try {
+    //         let result = await this.crud.get<any[]>("QuestionSheet/GetAllFoldersGlobal");
+    //         return result;
+    //     } catch (err) {
+    //         this.handleError(err);
+    //     }
+    // }
 
     getQuestionSheetObs(id: number, global: boolean) {
         let path = global ? "QuestionSheet/GetOnePublic/"+id : "QuestionSheet/GetOnePersonal/"+id;

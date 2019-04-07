@@ -5,6 +5,7 @@ import { CudActionTypes, CudActions } from "../actions/cud.actions";
 import { map, switchMap, catchError, tap } from "rxjs/operators";
 import { QuestionSheetService } from 'src/app/services/question-sheet-service';
 import { QuestionService } from "src/app/services/question-service";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class CudEffects {
@@ -27,7 +28,7 @@ export class CudEffects {
                             return new CudActions.editQuestionSuccess();
                         }),
                         catchError((error) => {
-                            return of(new CudActions.editQuestionFailedValidation(error));
+                            return of(new CudActions.editQuestionFailed(error));
                         }),
                     )
             })
@@ -44,8 +45,12 @@ export class CudEffects {
                         map(() => {
                             return new CudActions.editQSheetSuccess();
                         }),
-                        catchError((error) => {
-                            return of(new CudActions.editQSheetFailedValidation(error));
+                        catchError((response) => {
+                            if(response instanceof HttpErrorResponse){
+                                if (response.error.errors) {
+                                    return of(new CudActions.validationErrors(response.error.errors));
+                                }
+                            }
                         }),
                     )
             })
@@ -63,7 +68,7 @@ export class CudEffects {
                             return new CudActions.createQSheetSuccess(qSheetId);
                         }),
                         catchError((error) => {
-                            return of(new CudActions.createQSheetFaildeValidation(error));
+                            return of(new CudActions.createQSheetFailed(error));
                         }),
                     )
             })

@@ -14,7 +14,7 @@ export namespace ReadActionTypes {
 }
 
 /* #region  Global Question */
-class GlobalQuestionAction implements Action {
+class QuestionAction implements Action {
     public type = ReadActionTypes.GLOBAL_QUESTION;
     public payload: number;
 
@@ -25,7 +25,7 @@ class GlobalQuestionAction implements Action {
     }
 }
 
-class GlobalQuestionSuccessAction implements Action {
+class QuestionSuccessAction implements Action {
     public type = ReadActionTypes.GLOBAL_QUESTION_SUCCESS;
     public payload: any;
 
@@ -36,7 +36,7 @@ class GlobalQuestionSuccessAction implements Action {
     }
 }
 
-class GlobalQuestionActionFail implements Action {
+class QuestionActionFail implements Action {
     public type = ReadActionTypes.GLOBAL_QUESTION_FAIL;
     public payload: any;
 
@@ -89,9 +89,9 @@ class ClearReadStateAction implements Action {
 }
 
 export namespace ReadActions {
-    export const GlobalQuestion = GlobalQuestionAction;
-    export const GlobalQuestionFail = GlobalQuestionActionFail;
-    export const GlobalQuestionsSuccess = GlobalQuestionSuccessAction;
+    export const Question = QuestionAction;
+    export const QuestionFail = QuestionActionFail;
+    export const QuestionsSuccess = QuestionSuccessAction;
 
     export const QuestionSheet = QuestionSheetAction;
     export const QuestionSheetSuccess = QuestionSheetSuccessAction;

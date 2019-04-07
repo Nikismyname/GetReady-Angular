@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core"
-import { Crud } from "./crud";
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class QuestionService {
     constructor(
-        private crud: Crud,
         private http: HttpClient,
     ) {
     }
@@ -25,6 +23,11 @@ export class QuestionService {
 
     getPersonalQuestionObs(id) {
         return this.http.post("Question/GetPersonal", JSON.stringify(id));
+    }
+
+    getQuestionObs(id: number, global: boolean) {
+        let path = global ? "Question/GetGlobal" : "Question/GetPersonal";
+        return this.http.post(path, JSON.stringify(id));
     }
 
     /* #region Create */

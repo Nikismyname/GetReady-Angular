@@ -25,10 +25,10 @@ export class ReadEffects {
                 return this.questionService.getGlobalQuestionObs(payload)
                     .pipe(
                         map((question) => {
-                            return new ReadActions.GlobalQuestionsSuccess(question);
+                            return new ReadActions.QuestionsSuccess(question);
                         }),
                         catchError((error) => {
-                            return of(new ReadActions.GlobalQuestionFail(error));
+                            return of(new ReadActions.QuestionFail(error));
                         }),
                     )
             })
