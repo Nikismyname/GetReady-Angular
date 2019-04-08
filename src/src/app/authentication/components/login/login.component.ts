@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
 import { FormInputData, FormData, User } from "../../../services/models/other";
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import * as c from "../../../utilities/route-paths"; 
 
 @Component({
   selector: 'getready-login',
@@ -16,8 +17,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   successSub: Subscription;
 
   constructor(
-    private location: Location,
     private store: Store<IAuthState>,
+    private router: Router,
   ) {
   }
 
@@ -26,12 +27,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       new FormInputData("username", "Username", "string"),
       new FormInputData("password", "Password", "password"),
     ],
-    "Login Form", "login", false);
+    "Login Form", "Login", false);
   
   ngOnInit() {
     this.successSub = this.store.select(x => x.auth.loginSuccess).subscribe(success => {
       if (success === true) {
-        this.location.back();
+        this.router.navigate([""]);
       }
     });
   }

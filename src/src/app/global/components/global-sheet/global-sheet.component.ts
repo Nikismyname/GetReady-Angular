@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import * as c from "../../../utilities/route-paths";
 
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { GlobalState } from "../../reducers"
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 
@@ -24,12 +24,15 @@ export class GlobalSheetComponent {
     public col1$: Observable<QGlobalIndex[]>;
     public col2$: Observable<QGlobalIndex[]>;
     public col3$: Observable<QGlobalIndex[]>;
+    public undefined$: Observable<QGlobalIndex[]>;
     public col1: QGlobalIndex[];
     public col2: QGlobalIndex[];
     public col3: QGlobalIndex[];
-    private sub1;
-    private sub2;
-    private sub3;
+    public undefined: QGlobalIndex[];
+    private sub1: Subscription;
+    private sub2:Subscription;
+    private sub3: Subscription;
+    private undefSub: Subscription;
 
     constructor(
         private store: Store<GlobalState>,
@@ -51,26 +54,30 @@ export class GlobalSheetComponent {
             globalQuestions: [],
         } 
 
-        store.subscribe(x => { 
-            console.log("GlobalSheetStore", x);
-        });
-
-        store.dispatch(new GlobalSheetActions.loadSuccess(testValue));
-        store.dispatch(new GlobalSheetActions.Load(3));
-
         this.questionSheet$ = store.select(state => state.global.currentGlobalIndex);
+
         this.col1$ = this.questionSheet$.pipe(
             map(x=>x.globalQuestions.filter(x=> x.column===1).sort((a,b)=> a.order - b.order)),
         );
         this.sub1 = this.col1$.subscribe(v => this.col1 = v);
+
         this.col2$ = this.questionSheet$.pipe(
             map(x=>x.globalQuestions.filter(x=> x.column===2).sort((a,b)=> a.order - b.order)),
         );
         this.sub2 = this.col2$.subscribe(v => this.col2 = v);
+
         this.col3$ = this.questionSheet$.pipe(
             map(x=>x.globalQuestions.filter(x=> x.column===3).sort((a,b)=> a.order - b.order)),
         );
         this.sub3 = this.col3$.subscribe(v => this.col3 = v);
+
+        this.undefined$ = this.questionSheet$.pipe(
+            map(x=>x.globalQuestions.filter(x=> x.column===0))
+        );
+        this.undefSub = this.undefined$.subscribe(v => {
+            console.log("undefiled questions", v);
+            this.undefined = v
+        });
 
         let id = this.route.snapshot.paramMap.get("id");
         if (id === "-1") {

@@ -13,6 +13,7 @@
             <label class="col-3 col-form-label text-right">{{input.displayName}}</label>
             <div class="col-9">
               <textarea 
+                [attr.disabled]="formData.isDisabled? '': null"
                 *ngIf="input.type === 'textarea'"
                 formControlName="{{input.name}}"
                 (keydown)="handleKeyDown($event, input.name)" 
@@ -20,6 +21,7 @@
                 autosize name="{{input.name}}"
                 [minRows]="1"></textarea>
               <input 
+                [attr.disabled]="formData.isDisabled? '': null"
                 *ngIf="input.type !== 'textarea'" 
                 formControlName="{{input.name}}"
                 class="form-control-black mb-4" 
@@ -41,9 +43,19 @@
                     {{input.messages['min']}}
                   </div>
                   <div 
+                    class="Max-Error-Handling alert alert-warning"
+                    *ngIf="controls[input.name]?.hasError('max') && controls[input.name].touched">
+                    {{input.messages['max']}}
+                  </div>
+                  <div 
                     class="MinLength-Error-Handling alert alert-warning"
                     *ngIf="controls[input.name]?.hasError('minlength') && controls[input.name].touched">
                     {{input.messages['minLength']}}
+                  </div>
+                  <div 
+                    class="Passwords-maching alert alert-warning"
+                    *ngIf="input.name==='repeatPassword'&&controls['password'].touched&&controls['repeatPassword'].value!==controls['password'].value">
+                    Passwords must match!
                   </div>
                 </div>
             </div>
@@ -55,7 +67,13 @@
   
             <div style="transform: translateX(-56%)" class="bottom-fixed pb-4 pt-4">
               <button 
+                *ngIf="formData.submitButtonName !== 'Delete'"
                 class="btn btn-success" 
+                [disabled]="form.invalid"
+                type="submit">{{formData.submitButtonName}}</button>
+                <button 
+                *ngIf="formData.submitButtonName === 'Delete'"
+                class="btn btn-danger" 
                 [disabled]="form.invalid"
                 type="submit">{{formData.submitButtonName}}</button>
             </div>

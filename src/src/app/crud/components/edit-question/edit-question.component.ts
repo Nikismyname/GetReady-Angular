@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
-import { QuestionService } from 'src/app/services/question-service';
 import { ActivatedRoute } from "@angular/router";
 import { CrudState } from "../../reducers";
 import { Store, select } from "@ngrx/store";
@@ -25,7 +24,6 @@ export class EditQuestionComponent implements OnInit {
 
   constructor(
     private store: Store<CrudState>,
-    private questionService: QuestionService,
     private route: ActivatedRoute,
     private location: Location,
   ) {
@@ -45,10 +43,6 @@ export class EditQuestionComponent implements OnInit {
       }
     });
 
-    // this.store.subscribe(x => { 
-    //   console.log("NO_SELECT subscription", x["crud"]["read"]["globalQuestion"]);
-    // });
-
     this.dataSub = this.store.pipe(map(x => x.crud.read.question)).subscribe(x => { 
       console.log("GLOBAL QUESTION HERE: ", x);
       if (x.success === true) {
@@ -65,17 +59,9 @@ export class EditQuestionComponent implements OnInit {
           inputData, "Edit Question Form", "Edit", true
         );
         this.loaded = true;
-        this.store.dispatch(new ReadActions.ClearReadState());
+        this.store.dispatch(new ReadActions.ClearReadSuccesses());
       }
     });
-
-    // this.store.select(x => x.crud.read.globalQuestion).subscribe(x => { 
-    //   console.log("SELECT subscription", x);
-    // });
-
-    // this.dataSub = this.store.select(x => x.crud.read.globalQuestion).subscribe(x => {
-      
-    // });
 
     this.store.dispatch(new ReadActions.Question(Number(this.id)));
   }
@@ -91,8 +77,8 @@ export class EditQuestionComponent implements OnInit {
     this.resultSub.unsubscribe();
     this.dataSub.unsubscribe();
     //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.clearState());
-    this.store.dispatch(new ReadActions.ClearReadState());
+    this.store.dispatch(new CudActions.clearCudSuccesses());
+    this.store.dispatch(new ReadActions.ClearReadSuccesses());
   }
 
 } 

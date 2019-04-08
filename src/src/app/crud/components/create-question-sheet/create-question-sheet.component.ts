@@ -7,6 +7,7 @@ import { CrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'getready-create-question-sheet',
@@ -33,10 +34,35 @@ export class CreateQuestionSheetComponent implements OnInit {
 
   async ngOnInit() {
     let inputData = [
-      new FormInputData("name", "Name", "text"),
+      new FormInputData("name", "Name", "text", null,
+        [
+          Validators.required,
+          Validators.minLength(3),
+        ],
+        {
+          minLength: "Name must be at least 3 characters long!",
+        }),
       new FormInputData("description", "Description", "text"),
-      new FormInputData("difficulty", "Difficulty", "number"),
-      new FormInputData("importance", "Importance", "number"),
+      new FormInputData("difficulty", "Difficulty", "number", null,
+      [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(10),
+      ],
+      {
+        min: "Diffuculty must be between 1 and 10!",
+        max: "Diffuculty must be between 1 and 10!",
+      }),
+      new FormInputData("importance", "Importance", "number", null,
+      [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(10),
+      ],
+      {
+        min: "Importance must be between 1 and 10!",
+        max: "Importance must be between 1 and 10!",
+      }),
     ];
     this.formData = new FormData(
       inputData, "Create Sheet Form", "Create", false
@@ -60,7 +86,5 @@ export class CreateQuestionSheetComponent implements OnInit {
 
   ngOnDestroy() {
     this.resultSub.unsubscribe();
-    //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.clearState());
   }
 } 

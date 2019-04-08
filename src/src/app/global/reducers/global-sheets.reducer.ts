@@ -1,8 +1,9 @@
 import { Action } from "@ngrx/store";
 import { GlobalSheetActionTypes } from "../actions/global-sheet.action"; 
+import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
 
 export function globalSheetReducer(
-    state = "test",
+    state:QsGlobalIndex = initialState,
     action: Action,
 ) {
     switch (action.type) {
@@ -19,3 +20,15 @@ export function globalSheetReducer(
             return state;
     } 
 }
+
+let initialState: QsGlobalIndex = {
+    id: 0,
+    name: "Default",
+    description: "Default",
+    difficulty: 1,
+    importance: 1,
+    order: 1,
+    questionSheetId: 0,
+    children: [],
+    globalQuestions: [],
+};

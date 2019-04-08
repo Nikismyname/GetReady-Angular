@@ -33,14 +33,14 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li className="nav-item">
-            <a *ngIf="isUser" (click)="onClickLogout()" href="#" class="nav-link no-text-selection">Logout</a>
+            <a *ngIf="isUser" (click)="onClickLogout($event)" href="#" class="nav-link no-text-selection">Logout</a>
           </li>
           <li className="nav-item">
             <a *ngIf="!isUser" [routerLink]="[routePaths.loginPath]" class="nav-link no-text-selection">Login</a>
-          </li>
+          </li> 
           <li className="nav-item">
             <a *ngIf="!isUser" [routerLink]="[routePaths.registerPath]" class="nav-link no-text-selection">Register</a>
-          </li>
+          </li> 
         </ul>
       </div>
     </div>

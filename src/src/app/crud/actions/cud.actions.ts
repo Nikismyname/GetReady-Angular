@@ -2,33 +2,35 @@ import { Action } from '@ngrx/store';
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
 
 export namespace CudActionTypes {
-    export const EDIT_QUESTION = "[crud] edit-question";
-    export const EDIT_QUESTION_SUCCESS = "[crud] edit-sheet-question";
-    export const EDIT_QUESTION_FAILED = "[crud] edit-question-failed-validation";
+    export const EDIT_QUESTION = "[cud] edit-question";
+    export const EDIT_QUESTION_SUCCESS = "[cud] edit-sheet-question";
+    export const EDIT_QUESTION_FAILED = "[cud] edit-question-failed-validation";
 
-    export const EDIT_Q_SHEET = "[crud] edit-q-sheet";
-    export const EDIT_Q_SHEET_SUCCESS = "[crud] edit-q-sheet-success";
-    export const EDIT_Q_SHEET_FAILED = "[crud] edit-q-sheet-failed-validation";
+    export const EDIT_Q_SHEET = "[cud] edit-q-sheet";
+    export const EDIT_Q_SHEET_SUCCESS = "[cud] edit-q-sheet-success";
+    export const EDIT_Q_SHEET_FAILED = "[cud] edit-q-sheet-failed-validation";
 
-    export const CREATE_QUESTION = "[crud] create-question";
-    export const CREATE_QUESTION_SUCCESS = "[crud] create-question-success";
-    export const CREATE_QUESTION_FAILED = "[crud] create-question-failed-validation";
+    export const CREATE_QUESTION = "[cud] create-question";
+    export const CREATE_QUESTION_SUCCESS = "[cud] create-question-success";
+    export const CREATE_QUESTION_FAILED = "[cud] create-question-failed-validation";
 
-    export const CREATE_Q_SHEET = "[crud] create-q-sheet";
-    export const CREATE_Q_SHEET_SUCCESS = "[crud] create-q-sheet-success";
-    export const CREATE_Q_SHEET_FAILED = "[crud] create-q-sheet-failed-validation";
+    export const CREATE_Q_SHEET = "[cud] create-q-sheet";
+    export const CREATE_Q_SHEET_SUCCESS = "[cud] create-q-sheet-success";
+    export const CREATE_Q_SHEET_FAILED = "[cud] create-q-sheet-failed-validation";
 
-    export const DELETE_QUESTION = "[crud] delete-question";
-    export const DELETE_QUESTION_SUCCESS = "[crud] delete-question-success";
-    export const DELETE_QUESTION_FAILED = "[crud] delete-question-failed";
+    export const DELETE_QUESTION = "[cud] delete-question";
+    export const DELETE_QUESTION_SUCCESS = "[cud] delete-question-success";
+    export const DELETE_QUESTION_FAILED = "[cud] delete-question-failed";
 
-    export const DELETE_Q_SHEET = "[crud] delete-q-sheet";
-    export const DELETE_Q_SHEET_SUCCESS = "[crud] delete-q-sheet-success";
-    export const DELETE_Q_SHEET_FAILED = "[crud] delete-q-sheet-failed";
+    export const DELETE_Q_SHEET = "[cud] delete-q-sheet";
+    export const DELETE_Q_SHEET_SUCCESS = "[cud] delete-q-sheet-success";
+    export const DELETE_Q_SHEET_FAILED = "[cud] delete-q-sheet-failed";
 
-    export const VALIDATION_ERRORS = "[crud] validation errors";
+    export const VALIDATION_ERRORS = "[cud] validation errors";
 
-    export const CLEAR_CRUD_STATE = "[crud] clear";
+    export const CLEAR_CUD_SUCCESSES = "[cud] clear successes";
+
+    export const CLEAR_VALIDATION_ERRORS = "[cud] clear valdation errors";
 }
 
 /* #region  Edit */
@@ -196,8 +198,8 @@ class DeleteQSheetFailedAction implements Action {
 }
 /* #endregion */
 
-class ClearCrudStateAction implements Action { 
-    public type = CudActionTypes.CLEAR_CRUD_STATE;
+class ClearCudSuccessesAction implements Action { 
+    public type = CudActionTypes.CLEAR_CUD_SUCCESSES;
 }
 
 class ValidationErrorsAction implements Action { 
@@ -211,11 +213,16 @@ class ValidationErrorsAction implements Action {
     }
 }
 
+class ClearValidationErrorsAction implements Action { 
+    public type = CudActionTypes.CLEAR_VALIDATION_ERRORS;
+}
+
 export namespace CudActions {
 
-    export const clearState = ClearCrudStateAction;
+    export const clearCudSuccesses = ClearCudSuccessesAction;
 
     export const validationErrors = ValidationErrorsAction;
+    export const clearValidationErrors = ClearValidationErrorsAction;
 
     export const createQuestion = CreateQuestionAction;
     export const createQuestionSuccess = CreateQuestionSuccessAction;

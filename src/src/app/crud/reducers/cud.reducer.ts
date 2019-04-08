@@ -38,16 +38,17 @@ export function cudReducer(
             return delQSState;
         //ERRORS
         case CudActionTypes.VALIDATION_ERRORS:
-            let editQSFailState = Object.assign({}, state);
-            editQSFailState.validationErrors = action["payload"];
-            return editQSFailState;
-        //CLEAR 
-        case CudActionTypes.CLEAR_CRUD_STATE:
+            console.log("VALIDATION_ERRORS_REDUCED");
+            let valErrorState = Object.assign({}, state);
+            valErrorState.validationErrors = action["payload"];
+            return valErrorState;
+        //CLEAR Just The Success States.
+        case CudActionTypes.CLEAR_CUD_SUCCESSES:
             console.log("CLEEEEEEEEEEAR");
             console.log(initialCrudState);
             let newClearState = Object.assign({}, state);
             newClearState.createQSheet.success = false;
-            newClearState.createQSheet.createdId= null,
+            newClearState.createQSheet.createdId = null;
             newClearState.createQuestion.success = false;
 
             newClearState.editQSheet.success = false;
@@ -56,10 +57,11 @@ export function cudReducer(
             newClearState.deleteQSheet.success = false;
             newClearState.deleteQuestion.success = false;
 
-            newClearState.validationErrors = {}; 
-
             return newClearState;
-             
+        case CudActionTypes.CLEAR_VALIDATION_ERRORS:
+            let clearVEState = Object.assign({}, state);
+            clearVEState.validationErrors = {};
+            return clearVEState;
         default:
             return state;
     }

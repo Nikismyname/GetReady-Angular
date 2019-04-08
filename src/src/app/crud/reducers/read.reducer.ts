@@ -9,8 +9,8 @@ export function readReducer(
 
         case ReadActionTypes.GLOBAL_QUESTION_SUCCESS:
             let gqState = Object.assign({}, state);
-            gqState.globalQuestion.success = true;
-            gqState.globalQuestion.question = Object.assign({}, action["payload"]);
+            gqState.question.success = true;
+            gqState.question.question = Object.assign({}, action["payload"]);
             return gqState;
 
         case ReadActionTypes.QUESTION_SHEET_SUCCESS:
@@ -19,9 +19,9 @@ export function readReducer(
             qsState.questionSheet.qSheet = Object.assign({}, action["payload"]);
             return qsState;
 
-        case ReadActionTypes.CLEAR_READ_STATE:
+        case ReadActionTypes.CLEAR_READ_SUCCESSES:
             let clearState = Object.assign({}, state);
-            clearState.globalQuestion.success = false;
+            clearState.question.success = false;
             clearState.questionSheet.success = false;
             return clearState;
 
@@ -31,7 +31,7 @@ export function readReducer(
 }
 
 interface IReadState {
-    globalQuestion: {
+    question: {
         success: boolean,
         question: any,
     },
@@ -42,7 +42,7 @@ interface IReadState {
 }
 
 const initialReadState: IReadState = {
-    globalQuestion: {
+    question: {
         success: false,
         question: null,
     },

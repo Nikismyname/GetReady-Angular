@@ -11,6 +11,9 @@ import { ViewGlobalQuestionComponent } from "./global/components/view-global-que
 import { EditQuestionComponent } from "./crud/components/edit-question/edit-question.component";
 import { EditQuestionSheetComponent } from "./crud/components/edit-question-sheet/edit-question-sheet.component";
 import { CreateQuestionSheetComponent } from "./crud/components/create-question-sheet/create-question-sheet.component";
+import { DeleteQuestionSheetComponent } from "./crud/components/delete-question-sheet/delete-question-sheet.component"; 
+import { DeleteQuestionComponent } from "./crud/components/delete-question/delete-question.component";
+import { CreateQuestionComponent } from "./crud/components/create-question/create-question.component";
 import * as c from "./utilities/route-paths";
 
 const routes: Routes = [
@@ -43,12 +46,24 @@ const routes: Routes = [
     component: EditQuestionComponent
   },
   {
+    path: c.deleteQuestionPath + "/:id/:scope",
+    component: DeleteQuestionComponent,
+  },
+  {
     path: c.editQuestionSheetPath + "/:id/:scope",
     component: EditQuestionSheetComponent
   },
   {
+    path: c.deleteSheetPath + "/:id/:scope",
+    component: DeleteQuestionSheetComponent,
+  },
+  {
     path: c.createSheetPath + "/:parentId/:scope",
     component: CreateQuestionSheetComponent,
+  },
+  {
+    path: c.createQuestionPath + "/:parentId/:scope",
+    component: CreateQuestionComponent,
   },
   {
     path: "tests",

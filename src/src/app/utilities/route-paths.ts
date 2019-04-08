@@ -7,9 +7,11 @@ export const createQuestionPath = "question/create";
 export const globalQuestionSheetsPath = "question-sheet/global";
 export const personalQuestionSheetsPath = "question-sheet/personal";
 export const createSheetPath = "question-sheet/create";
+export const deleteSheetPath = "question-sheet/delete";
 export const viewGlobalQuestion = "question/global/view";
 export const copyQuestionsPath = "question/copy";
 export const editQuestionPath = "question/edit";
+export const deleteQuestionPath = "question/delete";
 export const editQuestionSheetPath = "question-sheet/edit";
 export const testPath = "test";
 export const filterQuestionsPath = "questions/filter";
@@ -42,4 +44,6 @@ export class RoutePaths {
     public testPath = "/" + testPath;
     public filterQuestionsPath = "/" + filterQuestionsPath;
     public reviewQuestionsPath = "/" + reviewQuestionsPath;
+    public deleteSheetPath = "/" + deleteSheetPath;
+    public deleteQuestionPath = "/" + deleteQuestionPath;
 }  

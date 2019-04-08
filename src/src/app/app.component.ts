@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { IAuthState } from './authentication/reducers';
+import { AuthActions } from "./authentication/actions/auth.actions";
 
 @Component({
   selector: "app-root",
@@ -9,13 +9,14 @@ import { Observable } from 'rxjs';
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  store$: Observable<any>;
   constructor(
-    public wholeStore: Store<any>,
+    private store: Store<IAuthState>,
   ) {
-    this.store$ = wholeStore.pipe(map(x => x["crud"]));
-    this.wholeStore.subscribe(x => {
-      console.log("state here", x);
-    })
+    let savedUser = localStorage.getItem("user");
+    if (savedUser !== null) {
+      let user = JSON.parse(savedUser);
+      this.store.dispatch(new AuthActions.loginSuccess(user));
+      this.store.dispatch(new AuthActions.clear());
+    }  
   }
 }

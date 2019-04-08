@@ -52,12 +52,12 @@ import { ToastrModule } from "ngx-toastr";
     CrudModule,
     AuthenticationModule,
 
-    StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      name: "Get Ready App",
-    }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    // StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      name:"GetReady", 
+    }),
 
     ToastrModule.forRoot(),
   ], 

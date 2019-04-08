@@ -10,7 +10,7 @@ export namespace ReadActionTypes {
     export const QUESTION_SHEET_SUCCESS = "[read] question-sheet-success";
     export const QUESTION_SHEET_FAIL = "[read] question-sheet-fail";
 
-    export const CLEAR_READ_STATE = "[read] clear";
+    export const CLEAR_READ_SUCCESSES = "[read] clear successes";
 }
 
 /* #region  Global Question */
@@ -84,8 +84,8 @@ class QuestionSheetFailAction implements Action {
 /* #endregion */
 
 
-class ClearReadStateAction implements Action {
-    public type = ReadActionTypes.CLEAR_READ_STATE;
+class ClearReadSuccessesAction implements Action {
+    public type = ReadActionTypes.CLEAR_READ_SUCCESSES;
 }
 
 export namespace ReadActions {
@@ -97,6 +97,6 @@ export namespace ReadActions {
     export const QuestionSheetSuccess = QuestionSheetSuccessAction;
     export const QuestionSheetFail = QuestionSheetFailAction
 
-    export const ClearReadState = ClearReadStateAction;
+    export const ClearReadSuccesses = ClearReadSuccessesAction;
 };
 

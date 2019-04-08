@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
+import { IScopedData } from './models/contracts/ScopedData';
+import { httpFactory } from '@angular/http/src/http_module';
 
 @Injectable()
 export class QuestionService {
@@ -8,62 +10,37 @@ export class QuestionService {
     ) {
     }
 
-    // async getGlobalQuestion(id) {
-    //     try {
-    //         let result = await this.crud.post("Question/GetGlobal", id);
-    //         return result;
-    //     } catch (err) {
-    //         this.handleError(err);
-    //     }
-    // }
-
-    getGlobalQuestionObs(id) {
+    getGlobalQuestionObs = (id) => {
         return this.http.post("Question/GetGlobal", JSON.stringify(id));
     }
 
-    getPersonalQuestionObs(id) {
+    getPersonalQuestionObs = (id) => {
         return this.http.post("Question/GetPersonal", JSON.stringify(id));
     }
 
-    getQuestionObs(id: number, global: boolean) {
+    getQuestionObs = (d: IScopedData) => {
+        let global = d.global;
+        let id = d.data;
         let path = global ? "Question/GetGlobal" : "Question/GetPersonal";
         return this.http.post(path, JSON.stringify(id));
     }
 
-    /* #region Create */
-    // async createQuestion(data, scope) {
-    //     try {
-    //         let path = scope === "global" ? "Question/CreateGlobal" : "Question/CreatePersonal";
-    //         let result = await this.crud.post(path, data);
-    //         return result;
-    //     } catch (err) {
-    //     }
-    // }
-    async createQuestionObs(data, global) {
+    createQuestionObs = (d: IScopedData) => {
+        let data = d.data;
+        let global = d.global;
         let path = global ? "Question/CreateGlobal" : "Question/CreatePersonal";
         return this.http.post(path, JSON.stringify(data));
     }
-    /* #endregion */
 
-    /* #region Edit */
-    // async editQuestion(data, scope) {//x
-    //     try {
-    //         let path = scope === "global" ? "Question/EditGlobal" : "Question/EditPersonal";
-    //         let result = await this.crud.post(path, data);
-    //         return result;
-    //     }
-    //     catch (err) {
-    //         this.handleError(err);
-    //     }
-    // }
-
-    editQuestionObs(data, global: boolean) {
+    editQuestionObs = (d: IScopedData) => {
+        let data = d.data;
+        let global = d.global;
         let path = global ? "Question/EditGlobal" : "Question/EditPersonal";
         return this.http.post(path, JSON.stringify(data));
     }
 
-    // editPersonalQuestionObs(data) {
-    //     return this.http.post("Question/EditPersonal", JSON.stringify(data));
-    // }
-    /* #endregion */
+    deleteQuestionObs = (d: IScopedData) => {
+        let path = d.global ? "Question/DeleteGlobal" : "Question/DeletePersonal";
+        return this.http.post(path, JSON.stringify(d.data));
+    }
 }

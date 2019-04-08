@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { FormData as myFormData } from "../../../services/models/other";
 import { Location } from '@angular/common';
 import { textFormattingMappings } from "../../../utilities/route-paths";
 import { Store } from '@ngrx/store';
 import { CrudState } from 'src/app/crud/reducers';
 import { Subscription } from 'rxjs';
+import { CudActions } from 'src/app/crud/actions/cud.actions';
 
 @Component({
   selector: 'getready-reactive-binding-form',
@@ -29,21 +30,22 @@ export class ReactiveBindingFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.errorSub = this.store.select(x => x.crud.cud.validationErrors).subscribe(errors => { 
-        //Reseting the errors;
-        for (let i = 0; i < this.formData.inputData.length; i++) {
-          this.formData.inputData[i].errors = [];
-        }
-    
-        let keys = Object.keys(errors);
-        for (let i = 0; i < keys.length; i++) {
-          let fixedKey = jsLcfirst(keys[i]);
-          this.formData.inputData.filter(x => x.name === fixedKey)[0].errors = errors[keys[i]];
-        };
-    
-        function jsLcfirst(string) {
-          return string.charAt(0).toLowerCase() + string.slice(1);
-        }
+    this.errorSub = this.store.select(x => x.crud.cud.validationErrors).subscribe(errors => {
+      console.log("FORM_VALIDATION_ERRORS_HERE: ", errors);
+      //Reseting the errors;
+      for (let i = 0; i < this.formData.inputData.length; i++) {
+        this.formData.inputData[i].errors = [];
+      }
+
+      let keys = Object.keys(errors);
+      for (let i = 0; i < keys.length; i++) {
+        let fixedKey = jsLcfirst(keys[i]);
+        this.formData.inputData.filter(x => x.name === fixedKey)[0].errors = errors[keys[i]];
+      };
+
+      function jsLcfirst(string) {
+        return string.charAt(0).toLowerCase() + string.slice(1);
+      }
     });
 
     let formControlsGroup = {};
@@ -109,6 +111,7 @@ export class ReactiveBindingFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.errorSub.unsubscribe();
+    this.store.dispatch(new CudActions.clearValidationErrors());
   }
 
 }
