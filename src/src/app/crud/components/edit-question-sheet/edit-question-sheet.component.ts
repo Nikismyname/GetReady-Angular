@@ -94,11 +94,10 @@ export class EditQuestionSheetComponent implements OnInit {
           inputData, "Edit Sheet Form", "Edit", false
         );
         this.loaded = true;
-        this.store.dispatch(new ReadActions.ClearReadSuccesses());
       }
     });
 
-    let data: IScopedData = {data: Number(this.id),global: this.global};
+    let data: IScopedData = {data: this.id, global: this.global};
     this.store.dispatch(new ReadActions.QuestionSheet(data));
   }
 
@@ -111,8 +110,5 @@ export class EditQuestionSheetComponent implements OnInit {
   ngOnDestroy() {
     this.resultSub.unsubscribe();
     this.dataSub.unsubscribe();
-    //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.clearCudSuccesses());
-    this.store.dispatch(new ReadActions.ClearReadSuccesses());
   }
 } 

@@ -73,13 +73,13 @@ export function createEffect(d: CreateEffectInput) {
                         if (response instanceof HttpErrorResponse) {
                             if (response.error && response.error.errors) {
                                 if (!d.catchValidationErrors) {
-                                    return of(new ValidationErrorWasIgnoredAction());
+                                    return of(new ValidationErrorWasIgnoredAction(response));
                                 }
                                 console.log("LOGING VALIDATION ERROR");
                                 return of(new d.validationErrorAction(response.error.errors));
                             } else {
                                 if (!d.catchGeneralErrors) {
-                                    return of(new GeneralErrorWasIgnoredAction());
+                                    return of(new GeneralErrorWasIgnoredAction(response));
                                 }
                                 if (d.useToastrForGErr) {
                                     d.toastr.error(response.error, "Error");
@@ -95,8 +95,16 @@ export function createEffect(d: CreateEffectInput) {
 
 class ValidationErrorWasIgnoredAction implements Action {
     public type = "[ignore] validation error";
+    public payload: any;
+    constructor(data: any) {
+        this.payload = data;
+    }
 }
 
 class GeneralErrorWasIgnoredAction implements Action {
     public type = "[ignore] general error";
+    public payload: any;
+    constructor(data: any) {
+        this.payload = data;
+    }
 }

@@ -7,7 +7,7 @@ export function readReducer(
 ) {
     switch (action.type) {
 
-        case ReadActionTypes.GLOBAL_QUESTION_SUCCESS:
+        case ReadActionTypes.QUESTION_SUCCESS:
             let gqState = Object.assign({}, state);
             gqState.question.success = true;
             gqState.question.question = Object.assign({}, action["payload"]);

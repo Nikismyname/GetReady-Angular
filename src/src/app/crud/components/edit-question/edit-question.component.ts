@@ -8,6 +8,7 @@ import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { map } from 'rxjs/operators';
+import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
  
 @Component({
   selector: 'getready-edit-question',
@@ -17,7 +18,7 @@ import { map } from 'rxjs/operators';
 
 export class EditQuestionComponent implements OnInit {
 
-  scope: string;
+  global: boolean;
   id: string;
   resultSub: ISubscription;
   dataSub: ISubscription;
@@ -28,8 +29,7 @@ export class EditQuestionComponent implements OnInit {
     private location: Location,
   ) {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.scope = this.route.snapshot.paramMap.get("scope");
-    console.log("id: " + this.id + " scope: " + this.scope);
+    this.global = this.route.snapshot.paramMap.get("scope") === "global"? true: false;
   }
 
   formData: FormData;
@@ -59,26 +59,22 @@ export class EditQuestionComponent implements OnInit {
           inputData, "Edit Question Form", "Edit", true
         );
         this.loaded = true;
-        this.store.dispatch(new ReadActions.ClearReadSuccesses());
       }
     });
 
-    this.store.dispatch(new ReadActions.Question(Number(this.id)));
+    let data: IScopedData = {data:this.id, global: this.global };
+    this.store.dispatch(new ReadActions.Question(data));
   }
 
   async onFormSubmit(input) {
     input["id"] = this.id;
-    let isGlobal = this.scope === "global" ? true : false;
-    let data = { data: input, global: isGlobal };
+    let data = { data: input, global: this.global };
     this.store.dispatch(new CudActions.editQuestion(data));
   }
 
   ngOnDestroy() {
     this.resultSub.unsubscribe();
     this.dataSub.unsubscribe();
-    //just in case reseting the state after component has been destroyed; 
-    this.store.dispatch(new CudActions.clearCudSuccesses());
-    this.store.dispatch(new ReadActions.ClearReadSuccesses());
   }
 
-} 
+}

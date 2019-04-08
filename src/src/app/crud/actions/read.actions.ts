@@ -2,9 +2,9 @@ import { Action } from '@ngrx/store';
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
 
 export namespace ReadActionTypes {
-    export const GLOBAL_QUESTION = "[read] global-question";
-    export const GLOBAL_QUESTION_SUCCESS = "[read] global-question-success";
-    export const GLOBAL_QUESTION_FAIL = "[read] global-question-fail";
+    export const QUESTION = "[read] question";
+    export const QUESTION_SUCCESS = "[read] question-success";
+    export const QUESTION_FAIL = "[read] question-fail";
 
     export const QUESTION_SHEET = "[read] question-sheet";
     export const QUESTION_SHEET_SUCCESS = "[read] question-sheet-success";
@@ -13,20 +13,20 @@ export namespace ReadActionTypes {
     export const CLEAR_READ_SUCCESSES = "[read] clear successes";
 }
 
-/* #region  Global Question */
+/* #region Question */
 class QuestionAction implements Action {
-    public type = ReadActionTypes.GLOBAL_QUESTION;
-    public payload: number;
+    public type = ReadActionTypes.QUESTION;
+    public payload: IScopedData;
 
     constructor(
-        public questionId: number,
+        public data: IScopedData,
     ) {
-        this.payload = questionId;
+        this.payload = data;
     }
 }
 
 class QuestionSuccessAction implements Action {
-    public type = ReadActionTypes.GLOBAL_QUESTION_SUCCESS;
+    public type = ReadActionTypes.QUESTION_SUCCESS;
     public payload: any;
 
     constructor(
@@ -37,7 +37,7 @@ class QuestionSuccessAction implements Action {
 }
 
 class QuestionActionFail implements Action {
-    public type = ReadActionTypes.GLOBAL_QUESTION_FAIL;
+    public type = ReadActionTypes.QUESTION_FAIL;
     public payload: any;
 
     constructor(

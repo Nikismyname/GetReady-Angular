@@ -3,12 +3,13 @@ import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
 import { CrudState } from "../../reducers";
-import { Store} from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { map } from 'rxjs/operators';
- 
+import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+
 @Component({
   selector: 'getready-delete-question',
   templateUrl: './delete-question.component.html',
@@ -27,7 +28,7 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
     private location: Location,
   ) {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.global = this.route.snapshot.paramMap.get("scope")==="global"? true : false;
+    this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
   }
 
   formData: FormData;
@@ -41,7 +42,7 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dataSub = this.store.pipe(map(x => x.crud.read.question)).subscribe(x => { 
+    this.dataSub = this.store.pipe(map(x => x.crud.read.question)).subscribe(x => {
       console.log("GLOBAL QUESTION HERE: ", x);
       if (x.success === true) {
         console.log("recieved the question");
@@ -60,11 +61,12 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.store.dispatch(new ReadActions.Question(Number(this.id)));
+    let data: IScopedData = { data: this.id, global: this.global };
+    this.store.dispatch(new ReadActions.Question(data));
   }
 
   async onFormSubmit() {
-    let data = { data: this.id, global: this.global };
+    let data: IScopedData = { data: this.id, global: this.global };
     this.store.dispatch(new CudActions.deleteQuestion(data));
   }
 

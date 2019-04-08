@@ -3,7 +3,7 @@ import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
 
 export namespace CudActionTypes {
     export const EDIT_QUESTION = "[cud] edit-question";
-    export const EDIT_QUESTION_SUCCESS = "[cud] edit-sheet-question";
+    export const EDIT_QUESTION_SUCCESS = "[cud] edit-question-success";
     export const EDIT_QUESTION_FAILED = "[cud] edit-question-failed-validation";
 
     export const EDIT_Q_SHEET = "[cud] edit-q-sheet";
