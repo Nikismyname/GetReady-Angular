@@ -1,4 +1,4 @@
-import { globalSheetReducer } from "./global-sheets.reducer";
+import { globalSheetReducer, latestIdReducer } from "./global-sheets.reducer";
 import {
     createSelector,
     createFeatureSelector,
@@ -9,9 +9,11 @@ import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIn
 export interface GlobalState {
     global: {
         currentGlobalIndex: QsGlobalIndex,
+        latestId: number,
     }
 }
 
 export const reducers: ActionReducerMap<any, any> = {
     currentGlobalIndex: globalSheetReducer,
+    latestId: latestIdReducer,
 }

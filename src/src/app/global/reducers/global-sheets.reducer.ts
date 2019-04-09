@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 import { GlobalSheetActionTypes } from "../actions/global-sheet.action"; 
 import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
+import { IQuestionReorder } from 'src/app/services/models/question/IQuestionReorder';
 
 export function globalSheetReducer(
     state:QsGlobalIndex = initialState,
@@ -9,13 +10,21 @@ export function globalSheetReducer(
     switch (action.type) {
         case GlobalSheetActionTypes.LOAD_SUCCESS:
             let lsPayload = action["payload"];
-            console.log("reducer here");
-            console.log(lsPayload);
             return lsPayload;
         case GlobalSheetActionTypes.QUESTIONS_REORDER:
-            let qrPayload = action["payload"];
-            console.log(qrPayload);
-            return state;
+            let reorderings = (action["payload"] as IQuestionReorder).orderings;
+            console.log("REORDERINGS_",reorderings);
+            let reorderedState = Object.assign({}, state);
+            let questions = reorderedState.globalQuestions;
+            let questionsRef = questions.slice(0);
+
+            for (let i = 0; i < questions.length; i++) {
+                let refQuestion = questionsRef[i];
+                questions[i].order = reorderings.indexOf(refQuestion.order);
+            }
+
+            reorderedState.globalQuestions = questions;
+            return reorderedState;;
         default:
             return state;
     } 
@@ -32,3 +41,17 @@ let initialState: QsGlobalIndex = {
     children: [],
     globalQuestions: [],
 };
+
+export function latestIdReducer(
+    state:number = initialStateLatestId,
+    action: Action,
+) {
+    switch (action.type) {
+        case GlobalSheetActionTypes.SAVE_LATEST_ID:
+            return action["payload"]
+        default:
+            return state;
+    } 
+}
+
+let initialStateLatestId: number = null;

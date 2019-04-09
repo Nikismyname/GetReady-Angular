@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
 import { IScopedData } from './models/contracts/ScopedData';
 import { httpFactory } from '@angular/http/src/http_module';
+import { IQuestionReorder } from './models/question/IQuestionReorder';
 
 @Injectable()
 export class QuestionService {
@@ -42,5 +43,18 @@ export class QuestionService {
     deleteQuestionObs = (d: IScopedData) => {
         let path = d.global ? "Question/DeleteGlobal" : "Question/DeletePersonal";
         return this.http.post(path, JSON.stringify(d.data));
+    }
+
+    // reorderObs = (d: IScopedData) => { 
+    //     let path = d.global ? "Question/ReorderGlobal" : "Question/ReorderPersonal";
+    //     return this.http.post(path, JSON.stringify(d.data));
+    // }
+
+    reorderGlobalObs = (d: IQuestionReorder) => { 
+        return this.http.post("Question/ReorderGlobal", JSON.stringify(d));
+    }
+
+    reorderPersonalObs = (d: IQuestionReorder) => { 
+        return this.http.post("Question/ReorderPersonal", JSON.stringify(d));
     }
 }

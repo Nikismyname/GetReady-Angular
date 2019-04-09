@@ -4,6 +4,4 @@ export class QGlobalIndex{
     public name: string;
 
     public order: number;
-
-    public column: number;
 }

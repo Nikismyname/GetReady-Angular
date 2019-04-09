@@ -1,11 +1,12 @@
 import { Effect, Actions, ofType } from "@ngrx/effects";
 import { Observable, of } from 'rxjs';
-import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { GlobalSheetActionTypes, GlobalSheetActions } from "../actions/global-sheet.action";
 import { map, switchMap, catchError, tap } from "rxjs/operators";
 import { QuestionSheetService } from 'src/app/services/question-sheet-service';
-import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
+import { createEffect } from "../../services/effects.services";
+import { QuestionService } from 'src/app/services/question-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class GlablEffects {
@@ -13,6 +14,8 @@ export class GlablEffects {
     constructor(
         private actions: Actions,
         private questionSheetService: QuestionSheetService,
+        private questionService: QuestionService,
+        private toastr: ToastrService,
     ) { }
 
     @Effect()
@@ -20,15 +23,12 @@ export class GlablEffects {
         .pipe(
             ofType(GlobalSheetActionTypes.LOAD),
             tap(x => {
-                console.log("first pipe");
-                console.log(x);
             }),
             map(action => action["payload"]),
             switchMap(payload => {
                 return this.questionSheetService.getGlobalIndexObs(payload)
                     .pipe(
                         map((sheet) => {
-                            console.log(sheet);
                             return new GlobalSheetActions.loadSuccess(sheet);
                         }),
                         catchError((error) => {
@@ -36,5 +36,19 @@ export class GlablEffects {
                         }),
                     )
             })
-        );
+    );
+    
+    @Effect()
+    reorderQuestions$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionService.reorderGlobalObs,
+        actionType: GlobalSheetActionTypes.QUESTIONS_REORDER,
+        successActions: [GlobalSheetActions.globalQuestionReorderSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: GlobalSheetActions.globalQuestionReorderFail,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
 }
