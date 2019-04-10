@@ -17,13 +17,13 @@ export class CopyQuestionsComponent implements OnInit {
   folderSelectionData: any[];
 
   async ngOnInit() {
-    let getResult = await this.questionSheetService.getAllFoldersGlobal();
-    if (getResult.status === 200) {
-      let data = getResult.data;
-      this.questionSelectionData = data;
-      this.folderSelectionData = data; 
-      this.loaded = true;
-    }
+    // let getResult = await this.questionSheetService.getAllFoldersGlobal();
+    // if (getResult.status === 200) {
+    //   let data = getResult.data;
+    //   this.questionSelectionData = data;
+    //   this.folderSelectionData = data; 
+    //   this.loaded = true;
+    //}
   }
 
   questionsSelected(id: number) {

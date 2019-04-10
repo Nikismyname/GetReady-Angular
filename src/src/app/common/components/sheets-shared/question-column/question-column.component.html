@@ -1,0 +1,12 @@
+<div *ngIf="loaded" cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="colNumber">
+  <ng-template ngFor let-question [ngForOf]="questions">
+        <div cdkDrag>
+            <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
+            <getready-question
+              [question]="question"
+              [isGlobal]="isGlobal"
+              [user]="user"
+            ></getready-question>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,14 @@
+<div *ngIf="loaded" cdkDropList (cdkDropListDropped)="onDropped($event)">
+  <ng-template ngFor let-child [ngForOf]="sheets">
+    <!-- <pre>{{child | json}}</pre> -->
+    <div cdkDrag>
+      <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
+      <getready-sheet 
+        [sheet]="child" 
+        [user]="user" 
+        [isGlobal]="isGlobal" 
+        (sheetClickedEmitter)="onClick($event)">
+      </getready-sheet>
+    </div>
+  </ng-template>
+</div>

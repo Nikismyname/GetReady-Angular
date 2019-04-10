@@ -51,4 +51,18 @@ export class GlablEffects {
         catchGeneralErrors: true,
         useToastrForGErr: true,
     });
+
+    @Effect()
+    reorderSheets$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionSheetService.reorderGlobalSheetsObs,
+        actionType: GlobalSheetActionTypes.SUBDIRECTORIES_REORDER,
+        successActions: [GlobalSheetActions.sheetReorderSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: GlobalSheetActions.sheetReorderFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
 }

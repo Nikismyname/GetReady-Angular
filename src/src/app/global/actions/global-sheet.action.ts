@@ -96,35 +96,21 @@ class QuestionsReorderFailAction implements Action {
 /* #region  CHILD_SHEETS_REORDER_ACTION */
 class SheetReorderAction implements Action {
     public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER;
-    public payload: [];
+    public payload: any;
 
     constructor(
-        public reorderings: [],
+        public data: any,
     ) {
-        this.payload = reorderings;
+        this.payload = data;
     }
 }
 
 class SheetReorderSuccessAction implements Action {
     public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
-    public payload: [];
-
-    constructor(
-        public reorderings: [],
-    ) {
-        this.payload = reorderings;
-    }
 }
 
 class SheetReorderFailAction implements Action {
     public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
-    public payload: [];
-
-    constructor(
-        public reorderings: [],
-    ) {
-        this.payload = reorderings;
-    }
 }
 /* #endregion */
 

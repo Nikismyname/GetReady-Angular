@@ -1,5 +1,5 @@
 import { QsChildIndex } from './qsChildIndex';
-import { QGlobalIndex } from '../question/qGlobalIndex';
+import { QIndex } from '../question/qGlobalIndex';
 
 export class QsGlobalIndex {
     public id: number;
@@ -19,5 +19,5 @@ export class QsGlobalIndex {
     public questionSheetId: number;
 
     public children: Array<QsChildIndex>;
-    public globalQuestions: Array<QGlobalIndex>;
+    public globalQuestions: Array<QIndex>;
 }

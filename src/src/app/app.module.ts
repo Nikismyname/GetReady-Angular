@@ -8,12 +8,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 //Module Declarations
 import { CommonModule } from "./common/common.module";
 import { GlobalModule } from "./global/global.module";
-import { CrudModule } from "./crud/crud.module"; 
+import { CrudModule } from "./crud/crud.module";  
 import { AuthenticationModule } from "./authentication/authentication.module";
  
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects"; 
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { QuestionSheetService } from "./services/question-sheet-service";

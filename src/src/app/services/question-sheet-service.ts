@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
 import { IScopedData } from './models/contracts/ScopedData';
+import { IReorderQuestion } from './models/other';
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
  
 @Injectable()
@@ -37,6 +38,14 @@ export class QuestionSheetService {
         let data = d.data;
         let path = global ? "QuestionSheet/CreateGlobalSheet": "QuestionSheet/CreatePersonalSheet";
         return this.http.post(path, JSON.stringify(data));
+    }
+
+    reorderGlobalSheetsObs = (d: IReorderQuestion) => { 
+        return this.http.post("QuestionSheet/ReorderGlobal", JSON.stringify(d)); 
+    }
+
+    reorderPersonalSheetsObs = (d: IReorderQuestion) => { 
+        return this.http.post("QuestionSheet/ReorderPersonal", JSON.stringify(d)); 
     }
     
 }

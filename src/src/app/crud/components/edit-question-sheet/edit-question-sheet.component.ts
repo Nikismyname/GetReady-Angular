@@ -3,7 +3,7 @@ import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router"; 
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
-import { CrudState } from '../../reducers';
+import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { CudActions } from "../../actions/cud.actions";
@@ -25,7 +25,7 @@ export class EditQuestionSheetComponent implements OnInit {
   errors: object = {};
 
   constructor(
-    private store: Store<CrudState>,
+    private store: Store<ICrudState>,
     private route: ActivatedRoute,
     private location: Location,
   ) {

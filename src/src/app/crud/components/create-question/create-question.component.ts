@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
-import { CrudState } from "../../reducers";
+import { ICrudState } from "../../reducers";
 import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ISubscription } from "rxjs/Subscription";
@@ -19,7 +19,7 @@ export class CreateQuestionComponent implements OnInit {
   resultSub: ISubscription;
 
   constructor(
-    private store: Store<CrudState>,
+    private store: Store<ICrudState>,
     private route: ActivatedRoute,
     private location: Location,
   ) {

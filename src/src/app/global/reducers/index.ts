@@ -6,7 +6,7 @@ import {
 } from '@ngrx/store';
 import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
 
-export interface GlobalState {
+export interface IGlobalState {
     global: {
         currentGlobalIndex: QsGlobalIndex,
         latestId: number,

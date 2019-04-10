@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+// import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from "@angular/router";
 
 import { CommonModule as MyCommonModule } from "../common/common.module";
@@ -27,7 +27,7 @@ const components = [
   imports: [
     CommonModule,
     MyCommonModule,
-    DragDropModule,
+    // DragDropModule,
     RouterModule,
     StoreModule.forFeature("global", reducers),
     EffectsModule.forFeature([GlablEffects]),

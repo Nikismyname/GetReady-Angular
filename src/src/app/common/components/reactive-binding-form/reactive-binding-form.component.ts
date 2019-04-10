@@ -4,7 +4,7 @@ import { FormData as myFormData } from "../../../services/models/other";
 import { Location } from '@angular/common';
 import { textFormattingMappings } from "../../../utilities/route-paths";
 import { Store } from '@ngrx/store';
-import { CrudState } from 'src/app/crud/reducers';
+import { ICrudState } from 'src/app/crud/reducers';
 import { Subscription } from 'rxjs';
 import { CudActions } from 'src/app/crud/actions/cud.actions';
 
@@ -25,7 +25,7 @@ export class ReactiveBindingFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    private store: Store<CrudState>,
+    private store: Store<ICrudState>,
   ) { }
 
   ngOnInit() {

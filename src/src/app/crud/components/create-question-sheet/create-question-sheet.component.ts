@@ -3,7 +3,7 @@ import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router"; 
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
-import { CrudState } from '../../reducers';
+import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
 import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
@@ -21,7 +21,7 @@ export class CreateQuestionSheetComponent implements OnInit {
   resultSub: ISubscription;
 
   constructor(
-    private store: Store<CrudState>,
+    private store: Store<ICrudState>,
     private route: ActivatedRoute,
     private location: Location,
   ) {

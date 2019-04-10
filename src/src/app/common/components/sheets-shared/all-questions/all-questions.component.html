@@ -1,0 +1,31 @@
+<div cdkDropListGroup>
+<div class="row">
+    <!-- COL_ONE -->
+      <div class="col-4">
+      <getready-question-column
+        [questions]="colOneQuestions"
+        [user]="user"
+        [isGlobal]="isGlobal"
+        [colNumber]="1"
+        (onDroppedEmitter)="onDropped($event)"
+      ></getready-question-column></div>
+      <!-- COL_TWO -->
+      <div class="col-4">
+      <getready-question-column
+        [questions]="colTwoQuestions"
+        [user]="user"
+        [isGlobal]="isGlobal"
+        (onDroppedEmitter)="onDropped($event)"
+        [colNumber]="2"
+    ></getready-question-column></div>
+      <!-- COL_THREE -->
+      <div class="col-4">
+      <getready-question-column
+        [questions]="colThreeQuestions"
+        [user]="user"
+        [isGlobal]="isGlobal"
+        (onDroppedEmitter)="onDropped($event)"
+        [colNumber]="3"
+    ></getready-question-column></div>
+  </div>
+</div>

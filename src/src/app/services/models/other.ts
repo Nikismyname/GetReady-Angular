@@ -50,3 +50,13 @@ export class User {
   ) {
   }
 }
+
+export interface IUserStatus{
+    isUser: boolean,
+    isAdmin: boolean,
+}
+
+export interface IReorderQuestion{
+  questionNumber: number; 
+  reorderEvent: any;
+}

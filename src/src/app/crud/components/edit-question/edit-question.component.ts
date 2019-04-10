@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
-import { CrudState } from "../../reducers";
+import { ICrudState } from "../../reducers";
 import { Store, select } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
@@ -24,7 +24,7 @@ export class EditQuestionComponent implements OnInit {
   dataSub: ISubscription;
 
   constructor(
-    private store: Store<CrudState>,
+    private store: Store<ICrudState>,
     private route: ActivatedRoute,
     private location: Location,
   ) {

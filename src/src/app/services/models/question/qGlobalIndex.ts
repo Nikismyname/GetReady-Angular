@@ -1,4 +1,4 @@
-export class QGlobalIndex{
+export class QIndex{
     public id: number;
 
     public name: string;

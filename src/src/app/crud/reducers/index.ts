@@ -4,7 +4,7 @@ import {
     ActionReducerMap,
 } from '@ngrx/store';
 
-export interface CrudState {
+export interface ICrudState {
     crud:
     {
         cud:

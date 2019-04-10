@@ -3,105 +3,28 @@
     <div class="row">
         <div class="col-3 mt-2">
             <!-- PARENT SHEET -->
-            <div (click)="onClickCurrentSheet($event, currentSheet.questionSheetId)">
-                <div class="card mb-2" style="border: 3px solid rgba(0, 0, 0, 0.6)">
-                    <div class="card-body">
-                        <h6 class="card-title">{{currentSheet.name}}</h6>
-                        <div *ngIf="isAdmin">
-                            <a [routerLink]="[routePaths.createSheetPath+'/'+currentSheet.id+'/global']">Create
-                                Sheet</a> <br />
-                            <a [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/global']">Create
-                                Question</a> <br />
-                        </div>
-                        <div *ngIf="isUser">
-                            <a href="#">Copy Questions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <getready-current-sheet
+                [isGlobal]="true"
+                [currentSheet]="currentSheet"
+                [user]="user"
+                (currentSheetClickedEmitter)="onClickCurrentSheet($event)"
+            ></getready-current-sheet>
             <!-- SHEET CHILDREN  -->
-            <div (click)="onClickChild($event, child.id)" *ngFor="let child of currentSheet.children">
-                <div class="card mb-2" style="border: 3px solid rgba(100, 100, 100, 0.6)">
-                    <div class="card-body">
-                        <h6 className="card-title">{{child.name}}</h6>
-                        <div *ngIf="isAdmin">
-                            <a [routerLink]="[routePaths.deleteSheetPath+'/'+child.id+'/global']">Delete</a>
-                            <a [routerLink]="[routePaths.editQuestionSheetPath+'/'+child.id+'/global']"
-                                class="ml-2">Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div cdkDropListGroup class="col-9" *ngIf="questions$|async as questions">
-
-            <div class="row">
-                <!-- COL_ONE -->
-                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="{ind: 1, qc: questions.length}" class="col-4">
-                    <ng-template ngFor let-question [ngForOf]="questions">
-                        <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngIf="reorderService.shouldDisplay(questions.length, question.order, 1)">
-                            <!-- {{question.order}} -->
-                            <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
-                            <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2"
-                                style="border: 1px solid rgba(3, 91, 255, 0.6)">
-                                <div class="card-body">
-                                    <h6 className="card-title">{{question.name}}</h6>
-                                    <div *ngIf="isAdmin">
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.deleteQuestionPath+'/'+question.id+'/global']">Delete</a>
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
-                <!-- COL_TWO -->
-                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="{ind: 2, qc: questions.length}" class="col-4">
-                    <ng-template ngFor let-question [ngForOf]="questions">
-                        <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngIf="reorderService.shouldDisplay(questions.length, question.order, 2)">
-                            <!-- {{question.order}} -->
-                            <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
-                            <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2"
-                                style="border: 1px solid rgba(3, 91, 255, 0.6)">
-                                <div class="card-body">
-                                    <h6 className="card-title">{{question.name}}</h6>
-                                    <div *ngIf="isAdmin">
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.deleteQuestionPath+'/'+question.id+'/global']">Delete</a>
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
-                <!-- COL_THREE -->
-                <div cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="{ind: 3, qc: questions.length}" class="col-4">
-                    <ng-template ngFor let-question [ngForOf]="questions">
-                        <div cdkDrag (click)="onClickQuestion($event, question.id)" *ngIf="reorderService.shouldDisplay(questions.length, question.order, 3)">
-                            <!-- {{question.order}} -->
-                            <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
-                            <div (click)="onClickGlobalQuestion(question.id)" class="card mb-2 mt-2"
-                                style="border: 1px solid rgba(3, 91, 255, 0.6)">
-                                <div class="card-body">
-                                    <h6 className="card-title">{{question.name}}</h6>
-                                    <div *ngIf="isAdmin">
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.deleteQuestionPath+'/'+question.id+'/global']">Delete</a>
-                                        <a class="ml-2"
-                                            [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/global']">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
-
-            </div>
+            <getready-sheet-list
+                [sheets]="currentSheet.children"
+                [user] = "user"
+                [isGlobal]="true"
+                (onClickSheet)="onClickChild($event)"
+                (onDoppedEmitter)="onDroppedSheets($event)"
+            ></getready-sheet-list>
+        </div> 
+        <div class="col-9">
+            <getready-all-questions
+                [isGlobal]="true"
+                [user]="user"
+                [questions]="currentSheet.globalQuestions"
+                (dropped)="onDroppedQuestions($event)"
+            ></getready-all-questions>
         </div>
     </div>
 </div>
