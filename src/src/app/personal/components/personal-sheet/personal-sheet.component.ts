@@ -1,39 +1,37 @@
 import { Component } from "@angular/core";
-import { IQsGlobalIndex } from "src/app/services/models/question-sheet/qs-global-index";
+import { IQsPersonalIndex } from '../../../services/models/question-sheet/qs-personal-index';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
-import { GlobalSheetActions } from "../../actions/global-sheet.action";
+import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
 
-import { ReorderService } from 'src/app/services/reorder-service';
 import * as c from "../../../utilities/route-paths";
-import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { IAppState } from 'src/app/store/reducers';
-import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';
- 
-@Component({
-    selector: "getready-global-sheet",
-    templateUrl: "./global-sheet.component.html",
-})
-export class GlobalSheetComponent {
+import { IUserStatus } from 'src/app/services/models/other';
 
-    questionSheet$: Observable<IQsGlobalIndex>;
+@Component({
+  selector: 'getready-personal-sheet',
+  templateUrl: './personal-sheet.component.html',
+  styleUrls: ['./personal-sheet.component.css']
+})
+export class PersonalSheetComponent {
+
+    questionSheet$: Observable<IQsPersonalIndex>;
     private latestIdSub: Subscription;
     private userSub: Subscription;
-    currentSheetId: number = 3;
+    currentSheetId: number = -1;
     loaded: boolean = false;
     isAdmin: boolean = false;
     isUser: boolean = false;
 
     constructor(
         private store: Store<IAppState>,
-        public reorderService: ReorderService,
         private route: ActivatedRoute,
         private router: Router,
         public routePaths: c.RoutePaths,
     ) {
-        this.questionSheet$ = store.select(state => state.global.currentGlobalIndex);
+        this.questionSheet$ = store.select(state => state.personal.currentPersonalIndex);
 
         this.userSub = this.store.select(x => x.auth.user).subscribe(user => {
             this.isUser = user ? true : false;
@@ -42,7 +40,7 @@ export class GlobalSheetComponent {
 
         let id = this.route.snapshot.paramMap.get("id");
         let initialSavedId = null;
-        this.latestIdSub = store.select(state => state.global.latestId).subscribe(x => {
+        this.latestIdSub = store.select(state => state.personal.latestId).subscribe(x => {
             initialSavedId = x;
         });
  
@@ -53,9 +51,12 @@ export class GlobalSheetComponent {
         }
     }
 
-    get user() {
+    get user () {
         let data: IUserStatus = { isAdmin: this.isAdmin, isUser: this.isUser }
         return data;
+    }
+
+    async ngOnInit() {
     }
 
     async fetchSheet(id) {
@@ -64,9 +65,9 @@ export class GlobalSheetComponent {
         }
         this.currentSheetId = id;
 
-        this.store.dispatch(new GlobalSheetActions.load(id));
-        this.store.dispatch(new GlobalSheetActions.SaveLatestId(id));
-        let newPath = c.globalQuestionSheetsPath + "/" + id;
+        this.store.dispatch(new PersonalSheetActions.load(id));
+        this.store.dispatch(new PersonalSheetActions.SaveLatestId(id));
+        let newPath = c.personalQuestionSheetsPath + "/" + id;
         window.history.pushState(null, null, newPath);
     }
 
@@ -83,12 +84,13 @@ export class GlobalSheetComponent {
     }
 
     onDroppedQuestions(questionReorder) {
-        this.store.dispatch(new GlobalSheetActions.globalQuestionReorder(questionReorder));
+        // console.log("::QUESTION::", questionReorder);
+        this.store.dispatch(new PersonalSheetActions.questionReorder(questionReorder));
     }
 
     onDroppedSheets(sheetReorder) {
-        console.log("::G_SHEET_REORDER::", sheetReorder);
-        this.store.dispatch(new GlobalSheetActions.sheetReorder(sheetReorder));
+        console.log("::SHEET::", sheetReorder);
+        this.store.dispatch(new PersonalSheetActions.sheetReorder(sheetReorder));
     }
 
     ngOnDestroy() {

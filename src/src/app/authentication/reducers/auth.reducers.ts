@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 import { AuthActionTypes } from "../actions/auth.actions";
-import { User } from 'src/app/services/models/other';
+import { IUser } from 'src/app/services/models/other';
 
 export function authReducer(
     state: IReducerState = Object.assign({}, initialAuthState),
@@ -38,7 +38,7 @@ export function authReducer(
 }
 
 interface IReducerState {
-    user: User,
+    user: IUser,
     loginSuccess: boolean,
     registerSuccess: boolean,
 }

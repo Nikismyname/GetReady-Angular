@@ -1,9 +1,9 @@
-import { User } from "src/app/services/models/other";
+import { IUser } from "src/app/services/models/other";
 
 export interface IAuthState {
     auth: {
-        user: User,
+        user: IUser,
         loginSuccess: boolean,
         registerSuccess: boolean,
     }
-}
+} 

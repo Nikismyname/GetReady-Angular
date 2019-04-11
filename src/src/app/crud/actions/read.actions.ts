@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
 
 export namespace ReadActionTypes {
     export const QUESTION = "[read] question";

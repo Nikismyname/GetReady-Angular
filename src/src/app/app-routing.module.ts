@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PersonalSheetComponent } from "./components/personal-sheet/personal-sheet.component";
 import { GlobalSheetComponent } from "./global/components/global-sheet/global-sheet.component";
 import { LoginComponent } from "./authentication/components/login/login.component";
 import { RegisterComponent } from "./authentication/components/register/register.component";
@@ -14,24 +13,25 @@ import { CreateQuestionSheetComponent } from "./crud/components/create-question-
 import { DeleteQuestionSheetComponent } from "./crud/components/delete-question-sheet/delete-question-sheet.component"; 
 import { DeleteQuestionComponent } from "./crud/components/delete-question/delete-question.component";
 import { CreateQuestionComponent } from "./crud/components/create-question/create-question.component";
+import { PersonalSheetComponent } from "./personal/components/personal-sheet/personal-sheet.component";
 import * as c from "./utilities/route-paths";
 
 const routes: Routes = [
   {
-    path: "",
-    component: HomeComponent
+    path: c.globalQuestionSheetsPath + "/:id",
+    component: GlobalSheetComponent
   },
   {
     path: c.personalQuestionSheetsPath + "/:id",
     component: PersonalSheetComponent
   },
   {
-    path: c.viewGlobalQuestion + "/:id",
-    component: ViewGlobalQuestionComponent
+    path: "",
+    component: HomeComponent
   },
   {
-    path: c.globalQuestionSheetsPath + "/:id",
-    component: GlobalSheetComponent
+    path: c.viewGlobalQuestion + "/:id",
+    component: ViewGlobalQuestionComponent
   },
   {
     path: c.loginPath,

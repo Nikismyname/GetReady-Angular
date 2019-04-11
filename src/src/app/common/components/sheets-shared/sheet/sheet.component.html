@@ -1,7 +1,6 @@
 <div (click)="onClickSheet($event, sheet.id)" *ngIf="loaded" class="card mb-2" style="border: 3px solid rgba(100, 100, 100, 0.6)">
   <div class="card-body">
     <h6 className="card-title">{{sheet.name}}</h6>
-    {{sheet.order}}
     <div *ngIf="isGlobal">
       <div *ngIf="user.isAdmin">
         <a [routerLink]="[routePaths.deleteSheetPath+'/'+sheet.id+'/global']">Delete</a>

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QIndex } from 'src/app/services/models/question/qGlobalIndex';
+import { IQGlobalIndex } from 'src/app/services/models/question/q-global-index';
 import { ReorderService } from 'src/app/services/reorder-service';
 import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';
+import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 
 @Component({
   selector: 'getready-all-questions',
@@ -10,7 +11,8 @@ import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';
 })
 export class AllQuestionsComponent implements OnInit {
 
-  questions: QIndex[]
+  questions: IQGlobalIndex[]
+  @Input() sheetId: number;
   @Input() isGlobal: boolean;
   @Input() user: IUserStatus;
   @Input("questions") set questionsSetter(val: any) {
@@ -28,9 +30,9 @@ export class AllQuestionsComponent implements OnInit {
   @Output() dropped: EventEmitter<any> = new EventEmitter();
   loaded: boolean = false;
 
-  colOneQuestions: QIndex[];
-  colTwoQuestions: QIndex[];
-  colThreeQuestions: QIndex[];
+  colOneQuestions: IQGlobalIndex[];
+  colTwoQuestions: IQGlobalIndex[];
+  colThreeQuestions: IQGlobalIndex[];
 
   constructor(
     private reorderService: ReorderService,
@@ -57,7 +59,11 @@ export class AllQuestionsComponent implements OnInit {
       currColumn,
       prevColumn
     );
-    this.dropped.emit(orderings);
+    let qr: IQuestionReorder = {
+      orderings: orderings,
+      sheetId: this.sheetId,
+    };
+    this.dropped.emit(qr);
   }
 
 }

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
-import { IScopedData } from './models/contracts/ScopedData';
+import { IScopedData } from './models/contracts/scoped-data';
 import { httpFactory } from '@angular/http/src/http_module';
-import { IQuestionReorder } from './models/question/IQuestionReorder';
+import { IQuestionReorder } from './models/question/question-reorder';
 
 @Injectable()
 export class QuestionService {

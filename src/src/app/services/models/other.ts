@@ -1,21 +1,11 @@
-import { Response } from "@angular/http/src/static_response";
+export class ParsingData { 
+  constructor(
+    public text: string,
 
-export class CrudResult<type>{ 
-    // status: 200, data: json, json, result
-    constructor(
-        public status: number,
-        public data: type,
-        public json: string,
-        public result: Response,
-    ) {}
-}
+    public done: boolean,
 
-export class ParsingData {
-    constructor(
-      public text: string,
-      public done: boolean,
-      public type: string,
-    ) { }
+    public type: string,
+  ) { }
 }
 
 export class FormInputData {
@@ -42,21 +32,28 @@ export class FormData {
   }
 }
 
-export class User { 
-  constructor(
-    public username: string,
-    public token: string, 
-    public role: string,
-  ) {
-  }
+export interface IUser {
+
+  username: string,
+  
+  token: string, 
+  
+  role: string,
+  
 }
 
 export interface IUserStatus{
-    isUser: boolean,
-    isAdmin: boolean,
+
+  isUser: boolean,
+  
+  isAdmin: boolean,
+  
 }
 
 export interface IReorderQuestion{
+
   questionNumber: number; 
+
   reorderEvent: any;
+
 }

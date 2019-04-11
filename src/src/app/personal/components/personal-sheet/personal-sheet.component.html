@@ -1,30 +1,30 @@
-<h1>GLOBAL SHEETS</h1>
+<h1>PERSONAL SHEETS</h1>
 <div *ngIf="questionSheet$|async as currentSheet">
     <div class="row">
         <div class="col-3 mt-2">
             <!-- PARENT SHEET -->
             <getready-current-sheet
-                [isGlobal]="true"
+                [isGlobal]="false"
                 [currentSheet]="currentSheet"
                 [user]="user"
                 (currentSheetClickedEmitter)="onClickCurrentSheet($event)"
             ></getready-current-sheet>
             <!-- SHEET CHILDREN  -->
             <getready-sheet-list
-                [sheets]="currentSheet.children"
                 [sheetId]="currentSheet.id"
+                [sheets]="currentSheet.children"
                 [user] = "user"
-                [isGlobal]="true"
+                [isGlobal]="false"
                 (onClickSheet)="onClickChild($event)"
                 (onDoppedEmitter)="onDroppedSheets($event)"
             ></getready-sheet-list>
         </div> 
         <div class="col-9">
             <getready-all-questions
-                [isGlobal]="true"
-                [sheetId]="currentSheet.id"
+                [sheetId]="currentSheet.id" 
+                [isGlobal]="false"
                 [user]="user"
-                [questions]="currentSheet.globalQuestions"
+                [questions]="currentSheet.personalQuestions"
                 (dropped)="onDroppedQuestions($event)"
             ></getready-all-questions>
         </div>

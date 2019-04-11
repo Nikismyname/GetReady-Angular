@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
-import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
 import { Validators } from '@angular/forms';
 
 @Component({

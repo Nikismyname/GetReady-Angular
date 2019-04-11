@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
-import { IScopedData } from './models/contracts/ScopedData';
+import { IScopedData } from './models/contracts/scoped-data';
 import { IReorderQuestion } from './models/other';
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
  
@@ -12,6 +12,10 @@ export class QuestionSheetService {
 
     getGlobalIndexObs = (id) => { 
         return this.http.get(`QuestionSheet/GetGlobalIndex/${id}`);
+    }
+
+    getPersonalIndexObs = (id) => { 
+        return this.http.get(`QuestionSheet/GetPersonalIndex/${id}`);
     }
 
     getQuestionSheetObs = (d: IScopedData) => {

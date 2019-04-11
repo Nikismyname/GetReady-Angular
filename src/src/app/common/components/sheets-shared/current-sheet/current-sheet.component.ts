@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
+import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
 import { RoutePaths } from 'src/app/utilities/route-paths';
 import { IUserStatus } from 'src/app/services/models/other';
 
@@ -11,7 +11,7 @@ import { IUserStatus } from 'src/app/services/models/other';
 export class CurrentSheetComponent implements OnInit {
 
   @Input() isGlobal: boolean;
-  @Input() currentSheet: QsGlobalIndex;
+  @Input() currentSheet: IQsGlobalIndex;
   @Input() user: IUserStatus;
   @Output() currentSheetClickedEmitter: EventEmitter<number> = new EventEmitter(); 
   loaded: boolean = false;

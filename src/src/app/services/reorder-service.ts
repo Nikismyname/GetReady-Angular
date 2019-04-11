@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { QIndex } from "src/app/services/models/question/qGlobalIndex";
+import { IQGlobalIndex } from "src/app/services/models/question/q-global-index";
 import { renderEmbeddedTemplate } from '@angular/core/src/render3/instructions';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ReorderService {
         return { old: oldArray, new: newArray };
     };
 
-    reorderColumns(inputColumns: QIndex[][], unassigned: QIndex[], sort: boolean = false) {
+    reorderColumns(inputColumns: IQGlobalIndex[][], unassigned: IQGlobalIndex[], sort: boolean = false) {
         let col1 = inputColumns[0];
         let col2 = inputColumns[1];
         let col3 = inputColumns[2];
@@ -140,7 +140,7 @@ export class ReorderService {
         return newOrders;
     }
 
-    generateOrderingWithElements(questions: QIndex[], currInd: number, prevIndex: number, currCol: number, prevCol: number) {
+    generateOrderingWithElements(questions: IQGlobalIndex[], currInd: number, prevIndex: number, currCol: number, prevCol: number) {
         let questionCount = questions.length;
         let remainder = questionCount % 3;
         let solidColumnLenght = (questionCount - remainder) / 3;

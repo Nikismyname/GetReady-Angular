@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
-import { IScopedData } from 'src/app/services/models/contracts/ScopedData';
+import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
 
 @Component({
   selector: 'getready-delete-question-sheet',

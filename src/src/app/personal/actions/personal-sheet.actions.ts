@@ -1,20 +1,20 @@
 import { Action } from '@ngrx/store';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 
-export namespace GlobalSheetActionTypes {
-    export const LOAD = "[GlobalSheet] load";
-    export const LOAD_SUCCESS = "[GlobalSheet] loaded";
-    export const LOAD_FAILED = "[GlobalSheet] failed";
+export namespace PersonalSheetActionTypes {
+    export const LOAD = "[PersonalSheet] load";
+    export const LOAD_SUCCESS = "[PersonalSheet] loaded";
+    export const LOAD_FAILED = "[PersonalSheet] failed";
 
-    export const QUESTIONS_REORDER = "[GlobalSheet] reorder questions";
-    export const QUESTIONS_REORDER_FAILED = "[GlobalSheet] reorder questions failed";
-    export const QUESTIONS_REORDER_SUCCESS = "[GlobalSheet] reorder questions success";
+    export const QUESTIONS_REORDER = "[PersonalSheet] reorder questions";
+    export const QUESTIONS_REORDER_FAILED = "[PersonalSheet] reorder questions failed";
+    export const QUESTIONS_REORDER_SUCCESS = "[PersonalSheet] reorder questions success";
 
-    export const SUBDIRECTORIES_REORDER = "[GlobalSheet] reorder subdirectories";
-    export const SUBDIRECTORIES_REORDER_FAILED = "[GlobalSheet] reorder subdirectories failed";
-    export const SUBDIRECTORIES_REORDER_SUCCESS = "[GlobalSheet] reorder subdirectories success";
+    export const SUBDIRECTORIES_REORDER = "[PersonalSheet] reorder subdirectories";
+    export const SUBDIRECTORIES_REORDER_FAILED = "[PersonalSheet] reorder subdirectories failed";
+    export const SUBDIRECTORIES_REORDER_SUCCESS = "[PersonalSheet] reorder subdirectories success";
 
-    export const SAVE_LATEST_ID = "[GlobalSheet] save latest id";
+    export const SAVE_LATEST_ID = "[PersonalSheet] save latest id";
 }
 
 // export const GlobalSheetLoadAction = createAction(
@@ -24,8 +24,8 @@ export namespace GlobalSheetActionTypes {
 
 
 /* #region  Load Actions */
-class GlobalSheetLoadAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD;
+class LoadAction implements Action {
+    public type = PersonalSheetActionTypes.LOAD;
     public payload: number;
 
     constructor(
@@ -35,8 +35,8 @@ class GlobalSheetLoadAction implements Action {
     }
 }
 
-class GlobalSheetLoadSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD_SUCCESS;
+class LoadSuccessAction implements Action {
+    public type = PersonalSheetActionTypes.LOAD_SUCCESS;
     public payload;
 
     constructor(
@@ -46,8 +46,8 @@ class GlobalSheetLoadSuccessAction implements Action {
     }
 }
 
-class GlobalSheetLoadFailedAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD_FAILED;
+class LoadFailedAction implements Action {
+    public type = PersonalSheetActionTypes.LOAD_FAILED;
     public payload;
 
     constructor(
@@ -60,7 +60,7 @@ class GlobalSheetLoadFailedAction implements Action {
 
 /* #region GLOBAL_QUESTION_REORDER_ACTIONS */
 class QuestionsReorderAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER;
+    public type = PersonalSheetActionTypes.QUESTIONS_REORDER;
     public payload: IQuestionReorder;
     
     constructor(
@@ -71,7 +71,7 @@ class QuestionsReorderAction implements Action {
 }
 
 class QuestionsReorderSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
+    public type = PersonalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
     public payload: any[];
 
     constructor(
@@ -82,7 +82,7 @@ class QuestionsReorderSuccessAction implements Action {
 }
 
 class QuestionsReorderFailAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER_FAILED;
+    public type = PersonalSheetActionTypes.QUESTIONS_REORDER_FAILED;
     public payload: any[];
 
     constructor(
@@ -95,7 +95,7 @@ class QuestionsReorderFailAction implements Action {
 
 /* #region  CHILD_SHEETS_REORDER_ACTION */
 class SheetReorderAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER;
+    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER;
     public payload: any;
 
     constructor(
@@ -106,16 +106,16 @@ class SheetReorderAction implements Action {
 }
 
 class SheetReorderSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
+    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
 }
 
 class SheetReorderFailAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
+    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
 }
 /* #endregion */
 
 class SaveLatestIdAction implements Action {
-    public type = GlobalSheetActionTypes.SAVE_LATEST_ID;
+    public type = PersonalSheetActionTypes.SAVE_LATEST_ID;
     public payload: [];
 
     constructor(
@@ -126,14 +126,14 @@ class SaveLatestIdAction implements Action {
 }
 
 
-export namespace GlobalSheetActions {
-    export const load = GlobalSheetLoadAction;
-    export const loadSuccess = GlobalSheetLoadSuccessAction;
-    export const loadFail = GlobalSheetLoadFailedAction;
+export namespace PersonalSheetActions {
+    export const load = LoadAction;
+    export const loadSuccess = LoadSuccessAction;
+    export const loadFail = LoadFailedAction;
 
-    export const globalQuestionReorder = QuestionsReorderAction;
-    export const globalQuestionReorderSuccess = QuestionsReorderSuccessAction;
-    export const globalQuestionReorderFail = QuestionsReorderFailAction;
+    export const questionReorder = QuestionsReorderAction;
+    export const questionReorderSuccess = QuestionsReorderSuccessAction;
+    export const questionReorderFail = QuestionsReorderFailAction;
 
     export const sheetReorder = SheetReorderAction;
     export const sheetReorderSuccess = SheetReorderSuccessAction;

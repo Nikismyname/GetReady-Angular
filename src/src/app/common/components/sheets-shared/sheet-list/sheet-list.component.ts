@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QsChildIndex } from 'src/app/services/models/question-sheet/qsChildIndex';
+import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
 import { IUserStatus } from 'src/app/services/models/other';
 import { ReorderService } from 'src/app/services/reorder-service';
+import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 
 @Component({
   selector: 'getready-sheet-list',
@@ -10,11 +11,12 @@ import { ReorderService } from 'src/app/services/reorder-service';
 })
 export class SheetListComponent implements OnInit {
 
-  sheets: QsChildIndex[];
-  @Input("sheets") set sheetSetter(data: QsChildIndex[]) {
+  sheets: IQsChildIndex[];
+  @Input("sheets") set sheetSetter(data: IQsChildIndex[]) {
     this.sheets = data.sort((a, b) => a.order - b.order);
     console.log("LSIT_SHEETS_HERE:", this.sheets);
   }
+  @Input() sheetId: number;
   @Input() user: IUserStatus;
   @Input() isGlobal: boolean;
   @Output() onClickSheet: EventEmitter<Number> = new EventEmitter();
@@ -37,7 +39,11 @@ export class SheetListComponent implements OnInit {
     let currentIndex = e.currentIndex;
     let prevIndex = e.previousIndex;
     let orderings = this.reorderService.generateReorderingsSheet(this.sheets, currentIndex, prevIndex);
-    this.onDoppedEmitter.emit(orderings);
+    let qr: IQuestionReorder = {
+      orderings: orderings,
+      sheetId: this.sheetId,
+    };
+    this.onDoppedEmitter.emit(qr);
   }
  
 }

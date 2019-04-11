@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QIndex } from 'src/app/services/models/question/qGlobalIndex';
+import { IQGlobalIndex } from 'src/app/services/models/question/q-global-index';
 import { IUserStatus } from 'src/app/services/models/other';
 
 @Component({
@@ -9,8 +9,8 @@ import { IUserStatus } from 'src/app/services/models/other';
 })
 export class QuestionColumnComponent implements OnInit {
 
-  questions: QIndex[];
-  @Input("questions") set questionsSetter(data: QIndex[]) {
+  questions: IQGlobalIndex[];
+  @Input("questions") set questionsSetter(data: IQGlobalIndex[]) {
     this.questions = data;
     console.log("QUESTION_COLUMN_UPDATED");
   }

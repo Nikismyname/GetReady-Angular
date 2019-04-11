@@ -8,7 +8,7 @@ import { CommonModule as MyCommonModule } from "../common/common.module";
 import { StoreModule } from "@ngrx/store"
 import { EffectsModule } from "@ngrx/effects";
 import { reducers } from "./reducers";
-import { GlablEffects } from "./effects/GlobalSheet.effects";
+import { GlobalSheetEffects } from "./effects/global-sheet.effects";
 
 import { GlobalSheetComponent } from "./components/global-sheet/global-sheet.component"; 
 import { CopyQuestionsComponent } from "./components/copy-questions/copy-questions.component";
@@ -30,7 +30,7 @@ const components = [
     // DragDropModule,
     RouterModule,
     StoreModule.forFeature("global", reducers),
-    EffectsModule.forFeature([GlablEffects]),
+    EffectsModule.forFeature([GlobalSheetEffects]),
   ],
   exports: [
     ...components

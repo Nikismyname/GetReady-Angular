@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QIndex } from 'src/app/services/models/question/qGlobalIndex';
+import { IQGlobalIndex } from 'src/app/services/models/question/q-global-index';
 import { IUserStatus } from 'src/app/services/models/other';
 import { RoutePaths } from 'src/app/utilities/route-paths';
 
@@ -11,7 +11,7 @@ import { RoutePaths } from 'src/app/utilities/route-paths';
 export class QuestionComponent implements OnInit {
 
   @Input() isGlobal: boolean; 
-  @Input() question: QIndex;
+  @Input() question: IQGlobalIndex;
   @Input() user: IUserStatus;
   loaded: boolean = false;
 

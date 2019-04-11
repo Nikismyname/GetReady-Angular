@@ -4,11 +4,11 @@ import {
     createFeatureSelector,
     ActionReducerMap,
 } from '@ngrx/store';
-import { QsGlobalIndex } from 'src/app/services/models/question-sheet/qsGlobalIndex';
+import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
 
 export interface IGlobalState {
     global: {
-        currentGlobalIndex: QsGlobalIndex,
+        currentGlobalIndex: IQsGlobalIndex,
         latestId: number,
     }
 }

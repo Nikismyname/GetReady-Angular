@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormInputData, FormData, User } from "../../../services/models/other";
+import { FormInputData, FormData, IUser } from "../../../services/models/other";
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";

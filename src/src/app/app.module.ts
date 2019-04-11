@@ -5,11 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-//Module Declarations
+//Module Declarations 
 import { CommonModule } from "./common/common.module";
 import { GlobalModule } from "./global/global.module";
 import { CrudModule } from "./crud/crud.module";  
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { PersonalModule } from "./personal/personal.module"; 
  
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects"; 
@@ -24,7 +25,6 @@ import { UserService } from "./services/user-service";
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
   
 import { AppComponent } from './app.component';
-import { PersonalSheetComponent } from "./components/personal-sheet/personal-sheet.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -35,7 +35,6 @@ import { ShouldDisplayQuestionDirective } from './directives/should-display-ques
 @NgModule({
   declarations: [
     AppComponent,
-    PersonalSheetComponent,
     NavbarComponent,
     NotFoundComponent,
     HomeComponent,
@@ -52,6 +51,7 @@ import { ShouldDisplayQuestionDirective } from './directives/should-display-ques
     GlobalModule,
     CrudModule,
     AuthenticationModule,
+    PersonalModule,
 
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),

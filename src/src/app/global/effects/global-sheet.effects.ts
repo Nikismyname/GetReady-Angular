@@ -1,15 +1,14 @@
-import { Effect, Actions, ofType } from "@ngrx/effects";
-import { Observable, of } from 'rxjs';
+import { Effect, Actions } from "@ngrx/effects";
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { GlobalSheetActionTypes, GlobalSheetActions } from "../actions/global-sheet.action";
-import { map, switchMap, catchError, tap } from "rxjs/operators";
-import { QuestionSheetService } from 'src/app/services/question-sheet-service';
+import { QuestionSheetService } from "../../services/question-sheet-service";
 import { createEffect } from "../../services/effects.services";
-import { QuestionService } from 'src/app/services/question-service';
+import { QuestionService } from "../../services/question-service";
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
-export class GlablEffects {
+export class GlobalSheetEffects {
 
     constructor(
         private actions: Actions,
@@ -19,24 +18,18 @@ export class GlablEffects {
     ) { }
 
     @Effect()
-    loadGlobalSheet$: Observable<any> = this.actions
-        .pipe(
-            ofType(GlobalSheetActionTypes.LOAD),
-            tap(x => {
-            }),
-            map(action => action["payload"]),
-            switchMap(payload => {
-                return this.questionSheetService.getGlobalIndexObs(payload)
-                    .pipe(
-                        map((sheet) => {
-                            return new GlobalSheetActions.loadSuccess(sheet);
-                        }),
-                        catchError((error) => {
-                            return of(new GlobalSheetActions.loadFail(error));
-                        }),
-                    )
-            })
-    );
+    loadGlobalSheet$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionSheetService.getGlobalIndexObs,
+        actionType: GlobalSheetActionTypes.LOAD,
+        successActions: [GlobalSheetActions.loadSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: GlobalSheetActions.loadFail,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
     
     @Effect()
     reorderQuestions$: Observable<any> = createEffect({
