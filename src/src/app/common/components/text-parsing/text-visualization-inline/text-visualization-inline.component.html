@@ -3,19 +3,19 @@
 
       <span 
         class="m-0 p-0" 
-        style="background-color: purple;white-space: pre" 
-        *ngIf="section.type==='<<p>>'"
+        style="white-space: pre-wrap" 
+        *ngIf="section.type==='text'"
       >{{section.text}}</span>
 
       <span 
         class="m-0 p-0" 
-        style="white-space: pre" 
-        *ngIf="section.type==='text'"
+        style="background-color: purple;white-space: pre-wrap" 
+        *ngIf="section.type==='<<p>>'"
       >{{section.text}}</span>
 
       <code 
         class="m-0 p-0" 
-        style="white-space: pre" 
+        style="white-space: pre-wrap" 
         *ngIf="section.type==='<<s>>'"
         [innerHTML] = "section.text"
       ></code>

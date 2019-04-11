@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AutosizeModule } from 'ngx-autosize'; // problems with name works otherwise
 
-import { BindingFormComponent } from "./components/binding-form/binding-form.component";
 import { ReactiveBindingFormComponent } from './components/reactive-binding-form/reactive-binding-form.component'; 
 import { FixedButtonsComponent } from "./components/fixed-buttons/fixed-buttons.component";
 import { FolderSelectorComponent } from "./components/folder-selector-dir/folder-selector/folder-selector.component"
@@ -22,7 +21,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SheetListComponent } from './components/sheets-shared/sheet-list/sheet-list.component';
 
 const components = [
-  BindingFormComponent,
   ReactiveBindingFormComponent,
   FixedButtonsComponent,
   FolderSelectorComponent,

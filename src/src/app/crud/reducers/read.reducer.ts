@@ -9,14 +9,12 @@ export function readReducer(
 
         case ReadActionTypes.QUESTION_SUCCESS:
             let gqState = Object.assign({}, state);
-            gqState.question.success = true;
-            gqState.question.question = Object.assign({}, action["payload"]);
+            gqState.question = {success: true, question: action["payload"]};
             return gqState;
 
         case ReadActionTypes.QUESTION_SHEET_SUCCESS:
             let qsState = Object.assign({}, state);
-            qsState.questionSheet.success = true;
-            qsState.questionSheet.qSheet = Object.assign({}, action["payload"]);
+            qsState.questionSheet = {success: true, qSheet: action["payload"]}; 
             return qsState;
 
         case ReadActionTypes.CLEAR_READ_SUCCESSES:

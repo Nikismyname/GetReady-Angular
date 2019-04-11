@@ -7,7 +7,6 @@ import { Store, select } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
-import { map } from 'rxjs/operators';
 import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
  
 @Component({
@@ -43,7 +42,7 @@ export class EditQuestionComponent implements OnInit {
       }
     });
 
-    this.dataSub = this.store.pipe(map(x => x.crud.read.question)).subscribe(x => { 
+    this.dataSub = this.store.select(x => x.crud.read.question).subscribe(x => { 
       console.log("GLOBAL QUESTION HERE: ", x);
       if (x.success === true) {
         console.log("recieved the question");

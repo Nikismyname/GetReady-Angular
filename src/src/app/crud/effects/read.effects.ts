@@ -31,24 +31,6 @@ export class ReadEffects {
         useToastrForGErr: true,
     });
 
-    // @Effect()
-    // loadGlobalQuestion$: Observable<any> = this.actions
-    //     .pipe(
-    //         ofType(ReadActionTypes.QUESTION),
-    //         map(action => action["payload"]),
-    //         switchMap(payload => {
-    //             return this.questionService.getGlobalQuestionObs(payload)
-    //                 .pipe(
-    //                     map((question) => {
-    //                         return new ReadActions.QuestionsSuccess(question);
-    //                     }),
-    //                     catchError((error) => {
-    //                         return of(new ReadActions.QuestionFail(error));
-    //                     }),
-    //                 )
-    //         })
-    // );
-
     @Effect()
     loadQuestionSheet$: Observable<any> = createEffect({
         actions: this.actions,

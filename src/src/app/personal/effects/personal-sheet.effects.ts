@@ -25,7 +25,7 @@ export class PersonalSheetEffects {
         successActions: [PersonalSheetActions.loadSuccess],
         toastr: this.toastr,
         validationErrorAction: null,
-        errorAction: PersonalSheetActions.loadFail,
+        errorAction: PersonalSheetActions.loadFailed,
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
@@ -39,7 +39,7 @@ export class PersonalSheetEffects {
         successActions: [PersonalSheetActions.questionReorderSuccess],
         toastr: this.toastr,
         validationErrorAction: null,
-        errorAction: PersonalSheetActions.questionReorderFail,
+        errorAction: PersonalSheetActions.questionReorderFailed,
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
@@ -58,4 +58,18 @@ export class PersonalSheetEffects {
         catchGeneralErrors: true,
         useToastrForGErr: true,
     });
+
+    @Effect()
+    getQIdsForSheet$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionSheetService.getQuestionIdsForPSheet,
+        actionType: PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET,
+        successActions: [PersonalSheetActions.getQIdsForSheetSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: PersonalSheetActions.getQIdsForSheetFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    })
 }

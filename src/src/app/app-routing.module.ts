@@ -5,7 +5,6 @@ import { LoginComponent } from "./authentication/components/login/login.componen
 import { RegisterComponent } from "./authentication/components/register/register.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
-import { BindingFormComponent } from "./common/components/binding-form/binding-form.component";
 import { ViewGlobalQuestionComponent } from "./global/components/view-global-question/view-global-question.component";
 import { EditQuestionComponent } from "./crud/components/edit-question/edit-question.component";
 import { EditQuestionSheetComponent } from "./crud/components/edit-question-sheet/edit-question-sheet.component";
@@ -15,35 +14,40 @@ import { DeleteQuestionComponent } from "./crud/components/delete-question/delet
 import { CreateQuestionComponent } from "./crud/components/create-question/create-question.component";
 import { PersonalSheetComponent } from "./personal/components/personal-sheet/personal-sheet.component";
 import * as c from "./utilities/route-paths";
+import { TestComponent } from './personal/components/test/test.component';
 
 const routes: Routes = [
   {
     path: c.globalQuestionSheetsPath + "/:id",
-    component: GlobalSheetComponent
+    component: GlobalSheetComponent,
   },
   {
     path: c.personalQuestionSheetsPath + "/:id",
-    component: PersonalSheetComponent
+    component: PersonalSheetComponent,
+  },
+  {
+    path: c.testPath + "/:id/:mode", //single or multiple
+    component: TestComponent,
   },
   {
     path: "",
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: c.viewGlobalQuestion + "/:id",
-    component: ViewGlobalQuestionComponent
+    component: ViewGlobalQuestionComponent,
   },
   {
     path: c.loginPath,
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: c.registerPath,
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: c.editQuestionPath + "/:id/:scope",
-    component: EditQuestionComponent
+    component: EditQuestionComponent,
   },
   {
     path: c.deleteQuestionPath + "/:id/:scope",
@@ -51,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: c.editQuestionSheetPath + "/:id/:scope",
-    component: EditQuestionSheetComponent
+    component: EditQuestionSheetComponent,
   },
   {
     path: c.deleteSheetPath + "/:id/:scope",
@@ -67,11 +71,11 @@ const routes: Routes = [
   },
   {
     path: "tests",
-    component: BindingFormComponent
+    component: NotFoundComponent,
   },
   {
     path: "**",
-    component: NotFoundComponent
+    component: NotFoundComponent,
   },
 ];
 @NgModule({

@@ -5,7 +5,6 @@ import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
-import { map } from 'rxjs/operators';
 import { CudActions } from "../../actions/cud.actions";
 import { ReadActions } from "../../actions/read.actions";
 import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
@@ -42,7 +41,7 @@ export class DeleteQuestionSheetComponent implements OnInit {
       }
     });
 
-    this.dataSub = this.store.pipe(map(x => x.crud.read.questionSheet)).subscribe(x => { 
+    this.dataSub = this.store.select(x => x.crud.read.questionSheet).subscribe(x => { 
       if (x.success === true) {
         
         let qs = x.qSheet;

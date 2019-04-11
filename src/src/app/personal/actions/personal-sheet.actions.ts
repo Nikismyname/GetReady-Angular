@@ -7,12 +7,18 @@ export namespace PersonalSheetActionTypes {
     export const LOAD_FAILED = "[PersonalSheet] failed";
 
     export const QUESTIONS_REORDER = "[PersonalSheet] reorder questions";
-    export const QUESTIONS_REORDER_FAILED = "[PersonalSheet] reorder questions failed";
     export const QUESTIONS_REORDER_SUCCESS = "[PersonalSheet] reorder questions success";
+    export const QUESTIONS_REORDER_FAILED = "[PersonalSheet] reorder questions failed";
 
     export const SUBDIRECTORIES_REORDER = "[PersonalSheet] reorder subdirectories";
-    export const SUBDIRECTORIES_REORDER_FAILED = "[PersonalSheet] reorder subdirectories failed";
     export const SUBDIRECTORIES_REORDER_SUCCESS = "[PersonalSheet] reorder subdirectories success";
+    export const SUBDIRECTORIES_REORDER_FAILED = "[PersonalSheet] reorder subdirectories failed";
+
+    export const GET_Q_IDS_FOR_SHEET = "[PersonalSheet] get question ids for sheet";
+    export const GET_Q_IDS_FOR_SHEET_SUCCESS = "[PersonalSheet] get question ids for sheet success";
+    export const GET_Q_IDS_FOR_SHEET_FAILED = "[PersonalSheet] get question ids for sheet failed";
+
+    export const CLEAR_SUCCESSES = "[PersonalSheet] clear successes";
 
     export const SAVE_LATEST_ID = "[PersonalSheet] save latest id";
 }
@@ -62,7 +68,7 @@ class LoadFailedAction implements Action {
 class QuestionsReorderAction implements Action {
     public type = PersonalSheetActionTypes.QUESTIONS_REORDER;
     public payload: IQuestionReorder;
-    
+
     constructor(
         public reorderings: IQuestionReorder,
     ) {
@@ -114,6 +120,7 @@ class SheetReorderFailAction implements Action {
 }
 /* #endregion */
 
+/* #region  SAVE_LATEST_ID */
 class SaveLatestIdAction implements Action {
     public type = PersonalSheetActionTypes.SAVE_LATEST_ID;
     public payload: [];
@@ -124,20 +131,58 @@ class SaveLatestIdAction implements Action {
         this.payload = latestId;
     }
 }
+/* #endregion */
 
+/* #region  GET_QUESTION_IDS_FOR_SHEET */
+class GetQIdsForSheetAction implements Action {
+    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET;
+    public payload: number;
+
+    constructor(
+        public data: number,
+    ) {
+        this.payload = data;
+    }
+}
+
+class GetQIdsForSheetSuccessAction implements Action {
+    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_SUCCESS;
+    public payload: number[];
+
+    constructor(
+        public data: number[],
+    ) {
+        this.payload = data;
+    }
+}
+
+class GetQIdsForSheetFailedAction implements Action {
+    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_FAILED;
+}
+
+class ClearSuccessesAction implements Action {
+    public type = PersonalSheetActionTypes.CLEAR_SUCCESSES;
+}
+/* #endregion */
 
 export namespace PersonalSheetActions {
     export const load = LoadAction;
     export const loadSuccess = LoadSuccessAction;
-    export const loadFail = LoadFailedAction;
+    export const loadFailed = LoadFailedAction;
 
     export const questionReorder = QuestionsReorderAction;
     export const questionReorderSuccess = QuestionsReorderSuccessAction;
-    export const questionReorderFail = QuestionsReorderFailAction;
+    export const questionReorderFailed = QuestionsReorderFailAction;
 
     export const sheetReorder = SheetReorderAction;
     export const sheetReorderSuccess = SheetReorderSuccessAction;
     export const sheetReorderFailed = SheetReorderFailAction;
+
+    export const getQIdsForSheet = GetQIdsForSheetAction;
+    export const getQIdsForSheetSuccess = GetQIdsForSheetSuccessAction;
+    export const getQIdsForSheetFailed = GetQIdsForSheetFailedAction;
+
+    export const clearSuccesses = ClearSuccessesAction; 
 
     export const SaveLatestId = SaveLatestIdAction;
 };

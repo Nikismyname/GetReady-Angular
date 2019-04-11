@@ -12,7 +12,7 @@
       <div *ngIf="!isGlobal">
         <a [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/personal'">Create Sheet</a> <br />
         <a [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/personal']">Create Question</a> <br />
-        <a href="#">Start Test</a>
+        <a [routerLink]="[routePaths.testPath+'/'+currentSheet.id+'/multiple']">Start Test</a>
       </div>
     </div>
   </div>

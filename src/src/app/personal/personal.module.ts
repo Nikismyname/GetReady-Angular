@@ -5,14 +5,16 @@ import { CommonModule as MyCommonModule } from "../common/common.module";
 import { StoreModule } from '@ngrx/store';
 import { reducers } from "./reducers/index"; 
 import { EffectsModule } from '@ngrx/effects';
-import { PersonalSheetEffects } from "./effects/personal-sheet.effects"; 
+import { PersonalSheetEffects } from "./effects/personal-sheet.effects";
+import { PersonalQuestionViewComponent } from './components/personal-question-view/personal-question-view.component';
+import { TestComponent } from './components/test/test.component'; 
 
 let components = [
   PersonalSheetComponent,
 ]; 
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, PersonalQuestionViewComponent, TestComponent],
   imports: [
     CommonModule,
     MyCommonModule,

@@ -1,10 +1,10 @@
 import { Action } from "@ngrx/store";
-import { PersonalSheetActionTypes } from "../actions/personal-sheet.actions"; 
+import { PersonalSheetActionTypes } from "../actions/personal-sheet.actions";
 import { IQuestionReorder } from "../../services/models/question/question-reorder"
-import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index"; 
+import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index";
 
-export function personalSheetReducer(
-    state:IQsPersonalIndex = initialState,
+export function personalIndexReducer(
+    state: IQsPersonalIndex = initialState,
     action: Action,
 ) {
     switch (action.type) {
@@ -28,14 +28,14 @@ export function personalSheetReducer(
             let sReorderState = Object.assign({}, state);
             let sheets = sReorderState.children.slice(0);
             for (let i = 0; i < dirReorderings.length; i++) {
-                sheets.filter(x=>x.id === dirReorderings[i][0])[0].order = i;
+                sheets.filter(x => x.id === dirReorderings[i][0])[0].order = i;
             }
             let finalSheets = sheets.sort((a, b) => a.order - b.order);
-            sReorderState.children = finalSheets; 
+            sReorderState.children = finalSheets;
             return sReorderState;
         default:
             return state;
-    } 
+    }
 }
 
 let initialState: IQsPersonalIndex = {
@@ -51,7 +51,7 @@ let initialState: IQsPersonalIndex = {
 };
 
 export function latestIdReducer(
-    state:number = initialStateLatestId,
+    state: number = initialStateLatestId,
     action: Action,
 ) {
     switch (action.type) {
@@ -59,7 +59,42 @@ export function latestIdReducer(
             return action["payload"]
         default:
             return state;
-    } 
+    }
 }
 
 let initialStateLatestId: number = null;
+
+export function testReducer(
+    state: testState = initialIdsState,
+    action: Action,
+) {
+    switch (action.type) {
+        case PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_SUCCESS:
+            let ids = action["payload"]
+            let successState = Object.assign({}, state);
+            successState.qIdsForSheet =  { success: true, ids: ids, };
+            return successState;
+        case PersonalSheetActionTypes.CLEAR_SUCCESSES:
+            let clearState = Object.assign({}, state);
+            clearState.qIdsForSheet.success = false;
+            return clearState;
+        default:
+            return state;
+    }
+}
+
+export interface testState {
+    qIdsForSheet: {
+        success: boolean,
+        ids: number[],
+    },
+    currentInd: number;
+}
+
+let initialIdsState: testState = {
+    qIdsForSheet: {
+        success: false,
+        ids: [],
+    },
+    currentInd: 0,
+} 

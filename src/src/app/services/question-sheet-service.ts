@@ -51,5 +51,9 @@ export class QuestionSheetService {
     reorderPersonalSheetsObs = (d: IReorderQuestion) => { 
         return this.http.post("QuestionSheet/ReorderPersonal", JSON.stringify(d)); 
     }
+
+    getQuestionIdsForPSheet = (id: number) => { 
+        return this.http.get<number[]>("QuestionSheet/GetQuestionIdsForSheet/"+ id);
+    }
     
 }

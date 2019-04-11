@@ -1,0 +1,20 @@
+<!-- {{id}} {{isSingle}} <br/>
+{{currentInd}} {{questionIds}} <br/>
+{{currentQuestion | json}} -->
+<getready-with-pretty-print
+(PRLoaded)="onPrLoaded()"
+></getready-with-pretty-print>
+<div *ngIf="loaded && PRLoaded">
+    <h1>Question</h1>
+    <getready-text-visualisation-tblock
+        [text]="currentQuestion.question"
+    ></getready-text-visualisation-tblock>
+    <h1>Comment</h1>
+    <getready-text-visualisation-tblock
+        [text]="currentQuestion.comment"
+    ></getready-text-visualisation-tblock>
+    <h1>Answer</h1>
+    <getready-text-visualisation-tblock
+        [text]="currentQuestion.answer"
+    ></getready-text-visualisation-tblock>
+</div>
