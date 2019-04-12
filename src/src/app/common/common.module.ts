@@ -5,7 +5,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AutosizeModule } from 'ngx-autosize'; // problems with name works otherwise
 
 import { ReactiveBindingFormComponent } from './components/reactive-binding-form/reactive-binding-form.component'; 
-import { FixedButtonsComponent } from "./components/fixed-buttons/fixed-buttons.component";
 import { FolderSelectorComponent } from "./components/folder-selector-dir/folder-selector/folder-selector.component"
 import { FolderRecursionComponent } from "./components/folder-selector-dir/folder-recursion/folder-recursion.component"; 
 import { TextVisualisationTBlockComponent } from "./components/text-parsing/text-visualisation-tblock/text-visualisation-tblock.component"; 
@@ -19,10 +18,10 @@ import { AllQuestionsComponent } from './components/sheets-shared/all-questions/
 import { CurrentSheetComponent } from './components/sheets-shared/current-sheet/current-sheet.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { SheetListComponent } from './components/sheets-shared/sheet-list/sheet-list.component';
+import { ButtonsRendererComponent } from './components/buttons-renderer/buttons-renderer.component';
 
 const components = [
   ReactiveBindingFormComponent,
-  FixedButtonsComponent,
   FolderSelectorComponent,
   FolderRecursionComponent,
   TextVisualisationTBlockComponent,
@@ -35,6 +34,7 @@ const components = [
   AllQuestionsComponent,
   CurrentSheetComponent,
   SheetListComponent,
+  ButtonsRendererComponent
 ];
 
 @NgModule({
@@ -47,6 +47,9 @@ const components = [
     AppRoutingModule,
     DragDropModule,
   ],
-  exports: [...components],
+  exports: [
+    ...components,
+    AutosizeModule,
+  ],
 })
 export class CommonModule { }

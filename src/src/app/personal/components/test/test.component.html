@@ -1,20 +1,53 @@
-<!-- {{id}} {{isSingle}} <br/>
-{{currentInd}} {{questionIds}} <br/>
-{{currentQuestion | json}} -->
+<div *ngIf="loaded && PRLoaded && firstQuestionLoaded">
+    <div *ngIf="(currentQuestion$ | async) as question">
+        <h1>Name</h1>
+        {{question.name}}
+        <h1>Question</h1>
+        <getready-text-visualisation-tblock
+            [text]="question.question"
+        ></getready-text-visualisation-tblock>
+
+        <h1>Your Answer</h1>
+        <textarea 
+            [(ngModel)]="userAnswer"
+            class="form-control-black mb-4"
+            autosize
+            [minRows]="1"></textarea>
+
+        <div *ngIf="shouldShowComment">
+            <h1>Comment</h1>
+            <getready-text-visualisation-tblock
+                [text]="question.comment"
+            ></getready-text-visualisation-tblock>
+        </div>
+
+        <div *ngIf="shouldShowAnswer">
+            <h1>Answer</h1>
+            <getready-text-visualisation-tblock
+                [text]="question.answer"
+            ></getready-text-visualisation-tblock>
+        </div>
+        <h1>Rate Your Answer</h1>
+        <rating [(ngModel)]="userRating"
+            [max]="10">
+        </rating>
+
+<!-- <div *ngIf="!isSingle">
+            <button (click)="showComment()" class="btn btn-primary">Show Comment</button>
+            <button (click)="showAnswer()" class="btn btn-primary">Show Answer</button>
+            <button (click)="onClickPrev()" class="btn btn-primary">Previous</button>
+            <button (click)="onClickNext()" class="btn btn-primary">Next</button>
+        </div>
+        <div *ngIf="isSingle">
+            <button (click)="showComment()" class="btn btn-primary">Show Comment</button>
+            <button (click)="showAnswer()" class="btn btn-primary">Show Answer</button>
+            <button (click)="onClickNext()" class="btn btn-primary">Done</button>
+        </div> -->
+
+        <getready-buttons-renderer [data]="buttons"></getready-buttons-renderer>
+    </div>
+</div>
+
 <getready-with-pretty-print
 (PRLoaded)="onPrLoaded()"
 ></getready-with-pretty-print>
-<div *ngIf="loaded && PRLoaded">
-    <h1>Question</h1>
-    <getready-text-visualisation-tblock
-        [text]="currentQuestion.question"
-    ></getready-text-visualisation-tblock>
-    <h1>Comment</h1>
-    <getready-text-visualisation-tblock
-        [text]="currentQuestion.comment"
-    ></getready-text-visualisation-tblock>
-    <h1>Answer</h1>
-    <getready-text-visualisation-tblock
-        [text]="currentQuestion.answer"
-    ></getready-text-visualisation-tblock>
-</div>

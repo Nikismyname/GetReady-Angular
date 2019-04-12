@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
 
 @Component({
   selector: 'getready-folder-recursion',
@@ -7,14 +8,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FolderRecursionComponent implements OnInit {
 
-  constructor() { 
-  }
+  constructor() { }
   
   _foldedFolders: number[] = []; 
   _selectedId: number = null;
            
-  @Input() currentNode: any;
-  @Input() allNotes: any;
+  @Input() currentNode: IFolderSelectData;
+  @Input() allNotes: IFolderSelectData[];
   @Input()
   set foldedFolders(foldedFolders: number[]) {
     this.isFolded = foldedFolders.includes(this.currentNode.id) ? true : false;
@@ -38,7 +38,7 @@ export class FolderRecursionComponent implements OnInit {
 
   getChildFolders() {
     if (this.loaded) {
-      return this.allNotes.filter(x => x.questionSheetId === this.currentNode.id);
+      return this.allNotes.filter(x => x.parentId === this.currentNode.id);
     } else {
       return [];
     }

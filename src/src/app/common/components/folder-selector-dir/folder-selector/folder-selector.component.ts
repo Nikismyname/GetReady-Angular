@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
+import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
 
 @Component({
   selector: 'getready-folder-selector',
@@ -8,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FolderSelectorComponent implements OnInit {
   constructor() {}
 
-  @Input() data: any[];
+  @Input() data: IFolderSelectData[];
   @Output() folderSelectedOutput: EventEmitter<number> = new EventEmitter(); 
 
   loaded: boolean = false;
@@ -18,7 +20,7 @@ export class FolderSelectorComponent implements OnInit {
   foldedFolders: number[] = [];
 
   ngOnInit() {
-    this.root = this.data.filter(x => x.questionSheetId === null)[0]; 
+    this.root = this.data.filter(x => x.parentId === null)[0]; 
     this.loaded = true;
   }
 
@@ -34,9 +36,20 @@ export class FolderSelectorComponent implements OnInit {
     }
   }
 
-  folderFinalChosen() { 
+  folderFinalChosen = () => { 
     if (this.selectedId !== null) {
       this.folderSelectedOutput.emit(this.selectedId);
     }
-  } 
+  }
+
+  get buttons():IButtonsRenderInformation {
+    return {
+      type: "default",
+      buttons: [{
+        styles: "",
+        name: "select",
+        function: this.folderFinalChosen,
+      }],
+    }
+  }
 }

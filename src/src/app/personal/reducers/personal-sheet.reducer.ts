@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { PersonalSheetActionTypes } from "../actions/personal-sheet.actions";
+import { PersonalSheetActionTypes, PersonalSheetActions } from "../actions/personal-sheet.actions";
 import { IQuestionReorder } from "../../services/models/question/question-reorder"
 import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index";
 
@@ -78,6 +78,15 @@ export function testReducer(
             let clearState = Object.assign({}, state);
             clearState.qIdsForSheet.success = false;
             return clearState;
+        case PersonalSheetActionTypes.INCREMENT_CURRENT_IND:
+            let change = action["payload"];
+            let incState = Object.assign({}, state);
+            incState.currentInd += change;
+            return incState;
+        case PersonalSheetActionTypes.CLEAR_CURRENT_ID_STATE:
+            let clearIndState = Object.assign({}, state);
+            clearIndState.currentInd = 0;
+            return clearIndState;
         default:
             return state;
     }

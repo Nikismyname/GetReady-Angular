@@ -13,10 +13,15 @@ import { DeleteQuestionSheetComponent } from "./crud/components/delete-question-
 import { DeleteQuestionComponent } from "./crud/components/delete-question/delete-question.component";
 import { CreateQuestionComponent } from "./crud/components/create-question/create-question.component";
 import { PersonalSheetComponent } from "./personal/components/personal-sheet/personal-sheet.component";
-import * as c from "./utilities/route-paths";
 import { TestComponent } from './personal/components/test/test.component';
+import { CopyQuestionsComponent } from './global/components/copy-questions/copy-questions.component';
+import * as c from "./utilities/route-paths";
 
 const routes: Routes = [
+  {
+    path: c.copyQuestionsPath + "/:id",
+    component:CopyQuestionsComponent
+  },
   {
     path: c.globalQuestionSheetsPath + "/:id",
     component: GlobalSheetComponent,

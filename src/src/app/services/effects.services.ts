@@ -5,6 +5,8 @@ import { of, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
+const shouldConsoleLog = true;
+
 class CreateEffectInput {
     constructor(
         public actions: Actions,
@@ -50,14 +52,20 @@ export function createEffect(d: CreateEffectInput) {
         .pipe(
             ofType(d.actionType),
             tap(x => {
-                console.log(d.actionType + "_ACTION_DETECTED: ", x);
+                if (shouldConsoleLog) {
+                    console.log("__ACTION_DETECTED: " + d.actionType);
+                }
             }),
             map(action => action["payload"]),
             switchMap(payload => {
-                console.log(d.actionType + " REQUEST SENT");
+                if (shouldConsoleLog) {
+                    console.log("__REQUEST SENT: " + d.actionType);
+                }
                 return d.serviceMethod(payload).pipe(
                     switchMap(res => {
-                        console.log(d.actionType + "_RESPONSE");
+                        if (shouldConsoleLog) {
+                            console.log("__RESPONSE RECIEVED: " + d.actionType);
+                        }
                         let result = [];
                         for (let i = 0; i < d.successActions.length; i++) {
                             const act = d.successActions[i];
@@ -75,7 +83,9 @@ export function createEffect(d: CreateEffectInput) {
                                 if (!d.catchValidationErrors) {
                                     return of(new ValidationErrorWasIgnoredAction(response));
                                 }
-                                console.log("LOGING VALIDATION ERROR");
+                                if (shouldConsoleLog) {
+                                    console.log("__GOT VALIDATION ERROR");
+                                }
                                 return of(new d.validationErrorAction(response.error.errors));
                             } else {
                                 if (!d.catchGeneralErrors) {
@@ -84,7 +94,9 @@ export function createEffect(d: CreateEffectInput) {
                                 if (d.useToastrForGErr) {
                                     d.toastr.error(response.error, "Error");
                                 }
-                                return of(new d.errorAction(response.error));
+                                if (shouldConsoleLog) {
+                                    console.log("__GOT GENERAL VALIDATION ERROR");
+                                } return of(new d.errorAction(response.error));
                             }
                         }
                     }),

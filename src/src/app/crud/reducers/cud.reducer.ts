@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import { CudActionTypes } from "../actions/cud.actions";
 
 export function cudReducer(
-    state: IReducerState = Object.assign({}, initialCrudState),
+    state: ICudState = Object.assign({}, initialCrudState),
     action: Action,
 ) {
     switch (action.type) {
@@ -67,7 +67,7 @@ export function cudReducer(
     }
 }
 
-interface IReducerState {
+export interface ICudState {
     editQuestion: {
         success: boolean,
     },
@@ -90,7 +90,7 @@ interface IReducerState {
     validationErrors: object,
 }
 
-const initialCrudState: IReducerState = {
+const initialCrudState: ICudState = {
     editQuestion: {
         success: false,
     },

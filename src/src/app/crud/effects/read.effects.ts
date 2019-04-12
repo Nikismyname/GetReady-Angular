@@ -45,4 +45,32 @@ export class ReadEffects {
         useToastrForGErr: true,
     });
 
+    @Effect()
+    loadAllItems$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionSheetService.getAllItemsObs,
+        actionType: ReadActionTypes.GET_ALL_ITEMS,
+        successActions: [ReadActions.GetAllItemsSuccess, ReadActions.ClearReadSuccesses],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: ReadActions.GetAllItemsFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
+
+    @Effect()
+    getAllFolders$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionSheetService.getAllFoldersObs,
+        actionType: ReadActionTypes.GET_ALL_FOLDERS,
+        successActions: [ReadActions.GetAllFoldersSuccess, ReadActions.ClearReadSuccesses],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: ReadActions.GetAllFoldersFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
+
 }

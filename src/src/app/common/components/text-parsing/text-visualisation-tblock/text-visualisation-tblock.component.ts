@@ -7,20 +7,23 @@ import { ParsingData } from "../../../../services/models/other";
   templateUrl: './text-visualisation-tblock.component.html',
   styleUrls: ['./text-visualisation-tblock.component.css']
 })
-export class TextVisualisationTBlockComponent implements OnInit {
+export class TextVisualisationTBlockComponent {
 
   constructor() { }
 
-  @Input() text: string;
+  @Input("text") set textSetter(data: string) {
+    console.log("TBLOCK DATA HERE", data);
+    if (data === null || data === undefined) {
+      this.loaded = false;
+    } else {
+      this.parsedData = this.parseTransperantBlockElements(data); 
+      this.loaded = true;
+    }
+  }
   loaded: boolean = false;
   parsedData: ParsingData[]; 
 
-  ngOnInit() {
-    this.loaded = true;
-    this.parsedData = this.parseTransperantBlockElements(this.text); 
-  }
-
-  parseTransperantBlockElements(text) {
+  parseTransperantBlockElements(text: string) {
     let tags = ["<<p>>", "<<y>>"]
     let result = [
       new ParsingData(text, false, "text")

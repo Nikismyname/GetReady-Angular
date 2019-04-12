@@ -62,12 +62,26 @@ export class PersonalSheetEffects {
     @Effect()
     getQIdsForSheet$: Observable<any> = createEffect({
         actions: this.actions,
-        serviceMethod: this.questionSheetService.getQuestionIdsForPSheet,
+        serviceMethod: this.questionSheetService.getQuestionIdsForPSheetObs,
         actionType: PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET,
         successActions: [PersonalSheetActions.getQIdsForSheetSuccess],
         toastr: this.toastr,
         validationErrorAction: null,
         errorAction: PersonalSheetActions.getQIdsForSheetFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    })
+
+    @Effect()
+    addNewAnserScore$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionService.addNewScoreObs,
+        actionType: PersonalSheetActionTypes.ADD_NEW_SCORE,
+        successActions: [PersonalSheetActions.addNewScoreSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: PersonalSheetActions.addNewScoreFailed,
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,

@@ -1,46 +1,13 @@
-import { cudReducer } from "./cud.reducer";
-import { readReducer } from './read.reducer';
-import {
-    ActionReducerMap,
-} from '@ngrx/store';
+import { cudReducer, ICudState } from "./cud.reducer";
+import { readReducer, IReadState } from './read.reducer';
+import { ActionReducerMap } from '@ngrx/store';
+import { } from "../actions/read.actions";
 
 export interface ICrudState {
     crud:
     {
-        cud:
-        {
-            editQuestion: {
-                success: boolean,
-            },
-            editQSheet: {
-                success: boolean,
-            },
-            createQuestion: {
-                success: boolean,
-            },
-            createQSheet: {
-                success: boolean,
-                createdId: number,
-            },
-            deleteQuestion: {
-                success: boolean,
-            },
-            deleteQSheet: {
-                success: boolean,
-            },
-            validationErrors: {},
-        },
- 
-        read: {
-            question: {
-                success: boolean,
-                question: any,
-            },
-            questionSheet: {
-                success: boolean,
-                qSheet: any,
-            },
-        }
+        cud: ICudState,
+        read: IReadState,
     }
 }
 

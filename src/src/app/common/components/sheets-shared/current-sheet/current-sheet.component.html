@@ -7,7 +7,9 @@
           <a [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/global'">Create Sheet</a> <br />
           <a [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/global']">Create Question</a> <br />
         </div>
-        <a href="#">Copy Questions</a>
+        <div *ngIf="user.isUser">
+          <a [routerLink]="[routePaths.copyQuestionsPath+'/'+currentSheet.id]">Copy Questions</a>
+        </div>
       </div>
       <div *ngIf="!isGlobal">
         <a [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/personal'">Create Sheet</a> <br />

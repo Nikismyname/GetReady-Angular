@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { PersonalSheetEffects } from "./effects/personal-sheet.effects";
 import { PersonalQuestionViewComponent } from './components/personal-question-view/personal-question-view.component';
 import { TestComponent } from './components/test/test.component'; 
+import { RatingModule } from "ngx-rating"; 
+import { FormsModule } from '@angular/forms';
 
 let components = [
   PersonalSheetComponent,
@@ -20,6 +22,8 @@ let components = [
     MyCommonModule,
     StoreModule.forFeature("personal", reducers),
     EffectsModule.forFeature([PersonalSheetEffects]),
+    RatingModule,
+    FormsModule,
   ], 
   exports: [...components],
 })

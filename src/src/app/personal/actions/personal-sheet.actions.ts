@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
+import { INewScoreData } from 'src/app/services/models/question/new-score-data';
 
 export namespace PersonalSheetActionTypes {
     export const LOAD = "[PersonalSheet] load";
@@ -7,18 +8,26 @@ export namespace PersonalSheetActionTypes {
     export const LOAD_FAILED = "[PersonalSheet] failed";
 
     export const QUESTIONS_REORDER = "[PersonalSheet] reorder questions";
-    export const QUESTIONS_REORDER_SUCCESS = "[PersonalSheet] reorder questions success";
-    export const QUESTIONS_REORDER_FAILED = "[PersonalSheet] reorder questions failed";
+    /*nu*/export const QUESTIONS_REORDER_SUCCESS = "[PersonalSheet] reorder questions success";
+    /*nu*/export const QUESTIONS_REORDER_FAILED = "[PersonalSheet] reorder questions failed";
 
     export const SUBDIRECTORIES_REORDER = "[PersonalSheet] reorder subdirectories";
-    export const SUBDIRECTORIES_REORDER_SUCCESS = "[PersonalSheet] reorder subdirectories success";
-    export const SUBDIRECTORIES_REORDER_FAILED = "[PersonalSheet] reorder subdirectories failed";
+    /*nu*/export const SUBDIRECTORIES_REORDER_SUCCESS = "[PersonalSheet] reorder subdirectories success";
+    /*nu*/export const SUBDIRECTORIES_REORDER_FAILED = "[PersonalSheet] reorder subdirectories failed";
 
-    export const GET_Q_IDS_FOR_SHEET = "[PersonalSheet] get question ids for sheet";
-    export const GET_Q_IDS_FOR_SHEET_SUCCESS = "[PersonalSheet] get question ids for sheet success";
-    export const GET_Q_IDS_FOR_SHEET_FAILED = "[PersonalSheet] get question ids for sheet failed";
+    export const GET_Q_IDS_FOR_SHEET = "[PersonalSheet][test] get question ids for sheet";
+    export const GET_Q_IDS_FOR_SHEET_SUCCESS = "[PersonalSheet][test] get question ids for sheet success";
+    export const GET_Q_IDS_FOR_SHEET_FAILED = "[PersonalSheet][test] get question ids for sheet failed";
 
-    export const CLEAR_SUCCESSES = "[PersonalSheet] clear successes";
+    export const ADD_NEW_SCORE = "[PersonalSheet][test] add new score";
+    export const ADD_NEW_SCORE_SUCCESS = "[PersonalSheet][test] add new score success";
+    export const ADD_NEW_SCORE_FALIED = "[PersonalSheet][test] add new score failed";
+
+    export const CLEAR_SUCCESSES = "[PersonalSheet][test] clear successes";
+
+    export const INCREMENT_CURRENT_IND = "[PersonalSheet][test] increment current ind";
+
+    export const CLEAR_CURRENT_ID_STATE = "[PersonalSheet][test] clear current ind state";
 
     export const SAVE_LATEST_ID = "[PersonalSheet] save latest id";
 }
@@ -165,6 +174,52 @@ class ClearSuccessesAction implements Action {
 }
 /* #endregion */
 
+/* #region  ADD_NEW_SCORE */
+class AddNewScoreAction implements Action {
+    public type = PersonalSheetActionTypes.ADD_NEW_SCORE;
+    public payload: INewScoreData;
+
+    constructor(
+        public data: INewScoreData,
+    ) {
+        this.payload = data;
+    }
+}
+
+class AddNewScoreSuccessAction implements Action {
+    public type = PersonalSheetActionTypes.ADD_NEW_SCORE_SUCCESS;
+    public payload: any = null;
+}
+
+class AddNewScoreFailedAction implements Action {
+    public type = PersonalSheetActionTypes.ADD_NEW_SCORE_FALIED;
+    public payload: any = null;
+}
+/* #endregion */
+
+
+class IncrementCurrentIndexAction implements Action {
+    public type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
+    public payload: number;
+
+    constructor(
+        public data: number,
+    ) {
+        this.payload = data;
+    }
+}
+
+class ClearCurrentIndexStateAction implements Action {
+    public type = PersonalSheetActionTypes.CLEAR_CURRENT_ID_STATE;
+    public payload: number;
+
+    constructor(
+        public data = null,
+    ) {
+        this.payload = data;
+    }
+}
+
 export namespace PersonalSheetActions {
     export const load = LoadAction;
     export const loadSuccess = LoadSuccessAction;
@@ -182,11 +237,16 @@ export namespace PersonalSheetActions {
     export const getQIdsForSheetSuccess = GetQIdsForSheetSuccessAction;
     export const getQIdsForSheetFailed = GetQIdsForSheetFailedAction;
 
-    export const clearSuccesses = ClearSuccessesAction; 
+    export const addNewScore = AddNewScoreAction;
+    export const addNewScoreSuccess = AddNewScoreSuccessAction;
+    export const addNewScoreFailed = AddNewScoreFailedAction;
 
-    export const SaveLatestId = SaveLatestIdAction;
+    export const clearSuccesses = ClearSuccessesAction;
+
+    export const incrementCurrentIndex = IncrementCurrentIndexAction;
+
+    export const saveLatestId = SaveLatestIdAction;
+
+    export const clearCurrentIndState = ClearCurrentIndexStateAction;
 };
-
-// export type GlobalSheetAction = GlobalSheetLoadAction /* | otherActionName*/
-
 

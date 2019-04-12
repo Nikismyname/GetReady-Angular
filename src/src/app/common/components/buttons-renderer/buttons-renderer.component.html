@@ -1,0 +1,22 @@
+<div *ngIf="loaded">
+  <div style="width: 100%" class="row mt-4 mb-4 container bottom-fixed">
+    <ng-template ngFor let-button [ngForOf]="data.buttons" let-i="index">
+
+      <div *ngIf="i!==0" class="col-2">
+        <button 
+          (click)="button.function()"
+          class="btn btn-primary btn-block {{button.styles}}"
+        >{{button.name}}</button>
+      </div>
+
+      <div *ngIf="i===0"  class="col-2 pl-0">
+        <button 
+          (click)="button.function()"
+          class="btn btn-primary btn-block {{button.styles}}"
+        >{{button.name}}</button>
+      </div>
+
+    </ng-template>
+  </div>
+</div>
+<div class="pb-5 pt-5"></div>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IScopedData } from './models/contracts/scoped-data';
 import { httpFactory } from '@angular/http/src/http_module';
 import { IQuestionReorder } from './models/question/question-reorder';
+import { INewScoreData } from './models/question/new-score-data';
 
 @Injectable()
 export class QuestionService {
@@ -57,4 +58,8 @@ export class QuestionService {
     reorderPersonalObs = (d: IQuestionReorder) => { 
         return this.http.post("Question/ReorderPersonal", JSON.stringify(d));
     }
+
+    addNewScoreObs = (data: INewScoreData) => { 
+        return this.http.post("Question/AddNewScore", JSON.stringify(data));
+    } 
 }

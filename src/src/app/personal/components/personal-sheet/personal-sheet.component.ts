@@ -66,7 +66,7 @@ export class PersonalSheetComponent {
         this.currentSheetId = id;
 
         this.store.dispatch(new PersonalSheetActions.load(id));
-        this.store.dispatch(new PersonalSheetActions.SaveLatestId(id));
+        this.store.dispatch(new PersonalSheetActions.saveLatestId(id));
         let newPath = c.personalQuestionSheetsPath + "/" + id;
         window.history.pushState(null, null, newPath);
     }
@@ -94,6 +94,7 @@ export class PersonalSheetComponent {
     }
 
     ngOnDestroy() {
+        this.store.dispatch(new PersonalSheetActions.clearCurrentIndState());
         this.latestIdSub.unsubscribe();
         this.userSub.unsubscribe();
     }
