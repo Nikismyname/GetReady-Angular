@@ -4,6 +4,9 @@ import { IUserStatus } from 'src/app/services/models/other';
 import { RoutePaths } from 'src/app/utilities/route-paths';
 import * as c from 'src/app/utilities/route-paths';
 import { Router } from '@angular/router';
+import { IAppState } from 'src/app/store/reducers';
+import { Store } from '@ngrx/store';
+import { PersonalSheetActions } from "../../../../personal/actions/personal-sheet.actions"; 
 
 @Component({
   selector: 'getready-question',
@@ -16,10 +19,11 @@ export class QuestionComponent implements OnInit {
   @Input() question: IQGlobalIndex;
   @Input() user: IUserStatus;
   loaded: boolean = false;
-
+ 
   constructor(
     public routePaths: RoutePaths,
     private router: Router,
+    private store: Store<IAppState>,
   ) { } 
 
   ngOnInit() {
@@ -34,7 +38,9 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  publish() {
-    
+  publish(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.store.dispatch(new PersonalSheetActions.suggestForPublishing(this.question.id));
   }
 }

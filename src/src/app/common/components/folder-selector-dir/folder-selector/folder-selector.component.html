@@ -14,8 +14,8 @@
   ></getready-buttons-renderer>
 </div>
 <div *ngIf="areCreatingFolder">
-    <getready-create-dir-internal
-      [intGlobal]="false"
+    <getready-create-dir-internal 
+      [intGlobal]="isGlobal"
       [intParentId]="selectedId"
       (folderCreatedEmitter)="onFolderCreated()"
     ></getready-create-dir-internal>

@@ -14,10 +14,15 @@ import { DeleteQuestionComponent } from "./crud/components/delete-question/delet
 import { CreateQuestionComponent } from "./crud/components/create-question/create-question.component";
 import { PersonalSheetComponent } from "./personal/components/personal-sheet/personal-sheet.component";
 import { TestComponent } from './personal/components/test/test.component';
+import { QuestionApprovalComponent } from "./admin/components/question-approval/question-approval.component";
 import { CopyQuestionsComponent } from './global/components/copy-questions/copy-questions.component';
 import * as c from "./utilities/route-paths";
 
 const routes: Routes = [
+  {
+    path: c.filterQuestionsPath,
+    component:QuestionApprovalComponent
+  },
   {
     path: c.copyQuestionsPath + "/:id",
     component:CopyQuestionsComponent

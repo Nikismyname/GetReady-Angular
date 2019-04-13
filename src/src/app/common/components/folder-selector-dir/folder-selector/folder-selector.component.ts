@@ -13,6 +13,7 @@ export class FolderSelectorComponent implements OnInit {
   constructor() { }
 
   folders: IFolderSelectData[];
+  @Input() isGlobal: boolean;
   @Input("folders") set foldersSetter(incFolders: IFolderSelectData[]) { 
     this.folders = incFolders;
     console.log("FOLDER CHANGE HERE: ", this.folders);

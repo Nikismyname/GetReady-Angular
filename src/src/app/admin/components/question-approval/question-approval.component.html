@@ -1,0 +1,39 @@
+<div *ngIf="loaded && PRLoaded && firstQuestionLoaded && !selectingDir">
+    <div *ngIf="(currentQuestion$ | async) as question">
+      
+        <h1>Name</h1>
+        {{question.name}}
+
+        <h1>Question</h1>
+        <getready-text-visualisation-tblock
+            [text]="question.question"
+        ></getready-text-visualisation-tblock>
+
+        <h1>Comment</h1>
+        <getready-text-visualisation-tblock
+            [text]="question.comment"
+        ></getready-text-visualisation-tblock>
+
+        <h1>Answer</h1>
+        <getready-text-visualisation-tblock
+            [text]="question.answer"
+        ></getready-text-visualisation-tblock>
+
+        <getready-buttons-renderer [data]="buttons"></getready-buttons-renderer>
+
+    </div>
+</div>
+
+<div *ngIf="selectingDir && foldersLoaded">
+    <getready-folder-selector
+        [isGlobal]="true"
+        [folders]="folders"
+        (folderCreatedRefresh)="directoryCreatedRefresh()"
+        (folderSelectedEmitter)="folderSelected($event)"
+    >
+    </getready-folder-selector>
+</div>
+
+<getready-with-pretty-print
+(PRLoaded)="onPrLoaded()"
+></getready-with-pretty-print>

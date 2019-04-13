@@ -10,7 +10,7 @@
     <div *ngIf="!isGlobal">
       <a class="ml-2" [routerLink]="[routePaths.deleteQuestionPath+'/'+question.id+'/personal']">Delete</a>
       <a class="ml-2" [routerLink]="[routePaths.editQuestionPath+'/'+question.id+'/personal']">Edit</a>
-      <a class="ml-2" (onclick)="publish()">Publish</a>
+      <a class="ml-2" href="#" (click)="publish($event)">Publish</a>
     </div>
   </div>
 </div>

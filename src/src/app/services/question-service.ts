@@ -67,4 +67,12 @@ export class QuestionService {
     copyQuestions = (data: ICopyQuestionData) => { 
         return this.http.post("Question/CopyQuestions", JSON.stringify(data));
     } 
+
+    suggestForPublishingObs = (id: number) => { 
+        return this.http.post("Question/SuggestForPublishing", JSON.stringify(id));
+    } 
+
+    getQuestionIdsForApprovalObs = () => { 
+        return this.http.get("Question/GetQuestionIdsForApproval");
+    }
 }

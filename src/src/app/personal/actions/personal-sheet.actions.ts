@@ -23,6 +23,10 @@ export namespace PersonalSheetActionTypes {
     export const ADD_NEW_SCORE_SUCCESS = "[PersonalSheet][test] add new score success";
     export const ADD_NEW_SCORE_FALIED = "[PersonalSheet][test] add new score failed";
 
+    export const SUGGEST_FOR_PUBLISHING = "[PersonalSheet] suggest for publishing";
+    export const SUGGEST_FOR_PUBLISHING_SUCCESS = "[PersonalSheet] suggest for publishing success";
+    export const SUGGEST_FOR_PUBLISHING_FAILED = "[PersonalSheet] suggest for publishing failed";
+
     export const CLEAR_SUCCESSES = "[PersonalSheet][test] clear successes";
 
     export const INCREMENT_CURRENT_IND = "[PersonalSheet][test] increment current ind";
@@ -197,6 +201,34 @@ class AddNewScoreFailedAction implements Action {
 }
 /* #endregion */
 
+/* #region  SUGGEST_FOR_PUBLISHING */
+class SuggestForPublishingAction implements Action {
+    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING;
+    public payload: number;
+
+    constructor(
+        public data: number,
+    ) {
+        this.payload = data;
+    }
+}
+
+class SuggestForPublishingSuccessAction implements Action {
+    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_SUCCESS;
+    public payload = null;
+}
+
+class SuggestForPublishingFailedAction implements Action {
+    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_FAILED;
+    public payload: any;
+
+    constructor(
+        public error: any,
+    ) {
+        this.payload = error;
+    }
+}
+/* #endregion */
 
 class IncrementCurrentIndexAction implements Action {
     public type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
@@ -240,6 +272,10 @@ export namespace PersonalSheetActions {
     export const addNewScore = AddNewScoreAction;
     export const addNewScoreSuccess = AddNewScoreSuccessAction;
     export const addNewScoreFailed = AddNewScoreFailedAction;
+
+    export const suggestForPublishing = SuggestForPublishingAction;
+    export const suggestForPublishingSuccess = SuggestForPublishingSuccessAction;
+    export const suggestForPublishingFailed = SuggestForPublishingFailedAction;
 
     export const clearSuccesses = ClearSuccessesAction;
 

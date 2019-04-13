@@ -73,7 +73,7 @@ export class PersonalSheetEffects {
         useToastrForGErr: true,
     })
 
-    @Effect()
+    @Effect() 
     addNewAnserScore$: Observable<any> = createEffect({
         actions: this.actions,
         serviceMethod: this.questionService.addNewScoreObs,
@@ -86,4 +86,18 @@ export class PersonalSheetEffects {
         catchGeneralErrors: true,
         useToastrForGErr: true,
     })
+
+    @Effect()
+    suggestForPublishing$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionService.suggestForPublishingObs,
+        actionType: PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING,
+        successActions: [PersonalSheetActions.suggestForPublishingSuccess],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: PersonalSheetActions.suggestForPublishingFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    }, "Siggest for publishing succeeded!", "Suggest for publishing failed!")
 }

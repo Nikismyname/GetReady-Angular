@@ -47,7 +47,11 @@ class CreateEffectInput {
 //     useToastrForGErr: true,
 // });
 
-export function createEffect(d: CreateEffectInput) {
+export function createEffect(
+    d: CreateEffectInput,
+    successMessage: string = null,
+    failedMessage: string = null,
+) {
     return d.actions
         .pipe(
             ofType(d.actionType),
@@ -62,7 +66,10 @@ export function createEffect(d: CreateEffectInput) {
                     console.log("__REQUEST SENT: " + d.actionType);
                 }
                 return d.serviceMethod(payload).pipe(
-                    switchMap(res => {
+                    switchMap(res => { //SUCCESS
+                        if (successMessage) {
+                            d.toastr.success(successMessage, "Success");
+                        }
                         if (shouldConsoleLog) {
                             console.log("__RESPONSE RECIEVED: " + d.actionType);
                         }
@@ -77,8 +84,11 @@ export function createEffect(d: CreateEffectInput) {
                         }
                         return result;
                     }),
-                    catchError((response) => {
+                    catchError((response) => {//ERROR
                         if (response instanceof HttpErrorResponse) {
+                            if (failedMessage) {
+                                d.toastr.error(failedMessage, "Error");
+                            }
                             if (response.error && response.error.errors) {
                                 if (!d.catchValidationErrors) {
                                     return of(new ValidationErrorWasIgnoredAction(response));
