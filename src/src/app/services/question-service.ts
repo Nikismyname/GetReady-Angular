@@ -4,6 +4,7 @@ import { IScopedData } from './models/contracts/scoped-data';
 import { httpFactory } from '@angular/http/src/http_module';
 import { IQuestionReorder } from './models/question/question-reorder';
 import { INewScoreData } from './models/question/new-score-data';
+import { ICopyQuestionData } from './models/question/copy-questions-data';
 
 @Injectable()
 export class QuestionService {
@@ -61,5 +62,9 @@ export class QuestionService {
 
     addNewScoreObs = (data: INewScoreData) => { 
         return this.http.post("Question/AddNewScore", JSON.stringify(data));
+    } 
+
+    copyQuestions = (data: ICopyQuestionData) => { 
+        return this.http.post("Question/CopyQuestions", JSON.stringify(data));
     } 
 }

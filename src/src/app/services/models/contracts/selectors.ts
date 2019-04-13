@@ -5,16 +5,18 @@ export interface IFolderSelectData {
     order: number,
 } 
 
-export interface IQuestionsSelectData{
+export interface IItemSelectData{
     name: string, 
     id: number,
     parentId: number,
-    items: IQuestionForSelectData[],
+    items: IItemForSelectData[],
     order: number,
+    selected: boolean,
 }
 
-export interface IQuestionForSelectData{
+export interface IItemForSelectData{
     name: string,
     id: number,
     order: number,
+    selected: boolean;
 }

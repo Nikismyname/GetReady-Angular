@@ -58,4 +58,18 @@ export class GlobalSheetEffects {
         catchGeneralErrors: true,
         useToastrForGErr: true,
     });
+
+    @Effect()
+    copyQuestions$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionService.copyQuestions,
+        actionType: GlobalSheetActionTypes.COPY_QUESTIONS,
+        successActions: [GlobalSheetActions.copyQuestionsSuccess, GlobalSheetActions.clearSuccesses],
+        toastr: this.toastr, 
+        validationErrorAction: null,
+        errorAction: GlobalSheetActions.copyQuestionsFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    });
 }

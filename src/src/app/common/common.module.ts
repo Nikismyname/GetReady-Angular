@@ -19,6 +19,8 @@ import { CurrentSheetComponent } from './components/sheets-shared/current-sheet/
 import { AppRoutingModule } from '../app-routing.module';
 import { SheetListComponent } from './components/sheets-shared/sheet-list/sheet-list.component';
 import { ButtonsRendererComponent } from './components/buttons-renderer/buttons-renderer.component';
+import { ItemRecursionComponent } from './components/item-selector-dir/item-recursion/item-recursion.component';
+import { ItemSelectorComponent } from './components/item-selector-dir/item-selector/item-selector.component';
 
 const components = [
   ReactiveBindingFormComponent,
@@ -34,7 +36,9 @@ const components = [
   AllQuestionsComponent,
   CurrentSheetComponent,
   SheetListComponent,
-  ButtonsRendererComponent
+  ButtonsRendererComponent,
+  ItemRecursionComponent,
+  ItemSelectorComponent,
 ];
 
 @NgModule({

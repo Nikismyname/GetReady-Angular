@@ -65,7 +65,7 @@ export class GlobalSheetComponent {
         this.currentSheetId = id;
 
         this.store.dispatch(new GlobalSheetActions.load(id));
-        this.store.dispatch(new GlobalSheetActions.SaveLatestId(id));
+        this.store.dispatch(new GlobalSheetActions.saveLatestId(id));
         let newPath = c.globalQuestionSheetsPath + "/" + id;
         window.history.pushState(null, null, newPath);
     }

@@ -9,7 +9,7 @@ import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
 export class FolderRecursionComponent implements OnInit {
 
   constructor() { }
-  
+   
   _foldedFolders: number[] = []; 
   _selectedId: number = null;
            
@@ -57,4 +57,5 @@ export class FolderRecursionComponent implements OnInit {
   childEmitedFolded(e) {
     this.folded.emit(e); 
   } 
+  
 }

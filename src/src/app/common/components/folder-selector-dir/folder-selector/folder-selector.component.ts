@@ -7,11 +7,13 @@ import { IButtonsRenderInformation } from 'src/app/services/models/contracts/but
   templateUrl: './folder-selector.component.html',
   styleUrls: ['./folder-selector.component.css']
 })
+  
 export class FolderSelectorComponent implements OnInit {
+  
   constructor() {}
 
-  @Input() data: IFolderSelectData[];
-  @Output() folderSelectedOutput: EventEmitter<number> = new EventEmitter(); 
+  @Input() folders: IFolderSelectData[];
+  @Output() folderSelectedEmitter: EventEmitter<number> = new EventEmitter(); 
 
   loaded: boolean = false;
   //data: any;
@@ -20,7 +22,7 @@ export class FolderSelectorComponent implements OnInit {
   foldedFolders: number[] = [];
 
   ngOnInit() {
-    this.root = this.data.filter(x => x.parentId === null)[0]; 
+    this.root = this.folders.filter(x => x.parentId === null)[0]; 
     this.loaded = true;
   }
 
@@ -38,7 +40,7 @@ export class FolderSelectorComponent implements OnInit {
 
   folderFinalChosen = () => { 
     if (this.selectedId !== null) {
-      this.folderSelectedOutput.emit(this.selectedId);
+      this.folderSelectedEmitter.emit(this.selectedId);
     }
   }
 
@@ -47,9 +49,10 @@ export class FolderSelectorComponent implements OnInit {
       type: "default",
       buttons: [{
         styles: "",
-        name: "select",
+        name: "Select",
         function: this.folderFinalChosen,
       }],
     }
   }
+
 }

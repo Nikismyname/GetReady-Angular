@@ -1,15 +1,13 @@
-<h1> Folder Picker </h1>
-<getready-folder-recursion
+<h1> Question Picker </h1>
+<getready-item-recursion
   *ngIf="loaded"
-  (selected)="folderSelected($event)"
+  (selected)="itemsSelected($event)"
   (folded)="folderFolded($event)"
   [currentNode] ="root"
   [allNotes] = "folders"
-  [selectedId] = "selectedId"
   [foldedFolders]= "foldedFolders"
-></getready-folder-recursion>
+></getready-item-recursion>
 
 <getready-buttons-renderer
   [data]="buttons"
-></getready-buttons-renderer>
-
+></getready-buttons-renderer> 

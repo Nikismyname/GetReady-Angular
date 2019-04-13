@@ -1,15 +1,12 @@
-<div *ngIf="loaded && (folders$|async) as folders">
-
-  <getready-folder-selector
-    *ngIf="loaded && selectingQuestions"
-    [data]="folders"
-    (folderSelectedOutput)="questionsSelected($event)"
-  ></getready-folder-selector>
-
-  <getready-folder-selector
-    *ngIf="loaded && !selectingQuestions" 
-    [data]="folders"
-    (folderSelectedOutput)="folderSelected($event)"
-  ></getready-folder-selector>
-
-</div>
+    <getready-item-selector
+      *ngIf="itemsLoaded && selectingItems && (items$|async) as items"
+      [folders]="items"
+      (selectedItemsEmitter)="questionsSelected($event)"
+    ></getready-item-selector>
+  
+    <getready-folder-selector
+      *ngIf="foldersLoaded && !selectingItems && (folders$|async) as folders" 
+      [folders]="folders"
+      (folderSelectedEmitter)="folderSelected($event)"
+    ></getready-folder-selector> 
+  

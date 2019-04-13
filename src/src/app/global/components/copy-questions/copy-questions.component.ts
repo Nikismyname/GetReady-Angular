@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { QuestionSheetService } from 'src/app/services/question-sheet-service';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { ReadActions } from "../../../crud/actions/read.actions";
-import { ISheetForAllFolders } from 'src/app/services/models/contracts/for-get-all';
 import { map } from 'rxjs/operators';
-import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
-import { Observable, of } from 'rxjs';
+import { IFolderSelectData, IItemSelectData } from 'src/app/services/models/contracts/selectors';
+import { Observable, Subscription } from 'rxjs';
+import { GlobalSheetActions } from "../../actions/global-sheet.action";
+import { Router } from '@angular/router';
+import * as c from "../../../utilities/route-paths"; 
 
 @Component({
   selector: 'getready-copy-questions',
@@ -15,18 +16,19 @@ import { Observable, of } from 'rxjs';
 })
 export class CopyQuestionsComponent {
 
-  loaded: boolean = false;
+  successSub: Subscription;
+  foldersLoaded: boolean = false;
+  itemsLoaded: boolean = false;
   folders$: Observable<IFolderSelectData[]>; 
+  items$: Observable<IItemSelectData[]>;
 
-  private firsSelectedId: number; 
-  private secondSelectedId: number;
-  selectingQuestions: boolean = true;
-  questionSelectionData: any[]; 
-  folderSelectionData: any[];
+  private selectedItems: number[]; 
+  private selectedFolder: number;
+  selectingItems: boolean = true;
 
   constructor(
-    private questionSheetService: QuestionSheetService,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private router: Router,
   ) {
     store.dispatch(new ReadActions.GetAllFolders(false));
     this.folders$ = store.select(x => x.crud.read.allFolders.folders).pipe(
@@ -44,22 +46,64 @@ export class CopyQuestionsComponent {
       }),
     );
 
-    let loadedSub = this.store.select(x => x.crud.read.allFolders.success).subscribe(x => {
+    store.dispatch(new ReadActions.GetAllItems(true));
+    this.items$ = store.select(x => x.crud.read.allItems.items).pipe(
+      map(x => { 
+          let newArr: IItemSelectData[] = [];
+          for (let i = 0; i < x.length; i++) {
+            newArr.push({
+              id: x[i].id,
+              name: x[i].name,
+              parentId: x[i].questionSheetId,
+              order: 0,
+              items: x[i].globalQuestions.map(x => Object.assign({}, x, {selected: false})),
+              selected: false,
+            });
+          }
+          return newArr;
+      }),
+    );
+
+    let fildersLoadedSub = this.store.select(x => x.crud.read.allFolders.success).subscribe(x => {
       if (x) {
-        this.loaded = true; 
-        loadedSub.unsubscribe();
-        console.log("folders loaded");
+        this.foldersLoaded = true; 
+        fildersLoadedSub.unsubscribe();
       }
     })
+
+    let ItemsLoadedSub = this.store.select(x => x.crud.read.allItems.success).subscribe(x => {
+      if (x) {
+        this.itemsLoaded = true; 
+        ItemsLoadedSub.unsubscribe();
+      }
+    })
+
    }
 
-  questionsSelected(id: number) {
-    this.firsSelectedId = id;
-    this.selectingQuestions = false;
+  questionsSelected(ids: number[]) {
+    this.selectedItems = ids;
+    this.selectingItems = false;
   } 
 
   folderSelected(id: number) {
-    this.secondSelectedId = id; 
-    alert(this.firsSelectedId + " " + this.secondSelectedId);
+    this.selectedFolder = id;
+    this.store.dispatch(new GlobalSheetActions.copyQuestions({
+      selectedDir: this.selectedFolder, 
+      selectedQuestions: this.selectedItems,
+    }));
+
+    this.successSub = this.store.select(x => x.global.copyQuestionsSuccess).subscribe(x => {
+      console.log("COPY_QUESTIONS_SUCCESS_",x);
+      if (x) {
+        this.router.navigate([c.personalQuestionSheetsPath+"/"+ this.selectedFolder]);
+      }
+    });
   }
+
+  ngOnDestroy() {
+    if (this.successSub) {
+      this.successSub.unsubscribe();
+    }
+  }
+
 }
