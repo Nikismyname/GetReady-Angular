@@ -4,9 +4,13 @@
       (selectedItemsEmitter)="questionsSelected($event)"
     ></getready-item-selector>
   
-    <getready-folder-selector
-      *ngIf="foldersLoaded && !selectingItems && (folders$|async) as folders" 
-      [folders]="folders"
-      (folderSelectedEmitter)="folderSelected($event)"
-    ></getready-folder-selector> 
+    <div *ngIf="foldersLoaded && !selectingItems && (folders$|async) as folders">
+       Copy Questions: {{folders.length}}
+      <getready-folder-selector
+        [folders]="folders"
+        (folderSelectedEmitter)="folderSelected($event)"
+        (folderCreatedRefresh)="folderCreatedRefresh()"
+      >
+      </getready-folder-selector> 
+    </div>
   

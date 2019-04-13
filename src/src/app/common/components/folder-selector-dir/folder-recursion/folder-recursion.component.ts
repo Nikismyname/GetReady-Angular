@@ -10,11 +10,14 @@ export class FolderRecursionComponent implements OnInit {
 
   constructor() { }
    
-  _foldedFolders: number[] = []; 
+  _foldedFolders: number[] = [];
   _selectedId: number = null;
            
   @Input() currentNode: IFolderSelectData;
-  @Input() allNotes: IFolderSelectData[];
+  allNotes: IFolderSelectData[];
+  @Input("allNotes") set allNotesSetter(data: IFolderSelectData[]) { 
+    this.allNotes = data;
+  }
   @Input()
   set foldedFolders(foldedFolders: number[]) {
     this.isFolded = foldedFolders.includes(this.currentNode.id) ? true : false;

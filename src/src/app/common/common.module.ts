@@ -21,6 +21,7 @@ import { SheetListComponent } from './components/sheets-shared/sheet-list/sheet-
 import { ButtonsRendererComponent } from './components/buttons-renderer/buttons-renderer.component';
 import { ItemRecursionComponent } from './components/item-selector-dir/item-recursion/item-recursion.component';
 import { ItemSelectorComponent } from './components/item-selector-dir/item-selector/item-selector.component';
+import { CreateDirInternalComponent } from './components/folder-selector-dir/create-dir-internal/create-dir-internal.component';
 
 const components = [
   ReactiveBindingFormComponent,
@@ -39,6 +40,7 @@ const components = [
   ButtonsRendererComponent,
   ItemRecursionComponent,
   ItemSelectorComponent,
+  CreateDirInternalComponent,
 ];
 
 @NgModule({

@@ -51,7 +51,7 @@ export class CopyQuestionsComponent {
       map(x => { 
           let newArr: IItemSelectData[] = [];
           for (let i = 0; i < x.length; i++) {
-            newArr.push({
+            newArr.push({ 
               id: x[i].id,
               name: x[i].name,
               parentId: x[i].questionSheetId,
@@ -98,6 +98,10 @@ export class CopyQuestionsComponent {
         this.router.navigate([c.personalQuestionSheetsPath+"/"+ this.selectedFolder]);
       }
     });
+  }
+
+  folderCreatedRefresh() {
+    this.store.dispatch(new ReadActions.GetAllFolders(false));
   }
 
   ngOnDestroy() {
