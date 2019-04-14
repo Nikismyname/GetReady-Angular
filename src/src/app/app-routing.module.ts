@@ -7,6 +7,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { AnonGuard } from './guards/anon.guard';
+import { CrudGuard } from './guards/crud.guard';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   {
     path: "crud",
     loadChildren: () => CrudModule,
-    canActivate: [UserGuard]
+    canActivate: [CrudGuard]
   },
 
   { path: "", component: HomeComponent },
