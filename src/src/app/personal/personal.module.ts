@@ -10,13 +10,14 @@ import { PersonalQuestionViewComponent } from './components/personal-question-vi
 import { TestComponent } from './components/test/test.component'; 
 import { RatingModule } from "ngx-rating"; 
 import { FormsModule } from '@angular/forms';
+import { ReviewQuestionsComponent } from './components/review-questions/review-questions.component';
 
 let components = [
   PersonalSheetComponent,
 ]; 
 
 @NgModule({
-  declarations: [...components, PersonalQuestionViewComponent, TestComponent],
+  declarations: [...components, PersonalQuestionViewComponent, TestComponent, ReviewQuestionsComponent],
   imports: [
     CommonModule,
     MyCommonModule,

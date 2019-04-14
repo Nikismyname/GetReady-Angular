@@ -17,11 +17,16 @@ import { TestComponent } from './personal/components/test/test.component';
 import { QuestionApprovalComponent } from "./admin/components/question-approval/question-approval.component";
 import { CopyQuestionsComponent } from './global/components/copy-questions/copy-questions.component';
 import * as c from "./utilities/route-paths";
+import { ReviewQuestionsComponent } from './personal/components/review-questions/review-questions.component';
 
 const routes: Routes = [
   {
+    path: c.reviewQuestionsPath,
+    component: ReviewQuestionsComponent,
+  },
+  {
     path: c.filterQuestionsPath,
-    component:QuestionApprovalComponent
+    component: QuestionApprovalComponent
   },
   {
     path: c.copyQuestionsPath + "/:id",

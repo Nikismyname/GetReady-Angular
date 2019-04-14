@@ -1,0 +1,23 @@
+<div *ngIf="(questions$|async) as questions">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th (click)="sortByName()">Name</th>
+        <th (click)="sortByAr()">Answer Rate</th>
+        <th (click)="sortByTa()">Times Answered</th>
+        <th (click)="sortByDiff()">Difficulty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let question of questions"
+        (click)="navigateToQuestion(question.id)"
+      >
+        <td>{{question.name}}</td>
+        <td>{{question.answerRate.toFixed(2)}}</td>
+        <td>{{question.timesBeingAnswered}}</td>
+        <td>{{question.difficulty}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

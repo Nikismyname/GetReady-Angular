@@ -100,4 +100,18 @@ export class PersonalSheetEffects {
         catchGeneralErrors: true,
         useToastrForGErr: true,
     }, "Siggest for publishing succeeded!", "Suggest for publishing failed!")
+
+    @Effect()
+    getAnsweredQuestions$: Observable<any> = createEffect({
+        actions: this.actions,
+        serviceMethod: this.questionService.getAnsweredQuestionsObs,
+        actionType: PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS,
+        successActions: [PersonalSheetActions.getAnsweredQuestionsSuccess, PersonalSheetActions.clearSuccesses],
+        toastr: this.toastr,
+        validationErrorAction: null,
+        errorAction: PersonalSheetActions.getAnsweredQuestionFailed,
+        catchValidationErrors: false,
+        catchGeneralErrors: true,
+        useToastrForGErr: true,
+    }, null, "Get questions for review failed!")
 }

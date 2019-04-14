@@ -5,6 +5,7 @@ import { httpFactory } from '@angular/http/src/http_module';
 import { IQuestionReorder } from './models/question/question-reorder';
 import { INewScoreData } from './models/question/new-score-data';
 import { ICopyQuestionData } from './models/question/copy-questions-data';
+import { IPQForUserReview } from './models/contracts/pq-for_user-review';
 
 @Injectable()
 export class QuestionService {
@@ -74,5 +75,9 @@ export class QuestionService {
 
     getQuestionIdsForApprovalObs = () => { 
         return this.http.get("Question/GetQuestionIdsForApproval");
+    }
+
+    getAnsweredQuestionsObs = () => { 
+        return this.http.get<IPQForUserReview[]>("Question/GetAnsweredQuestions");
     }
 }

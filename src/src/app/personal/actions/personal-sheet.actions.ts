@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { INewScoreData } from 'src/app/services/models/question/new-score-data';
+import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
 
 export namespace PersonalSheetActionTypes {
     export const LOAD = "[PersonalSheet] load";
@@ -26,6 +27,10 @@ export namespace PersonalSheetActionTypes {
     export const SUGGEST_FOR_PUBLISHING = "[PersonalSheet] suggest for publishing";
     export const SUGGEST_FOR_PUBLISHING_SUCCESS = "[PersonalSheet] suggest for publishing success";
     export const SUGGEST_FOR_PUBLISHING_FAILED = "[PersonalSheet] suggest for publishing failed";
+
+    export const GET_ANSWERED_QUESTIONS = "[PersonalSheet] get answered questions";
+    export const GET_ANSWERED_QUESTIONS_SUCCESS = "[PersonalSheet] get answered questions success";
+    export const GET_ANSWERED_QUESTIONS_FAILED = "[PersonalSheet] get answered questions failed";
 
     export const CLEAR_SUCCESSES = "[PersonalSheet][test] clear successes";
 
@@ -230,6 +235,35 @@ class SuggestForPublishingFailedAction implements Action {
 }
 /* #endregion */
 
+/* #region  GET_ANSWERED_QUESTIONS */
+class GetAnsweredQuestionsAction implements Action {
+    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS;
+    public payload = null;
+}
+
+class GetAnsweredQuestionsSuccessAction implements Action {
+    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_SUCCESS;
+    public payload: IPQForUserReview[];
+
+    constructor(
+        public data: IPQForUserReview[],
+    ) {
+        this.payload = data;
+    }
+}
+
+class GetAnsweredQuestionsFailedAction implements Action {
+    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_FAILED;
+    public payload: any;
+
+    constructor(
+        public data: any,
+    ) {
+        this.payload = data;
+    }
+}
+/* #endregion */
+
 class IncrementCurrentIndexAction implements Action {
     public type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
     public payload: number;
@@ -276,6 +310,10 @@ export namespace PersonalSheetActions {
     export const suggestForPublishing = SuggestForPublishingAction;
     export const suggestForPublishingSuccess = SuggestForPublishingSuccessAction;
     export const suggestForPublishingFailed = SuggestForPublishingFailedAction;
+
+    export const getAnsweredQuestions = GetAnsweredQuestionsAction; 
+    export const getAnsweredQuestionsSuccess = GetAnsweredQuestionsSuccessAction;
+    export const getAnsweredQuestionFailed = GetAnsweredQuestionsFailedAction;
 
     export const clearSuccesses = ClearSuccessesAction;
 

@@ -1,15 +1,33 @@
-<getready-with-pretty-print (PRLoaded)="prLoaded()">
-</getready-with-pretty-print>
+<div *ngIf="loaded&&PRLoaded&&(question$|async) as question">
 
-<div *ngIf="loaded&&PRLoaded">
+    <h1>Name</h1>
+    {{question.name}}
+
     <h1>Question</h1>
-    <getready-text-visualisation-tblock [text]="question.question">
-    </getready-text-visualisation-tblock>
-    <h1>Comment</h1>
-    <getready-text-visualisation-tblock [text]="question.comment">
-    </getready-text-visualisation-tblock>
-    <h1>Answer</h1>
-    <getready-text-visualisation-tblock [text]="question.answer">
-    </getready-text-visualisation-tblock>
-    <button class="btn btn-primary" (click)="onClickBack()">Back</button>
+    <getready-text-visualisation-tblock 
+        [text]="question.question"
+    ></getready-text-visualisation-tblock>
+
+    <div *ngIf="showCommentb">
+        <h1>Comment</h1>
+        <getready-text-visualisation-tblock 
+            [text]="question.comment"
+        ></getready-text-visualisation-tblock>
+    </div>
+
+    <div *ngIf="showAnswerb">
+        <h1>Answer</h1>
+        <getready-text-visualisation-tblock 
+            [text]="question.answer"
+        ></getready-text-visualisation-tblock>
+    </div>
+
+    <getready-buttons-renderer
+        [data]="buttons"
+    ></getready-buttons-renderer>
 </div>
+
+<getready-with-pretty-print 
+    (PRLoaded)="prLoaded()"
+></getready-with-pretty-print>
+    

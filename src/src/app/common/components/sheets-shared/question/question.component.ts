@@ -32,7 +32,7 @@ export class QuestionComponent implements OnInit {
 
   onClickQuestion() {
     if (this.isGlobal) {
-      
+      this.router.navigate([c.viewGlobalQuestion+"/"+this.question.id]);
     } else {
       this.router.navigate([c.testPath+"/"+ this.question.id + "/single"]);
     }

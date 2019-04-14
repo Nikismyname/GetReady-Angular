@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { PersonalSheetActionTypes, PersonalSheetActions } from "../actions/personal-sheet.actions";
 import { IQuestionReorder } from "../../services/models/question/question-reorder"
 import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index";
+import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
 
 export function personalIndexReducer(
     state: IQsPersonalIndex = initialState,
@@ -74,30 +75,46 @@ export function testReducer(
             let successState = Object.assign({}, state);
             successState.qIdsForSheet =  { success: true, ids: ids, };
             return successState;
+        
+        case PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_SUCCESS:
+            let gqState = Object.assign({}, state);
+            gqState.questionsForReview = { success: true, questions: action["payload"] }
+            return gqState;
+            
         case PersonalSheetActionTypes.CLEAR_SUCCESSES:
             let clearState = Object.assign({}, state);
             clearState.qIdsForSheet.success = false;
+            clearState.questionsForReview.success = false;
             return clearState;
+        
         case PersonalSheetActionTypes.INCREMENT_CURRENT_IND:
             let change = action["payload"];
             let incState = Object.assign({}, state);
             incState.currentInd += change;
             return incState;
+        
         case PersonalSheetActionTypes.CLEAR_CURRENT_ID_STATE:
             let clearIndState = Object.assign({}, state);
             clearIndState.currentInd = 0;
             return clearIndState;
+        
         default:
             return state;
     }
 }
 
+//RENEAME TEST STATE TO SOMETHING
 export interface testState {
     qIdsForSheet: {
         success: boolean,
         ids: number[],
     },
     currentInd: number;
+
+    questionsForReview: {
+        success: boolean, 
+        questions: IPQForUserReview[],
+    }
 }
 
 let initialIdsState: testState = {
@@ -106,4 +123,9 @@ let initialIdsState: testState = {
         ids: [],
     },
     currentInd: 0,
+
+    questionsForReview: {
+        success: false, 
+        questions: [],
+    }
 } 
