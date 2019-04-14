@@ -16,12 +16,12 @@ import { QuestionComponent } from './components/sheets-shared/question/question.
 import { SheetComponent } from './components/sheets-shared/sheet/sheet.component';
 import { AllQuestionsComponent } from './components/sheets-shared/all-questions/all-questions.component';
 import { CurrentSheetComponent } from './components/sheets-shared/current-sheet/current-sheet.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { SheetListComponent } from './components/sheets-shared/sheet-list/sheet-list.component';
 import { ButtonsRendererComponent } from './components/buttons-renderer/buttons-renderer.component';
 import { ItemRecursionComponent } from './components/item-selector-dir/item-recursion/item-recursion.component';
 import { ItemSelectorComponent } from './components/item-selector-dir/item-selector/item-selector.component';
-import { CreateDirInternalComponent } from './components/folder-selector-dir/create-dir-internal/create-dir-internal.component';
+import { CreateDirInternalComponent } from './components/folder-selector-dir/create-dir-internal/create-dir-internal.component'; 
+import { RouterModule } from "@angular/router";
 
 const components = [
   ReactiveBindingFormComponent,
@@ -50,12 +50,12 @@ const components = [
     FormsModule,
     ReactiveFormsModule,
     AutosizeModule,
-    AppRoutingModule,
     DragDropModule,
+    RouterModule,
   ],
   exports: [
     ...components,
     AutosizeModule,
   ],
 })
-export class CommonModule { }
+export class SharedModule { }

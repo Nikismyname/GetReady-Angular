@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
 import { IUserStatus } from 'src/app/services/models/other';
-import { RoutePaths } from 'src/app/utilities/route-paths';
+import { RoutePaths } from 'src/app/services/route-paths';
 
 @Component({
   selector: 'getready-sheet',

@@ -6,7 +6,7 @@ import { AuthActions } from "../../actions/auth.actions";
 import { Subscription } from 'rxjs';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as c from "../../../utilities/route-paths";
+import * as c from "../../../services/route-paths";
 
 @Component({
   selector: 'getready-register',

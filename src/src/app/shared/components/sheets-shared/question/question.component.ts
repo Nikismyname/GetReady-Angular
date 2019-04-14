@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IQGlobalIndex } from 'src/app/services/models/question/q-global-index';
 import { IUserStatus } from 'src/app/services/models/other';
-import { RoutePaths } from 'src/app/utilities/route-paths';
-import * as c from 'src/app/utilities/route-paths';
+import { RoutePaths } from 'src/app/services/route-paths';
+import * as c from 'src/app/services/route-paths';
 import { Router } from '@angular/router';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';

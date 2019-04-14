@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { RoutePaths } from "../../utilities/route-paths";
+import { RoutePaths } from "../../services/route-paths";
 import { Store } from '@ngrx/store';
 import { IAuthState } from "../../authentication/reducers";
 import { AuthActions } from "../../authentication/actions/auth.actions";

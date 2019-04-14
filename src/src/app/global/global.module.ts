@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from "@angular/router";
 
-import { CommonModule as MyCommonModule } from "../common/common.module";
+import { SharedModule } from "../shared/shared.module";
 
 import { StoreModule } from "@ngrx/store"
 import { EffectsModule } from "@ngrx/effects";
@@ -13,6 +12,7 @@ import { GlobalSheetEffects } from "./effects/global-sheet.effects";
 import { GlobalSheetComponent } from "./components/global-sheet/global-sheet.component"; 
 import { CopyQuestionsComponent } from "./components/copy-questions/copy-questions.component";
 import { ViewGlobalQuestionComponent } from "./components/view-global-question/view-global-question.component"; 
+import { GlobalRoutingModule } from './global-routing.module';
 
 const components = [
   CopyQuestionsComponent,
@@ -26,8 +26,8 @@ const components = [
   ],
   imports: [
     CommonModule,
-    MyCommonModule,
-    // DragDropModule,
+    SharedModule,
+    GlobalRoutingModule,
     RouterModule,
     StoreModule.forFeature("global", reducers),
     EffectsModule.forFeature([GlobalSheetEffects]),

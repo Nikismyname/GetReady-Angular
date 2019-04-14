@@ -10,4 +10,4 @@ export interface IAppState extends
     ICrudState,
     IPersonalState,
     IAdminState
-{}
+{ }

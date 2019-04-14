@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { IQGlobalIndex } from "src/app/services/models/question/q-global-index";
-import { renderEmbeddedTemplate } from '@angular/core/src/render3/instructions';
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class ReorderService {
     reorderTwoContainers(
         oldArray: any[],

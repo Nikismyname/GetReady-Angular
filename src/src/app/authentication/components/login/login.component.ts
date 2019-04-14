@@ -5,7 +5,7 @@ import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import * as c from "../../../utilities/route-paths"; 
+import * as c from "../../../services/route-paths"; 
 
 @Component({
   selector: 'getready-login',

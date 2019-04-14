@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
-import { RoutePaths } from 'src/app/utilities/route-paths';
+import { RoutePaths } from 'src/app/services/route-paths';
 import { IUserStatus } from 'src/app/services/models/other';
 
 @Component({

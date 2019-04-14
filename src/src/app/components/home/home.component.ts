@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { IAppState } from 'src/app/store/reducers';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'getready-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  constructor() { }
+  isUser: boolean = false;
+  userSub: Subscription; 
 
-  ngOnInit() {
+  constructor(
+    private store: Store<IAppState>
+  ) { 
+    this.userSub = store.select(x => x.auth.user).subscribe(x => {
+      if (x) {
+       this.isUser = true; 
+      }else{
+        this.isUser = false;
+      }
+    });
   }
-
 }

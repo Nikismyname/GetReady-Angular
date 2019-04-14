@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule as stockCommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { CreateQuestionComponent } from "./components/create-question/create-question.component";
 import { CreateQuestionSheetComponent } from "./components/create-question-sheet/create-question-sheet.component"; 
@@ -8,7 +8,8 @@ import { EditQuestionSheetComponent } from "./components/edit-question-sheet/edi
 import { DeleteQuestionSheetComponent } from './components/delete-question-sheet/delete-question-sheet.component';
 import { DeleteQuestionComponent } from './components/delete-question/delete-question.component';
 
-import { CommonModule } from "../common/common.module"; 
+import { SharedModule } from "../shared/shared.module"; 
+import { CrudRoutingModule } from "./crud-routing.module"; 
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -29,7 +30,8 @@ let components = [
   declarations: [...components], 
   imports: [
     CommonModule,
-    stockCommonModule,
+    CrudRoutingModule,
+    SharedModule,
     StoreModule.forFeature("crud", reducers),
     EffectsModule.forFeature([
       CudEffects,

@@ -7,7 +7,7 @@ import { IFolderSelectData, IItemSelectData } from 'src/app/services/models/cont
 import { Observable, Subscription } from 'rxjs';
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 import { Router } from '@angular/router';
-import * as c from "../../../utilities/route-paths"; 
+import * as c from "../../../services/route-paths"; 
 
 @Component({
   selector: 'getready-copy-questions',

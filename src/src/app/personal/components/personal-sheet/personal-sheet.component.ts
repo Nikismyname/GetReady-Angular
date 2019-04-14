@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
 
-import * as c from "../../../utilities/route-paths";
+import * as c from "../../../services/route-paths";
 import { IAppState } from 'src/app/store/reducers';
 import { IUserStatus } from 'src/app/services/models/other';
 

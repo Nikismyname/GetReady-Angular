@@ -1,14 +1,3 @@
-const codeBlockTag = "<<c>>";
-const emphasisBlockTag = "<<e>>"
-
-const paragraphTBlockTag = "<<p>>";
-const yellowTBlockTag = "<<y>>";
-
-const inlineCodeTag = "<<s>>";
-const inlineEmpTag = "<<em>>";
-
-const fontSize = 25;
-
 export function replaceTags(str) {
     return str.replace(/[<>]/g, replaceTag);
 }

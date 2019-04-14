@@ -4,7 +4,9 @@ import { IScopedData } from './models/contracts/scoped-data';
 import { IReorderQuestion } from './models/other';
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class QuestionSheetService {
     constructor(
         private http: HttpClient,

@@ -7,7 +7,7 @@ import { Observable, Subscription } from "rxjs";
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 
 import { ReorderService } from 'src/app/services/reorder-service';
-import * as c from "../../../utilities/route-paths";
+import * as c from "../../../services/route-paths";
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { IAppState } from 'src/app/store/reducers';
 import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';

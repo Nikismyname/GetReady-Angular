@@ -26,23 +26,12 @@
             <getready-text-visualisation-tblock
                 [text]="question.answer"
             ></getready-text-visualisation-tblock>
-        </div>
-        <h1>Rate Your Answer</h1>
-        <rating [(ngModel)]="userRating"
-            [max]="10">
-        </rating>
 
-<!-- <div *ngIf="!isSingle">
-            <button (click)="showComment()" class="btn btn-primary">Show Comment</button>
-            <button (click)="showAnswer()" class="btn btn-primary">Show Answer</button>
-            <button (click)="onClickPrev()" class="btn btn-primary">Previous</button>
-            <button (click)="onClickNext()" class="btn btn-primary">Next</button>
+            <h1>Rate Your Answer</h1>
+            <rating [(ngModel)]="userRating"
+                [max]="10">
+            </rating>
         </div>
-        <div *ngIf="isSingle">
-            <button (click)="showComment()" class="btn btn-primary">Show Comment</button>
-            <button (click)="showAnswer()" class="btn btn-primary">Show Answer</button>
-            <button (click)="onClickNext()" class="btn btn-primary">Done</button>
-        </div> -->
 
         <getready-buttons-renderer [data]="buttons"></getready-buttons-renderer>
     </div>

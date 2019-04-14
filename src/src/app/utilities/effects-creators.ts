@@ -22,31 +22,6 @@ class CreateEffectInput {
     ) { }
 }
 
-// actions: "",
-// serviceMethod: "",
-// actionType: "",
-// successActions: "",
-// toastr: "",
-// validationErrorAction: "",
-// errorAction: "",
-// catchValidationErrors: "",
-// catchGeneralErrors: "",
-// useToastrForGErr: "",
-
-// @Effect()
-// login$: Observable<any> = createEffect({
-//     actions: this.actions,
-//     serviceMethod: this.userService.loginObs,
-//     actionType: AuthActionTypes.LOGIN,
-//     successActions: [AuthActions.loginSuccess, AuthActions.clear],
-//     toastr: this.toastr,
-//     validationErrorAction: null,
-//     errorAction: AuthActions.loginFail,
-//     catchValidationErrors: false,
-//     catchGeneralErrors: true,
-//     useToastrForGErr: true,
-// });
-
 export function createEffect(
     d: CreateEffectInput,
     successMessage: string = null,

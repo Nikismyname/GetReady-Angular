@@ -3,6 +3,7 @@ import { PersonalSheetActionTypes, PersonalSheetActions } from "../actions/perso
 import { IQuestionReorder } from "../../services/models/question/question-reorder"
 import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index";
 import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
+import { AuthActionTypes } from 'src/app/authentication/actions/auth.actions';
 
 export function personalIndexReducer(
     state: IQsPersonalIndex = initialState,
@@ -58,6 +59,8 @@ export function latestIdReducer(
     switch (action.type) {
         case PersonalSheetActionTypes.SAVE_LATEST_ID:
             return action["payload"]
+        case AuthActionTypes.LOGOUT:
+            return null;
         default:
             return state;
     }

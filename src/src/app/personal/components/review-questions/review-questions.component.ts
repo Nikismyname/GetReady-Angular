@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import * as c from "../../../utilities/route-paths";
+import * as c from "../../../services/route-paths";
 
 @Component({
   selector: 'getready-review-questions',

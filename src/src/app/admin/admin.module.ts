@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule as StockCommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AdminEffects } from "./effects/admin.effects"; 
 import { adminReducer } from "./reducers/admin.reducers";
-import { CommonModule } from "../common/common.module";
+import { SharedModule } from "../shared/shared.module";
 import { QuestionApprovalComponent } from './components/question-approval/question-approval.component'; 
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   declarations:[
     QuestionApprovalComponent,
   ],
   imports: [
-    StockCommonModule,
+    SharedModule,
+    AdminRoutingModule,
     StoreModule.forFeature("admin", adminReducer),
     EffectsModule.forFeature([AdminEffects]),
     CommonModule,
   ],
   exports: [
-    QuestionApprovalComponent
+    QuestionApprovalComponent,
   ]
 })
 export class AdminModule { }

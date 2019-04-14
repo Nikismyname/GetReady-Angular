@@ -1,3 +1,64 @@
-<p>
-  home works!
-</p>
+<div *ngIf="isUser">
+    <div class="fontSize">
+        <h1 class="text-center mb-5">Welcome And Get Ready</h1>
+        <p class="question">How do I copy questions from the global pool?</p>
+        <p>
+            To do that first go to the page where the wanted questions are.
+            Then click on "Copy Questions". You will see a page with all the avaiable questions.
+            It will be expanded on the directory from which you came. You can select questions
+            one at a time or click on the directory checkbox to select all in that directory.
+            After you click "Select", you will be taken to another page in which you will 
+            select a personal directory where the questions will be copied to. Alternatively
+            you can create a new directory by first selecting the parent directory and then 
+            clicking "Create New". After the questions are copied you can then edit and 
+            track your answers rates.
+        </p>
+        <p  class="question">How do I test myself?</p>
+        <p>
+            You can do that in two ways - one is on a single question and the other is on
+            on all questions in given directory. For the single question you go to you personal
+            directory which contains the question and simply click it? For a whole directory 
+            test, again go to the personal directory with the wanted questions and click 
+            "Start Test". After each question will be asked to rate your answer, which 
+            helps you to track your progress.
+        </p>
+        <p class="question">How do I format my questions?</p>
+        <p>
+            There are three formating modes:
+            <ul>
+                <li>
+                    Transperant Blocks: you put the tag that coresponds to the desired block
+                    on a new line both above and below the text you want to format. The
+                    coresponding formatting will be applied, but all other formatings inside
+                    will also be applied!
+                </li>
+                <li>
+                    Blocks: same as transperent blocks - tag below and above the text on a new
+                    line. The selected formatting will be applied but unlike before, no further
+                    formatting will take place!
+                </li>
+                <li>
+                    For inline formatting, you put the appropriate tag imidiatly before and after
+                    the text you want to format as part of the text, not on a new line.
+                </li>
+                <li>
+                    There is also the options to use shortcuts. First you select the text you
+                    want to format, then pres ctrl + the letter that corresponds to the wanted 
+                    formating. You can see the leter in the info to the right on the screen.
+                    The tags will be applied in an appropriate manner.
+                </li>
+            </ul>
+    </div>
+</div>
+
+<div *ngIf="!isUser">
+    <div class="fontSize">
+        <h1 class="text-center mb-5">Welcome And Get Ready</h1>
+        <p>GetReady is the site what lets you prepare for that test or an interview that is coming up!
+           You are free to explore the wealth of public questions and answers we have available. If you
+           sighn up you can copy and personalise all the questions you are interested it. You will
+           also bew able to thrack which one give you the most trouble, so you know what to focus on
+           in your studys.
+        </p>
+    </div>
+</div>

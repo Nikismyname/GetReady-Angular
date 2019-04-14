@@ -6,7 +6,7 @@ import { ReadActions } from "../../../crud/actions/read.actions";
 import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
 import { IScopedData } from "../../../services/models/contracts/scoped-data";
 import { Subscription, Observable } from 'rxjs';
-import * as c from 'src/app/utilities/route-paths';
+import * as c from 'src/app/services/route-paths';
 import { IButtonsRenderInformation, IButtonRenderInformation } from 'src/app/services/models/contracts/button-renderer';
 
 @Component({
@@ -112,6 +112,10 @@ export class TestComponent implements OnDestroy {
     this.shouldShowAnswer = !this.shouldShowAnswer;
   }
 
+  back = () => { 
+    this.router.navigate([c.personalQuestionSheetsPath+"/-1"]);
+  }
+
   resetUIState() {
     this.shouldShowAnswer = false;
     this.shouldShowComment = false;
@@ -125,7 +129,7 @@ export class TestComponent implements OnDestroy {
         styles: "",
         function: this.showComment, 
       },
-      {
+      { 
         name: "Show Answer", 
         styles: "", 
         function: this.showAnswer, 
@@ -144,11 +148,15 @@ export class TestComponent implements OnDestroy {
         styles: "",
         function: this.onClickPrev, 
       })
-
       buttons.push({ 
         name: "Next",
         styles: "",
         function: this.onClickNext, 
+      })
+      buttons.push({ 
+        name: "Back",
+        styles: "",
+        function: this.back, 
       })
     }
 

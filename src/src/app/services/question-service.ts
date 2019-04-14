@@ -7,7 +7,9 @@ import { INewScoreData } from './models/question/new-score-data';
 import { ICopyQuestionData } from './models/question/copy-questions-data';
 import { IPQForUserReview } from './models/contracts/pq-for_user-review';
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class QuestionService {
     constructor(
         private http: HttpClient,

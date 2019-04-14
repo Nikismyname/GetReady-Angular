@@ -1,10 +1,11 @@
 import { Action } from "@ngrx/store";
-import { GlobalSheetActionTypes } from "../actions/global-sheet.action"; 
+import { GlobalSheetActionTypes } from "../actions/global-sheet.action";
 import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
+import { AuthActionTypes } from 'src/app/authentication/actions/auth.actions';
 
 export function globalSheetReducer(
-    state:IQsGlobalIndex = initialState,
+    state: IQsGlobalIndex = initialState,
     action: Action,
 ) {
     switch (action.type) {
@@ -25,20 +26,20 @@ export function globalSheetReducer(
             return reorderedState;
         case GlobalSheetActionTypes.SUBDIRECTORIES_REORDER:
             let dirReorderings = action["payload"].orderings;
-            console.log("DIR_REORDERINGS_",dirReorderings );
+            console.log("DIR_REORDERINGS_", dirReorderings);
             let sReorderState = Object.assign({}, state);
             let sheets = sReorderState.children.slice(0);
             for (let i = 0; i < dirReorderings.length; i++) {
-                console.log("REORDERING WITH ID: ",dirReorderings[i][0], "TO ORDER", i);
-                sheets.filter(x=>x.id === dirReorderings[i][0])[0].order = i;
+                console.log("REORDERING WITH ID: ", dirReorderings[i][0], "TO ORDER", i);
+                sheets.filter(x => x.id === dirReorderings[i][0])[0].order = i;
             }
             let finalSheets = sheets.sort((a, b) => a.order - b.order);
             console.log("FINAL SHEETS: ", finalSheets);
-            sReorderState.children = finalSheets; 
+            sReorderState.children = finalSheets;
             return sReorderState;
         default:
             return state;
-    } 
+    }
 }
 
 let initialState: IQsGlobalIndex = {
@@ -54,15 +55,17 @@ let initialState: IQsGlobalIndex = {
 };
 
 export function latestIdReducer(
-    state:number = initialStateLatestId,
+    state: number = initialStateLatestId,
     action: Action,
 ) {
     switch (action.type) {
         case GlobalSheetActionTypes.SAVE_LATEST_ID:
             return action["payload"]
+        case AuthActionTypes.LOGOUT:
+            return null;
         default:
             return state;
-    } 
+    }
 }
 
 let initialStateLatestId: number = null;
@@ -76,5 +79,5 @@ export function copyQuestionReducer(
             return true;
         case GlobalSheetActionTypes.CLEAR_SUCCESS_STATES:
             return false;
-    } 
+    }
 }

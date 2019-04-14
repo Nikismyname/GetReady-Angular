@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angu
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FormData as myFormData } from "../../../services/models/other";
 import { Location } from '@angular/common';
-import { textFormattingMappings } from "../../../utilities/route-paths";
+import { textFormattingMappings } from "../../../services/route-paths";
 import { Store } from '@ngrx/store';
 import { ICrudState } from 'src/app/crud/reducers';
 import { Subscription } from 'rxjs';
