@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
 import { ICrudState } from "../../reducers";
-import { Store, select } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
-import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { take } from 'rxjs/operators';
  
 @Component({
   selector: 'getready-edit-question',
@@ -15,12 +14,13 @@ import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
   styleUrls: ['./edit-question.component.css']
 })
 
-export class EditQuestionComponent implements OnInit {
+export class EditQuestionComponent {
 
   global: boolean;
   id: string;
   resultSub: ISubscription;
-  dataSub: ISubscription;
+  formData: FormData;
+  loaded: boolean = false;
 
   constructor(
     private store: Store<ICrudState>,
@@ -28,13 +28,7 @@ export class EditQuestionComponent implements OnInit {
     private location: Location,
   ) {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.global = this.route.snapshot.paramMap.get("scope") === "global"? true: false;
-  }
-
-  formData: FormData;
-  loaded: boolean = false;
-
-  async ngOnInit() {
+    this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
 
     this.resultSub = this.store.select(x => x.crud.cud.editQuestion.success).subscribe(done => {
       if (done === true) {
@@ -42,10 +36,8 @@ export class EditQuestionComponent implements OnInit {
       }
     });
 
-    this.dataSub = this.store.select(x => x.crud.read.question).subscribe(x => { 
-      console.log("GLOBAL QUESTION HERE: ", x);
+    this.store.select(x => x.crud.read.question).pipe(take(1)).subscribe(x => { 
       if (x.success === true) {
-        console.log("recieved the question");
         let question = x.question;
         let inputData = [
           new FormInputData("name", "Name", "text", question.name),
@@ -60,9 +52,6 @@ export class EditQuestionComponent implements OnInit {
         this.loaded = true;
       }
     });
-
-    let data: IScopedData = {data:this.id, global: this.global };
-    this.store.dispatch(new ReadActions.Question(data));
   }
 
   async onFormSubmit(input) {
@@ -73,7 +62,6 @@ export class EditQuestionComponent implements OnInit {
 
   ngOnDestroy() {
     this.resultSub.unsubscribe();
-    this.dataSub.unsubscribe();
   }
 
 }

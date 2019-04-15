@@ -15,15 +15,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects"; 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
  
-//SERVICES
-// import { QuestionSheetService } from "./services/question-sheet-service";
-// import { QuestionService } from "./services/question-service"
-// import { ReorderService } from "./services/reorder-service";
-// import { RoutePaths } from "./services/route-paths";
-// import { UserService } from "./services/user-service";
-// import { AdminService } from "./services/admin-service";
-
-//INTERCEPTORS
+//INTERCEPTORS 
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
    
 //COMPONENTS
@@ -54,7 +46,6 @@ import { ShouldDisplayQuestionDirective } from './directives/should-display-ques
 
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    // StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       name:"GetReady", 
     }),
@@ -62,12 +53,6 @@ import { ShouldDisplayQuestionDirective } from './directives/should-display-ques
     ToastrModule.forRoot(),
   ], 
   providers: [
-    // QuestionSheetService,
-    // QuestionService,
-    // AdminService,
-    // UserService,
-    // ReorderService,
-    // RoutePaths,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,

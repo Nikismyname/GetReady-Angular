@@ -35,30 +35,25 @@ export function personalIndexReducer(
             let finalSheets = sheets.sort((a, b) => a.order - b.order);
             sReorderState.children = finalSheets;
             return sReorderState;
+        
+        case AuthActionTypes.LOGOUT:
+            return null;
+        
         default:
             return state;
     }
 }
 
-let initialState: IQsPersonalIndex = {
-    id: 0,
-    name: "Default",
-    description: "Default",
-    difficulty: 1,
-    importance: 1,
-    order: 1,
-    questionSheetId: 0,
-    children: [],
-    personalQuestions: [],
-};
+let initialState: IQsPersonalIndex = null;
 
 export function latestIdReducer(
     state: number = initialStateLatestId,
     action: Action,
 ) {
     switch (action.type) {
-        case PersonalSheetActionTypes.SAVE_LATEST_ID:
-            return action["payload"]
+        case PersonalSheetActionTypes.LOAD_SUCCESS:
+            let payload = (action["payload"] as IQsPersonalIndex);
+            return payload.id;
         case AuthActionTypes.LOGOUT:
             return null;
         default:

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route } from '@angular/router';
-import { IAppState } from '../store/reducers';
+import { IAppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { take } from "rxjs/operators"
 import { ToastrService } from 'ngx-toastr';
@@ -21,7 +21,6 @@ export class UserGuard implements CanActivate {
         let user;
         this.store.select(x => x.auth.user).pipe(take(1)).subscribe(x => {
             user = x;
-            console.log("GUARD GOT USER");
         })
 
         if (user) {

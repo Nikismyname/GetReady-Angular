@@ -16,7 +16,6 @@ export class TextVisualizationInlineComponent implements OnInit {
   
   ngOnInit() {
     this.formatetText = this.parseInlineElements(this.text);
-    console.log(this.formatetText);
     this.loaded = true;
   }
 

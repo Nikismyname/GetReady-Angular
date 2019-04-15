@@ -1,6 +1,9 @@
 import { Action } from "@ngrx/store";
 import { ReadActionTypes } from "../actions/read.actions";
 import { IGlobalSheetForAllItems, ISheetForAllFolders } from 'src/app/services/models/contracts/for-get-all';
+import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
+import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
+import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
 
 export function readReducer(
     state: IReadState = initialReadState,
@@ -10,7 +13,11 @@ export function readReducer(
 
         case ReadActionTypes.QUESTION_SUCCESS:
             let gqState = Object.assign({}, state);
-            gqState.question = {success: true, question: action["payload"]};
+            gqState.question = {
+                success: true,
+                question: JSON.parse(JSON.stringify(action["payload"]))
+            }
+            // gqState.question.question = JSON.parse(JSON.stringify(action["payload"]));
             return gqState;
 
         case ReadActionTypes.QUESTION_SHEET_SUCCESS:
@@ -44,11 +51,11 @@ export function readReducer(
 export interface IReadState {
     question: {
         success: boolean,
-        question: any,
+        question: IGlobalQuestion | IPersonalQuestion,
     },
     questionSheet: {
         success: boolean,
-        qSheet: any,
+        qSheet: IQuestionSheet,
     },
     allItems: {
         success: boolean,

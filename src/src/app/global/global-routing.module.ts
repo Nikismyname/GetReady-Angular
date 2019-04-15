@@ -4,11 +4,13 @@ import * as c from "../services/route-paths";
 import { GlobalSheetComponent } from './components/global-sheet/global-sheet.component';
 import { ViewGlobalQuestionComponent } from './components/view-global-question/view-global-question.component';
 import { CopyQuestionsComponent } from './components/copy-questions/copy-questions.component';
+import { PublicSheetGuard } from '../services/data-guards/public-sheet.guard';
 
 const routes: Routes = [
     {
         path: c.forFeatureRouting(c.globalQuestionSheetsPath) + "/:id",
         component: GlobalSheetComponent,
+        canActivate: [PublicSheetGuard]
     },
     {
         path: c.forFeatureRouting(c.viewGlobalQuestion) + "/:id",

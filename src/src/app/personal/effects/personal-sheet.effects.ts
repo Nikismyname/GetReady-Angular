@@ -7,7 +7,7 @@ import { createEffect } from "../../utilities/effects-creators";
 import { QuestionService } from "../../services/question-service";
 import { ToastrService } from 'ngx-toastr';
 
-@Injectable()
+@Injectable()//messagesX
 export class PersonalSheetEffects {
 
     constructor(
@@ -29,7 +29,7 @@ export class PersonalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, null);
     
     @Effect()
     reorderQuestions$: Observable<any> = createEffect({
@@ -43,7 +43,7 @@ export class PersonalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, "Reorder questions failed!");
 
     @Effect()
     reorderSheets$: Observable<any> = createEffect({
@@ -57,7 +57,7 @@ export class PersonalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, "Reorder sheets failed!");
 
     @Effect()
     getQIdsForSheet$: Observable<any> = createEffect({
@@ -71,7 +71,7 @@ export class PersonalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    })
+    }, null, null)
 
     @Effect() 
     addNewAnserScore$: Observable<any> = createEffect({
@@ -85,7 +85,7 @@ export class PersonalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    })
+    }, null, null)
 
     @Effect()
     suggestForPublishing$: Observable<any> = createEffect({

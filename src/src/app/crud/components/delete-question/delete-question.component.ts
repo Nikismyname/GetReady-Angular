@@ -1,25 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
 import { ICrudState } from "../../reducers";
 import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
-import { ReadActions } from "../../actions/read.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'getready-delete-question',
   templateUrl: './delete-question.component.html',
   styleUrls: ['./delete-question.component.css']
 })
-export class DeleteQuestionComponent implements OnInit, OnDestroy {
+export class DeleteQuestionComponent implements OnDestroy {
 
   global: boolean;
   id: string;
   resultSub: ISubscription;
   dataSub: ISubscription;
+  formData: FormData;
 
   constructor(
     private store: Store<ICrudState>,
@@ -28,22 +29,9 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
   ) {
     this.id = this.route.snapshot.paramMap.get("id");
     this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
-  }
 
-  formData: FormData;
-  loaded: boolean = false;
-
-  async ngOnInit() {
-
-    this.resultSub = this.store.select(x => x.crud.cud.deleteQuestion.success).subscribe(done => {
-      if (done === true) {
-        this.location.back();
-      }
-    });
-
-    this.dataSub = this.store.select(x => x.crud.read.question).subscribe(x => {
-      console.log("GLOBAL QUESTION HERE: ", x);
-      if (x.success === true) {
+    this.store.select(x => x.crud.read.question).pipe(take(1)).subscribe(x => {
+        console.log("QUESTION HERE: ", x);
         console.log("recieved the question");
         let question = x.question;
         let inputData = [
@@ -56,12 +44,16 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
         this.formData = new FormData(
           inputData, "Delete Question Form", "Delete", false, true
         );
-        this.loaded = true;
+    });
+
+    console.log("FORM DATA HERE,", this.formData);
+
+    this.resultSub = this.store.select(x => x.crud.cud.deleteQuestion.success).subscribe(done => {
+      if (done === true) {
+        this.location.back();
       }
     });
 
-    let data: IScopedData = { data: this.id, global: this.global };
-    this.store.dispatch(new ReadActions.Question(data));
   }
 
   async onFormSubmit() {
@@ -71,7 +63,6 @@ export class DeleteQuestionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.resultSub.unsubscribe();
-    this.dataSub.unsubscribe();
   }
 
 } 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { trimEnds } from "../../../../utilities/text-formatting-helpers";
 import { ParsingData } from "../../../../services/models/other";
 
@@ -12,7 +12,6 @@ export class TextVisualisationTBlockComponent {
   constructor() { }
 
   @Input("text") set textSetter(data: string) {
-    console.log("TBLOCK DATA HERE", data);
     if (data === null || data === undefined) {
       this.loaded = false;
     } else {

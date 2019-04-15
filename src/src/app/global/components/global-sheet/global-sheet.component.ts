@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { IQsGlobalIndex } from "src/app/services/models/question-sheet/qs-global-index";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
@@ -8,9 +8,9 @@ import { GlobalSheetActions } from "../../actions/global-sheet.action";
 
 import { ReorderService } from 'src/app/services/reorder-service';
 import * as c from "../../../services/route-paths";
-import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { IAppState } from 'src/app/store/reducers';
-import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';
+import { IUserStatus } from 'src/app/services/models/other';
+import { take } from 'rxjs/operators';
  
 @Component({
     selector: "getready-global-sheet",
@@ -19,7 +19,6 @@ import { IUserStatus, IReorderQuestion } from 'src/app/services/models/other';
 export class GlobalSheetComponent {
 
     questionSheet$: Observable<IQsGlobalIndex>;
-    private latestIdSub: Subscription;
     private userSub: Subscription;
     currentSheetId: number = 3;
     loaded: boolean = false;
@@ -29,7 +28,6 @@ export class GlobalSheetComponent {
     constructor(
         private store: Store<IAppState>,
         public reorderService: ReorderService,
-        private route: ActivatedRoute,
         private router: Router,
         public routePaths: c.RoutePaths,
     ) {
@@ -40,17 +38,10 @@ export class GlobalSheetComponent {
             this.isAdmin = user ? user.role === "Admin" ? true : false : false;
         });
 
-        let id = this.route.snapshot.paramMap.get("id");
-        let initialSavedId = null;
-        this.latestIdSub = store.select(state => state.global.latestId).subscribe(x => {
-            initialSavedId = x;
+        store.select(state => state.global.latestId).pipe(take(1)).subscribe(x => {
+            let newPath = c.globalQuestionSheetsPath + "/" + x;
+            window.history.pushState(null, null, newPath);
         });
- 
-        if (id === "-1" && initialSavedId !== null) {
-            this.fetchSheet(initialSavedId);
-        } else {
-            this.fetchSheet(id);
-        }
     }
 
     get user() {
@@ -65,7 +56,6 @@ export class GlobalSheetComponent {
         this.currentSheetId = id;
 
         this.store.dispatch(new GlobalSheetActions.load(id));
-        this.store.dispatch(new GlobalSheetActions.saveLatestId(id));
         let newPath = c.globalQuestionSheetsPath + "/" + id;
         window.history.pushState(null, null, newPath);
     }
@@ -92,7 +82,6 @@ export class GlobalSheetComponent {
     }
 
     ngOnDestroy() {
-        this.latestIdSub.unsubscribe();
         this.userSub.unsubscribe();
     }
 }

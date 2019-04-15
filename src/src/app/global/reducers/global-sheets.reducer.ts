@@ -42,25 +42,16 @@ export function globalSheetReducer(
     }
 }
 
-let initialState: IQsGlobalIndex = {
-    id: 0,
-    name: "Default",
-    description: "Default",
-    difficulty: 1,
-    importance: 1,
-    order: 1,
-    questionSheetId: 0,
-    children: [],
-    globalQuestions: [],
-};
+let initialState: IQsGlobalIndex = null;
 
 export function latestIdReducer(
     state: number = initialStateLatestId,
     action: Action,
 ) {
     switch (action.type) {
-        case GlobalSheetActionTypes.SAVE_LATEST_ID:
-            return action["payload"]
+        case GlobalSheetActionTypes.LOAD_SUCCESS:
+            let payload = (action["payload"] as IQsGlobalIndex);
+            return payload.id;
         case AuthActionTypes.LOGOUT:
             return null;
         default:

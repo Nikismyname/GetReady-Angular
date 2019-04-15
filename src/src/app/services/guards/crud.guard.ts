@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Location } from "@angular/common";
-import { IAppState } from '../store/reducers';
+import { IAppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { take } from "rxjs/operators"
-import { IUser } from '../services/models/other';
+import { IUser } from '../models/other';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -25,7 +25,6 @@ export class CrudGuard implements CanActivate {
         let user: IUser; 
         this.store.select(x => x.auth.user).pipe(take(1)).subscribe(x => {
             user = x;
-            console.log("GUARD GOT USER");
         })
 
         let url = state.url;

@@ -12,7 +12,6 @@ export class QuestionColumnComponent implements OnInit {
   questions: IQGlobalIndex[];
   @Input("questions") set questionsSetter(data: IQGlobalIndex[]) {
     this.questions = data;
-    console.log("QUESTION_COLUMN_UPDATED");
   }
   @Input() user: IUserStatus;
   @Input() isGlobal: boolean;

@@ -7,7 +7,7 @@ import { createEffect } from "../../utilities/effects-creators";
 import { QuestionService } from "../../services/question-service";
 import { ToastrService } from 'ngx-toastr';
 
-@Injectable()
+@Injectable()//messagesX
 export class GlobalSheetEffects {
 
     constructor(
@@ -29,7 +29,7 @@ export class GlobalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, null);
     
     @Effect()
     reorderQuestions$: Observable<any> = createEffect({
@@ -43,7 +43,7 @@ export class GlobalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, "Reorder questions failed!");
 
     @Effect()
     reorderSheets$: Observable<any> = createEffect({
@@ -57,7 +57,7 @@ export class GlobalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    }, null, "Reorder sheets failed!");
 
     @Effect()
     copyQuestions$: Observable<any> = createEffect({
@@ -71,5 +71,5 @@ export class GlobalSheetEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    },null, "Copy Questions failed!");
 }

@@ -7,7 +7,7 @@ import { CudActions } from "../../crud/actions/cud.actions";
 import { ToastrService } from 'ngx-toastr';
 import { createEffect } from "../../utilities/effects-creators";
 
-@Injectable()
+@Injectable()//messagesX
 export class AuthEffects {
 
     constructor(
@@ -28,7 +28,7 @@ export class AuthEffects {
         catchValidationErrors: false,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    },null, "Login failed!");
 
     @Effect()
     register$: Observable<any> = createEffect({
@@ -42,7 +42,7 @@ export class AuthEffects {
         catchValidationErrors: true,
         catchGeneralErrors: true,
         useToastrForGErr: true,
-    });
+    },"Successfully registered, please log in!", "Register failed!");
 
 }
 

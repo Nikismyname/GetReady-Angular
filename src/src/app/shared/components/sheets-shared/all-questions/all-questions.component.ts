@@ -25,7 +25,6 @@ export class AllQuestionsComponent implements OnInit {
     this.colThreeQuestions = this.questions
       .filter(x => this.reorderService.shouldDisplay(questionCount, x.order, 3));
     this.loaded = true;
-    console.log("ALL_QUESTIONS_UPDATED");
   };
   @Output() dropped: EventEmitter<any> = new EventEmitter();
   loaded: boolean = false;

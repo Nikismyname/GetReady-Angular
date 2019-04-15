@@ -4,10 +4,10 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
 import { CrudModule } from "./crud/crud.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
-import { UserGuard } from './guards/user.guard';
-import { AdminGuard } from './guards/admin.guard';
-import { AnonGuard } from './guards/anon.guard';
-import { CrudGuard } from './guards/crud.guard';
+import { UserGuard } from './services/guards/user.guard';
+import { AdminGuard } from './services/guards/admin.guard';
+import { AnonGuard } from './services/guards/anon.guard';
+import { CrudGuard } from './services/guards/crud.guard';
 
 const routes: Routes = [
   {

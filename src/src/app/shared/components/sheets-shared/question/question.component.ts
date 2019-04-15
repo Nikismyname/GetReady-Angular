@@ -43,4 +43,8 @@ export class QuestionComponent implements OnInit {
     e.stopPropagation();
     this.store.dispatch(new PersonalSheetActions.suggestForPublishing(this.question.id));
   }
+
+  stopPropagation(e) {
+    e.stopPropagation();
+  }
 }

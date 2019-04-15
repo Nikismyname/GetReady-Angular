@@ -5,7 +5,7 @@ import { of, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-const shouldConsoleLog = true;
+const shouldConsoleLog = false;
 
 class CreateEffectInput {
     constructor(
@@ -77,7 +77,9 @@ export function createEffect(
                                     return of(new GeneralErrorWasIgnoredAction(response));
                                 }
                                 if (d.useToastrForGErr) {
-                                    d.toastr.error(response.error, "Error");
+                                    if (typeof response.error === "string") {
+                                        d.toastr.error(response.error, "Error");
+                                    }
                                 }
                                 if (shouldConsoleLog) {
                                     console.log("__GOT GENERAL VALIDATION ERROR");

@@ -14,7 +14,6 @@ export class SheetListComponent implements OnInit {
   sheets: IQsChildIndex[];
   @Input("sheets") set sheetSetter(data: IQsChildIndex[]) {
     this.sheets = data.sort((a, b) => a.order - b.order);
-    console.log("LSIT_SHEETS_HERE:", this.sheets);
   }
   @Input() sheetId: number;
   @Input() user: IUserStatus;
