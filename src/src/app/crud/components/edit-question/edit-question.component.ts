@@ -37,7 +37,6 @@ export class EditQuestionComponent {
     });
 
     this.store.select(x => x.crud.read.question).pipe(take(1)).subscribe(x => { 
-      if (x.success === true) {
         let question = x.question;
         let inputData = [
           new FormInputData("name", "Name", "text", question.name),
@@ -50,7 +49,6 @@ export class EditQuestionComponent {
           inputData, "Edit Question Form", "Edit", true
         );
         this.loaded = true;
-      }
     });
   }
 

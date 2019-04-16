@@ -20,7 +20,7 @@ export class SheetComponent implements OnInit {
     public routePaths: RoutePaths,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.loaded = true;
   }
 
@@ -30,6 +30,10 @@ export class SheetComponent implements OnInit {
 
   publish() {
     
+  }
+
+  stopPropagation(event) {
+    event.stopPropagation();
   }
 
 }

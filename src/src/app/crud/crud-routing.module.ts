@@ -7,7 +7,8 @@ import { DeleteQuestionSheetComponent } from './components/delete-question-sheet
 import { DeleteQuestionComponent } from './components/delete-question/delete-question.component';
 import { CreateQuestionSheetComponent } from './components/create-question-sheet/create-question-sheet.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
-import { QuestionGuard } from '../services/data-guards/question.guard';
+import { QuestionGuard2 } from '../services/data-guards/question.guard.2';
+import { SheetGuard2 } from '../services/data-guards/sheet.guard.2';
 
 const routes: Routes = [
     {
@@ -17,10 +18,12 @@ const routes: Routes = [
     {
         path: c.forFeatureRouting(c.editSheetPath) + "/:id/:scope",
         component: EditQuestionSheetComponent,
+        canActivate: [SheetGuard2], 
     },
     {
         path: c.forFeatureRouting(c.deleteSheetPath) + "/:id/:scope",
         component: DeleteQuestionSheetComponent,
+        canActivate: [SheetGuard2],
     },
 
     {
@@ -30,12 +33,12 @@ const routes: Routes = [
     {
         path: c.forFeatureRouting(c.editQuestionPath) + "/:id/:scope",
         component: EditQuestionComponent,
-        canActivate:[QuestionGuard]
+        canActivate:[QuestionGuard2]
     },
     {
         path: c.forFeatureRouting(c.deleteQuestionPath) + "/:id/:scope",
         component: DeleteQuestionComponent,
-        canActivate: [QuestionGuard]
+        canActivate: [QuestionGuard2]
     },
 ]
 

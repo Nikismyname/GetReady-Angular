@@ -3,13 +3,13 @@
     <h6 className="card-title">{{sheet.name}}</h6>
     <div *ngIf="isGlobal">
       <div *ngIf="user.isAdmin">
-        <a [routerLink]="[routePaths.deleteSheetPath+'/'+sheet.id+'/global']">Delete</a>
-        <a [routerLink]="[routePaths.editQuestionSheetPath+'/'+sheet.id+'/global']" class="ml-2">Edit</a>
+        <a (click)="stopPropagation($event)" [routerLink]="[routePaths.deleteSheetPath+'/'+sheet.id+'/global']">Delete</a>
+        <a (click)="stopPropagation($event)" [routerLink]="[routePaths.editQuestionSheetPath+'/'+sheet.id+'/global']" class="ml-2">Edit</a>
       </div>
     </div>
     <div *ngIf="!isGlobal">
-      <a [routerLink]="[routePaths.deleteSheetPath+'/'+sheet.id+'/personal']">Delete</a>
-      <a [routerLink]="[routePaths.editQuestionSheetPath+'/'+sheet.id+'/personal']" class="ml-2">Edit</a>
+      <a (click)="stopPropagation($event)" [routerLink]="[routePaths.deleteSheetPath+'/'+sheet.id+'/personal']">Delete</a>
+      <a (click)="stopPropagation($event)" [routerLink]="[routePaths.editQuestionSheetPath+'/'+sheet.id+'/personal']" class="ml-2">Edit</a>
     </div>
   </div>
 </div>

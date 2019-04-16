@@ -16,7 +16,11 @@ export class AllQuestionsComponent implements OnInit {
   @Input() isGlobal: boolean;
   @Input() user: IUserStatus;
   @Input("questions") set questionsSetter(val: any) {
-    this.questions = val;
+    this.questions = val.sort((a, b) => a.order - b.order);
+    for (let i = 0; i < this.questions.length; i++) {
+      this.questions[i].order = i;
+    }
+    
     let questionCount = this.questions.length;
     this.colOneQuestions = this.questions
       .filter(x => this.reorderService.shouldDisplay(questionCount, x.order, 1));

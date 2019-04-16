@@ -3,27 +3,27 @@ import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
 
 export namespace CudActionTypes {
     export const EDIT_QUESTION = "[cud] edit-question";
-    export const EDIT_QUESTION_SUCCESS = "[cud] edit-question-success";
+    export const EDIT_QUESTION_SUCCESS = "[cud] edit-question-success";//x
     export const EDIT_QUESTION_FAILED = "[cud] edit-question-failed-validation";
 
     export const EDIT_Q_SHEET = "[cud] edit-q-sheet";
-    export const EDIT_Q_SHEET_SUCCESS = "[cud] edit-q-sheet-success";
+    export const EDIT_Q_SHEET_SUCCESS = "[cud] edit-q-sheet-success";//x
     export const EDIT_Q_SHEET_FAILED = "[cud] edit-q-sheet-failed-validation";
 
     export const CREATE_QUESTION = "[cud] create-question";
-    export const CREATE_QUESTION_SUCCESS = "[cud] create-question-success";
+    export const CREATE_QUESTION_SUCCESS = "[cud] create-question-success";//x
     export const CREATE_QUESTION_FAILED = "[cud] create-question-failed-validation";
 
     export const CREATE_Q_SHEET = "[cud] create-q-sheet";
-    export const CREATE_Q_SHEET_SUCCESS = "[cud] create-q-sheet-success";
+    export const CREATE_Q_SHEET_SUCCESS = "[cud] create-q-sheet-success"; //x
     export const CREATE_Q_SHEET_FAILED = "[cud] create-q-sheet-failed-validation";
 
     export const DELETE_QUESTION = "[cud] delete-question";
-    export const DELETE_QUESTION_SUCCESS = "[cud] delete-question-success";
+    export const DELETE_QUESTION_SUCCESS = "[cud] delete-question-success"; //x
     export const DELETE_QUESTION_FAILED = "[cud] delete-question-failed";
 
-    export const DELETE_Q_SHEET = "[cud] delete-q-sheet";
-    export const DELETE_Q_SHEET_SUCCESS = "[cud] delete-q-sheet-success";
+    export const DELETE_Q_SHEET = "[cud] delete-q-sheet"; 
+    export const DELETE_Q_SHEET_SUCCESS = "[cud] delete-q-sheet-success";//x
     export const DELETE_Q_SHEET_FAILED = "[cud] delete-q-sheet-failed";
 
     export const VALIDATION_ERRORS = "[cud] validation errors";
@@ -48,6 +48,7 @@ class EditQuestionAction implements Action {
 
 class EditQuestionSuccessAction implements Action {
     public type = CudActionTypes.EDIT_QUESTION_SUCCESS;
+    constructor(public payload: any){}
 }
 
 class EditQuestionFailedValidationAction implements Action {
@@ -75,6 +76,7 @@ class EditQSheetAction implements Action {
 
 class EditQSheetSuccessAction implements Action {
     public type = CudActionTypes.EDIT_Q_SHEET_SUCCESS;
+    constructor(public payload: any){}
 }
 
 class EditQSheetFailedValidationAction implements Action {
@@ -105,6 +107,7 @@ class CreateQuestionAction implements Action {
 
 class CreateQuestionSuccessAction implements Action {
     public type = CudActionTypes.CREATE_QUESTION_SUCCESS;
+    constructor(public payload: any){}
 }
 
 class CreateQuestionValidationFailedAction implements Action {
@@ -132,13 +135,7 @@ class CreateQSheetAction implements Action {
 
 class CreateQSheetSuccessAction implements Action {
     public type = CudActionTypes.CREATE_Q_SHEET_SUCCESS;
-    public payload: any;
-
-    constructor(
-        public createdId: any,
-    ) {
-        this.payload = createdId;
-    }
+    constructor(public payload: any){}
 }
 
 class CreateQSheetValidationFailedAction implements Action {
@@ -171,6 +168,7 @@ class DeleteQuestionAction implements Action {
 
 class DeleteQuestionSuccessAction implements Action {
     public type = CudActionTypes.DELETE_QUESTION_SUCCESS;
+    constructor(public payload: any){}
 }
 
 class DeleteQuestionFailedAction implements Action {
@@ -191,6 +189,7 @@ class DeleteQSheetAction implements Action {
 
 class DeleteQSheetSuccessAction implements Action {
     public type = CudActionTypes.DELETE_Q_SHEET_SUCCESS;
+    constructor(private payload: any){}
 }
 
 class DeleteQSheetFailedAction implements Action {

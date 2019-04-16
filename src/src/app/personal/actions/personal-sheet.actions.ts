@@ -2,6 +2,8 @@ import { Action } from '@ngrx/store';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { INewScoreData } from 'src/app/services/models/question/new-score-data';
 import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
+import { IQPersonalIndex } from 'src/app/services/models/question/q-personal-index';
+import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
 
 export namespace PersonalSheetActionTypes {
     export const LOAD = "[PersonalSheet] load";
@@ -31,6 +33,11 @@ export namespace PersonalSheetActionTypes {
     export const GET_ANSWERED_QUESTIONS = "[PersonalSheet] get answered questions";
     export const GET_ANSWERED_QUESTIONS_SUCCESS = "[PersonalSheet] get answered questions success";
     export const GET_ANSWERED_QUESTIONS_FAILED = "[PersonalSheet] get answered questions failed";
+
+    // export const QUESTION_DELETED = "[PersonalSheet] question deleted";
+    // export const QUESTION_ADDED = "[PersonalSheet] question added";
+    // export const SHEET_DELETED = "[PersonalSheet] sheet deleted";
+    // export const SHEET_ADDED = "[PersonalSheet] sheet added";
 
     export const CLEAR_SUCCESSES = "[PersonalSheet][test] clear successes";
 
@@ -264,6 +271,28 @@ class GetAnsweredQuestionsFailedAction implements Action {
 }
 /* #endregion */
 
+/* #region  State Managment */
+// class QuestionDeletedAction implements Action {
+//     public type = PersonalSheetActionTypes.QUESTION_DELETED;
+//     constructor(public payload: number) { }
+// }
+
+// class QuestionAddedAction implements Action {
+//     public type = PersonalSheetActionTypes.QUESTION_ADDED;
+//     constructor(public payload: IQPersonalIndex) { }
+// }
+
+// class SheetDeletedAction implements Action {
+//     public type = PersonalSheetActionTypes.SHEET_DELETED;
+//     constructor(public payload: number) { }
+// }
+
+// class SheetAddedAction implements Action {
+//     public type = PersonalSheetActionTypes.SHEET_ADDED;
+//     constructor(public payload: IQsChildIndex) { }
+// }
+/* #endregion */
+
 class IncrementCurrentIndexAction implements Action {
     public type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
     public payload: number;
@@ -311,9 +340,14 @@ export namespace PersonalSheetActions {
     export const suggestForPublishingSuccess = SuggestForPublishingSuccessAction;
     export const suggestForPublishingFailed = SuggestForPublishingFailedAction;
 
-    export const getAnsweredQuestions = GetAnsweredQuestionsAction; 
+    export const getAnsweredQuestions = GetAnsweredQuestionsAction;
     export const getAnsweredQuestionsSuccess = GetAnsweredQuestionsSuccessAction;
     export const getAnsweredQuestionFailed = GetAnsweredQuestionsFailedAction;
+
+    // export const questionDeleted = QuestionDeletedAction;
+    // export const questionAdded = QuestionAddedAction; 
+    // export const sheetDeleted = SheetDeletedAction;
+    // export const sheetAdded = SheetAddedAction;
 
     export const clearSuccesses = ClearSuccessesAction;
 

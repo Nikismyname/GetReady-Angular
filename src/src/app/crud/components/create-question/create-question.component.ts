@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormInputData, FormData } from "../../../services/models/other";
 import { ActivatedRoute } from "@angular/router";
@@ -13,10 +13,13 @@ import { Validators } from '@angular/forms';
   templateUrl: './create-question.component.html',
   styleUrls: ['./create-question.component.css']
 })
-export class CreateQuestionComponent implements OnInit {
+export class CreateQuestionComponent {
+  
   global: boolean;
   parentId: string;
   resultSub: ISubscription;
+  formData: FormData;
+  loaded: boolean = false;
 
   constructor(
     private store: Store<ICrudState>,
@@ -25,12 +28,17 @@ export class CreateQuestionComponent implements OnInit {
   ) {
     this.parentId = this.route.snapshot.paramMap.get("parentId");
     this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
+
+    this.resultSub = this.store.select(x => x.crud.cud.createQuestion.success).subscribe(done => {
+      if (done === true) {
+        this.location.back();
+      }
+    });
+
+    this.formData = this.generateForm();
   }
 
-  formData: FormData;
-  loaded: boolean = false;
-
-  async ngOnInit() {
+  generateForm(): FormData {
     let inputData = [
       new FormInputData("name", "Name", "text", null,
         [
@@ -69,17 +77,9 @@ export class CreateQuestionComponent implements OnInit {
         }),
     ];
 
-    this.formData = new FormData(
+    return new FormData(
       inputData, "Create Question Form", "Create", true
     );
-
-    this.loaded = true;
-
-    this.resultSub = this.store.select(x => x.crud.cud.createQuestion.success).subscribe(done => {
-      if (done === true) {
-        this.location.back();
-      }
-    });
   }
 
   async onFormSubmit(input) {

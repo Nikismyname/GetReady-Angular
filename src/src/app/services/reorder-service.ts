@@ -90,7 +90,12 @@ export class ReorderService {
         return array;
     };
 
-    generateOrdering(questionCount: number, currInd: number, prevIndex: number, currCol: number, prevCol: number) {
+    generateOrdering(
+        questionCount: number,
+        currInd: number,
+        prevIndex: number,
+        currCol: number,
+        prevCol: number) {
         console.log("QUESTION_COUNT_", questionCount);
         
         let remainder = questionCount % 3;

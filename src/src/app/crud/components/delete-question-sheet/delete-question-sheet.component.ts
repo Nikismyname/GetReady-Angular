@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormInputData, FormData } from "../../../services/models/other";
-import { ActivatedRoute } from "@angular/router"; 
+import { ActivatedRoute } from "@angular/router";
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
-import { ReadActions } from "../../actions/read.actions";
 import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { take } from 'rxjs/operators';
+import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
 
 @Component({
   selector: 'getready-delete-question-sheet',
   templateUrl: './delete-question-sheet.component.html',
   styleUrls: ['./delete-question-sheet.component.css']
 })
-export class DeleteQuestionSheetComponent implements OnInit {
+export class DeleteQuestionSheetComponent {
 
   global: boolean;
   id: string;
   resultSub: ISubscription;
-  dataSub: ISubscription;
+  formData: FormData;
 
   constructor(
     private store: Store<ICrudState>,
@@ -28,12 +29,6 @@ export class DeleteQuestionSheetComponent implements OnInit {
   ) {
     this.id = this.route.snapshot.paramMap.get("id");
     this.global = this.route.snapshot.paramMap.get("scope") == "global" ? true : false;
-  }
-
-  formData: FormData;
-  loaded: boolean = false;
-
-  async ngOnInit() {
 
     this.resultSub = this.store.select(x => x.crud.cud.deleteQSheet.success).subscribe(done => {
       if (done === true) {
@@ -41,29 +36,28 @@ export class DeleteQuestionSheetComponent implements OnInit {
       }
     });
 
-    this.dataSub = this.store.select(x => x.crud.read.questionSheet).subscribe(x => { 
-      if (x.success === true) {
-        
-        let qs = x.qSheet;
-        let inputData = [
-          new FormInputData("name", "Name", "text", qs.name),
-          
-          new FormInputData("description", "Description", "text", qs.description),
-          
-          new FormInputData("difficulty", "Difficulty", "number", qs.difficulty),
+    this.formData = this.generateForm();
+  }
 
-          new FormInputData("importance", "Importance", "number", qs.importance),
-        ];
-
-        this.formData = new FormData(
-          inputData, "Delete Sheet Form", "Delete", false, true
-        );
-        this.loaded = true;
-      }
+  generateForm() {
+    let qs: IQuestionSheet;
+    this.store.select(x => x.crud.read.questionSheet).pipe(take(1)).subscribe(x => {
+      qs = x.qSheet;
     });
 
-    let data: IScopedData = {data: Number(this.id),global: this.global};
-    this.store.dispatch(new ReadActions.QuestionSheet(data));
+    let inputData = [
+      new FormInputData("name", "Name", "text", qs.name),
+
+      new FormInputData("description", "Description", "text", qs.description),
+
+      new FormInputData("difficulty", "Difficulty", "number", qs.difficulty),
+
+      new FormInputData("importance", "Importance", "number", qs.importance),
+    ];
+
+    return new FormData(
+      inputData, "Delete Sheet Form", "Delete", false, true
+    );
   }
 
   async onFormSubmit() {
@@ -74,6 +68,5 @@ export class DeleteQuestionSheetComponent implements OnInit {
 
   ngOnDestroy() {
     this.resultSub.unsubscribe();
-    this.dataSub.unsubscribe();
   }
 } 
