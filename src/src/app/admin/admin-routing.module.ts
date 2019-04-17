@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import * as c from "../services/route-paths";
 import { QuestionApprovalComponent } from './components/question-approval/question-approval.component';
-
+//1
 const routes: Routes =
     [
         {

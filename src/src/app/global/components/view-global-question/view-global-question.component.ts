@@ -1,23 +1,20 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from "@angular/common";
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable } from 'rxjs';
-import { ReadActions } from 'src/app/crud/actions/read.actions';
-import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'getready-view-global-question',
   templateUrl: './view-global-question.component.html',
   styleUrls: ['./view-global-question.component.css']
 })
-export class ViewGlobalQuestionComponent implements OnDestroy {
+export class ViewGlobalQuestionComponent {
 
   question$: Observable<any>;
   PRLoaded: boolean = false;
-  loaded: boolean = false;
-  successSub: Subscription;
 
   showCommentb: boolean = false; 
   showAnswerb: boolean = false;
@@ -25,21 +22,8 @@ export class ViewGlobalQuestionComponent implements OnDestroy {
   constructor(
     private store: Store<IAppState>,
     private location: Location,
-    private activatedRoute: ActivatedRoute,
   ) {
-    let id = activatedRoute.snapshot.paramMap.get("id");
-    this.store.dispatch(new ReadActions.Question({
-      data: id,
-      global: true,
-    }));
-    this.question$ = this.store.select(x => x.crud.read.question.question);
-    this.successSub = this.store.select(x => x.crud.read.question.success).subscribe(x=>{
-      if (x) {
-        this.loaded = true; 
-        this.successSub.unsubscribe();
-      }
-    })
-
+    this.question$ = this.store.select(x => x.crud.read.question.question).pipe(take(1));
   }
 
   prLoaded() {
@@ -80,10 +64,4 @@ export class ViewGlobalQuestionComponent implements OnDestroy {
       ]
     }
   } 
-
-  ngOnDestroy() {
-    if (this.successSub) {
-      this.successSub.unsubscribe();
-    }
-  }
 } 

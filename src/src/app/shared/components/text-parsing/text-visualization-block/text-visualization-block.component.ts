@@ -5,7 +5,7 @@ import { ParsingData } from "../../../../services/models/other";
 @Component({
   selector: 'getready-text-visualization-block',
   templateUrl: './text-visualization-block.component.html',
-  styleUrls: ['./text-visualization-block.component.css']
+  styleUrls: ['../../../../css/text-parsing-shared.css']
 })
 export class TextVisualizationBlockComponent implements OnInit {
 

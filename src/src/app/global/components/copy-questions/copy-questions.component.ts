@@ -17,8 +17,6 @@ import * as c from "../../../services/route-paths";
 export class CopyQuestionsComponent {
 
   successSub: Subscription;
-  foldersLoaded: boolean = false;
-  itemsLoaded: boolean = false;
   folders$: Observable<IFolderSelectData[]>; 
   items$: Observable<IItemSelectData[]>;
 
@@ -30,8 +28,12 @@ export class CopyQuestionsComponent {
     private store: Store<IAppState>,
     private router: Router,
   ) {
-    store.dispatch(new ReadActions.GetAllFolders(false));
-    this.folders$ = store.select(x => x.crud.read.allFolders.folders).pipe(
+    this.folders$ = this.getAllFoldersWithTransform$();
+    this.items$ = this.getAllItemsWithTransform$();
+  }
+  
+  getAllFoldersWithTransform$() {
+    return this.store.select(x => x.crud.read.allFolders.folders).pipe(
       map(x => { 
           let newArr: IFolderSelectData[] = [];
           for (let i = 0; i < x.length; i++) {
@@ -45,9 +47,10 @@ export class CopyQuestionsComponent {
           return newArr;
       }),
     );
+  }
 
-    store.dispatch(new ReadActions.GetAllItems(true));
-    this.items$ = store.select(x => x.crud.read.allItems.items).pipe(
+  getAllItemsWithTransform$() {
+    return this.store.select(x => x.crud.read.allItems.items).pipe(
       map(x => { 
           let newArr: IItemSelectData[] = [];
           for (let i = 0; i < x.length; i++) {
@@ -61,24 +64,9 @@ export class CopyQuestionsComponent {
             });
           }
           return newArr;
-      }),
-    );
-
-    let fildersLoadedSub = this.store.select(x => x.crud.read.allFolders.success).subscribe(x => {
-      if (x) {
-        this.foldersLoaded = true; 
-        fildersLoadedSub.unsubscribe();
-      }
-    })
-
-    let ItemsLoadedSub = this.store.select(x => x.crud.read.allItems.success).subscribe(x => {
-      if (x) {
-        this.itemsLoaded = true; 
-        ItemsLoadedSub.unsubscribe();
-      }
-    })
-
-   }
+      })
+    ); 
+  }
 
   questionsSelected(ids: number[]) {
     this.selectedItems = ids;

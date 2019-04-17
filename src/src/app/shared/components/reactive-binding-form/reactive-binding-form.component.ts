@@ -31,7 +31,6 @@ export class ReactiveBindingFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.errorSub = this.store.select(x => x.crud.cud.validationErrors).subscribe(errors => {
-      console.log("FORM_VALIDATION_ERRORS_HERE: ", errors);
       //Reseting the errors;
       for (let i = 0; i < this.formData.inputData.length; i++) {
         this.formData.inputData[i].errors = [];

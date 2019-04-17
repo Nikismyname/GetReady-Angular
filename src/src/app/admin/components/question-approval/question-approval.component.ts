@@ -6,9 +6,12 @@ import { AdminActions } from "../../actions/admin.actions";
 import { IScopedData } from "../../../services/models/contracts/scoped-data";
 import { Subscription, Observable } from 'rxjs';
 import { Location } from "@angular/common";
-import { IButtonsRenderInformation, IButtonRenderInformation } from 'src/app/services/models/contracts/button-renderer';
+import {
+  IButtonsRenderInformation,
+  IButtonRenderInformation
+} from 'src/app/services/models/contracts/button-renderer';
 import { IApproveQuestionData } from 'src/app/services/models/contracts/approve-question-data';
-
+//1 Maybe add the new directory from the action instead of of fething all the folders again.
 
 @Component({
   selector: 'getready-question-approval',
@@ -39,6 +42,7 @@ export class QuestionApprovalComponent implements OnDestroy {
     private location: Location,
     private store: Store<IAppState>,
   ) {
+    this.currentQuestion$ = this.store.select(x => x.crud.read.question.question);
 
     this.questionSuccessSub = store
       .select(x => x.crud.read.question.success)
@@ -65,7 +69,6 @@ export class QuestionApprovalComponent implements OnDestroy {
   displayQuestion() {
     let data: IScopedData = { data: this.questionIds[this.index], global: true };
     this.store.dispatch(new ReadActions.Question(data));
-    this.currentQuestion$ = this.store.select(x => x.crud.read.question.question);
   }
 
   onPrLoaded() {

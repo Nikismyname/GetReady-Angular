@@ -5,7 +5,7 @@ import { ParsingData } from "../../../../services/models/other";
 @Component({
   selector: 'getready-text-visualisation-tblock',
   templateUrl: './text-visualisation-tblock.component.html',
-  styleUrls: ['./text-visualisation-tblock.component.css']
+  styleUrls: ['../../../../css/text-parsing-shared.css']
 })
 export class TextVisualisationTBlockComponent {
 

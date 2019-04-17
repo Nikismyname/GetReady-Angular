@@ -4,21 +4,22 @@ import { Store } from '@ngrx/store';
 import { IAuthState } from "../../authentication/reducers";
 import { AuthActions } from "../../authentication/actions/auth.actions";
 import { Router } from '@angular/router';
-
+//1
 @Component({
   selector: 'getready-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  
+  isAdmin: boolean;
+  isUser: boolean;
+
   constructor(
     public routePaths: RoutePaths,
     private store: Store<IAuthState>,
     private router: Router,
   ) { }
-
-  isAdmin: boolean;
-  isUser: boolean;
 
   ngOnInit() {
     this.store.select(x=>x.auth.user).subscribe((user) => { 

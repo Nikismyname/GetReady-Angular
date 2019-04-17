@@ -28,4 +28,8 @@ export class CurrentSheetComponent implements OnInit {
     this.currentSheetClickedEmitter.emit(id);
   }
 
+  stopPropagation(event) {
+    event.stopPropagation(); 
+  } 
+
 }

@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 import { ReadActionTypes } from "../actions/read.actions";
-import { IGlobalSheetForAllItems, ISheetForAllFolders } from 'src/app/services/models/contracts/for-get-all';
+import { ISheetForAllFolders } from 'src/app/services/models/contracts/sheet-for-all-folders';
+import { ISheetForAllItems } from "src/app/services/models/contracts/sheet-for-all-items";
 import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
 import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
 import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
@@ -59,7 +60,7 @@ export interface IReadState {
     },
     allItems: {
         success: boolean,
-        items: IGlobalSheetForAllItems[],
+        items: ISheetForAllItems[],
     }
     allFolders: {
         success: boolean,

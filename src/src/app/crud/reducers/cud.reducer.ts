@@ -44,8 +44,6 @@ export function cudReducer(
             return valErrorState;
         //CLEAR Just The Success States.
         case CudActionTypes.CLEAR_CUD_SUCCESSES:
-            console.log("CLEEEEEEEEEEAR");
-            console.log(initialCrudState);
             let newClearState = Object.assign({}, state);
             newClearState.createQSheet.success = false;
             newClearState.createQSheet.createdId = null;

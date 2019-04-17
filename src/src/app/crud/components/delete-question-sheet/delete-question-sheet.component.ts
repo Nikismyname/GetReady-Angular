@@ -18,7 +18,7 @@ import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-
 export class DeleteQuestionSheetComponent {
 
   global: boolean;
-  id: string;
+  id: number;
   resultSub: ISubscription;
   formData: FormData;
 
@@ -27,7 +27,7 @@ export class DeleteQuestionSheetComponent {
     private route: ActivatedRoute,
     private location: Location,
   ) {
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = Number(this.route.snapshot.paramMap.get("id"));
     this.global = this.route.snapshot.paramMap.get("scope") == "global" ? true : false;
 
     this.resultSub = this.store.select(x => x.crud.cud.deleteQSheet.success).subscribe(done => {

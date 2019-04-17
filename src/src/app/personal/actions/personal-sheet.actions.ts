@@ -2,8 +2,6 @@ import { Action } from '@ngrx/store';
 import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
 import { INewScoreData } from 'src/app/services/models/question/new-score-data';
 import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
-import { IQPersonalIndex } from 'src/app/services/models/question/q-personal-index';
-import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
 
 export namespace PersonalSheetActionTypes {
     export const LOAD = "[PersonalSheet] load";

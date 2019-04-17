@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-
+//1 
 export namespace AdminActionTypes {
     export const GET_IDS_FOR_APPROVAL = "[Admin] get ids for approval";
     export const GET_IDS_FOR_APPROVAL_SUCCESS = "[Admin] get ids for approval success";
@@ -19,92 +19,62 @@ export namespace AdminActionTypes {
 /* #region  GET_IDS_FOR_APPROVAL */
 class GetIdsForApprovalAction implements Action {
     public type = AdminActionTypes.GET_IDS_FOR_APPROVAL;
-    public payload = null;
+    constructor(public payload: null = null){}
 }
 
 class GetIdsForApprovalSuccessAction implements Action {
-    public type = AdminActionTypes.GET_IDS_FOR_APPROVAL_SUCCESS;
-    public payload: number[];
-
-    constructor(
-        public data: number[],
-    ) {
-        this.payload = data;
-    }
+    public readonly type = AdminActionTypes.GET_IDS_FOR_APPROVAL_SUCCESS;
+    constructor(public readonly payload: number[]){}
 }
 
 class GetIdsForApprovalFailedAction implements Action {
     public type = AdminActionTypes.GET_IDS_FOR_APPROVAL_FAILED;
-    public payload: any;
+    constructor(public payload: any){}
 
-    constructor(
-        public error: any,
-    ) {
-        this.payload = error;
-    }
 }
 /* #endregion */
 
 /* #region APPROVE_/_REJECT_QUESTION */
 class ApproveQuestionAction implements Action {
     public type = AdminActionTypes.APPROVE_QUESTION;
-    public payload: any;
+    constructor(public payload: any){}
 
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
 }
 
 class ApproveQuestionSuccessAction implements Action {
     public type = AdminActionTypes.APPROVE_QUESTION_SUCCESS;
-    public payload = null;
+    constructor(public payload: null = null){}
 }
 
 class ApproveQuestionFailedAction implements Action {
     public type = AdminActionTypes.APPROVE_QUESTION_FAILED;
-    public payload: any;
+    constructor(public payload: any){}
 
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
 }
 
 //REJECT
 class RejectQuestionAction implements Action {
     public type = AdminActionTypes.REJECT_QUESTION;
-    public payload: any;
+    constructor(public payload: any){}
 
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
 }
 
 class RejectQuestionSuccessAction implements Action {
     public type = AdminActionTypes.REJECT_QUESTION_SUCCESS;
-    public payload = null;
+    constructor(public payload: null = null){}
+
 }
 
 class RejectQuestionFailedAction implements Action {
-    public type = AdminActionTypes.REJECT_QUESTION_FAILED;
-    public payload: any;
+    public readonly type = AdminActionTypes.REJECT_QUESTION_FAILED;
+    constructor(public readonly payload: any){}
 
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
 }
 /* #endregion */
 
 class ClearSuccessesAction implements Action {
     public type = AdminActionTypes.CLEAR_SUCCESSES;
-    public payload = null;
+    constructor(public payload:null = null){}
 }
 
 export namespace AdminActions {
@@ -122,4 +92,26 @@ export namespace AdminActions {
 
     export const clearSuccesses = ClearSuccessesAction;
 }
+
+// export type AdminActionType =
+//     GetIdsForApprovalAction |
+//     GetIdsForApprovalSuccessAction |
+//     GetIdsForApprovalFailedAction |
+
+//     ApproveQuestionAction |
+//     ApproveQuestionSuccessAction |
+//     ApproveQuestionFailedAction |
+
+//     RejectQuestionAction |
+//     RejectQuestionSuccessAction |
+//     RejectQuestionFailedAction |
+
+//     ClearSuccessesAction;
+
+
+export type AdminActionType =
+    GetIdsForApprovalSuccessAction |
+    ClearSuccessesAction;
+
+    
 

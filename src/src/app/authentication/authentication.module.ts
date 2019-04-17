@@ -7,7 +7,7 @@ import { authReducer } from "./reducers/auth.reducers";
 import { AuthEffects } from "./effects/auth.effects"; 
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { SharedModule } from '../shared/shared.module';
-
+//1
 @NgModule({
     declarations: [
         LoginComponent,

@@ -17,7 +17,7 @@ import { take } from 'rxjs/operators';
 export class DeleteQuestionComponent implements OnDestroy {
 
   global: boolean;
-  id: string;
+  id: number;
   resultSub: ISubscription;
   dataSub: ISubscription;
   formData: FormData;
@@ -27,7 +27,7 @@ export class DeleteQuestionComponent implements OnDestroy {
     private route: ActivatedRoute,
     private location: Location,
   ) {
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = Number(this.route.snapshot.paramMap.get("id"));
     this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
 
     this.store.select(x => x.crud.read.question).pipe(take(1)).subscribe(x => {

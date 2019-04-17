@@ -1,0 +1,114 @@
+span, code {
+    font-size: 1.2rem; 
+}
+
+/* desert scheme ported from vim to google prettify */
+/* TODO: Changes here */
+:host ::ng-deep code.prettyprint {
+    display: block;
+    border: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+:host ::ng-deep code .nocode {
+    background-color: none;
+    color: #000
+}
+
+:host ::ng-deep code .str {
+    color: #ffa0a0
+}
+
+:host ::ng-deep  code .kwd {
+    color: #f0e68c;
+    font-weight: bold;
+}
+
+:host ::ng-deep code .com {
+    color: #87ceeb
+}
+:host ::ng-deep code .typ {
+    color: #98fb98
+}
+:host ::ng-deep code .lit {
+    color: #cd5c5c
+}
+:host ::ng-deep code .pun {
+    color: #fff
+}
+:host ::ng-deep code .pln {
+    color: #fff
+}
+:host ::ng-deep code .tag {
+    color: #f0e68c;
+    font-weight: bold
+}
+:host ::ng-deep code .atn {
+    color: #bdb76b;
+    font-weight: bold
+}
+:host ::ng-deep code .atv {
+    color: #ffa0a0
+}
+:host ::ng-deep code .dec {
+    color: #98fb98
+}
+
+:host ::ng-deep ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #AEAEAE
+}
+:host ::ng-deep li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
+    list-style-type: none
+}
+
+@media print {
+    :host ::ng-deep code.prettyprint {
+        background-color: none
+    }
+
+    :host ::ng-deep  pre .str, code .str {
+        color: #060
+    }
+
+    :host ::ng-deep pre .kwd, code .kwd {
+        color: #006;
+        font-weight: bold
+    }
+
+    :host ::ng-deep  pre .com, code .com {
+        color: #600;
+        font-style: italic
+    }
+
+    :host ::ng-deep pre .typ, code .typ {
+        color: #404;
+        font-weight: bold
+    }
+
+    :host ::ng-deep  pre .lit, code .lit {
+        color: #044
+    }
+
+    :host ::ng-deep  pre .pun, code .pun {
+        color: #440
+    }
+
+    :host ::ng-deep pre .pln, code .pln {
+        color: #000
+    }
+
+    :host ::ng-deep pre .tag, code .tag {
+        color: #006;
+        font-weight: bold
+    }
+
+    :host ::ng-deep pre .atn, code .atn {
+        color: #404
+    }
+
+    :host ::ng-deep pre .atv, code .atv {
+        color: #060
+    }
+} 

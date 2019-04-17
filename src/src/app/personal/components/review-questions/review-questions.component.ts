@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
-import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
 import { Observable } from 'rxjs';
 import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as c from "../../../services/route-paths";
 
@@ -13,7 +12,7 @@ import * as c from "../../../services/route-paths";
   templateUrl: './review-questions.component.html',
   styleUrls: ['./review-questions.component.css']
 })
-export class ReviewQuestionsComponent implements OnDestroy {
+export class ReviewQuestionsComponent {
 
   questions$: Observable<IPQForUserReview[]>;
   nameAsc: boolean = true;
@@ -25,8 +24,9 @@ export class ReviewQuestionsComponent implements OnDestroy {
     private store: Store<IAppState>,
     private router: Router,
   ) {
-    store.dispatch(new PersonalSheetActions.getAnsweredQuestions());
-    this.questions$ = this.store.select(x => x.personal.test.questionsForReview.questions);
+    this.questions$ = this.store
+      .select(x => x.personal.test.questionsForReview.questions)
+      .pipe(take(1));
   }
 
   sortByName() {
@@ -67,10 +67,6 @@ export class ReviewQuestionsComponent implements OnDestroy {
 
   navigateToQuestion(id: number) {
     this.router.navigate([c.testPath+"/"+id+"/single"]);
-  }
-
-  ngOnDestroy() {
-
   }
 
 }

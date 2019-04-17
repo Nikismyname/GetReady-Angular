@@ -25,7 +25,6 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "./components/home/home.component";
  
 import { ToastrModule } from "ngx-toastr";
-import { ShouldDisplayQuestionDirective } from './directives/should-display-question.directive';
   
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { ShouldDisplayQuestionDirective } from './directives/should-display-ques
     NavbarComponent,
     NotFoundComponent,
     HomeComponent,
-    ShouldDisplayQuestionDirective,
   ],
   imports: [
     BrowserModule,

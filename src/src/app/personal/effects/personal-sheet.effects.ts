@@ -64,7 +64,9 @@ export class PersonalSheetEffects {
         actions: this.actions,
         serviceMethod: this.questionSheetService.getQuestionIdsForPSheetObs,
         actionType: PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET,
-        successActions: [PersonalSheetActions.getQIdsForSheetSuccess],
+        successActions: [
+            PersonalSheetActions.getQIdsForSheetSuccess,
+            PersonalSheetActions.clearSuccesses],
         toastr: this.toastr,
         validationErrorAction: null,
         errorAction: PersonalSheetActions.getQIdsForSheetFailed,

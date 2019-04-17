@@ -4,7 +4,7 @@ import { trimEnds, replaceTags } from "../../../../utilities/text-formatting-hel
 @Component({
   selector: 'getready-text-visualization-inline',
   templateUrl: './text-visualization-inline.component.html',
-  styleUrls: ['./text-visualization-inline.component.css']
+  styleUrls: ['../../../../css/text-parsing-shared.css'],
 })
 export class TextVisualizationInlineComponent implements OnInit {
 

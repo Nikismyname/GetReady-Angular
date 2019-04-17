@@ -1,10 +1,10 @@
     <getready-item-selector
-      *ngIf="itemsLoaded && selectingItems && (items$|async) as items"
+      *ngIf="selectingItems && (items$|async) as items"
       [folders]="items"
       (selectedItemsEmitter)="questionsSelected($event)"
     ></getready-item-selector>
   
-    <div *ngIf="foldersLoaded && !selectingItems && (folders$|async) as folders">
+    <div *ngIf="!selectingItems && (folders$|async) as folders">
        Copy Questions: {{folders.length}}
       <getready-folder-selector
         [isGlobal]="false"

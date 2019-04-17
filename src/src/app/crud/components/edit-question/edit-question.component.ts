@@ -17,7 +17,7 @@ import { take } from 'rxjs/operators';
 export class EditQuestionComponent {
 
   global: boolean;
-  id: string;
+  id: number;
   resultSub: ISubscription;
   formData: FormData;
   loaded: boolean = false;
@@ -27,7 +27,7 @@ export class EditQuestionComponent {
     private route: ActivatedRoute,
     private location: Location,
   ) {
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = Number(this.route.snapshot.paramMap.get("id"));
     this.global = this.route.snapshot.paramMap.get("scope") === "global" ? true : false;
 
     this.resultSub = this.store.select(x => x.crud.cud.editQuestion.success).subscribe(done => {

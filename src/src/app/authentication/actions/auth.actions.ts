@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-
+//1
 export namespace AuthActionTypes {
     export const LOGIN = "[auth] login";
     export const LOGIN_SUCCESS = "[auth] login success";
@@ -17,29 +17,18 @@ export namespace AuthActionTypes {
 /* #region  LOGIN */
 class LoginAction implements Action {
     public type = AuthActionTypes.LOGIN;
-    public payload: any;
-
-    constructor(
-        public loginData: any,
-    ) {
-        console.log("LOGIN_ACTION_CONSTRUCTOR");
-        this.payload = loginData;
-    }
+    constructor(public payload: any) { }
 }
 
 class LoginSuccessAction implements Action {
     public type = AuthActionTypes.LOGIN_SUCCESS;
-    public payload: any;
+    constructor(public payload: any) { }
 
-    constructor(
-        public userData: any,
-    ) {
-        this.payload = userData;
-    }
 }
 
 class LoginFailAction implements Action {
     public type = AuthActionTypes.LOGIN_FAIL;
+    constructor(public payload: null = null) { }
 }
 /* #endregion */
 
@@ -48,21 +37,18 @@ class LoginFailAction implements Action {
 
 class RegisterAction implements Action {
     public type = AuthActionTypes.REGISTER;
-    public payload: any;
+    constructor(public payload: any) { }
 
-    constructor(
-        public registerData: any,
-    ) {
-        this.payload = registerData;
-    }
 }
 
 class RegisterSuccessAction implements Action {
     public type = AuthActionTypes.REGISTER_SUCCESS;
+    constructor(public payload: null = null) { }
 }
 
 class RegisterFailAction implements Action {
     public type = AuthActionTypes.REGISTER_FAIL;
+    constructor(public payload: null = null) { }
 }
 
 /* #endregion */
@@ -70,12 +56,14 @@ class RegisterFailAction implements Action {
 
 /* #region  OTHER */
 
-class LogoutAction implements Action { 
+class LogoutAction implements Action {
     public type = AuthActionTypes.LOGOUT;
+    constructor(public payload: null = null) { }
 }
 
-class ClearAuthState implements Action { 
+class ClearAuthState implements Action {
     public type = AuthActionTypes.CLEAR_AUTH_STATE;
+    constructor(public payload: null = null) { }
 }
 
 /* #endregion */
@@ -86,7 +74,7 @@ export namespace AuthActions {
     export const loginFail = LoginFailAction;
 
     export const register = RegisterAction;
-    export const registerSuccess = RegisterSuccessAction; 
+    export const registerSuccess = RegisterSuccessAction;
     export const registerFail = RegisterFailAction;
 
     export const logout = LogoutAction;

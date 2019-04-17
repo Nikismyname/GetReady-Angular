@@ -18,9 +18,5 @@ export class AppComponent {
       this.store.dispatch(new AuthActions.loginSuccess(user));
       this.store.dispatch(new AuthActions.clear());
     } 
-
-    this.store.select(x => x.crud.read.question).subscribe(x=> {
-      console.log("QUESTION_CHANGED_", x);
-    });
   }
 }

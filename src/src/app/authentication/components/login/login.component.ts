@@ -5,23 +5,15 @@ import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import * as c from "../../../services/route-paths"; 
-
+//1
 @Component({
   selector: 'getready-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
 
   successSub: Subscription;
-
-  constructor(
-    private store: Store<IAuthState>,
-    private router: Router,
-  ) {
-  }
-
   formData = new FormData(
     [
       new FormInputData("username", "Username", "string"),
@@ -29,7 +21,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     ],
     "Login Form", "Login", false);
   
-  ngOnInit() {
+
+  constructor(
+    private store: Store<IAuthState>,
+    private router: Router,
+  ) {
     this.successSub = this.store.select(x => x.auth.loginSuccess).subscribe(success => {
       if (success === true) {
         this.router.navigate([""]);
@@ -38,7 +34,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(data) {
-    console.log(data);
     this.store.dispatch(new AuthActions.login(data));
   }
   

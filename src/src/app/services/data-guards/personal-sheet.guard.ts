@@ -17,44 +17,33 @@ export class PersonalSheetGuard implements CanActivate {
         private store: Store<IAppState>,
     ) { }
 
-    getFromStoreOrAPI(id: string): Observable<any> {
-
+    getFromStoreOrAPI(id: number): Observable<any> {
         return this.store
             .select(x => x.personal.currentPersonalIndex).pipe(
                 tap((personalIndex: IQsPersonalIndex) => {
                     if (personalIndex === null) {
-                        if (shouldConsoleLog) {
-                            console.log("PI_GUARD_FETCHED_NULL");
-                        }
+                        if (shouldConsoleLog) { console.log("PI_GUARD_FETCHED_NULL");}
                         this.store.dispatch(new PersonalSheetActions.load(Number(id)));
-                    } else if (id === "-1") {
-                        if (shouldConsoleLog) {
-                            console.log("PI_GUARD_LOADED_FROM_MEMORY_LAST_ACCESSED_SHEET");
-                        }
+                    } else if (id === -1) {
+                        if (shouldConsoleLog) {console.log("PI_GUARD_LOADED_FROM_MEMORY_LAST_ACCESSED_SHEET");}
                     }
                     else // id is not -1 and perInd is not null;
                     {
                         if (personalIndex.id === Number(id)) {
-                            if (shouldConsoleLog) {
-                                console.log("PI_GUARD_LOADED_FROM_MEMORY");
-                            }
+                            if (shouldConsoleLog) {console.log("PI_GUARD_LOADED_FROM_MEMORY");}
                         } else {
-                            if (shouldConsoleLog) {
-                                console.log("PI_GUARD_FETCHED_NON_MATCHING_IDS");
-                            }
-                            this.store.dispatch(new PersonalSheetActions.load(Number(id)));
+                            if (shouldConsoleLog) {console.log("PI_GUARD_FETCHED_NON_MATCHING_IDS");}
+                            this.store.dispatch(new PersonalSheetActions.load(id));
                         }
                     }
                 }),
                 filter((personalIndex: IQsPersonalIndex) => {
-                    if (id === "-1") {
+                    if (id === -1) {
                         if (personalIndex !== null) {
-                            //console.log("FILTER: ID -1 Ind NON NULL");
                             return true;
                         }
                     } else {
                         if (personalIndex && Number(id) === personalIndex.id) {
-                            //console.log("FILTER: IDS MATCH");
                             return true; 
                         }
                     }
@@ -65,7 +54,7 @@ export class PersonalSheetGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        let id = next.paramMap.get("id")
+        let id = Number(next.paramMap.get("id"))
         return this.getFromStoreOrAPI(id).pipe(
             switchMap(() => of(true)),
             catchError(() => of(false)),

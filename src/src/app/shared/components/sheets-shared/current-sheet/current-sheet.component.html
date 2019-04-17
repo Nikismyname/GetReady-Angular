@@ -4,17 +4,17 @@
       <h6 class="card-title">{{currentSheet.name}}</h6>
       <div *ngIf="isGlobal">
         <div *ngIf="user.isAdmin">
-          <a [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/global'">Create Sheet</a> <br />
-          <a [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/global']">Create Question</a> <br />
+          <a (click)="stopPropagation($event)" [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/global'">Create Sheet</a> <br />
+          <a (click)="stopPropagation($event)" [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/global']">Create Question</a> <br />
         </div>
         <div *ngIf="user.isUser">
-          <a [routerLink]="[routePaths.copyQuestionsPath+'/'+currentSheet.id]">Copy Questions</a>
+          <a (click)="stopPropagation($event)" [routerLink]="[routePaths.copyQuestionsPath+'/'+currentSheet.id]">Copy Questions</a>
         </div>
       </div>
       <div *ngIf="!isGlobal">
-        <a [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/personal'">Create Sheet</a> <br />
-        <a [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/personal']">Create Question</a> <br />
-        <a [routerLink]="[routePaths.testPath+'/'+currentSheet.id+'/multiple']">Start Test</a>
+        <a (click)="stopPropagation($event)" [routerLink]="routePaths.createSheetPath+'/'+currentSheet.id+'/personal'">Create Sheet</a> <br />
+        <a (click)="stopPropagation($event)" [routerLink]="[routePaths.createQuestionPath+'/'+currentSheet.id+'/personal']">Create Question</a> <br />
+        <a (click)="stopPropagation($event)" [routerLink]="[routePaths.testPath+'/'+currentSheet.id+'/multiple']">Start Test</a>
       </div>
     </div>
   </div>

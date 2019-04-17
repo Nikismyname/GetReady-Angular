@@ -7,6 +7,7 @@ import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { Validators } from '@angular/forms';
+import { ICreateQuestion } from 'src/app/services/models/question/create-question';
 
 @Component({
   selector: 'getready-create-question',
@@ -83,8 +84,9 @@ export class CreateQuestionComponent {
   }
 
   async onFormSubmit(input) {
-    input["sheetId"] = this.parentId;
-    let data = { data: input, global: this.global };
+    let createData = <ICreateQuestion>input;
+    createData.sheetId = Number(this.parentId);
+    let data = { data: createData, global: this.global };
     this.store.dispatch(new CudActions.createQuestion(data));
   }
 

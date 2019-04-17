@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-
+//1 
 @Component({
   selector: 'getready-home',
   templateUrl: './home.component.html',
@@ -11,15 +11,15 @@ import { Subscription } from 'rxjs';
 export class HomeComponent {
 
   isUser: boolean = false;
-  userSub: Subscription; 
+  userSub: Subscription;
 
   constructor(
     private store: Store<IAppState>
-  ) { 
-    this.userSub = store.select(x => x.auth.user).subscribe(x => {
+  ) {
+    this.userSub = this.store.select(x => x.auth.user).subscribe(x => {
       if (x) {
-       this.isUser = true; 
-      }else{
+        this.isUser = true;
+      } else {
         this.isUser = false;
       }
     });

@@ -7,11 +7,11 @@ import { adminReducer } from "./reducers/admin.reducers";
 import { SharedModule } from "../shared/shared.module";
 import { QuestionApprovalComponent } from './components/question-approval/question-approval.component'; 
 import { AdminRoutingModule } from './admin-routing.module';
+//1
+const components = [QuestionApprovalComponent];
 
 @NgModule({
-  declarations:[
-    QuestionApprovalComponent,
-  ],
+  declarations:[...components],
   imports: [
     SharedModule,
     AdminRoutingModule,
@@ -19,8 +19,6 @@ import { AdminRoutingModule } from './admin-routing.module';
     EffectsModule.forFeature([AdminEffects]),
     CommonModule,
   ],
-  exports: [
-    QuestionApprovalComponent,
-  ]
+  exports: [...components]
 })
 export class AdminModule { }
