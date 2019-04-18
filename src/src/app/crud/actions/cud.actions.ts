@@ -1,7 +1,12 @@
 import { Action } from '@ngrx/store';
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { ICreateQuestion } from 'src/app/services/models/question/create-question';
-//1
+import { IQuestionIndexWithScope } from 'src/app/services/models/question/question-index-with-scope';
+import { ICreateSheet } from 'src/app/services/models/question-sheet/create-sheet';
+import { ISheetIndexWithScope } from 'src/app/services/models/question-sheet/sheet-index-with-scope';
+import { IEditQuestion } from 'src/app/services/models/question/edit-question';
+import { IEditSheet } from 'src/app/services/models/question-sheet/edit-sheet';
+//1 //done
 export namespace CudActionTypes {
     export const EDIT_QUESTION = "[cud] edit-question";
     export const EDIT_QUESTION_SUCCESS = "[cud] edit-question-success";//x
@@ -38,35 +43,34 @@ export namespace CudActionTypes {
 
 //QUESTION ACTIONS
 class CreateQuestionAction implements Action {
-    public type = CudActionTypes.CREATE_QUESTION;
-    constructor(public payload: IScopedData<ICreateQuestion>) { }
+    public readonly type = CudActionTypes.CREATE_QUESTION;
+    constructor(public readonly payload: IScopedData<ICreateQuestion>) { }
 }
-//TODO: FINISH THIS
+
 class CreateQuestionSuccessAction implements Action {
-    public type = CudActionTypes.CREATE_QUESTION_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.CREATE_QUESTION_SUCCESS;
+    constructor(public readonly payload: IQuestionIndexWithScope){}
 }
 
 class CreateQuestionValidationFailedAction implements Action {
-    public type = CudActionTypes.CREATE_QUESTION_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = CudActionTypes.CREATE_QUESTION_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 
 //QUESTION SHEET ACTIONS
 class CreateQSheetAction implements Action {
-    public type = CudActionTypes.CREATE_Q_SHEET;
-    constructor(public payload: IScopedData) { }
-
+    public readonly type = CudActionTypes.CREATE_Q_SHEET;
+    constructor(public readonly payload: IScopedData<ICreateSheet>) { }
 }
 
 class CreateQSheetSuccessAction implements Action {
-    public type = CudActionTypes.CREATE_Q_SHEET_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.CREATE_Q_SHEET_SUCCESS;
+    constructor(public readonly payload: ISheetIndexWithScope){}
 }
 
 class CreateQSheetValidationFailedAction implements Action {
-    public type = CudActionTypes.CREATE_Q_SHEET_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = CudActionTypes.CREATE_Q_SHEET_FAILED;
+    constructor(/**errors any*/public readonly payload: any) { }
 }
 
 /* #endregion */
@@ -74,34 +78,33 @@ class CreateQSheetValidationFailedAction implements Action {
 /* #region  Edit */
 //QUESTION ACTIONS
 class EditQuestionAction implements Action {
-    public type = CudActionTypes.EDIT_QUESTION;
-    constructor(public payload: any) { }
+    public readonly type = CudActionTypes.EDIT_QUESTION;
+    constructor(public readonly payload:IScopedData<IEditQuestion>) { }
 }
 class EditQuestionSuccessAction implements Action {
-    public type = CudActionTypes.EDIT_QUESTION_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.EDIT_QUESTION_SUCCESS;
+    constructor(public readonly payload: IQuestionIndexWithScope){}
 }
 
 class EditQuestionFailedValidationAction implements Action {
-    public type = CudActionTypes.EDIT_QUESTION_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = CudActionTypes.EDIT_QUESTION_FAILED;
+    constructor(/** error any */public readonly payload: any) { }
 }
 
 //QUESTION SHEET ACTIONS
 class EditQSheetAction implements Action {
-    public type = CudActionTypes.EDIT_Q_SHEET;
-    constructor(public payload: IScopedData) { }
-
+    public readonly type = CudActionTypes.EDIT_Q_SHEET;
+    constructor(public readonly payload: IScopedData<IEditSheet>) { }
 }
 
 class EditQSheetSuccessAction implements Action {
-    public type = CudActionTypes.EDIT_Q_SHEET_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.EDIT_Q_SHEET_SUCCESS;
+    constructor(public readonly payload: ISheetIndexWithScope){}
 }
 
 class EditQSheetFailedValidationAction implements Action {
-    public type = CudActionTypes.EDIT_Q_SHEET_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = CudActionTypes.EDIT_Q_SHEET_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 /* #endregion */
 
@@ -109,54 +112,51 @@ class EditQSheetFailedValidationAction implements Action {
 
 //QUESTION ACTIONS
 class DeleteQuestionAction implements Action {
-    public type = CudActionTypes.DELETE_QUESTION;
-    constructor(public payload: any) { }
-
+    public readonly type = CudActionTypes.DELETE_QUESTION;
+    constructor(/**question id*/public readonly payload: IScopedData<number>) { }
 }
 
 class DeleteQuestionSuccessAction implements Action {
-    public type = CudActionTypes.DELETE_QUESTION_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.DELETE_QUESTION_SUCCESS;
+    constructor(/**deleted id*/public readonly payload: number){}
 }
 
 class DeleteQuestionFailedAction implements Action {
-    public type = CudActionTypes.DELETE_QUESTION_FAILED;
-    constructor(public payload: null = null) { }
+    public readonly type = CudActionTypes.DELETE_QUESTION_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 
 //QUESTION SHEET ACTIONS
 class DeleteQSheetAction implements Action {
-    public type = CudActionTypes.DELETE_Q_SHEET;
-    constructor(public payload: any) { }
-
+    public readonly type = CudActionTypes.DELETE_Q_SHEET;
+    constructor(/**sheet id*/public readonly payload: IScopedData<number>) { }
 }
 
 class DeleteQSheetSuccessAction implements Action {
-    public type = CudActionTypes.DELETE_Q_SHEET_SUCCESS;
-    constructor(public payload: any){}
+    public readonly type = CudActionTypes.DELETE_Q_SHEET_SUCCESS;
+    constructor(/**deleted sheet id*/public readonly payload: number){}
 }
 
 class DeleteQSheetFailedAction implements Action {
-    public type = CudActionTypes.DELETE_Q_SHEET_FAILED;
-    constructor(public payload: null = null) { }
+    public readonly type = CudActionTypes.DELETE_Q_SHEET_FAILED;
+    constructor(/** error any */public readonly payload: any) { }
 }
 
 /* #endregion */
 
 class ClearCudSuccessesAction implements Action { 
-    public type = CudActionTypes.CLEAR_CUD_SUCCESSES;
-    constructor(public payload: null = null) { }
+    public readonly type = CudActionTypes.CLEAR_CUD_SUCCESSES;
+    constructor(public readonly payload: null = null) { }
 }
 
 class ValidationErrorsAction implements Action { 
-    public type = CudActionTypes.VALIDATION_ERRORS;
-    constructor(public payload: object) { }
-
+    public readonly type = CudActionTypes.VALIDATION_ERRORS;
+    constructor(/** validation errors */public readonly payload: object) { }
 }
 
 class ClearValidationErrorsAction implements Action { 
-    public type = CudActionTypes.CLEAR_VALIDATION_ERRORS;
-    constructor(public payload: null = null) { }
+    public readonly type = CudActionTypes.CLEAR_VALIDATION_ERRORS;
+    constructor(public readonly payload: null = null) { }
 }
 
 export namespace CudActions {
@@ -189,4 +189,33 @@ export namespace CudActions {
 
     export const clearCudSuccesses = ClearCudSuccessesAction;
 };
+
+export type CudActionType
+    = CreateQuestionAction
+    | CreateQuestionSuccessAction
+    | CreateQuestionValidationFailedAction
+    
+    | CreateQSheetAction
+    | CreateQSheetSuccessAction
+    | CreateQSheetValidationFailedAction
+    
+    | EditQuestionAction
+    | EditQuestionSuccessAction
+    | EditQuestionFailedValidationAction
+    
+    | EditQSheetAction
+    | EditQSheetSuccessAction
+    | EditQSheetFailedValidationAction
+    
+    | DeleteQuestionAction
+    | DeleteQuestionSuccessAction
+    | DeleteQuestionFailedAction
+    
+    | DeleteQSheetAction
+    | DeleteQSheetSuccessAction
+    | DeleteQSheetFailedAction
+    
+    | ValidationErrorsAction
+    | ClearValidationErrorsAction
+    | ClearCudSuccessesAction;
 

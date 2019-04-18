@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
-import { IUserStatus } from 'src/app/services/models/other';
+import { IUserStatus } from "src/app/services/models/others/user-status";
 import { RoutePaths } from 'src/app/services/route-paths';
-
+//typed
 @Component({
   selector: 'getready-sheet',
   templateUrl: './sheet.component.html',
@@ -26,10 +26,6 @@ export class SheetComponent implements OnInit {
 
   onClickSheet(event, id) {
     this.sheetClickedEmitter.emit(id);
-  }
-
-  publish() {
-    
   }
 
   stopPropagation(event) {

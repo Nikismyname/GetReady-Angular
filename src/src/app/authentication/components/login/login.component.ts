@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormInputData, FormData, IUser } from "../../../services/models/other";
+import { Component, OnDestroy } from '@angular/core';
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-//1
-@Component({
+import { ILoginData } from 'src/app/services/models/others/login-data';
+//1 //typed
+@Component({ 
   selector: 'getready-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -14,7 +16,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnDestroy {
 
   successSub: Subscription;
-  formData = new FormData(
+  formData: FormData = new FormData(
     [
       new FormInputData("username", "Username", "string"),
       new FormInputData("password", "Password", "password"),
@@ -33,7 +35,7 @@ export class LoginComponent implements OnDestroy {
     });
   }
 
-  onFormSubmit(data) {
+  onFormSubmit(data: ILoginData) {
     this.store.dispatch(new AuthActions.login(data));
   }
   

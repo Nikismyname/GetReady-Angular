@@ -9,9 +9,9 @@ import { GlobalSheetActions } from "../../actions/global-sheet.action";
 import { ReorderService } from 'src/app/services/reorder-service';
 import * as c from "../../../services/route-paths";
 import { IAppState } from 'src/app/store/reducers';
-import { IUserStatus } from 'src/app/services/models/other';
+import { IUserStatus } from "src/app/services/models/others/user-status";
 import { take } from 'rxjs/operators';
- 
+ //typed
 @Component({
     selector: "getready-global-sheet",
     templateUrl: "./global-sheet.component.html",
@@ -38,7 +38,7 @@ export class GlobalSheetComponent {
             this.isAdmin = user ? user.role === "Admin" ? true : false : false;
         });
 
-        store.select(state => state.global.latestId).pipe(take(1)).subscribe(x => {
+        store.select(state => state.global.currentGlobalIndex.id).pipe(take(1)).subscribe(x => {
             let newPath = c.globalQuestionSheetsPath + "/" + x;
             window.history.pushState(null, null, newPath);
         });

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { FormData as myFormData } from "../../../services/models/other";
+import { FormData as myFormData } from "../../../services/models/others/form-data";
 import { Location } from '@angular/common';
 import { textFormattingMappings } from "../../../services/route-paths";
 import { Store } from '@ngrx/store';
 import { ICrudState } from 'src/app/crud/reducers';
 import { Subscription } from 'rxjs';
 import { CudActions } from 'src/app/crud/actions/cud.actions';
-
+//typed
 @Component({
   selector: 'getready-reactive-binding-form',
   templateUrl: './reactive-binding-form.component.html',

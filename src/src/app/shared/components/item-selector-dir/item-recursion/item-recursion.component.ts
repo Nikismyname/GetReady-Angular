@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IItemSelectData } from 'src/app/services/models/contracts/selectors';
+import { IItemSelectData } from 'src/app/services/models/others/selectors';
 import { IItemsPickedData } from '../item-selector/item-selector.component';
-
+//typed
 @Component({
   selector: 'getready-item-recursion',
   templateUrl: './item-recursion.component.html',

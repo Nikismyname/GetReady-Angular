@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { IAppState } from '../../store/reducers';
 import { Store } from '@ngrx/store';
 import { take } from "rxjs/operators"
-import { IUser } from '../models/other';
+import { IUser } from "../models/others/user";
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({

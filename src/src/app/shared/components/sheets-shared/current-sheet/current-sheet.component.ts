@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
 import { RoutePaths } from 'src/app/services/route-paths';
-import { IUserStatus } from 'src/app/services/models/other';
-
+import { IUserStatus } from "src/app/services/models/others/user-status";
+//typed
 @Component({
   selector: 'getready-current-sheet',
   templateUrl: './current-sheet.component.html',

@@ -1,23 +1,30 @@
 <div *ngIf="loaded && PRLoaded && firstQuestionLoaded && !selectingDir">
     <div *ngIf="(currentQuestion$ | async) as question">
-      
-        <h1>Name</h1>
-        {{question.name}}
+       
+        <div class="section text-center">
+            <h3>{{question.name}}</h3>
+        </div>
 
-        <h1>Question</h1>
-        <getready-text-visualisation-tblock
-            [text]="question.question"
-        ></getready-text-visualisation-tblock>
+        <div class="section">
+            <h1>Question</h1>
+            <getready-text-visualisation-tblock
+                [text]="question.question"
+            ></getready-text-visualisation-tblock>
+        </div>
 
-        <h1>Comment</h1>
-        <getready-text-visualisation-tblock
-            [text]="question.comment"
-        ></getready-text-visualisation-tblock>
+        <div class="section">
+            <h1>Comment</h1>
+            <getready-text-visualisation-tblock
+                [text]="question.comment"
+            ></getready-text-visualisation-tblock>
+        </div>
 
-        <h1>Answer</h1>
-        <getready-text-visualisation-tblock
-            [text]="question.answer"
-        ></getready-text-visualisation-tblock>
+        <div class="section">
+            <h1>Answer</h1>
+            <getready-text-visualisation-tblock
+                [text]="question.answer"
+            ></getready-text-visualisation-tblock>
+        </div>
 
         <getready-buttons-renderer [data]="buttons"></getready-buttons-renderer>
 

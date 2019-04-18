@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
-
+import { IFolderSelectData } from 'src/app/services/models/others/selectors';
+//typed
 @Component({
   selector: 'getready-folder-recursion',
   templateUrl: './folder-recursion.component.html',

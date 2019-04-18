@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { ActivatedRoute } from "@angular/router";
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { take } from 'rxjs/operators';
 import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
-
+//typed
 @Component({
   selector: 'getready-delete-question-sheet',
   templateUrl: './delete-question-sheet.component.html',

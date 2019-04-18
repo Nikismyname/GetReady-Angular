@@ -17,7 +17,7 @@ export class ReviewQuestionsGuard implements CanActivate {
     ) { }
 
     fetchStream() {
-        return this.store.select(x => x.personal.test.questionsForReview).pipe(
+        return this.store.select(x => x.personal.questionReview).pipe(
             filter(x => x.success), 
             switchMap(x => {
                 if (shouldConsoleLog) { console.log("ALL_ITEMS_GUARD_PASSED"); }

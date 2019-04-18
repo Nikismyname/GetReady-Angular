@@ -3,16 +3,18 @@ import { IAppState } from "../../../store/reducers/index";
 import { Store } from '@ngrx/store';
 import { ReadActions } from "../../../crud/actions/read.actions";
 import { AdminActions } from "../../actions/admin.actions";
-import { IScopedData } from "../../../services/models/contracts/scoped-data";
+import { IScopedData } from "../../../services/models/others/scoped-data";
 import { Subscription, Observable } from 'rxjs';
 import { Location } from "@angular/common";
 import {
   IButtonsRenderInformation,
   IButtonRenderInformation
-} from 'src/app/services/models/contracts/button-renderer';
-import { IApproveQuestionData } from 'src/app/services/models/contracts/approve-question-data';
-//1 Maybe add the new directory from the action instead of of fething all the folders again.
-
+} from 'src/app/services/models/others/button-renderer';
+import { IApproveQuestionData } from 'src/app/services/models/others/approve-question-data';
+import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
+import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
+import { IFolderSelectData } from 'src/app/services/models/others/selectors';
+//typed
 @Component({
   selector: 'getready-question-approval',
   templateUrl: './question-approval.component.html',
@@ -20,19 +22,19 @@ import { IApproveQuestionData } from 'src/app/services/models/contracts/approve-
 })
 export class QuestionApprovalComponent implements OnDestroy {
 
-  questionIds: any[];
+  questionIds: number[];
   id: string;
   dataSub: Subscription;
   questionSuccessSub: Subscription;
-  currentQuestion$: Observable<any>;
+  currentQuestion$: Observable<IGlobalQuestion | IPersonalQuestion>;
   PRLoaded: boolean = false;
   firstQuestionLoaded: boolean = false;
   loaded: boolean = false;
   foldersLoaded: boolean = false;
-  folders: any[];
+  folders: IFolderSelectData[];
   folderSub: Subscription;
 
-  shouldShowComment: boolean = false; 
+  shouldShowComment: boolean = false;
   shouldShowAnswer: boolean = false;
   index: number = 0;
 
@@ -53,17 +55,17 @@ export class QuestionApprovalComponent implements OnDestroy {
         }
       });
 
-      this.store.dispatch(new AdminActions.getIdsForApproval());
-      this.dataSub = this.store.select(x => x.admin.idsForApproval).subscribe(x => { 
-        if (x.success === true) {
-          if (x.ids.length === 0) {
-            this.location.back();
-          }
-          this.questionIds = x.ids;
-          this.loaded = true;
-          this.displayQuestion();
+    this.store.dispatch(new AdminActions.getIdsForApproval());
+    this.dataSub = this.store.select(x => x.admin.idsForApproval).subscribe(x => {
+      if (x.success === true) {
+        if (x.ids.length === 0) {
+          this.location.back();
         }
-      });
+        this.questionIds = x.ids;
+        this.loaded = true;
+        this.displayQuestion();
+      }
+    });
   }
 
   displayQuestion() {
@@ -75,22 +77,23 @@ export class QuestionApprovalComponent implements OnDestroy {
     this.PRLoaded = true;
   }
 
-  next = () => { 
+  next = () => {
     this.index++;
     if (this.index >= this.questionIds.length) {
       this.location.back();
     }
-    this.displayQuestion(); 
+    this.displayQuestion();
   }
 
-  approve = () => { 
+  approve = () => {
     this.store.dispatch(new ReadActions.GetAllFolders(true));
-    this.folderSub = this.store.select(x => x.crud.read.allFolders).subscribe(x => { 
+    this.folderSub = this.store.select(x => x.crud.read.allFolders).subscribe(x => {
       if (x.success) {
         this.folders = x.folders.map(x => ({
-            id: x.id,
-            name: x.name,
-            parentId: x.questionSheetId
+          id: x.id,
+          name: x.name,
+          parentId: x.questionSheetId,
+          order: 0,
         }));
         this.foldersLoaded = true;
         this.selectingDir = true;
@@ -100,7 +103,7 @@ export class QuestionApprovalComponent implements OnDestroy {
 
   folderSelected(id: number) {
     this.selectingDir = false;
-    let data: IApproveQuestionData = {globalParentSheetId: id, questionId: this.questionIds[this.index]};
+    let data: IApproveQuestionData = { globalParentSheetId: id, questionId: this.questionIds[this.index] };
     this.store.dispatch(new AdminActions.approveQuestion(data));
     this.next();
   }
@@ -109,36 +112,36 @@ export class QuestionApprovalComponent implements OnDestroy {
     this.store.dispatch(new ReadActions.GetAllFolders(true));
   }
 
-  reject = () => { 
+  reject = () => {
     this.store.dispatch(new AdminActions.rejectQuestion(this.questionIds[this.index]));
     this.next();
   }
 
-  skip = () => { 
+  skip = () => {
     this.next();
   }
 
   get buttons(): IButtonsRenderInformation {
-    let buttons: IButtonRenderInformation[] =  [
+    let buttons: IButtonRenderInformation[] = [
       {
         name: "Approve",
         styles: "",
-        function: this.approve, 
+        function: this.approve,
       },
       {
-        name: "Reject", 
-        styles: "", 
-        function: this.reject, 
+        name: "Reject",
+        styles: "",
+        function: this.reject,
       },
       {
-        name: "Skip", 
-        styles: "", 
-        function: this.skip, 
+        name: "Skip",
+        styles: "",
+        function: this.skip,
       }
     ]
 
     return {
-      type: "default", 
+      type: "default",
       buttons: buttons,
     }
   }

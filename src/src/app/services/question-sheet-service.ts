@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
-import { IScopedData } from './models/contracts/scoped-data';
-import { IReorderQuestion } from './models/other';
+import { IScopedData } from './models/others/scoped-data';
+import { IReorderQuestions } from "./models/others/reorder-questions";
 //import QsPersonalIndex from "./models/question-sheet/qsPersonalIndex";
 
 @Injectable({
@@ -46,11 +46,11 @@ export class QuestionSheetService {
         return this.http.post(path, JSON.stringify(data));
     }
 
-    reorderGlobalSheetsObs = (d: IReorderQuestion) => {
+    reorderGlobalSheetsObs = (d: IReorderQuestions) => {
         return this.http.post("QuestionSheet/ReorderGlobal", JSON.stringify(d));
     }
 
-    reorderPersonalSheetsObs = (d: IReorderQuestion) => {
+    reorderPersonalSheetsObs = (d: IReorderQuestions) => {
         return this.http.post("QuestionSheet/ReorderPersonal", JSON.stringify(d));
     }
 

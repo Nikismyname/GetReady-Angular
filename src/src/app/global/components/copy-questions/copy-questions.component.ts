@@ -3,12 +3,12 @@ import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { ReadActions } from "../../../crud/actions/read.actions";
 import { map } from 'rxjs/operators';
-import { IFolderSelectData, IItemSelectData } from 'src/app/services/models/contracts/selectors';
+import { IFolderSelectData, IItemSelectData } from 'src/app/services/models/others/selectors';
 import { Observable, Subscription } from 'rxjs';
 import { GlobalSheetActions } from "../../actions/global-sheet.action";
 import { Router } from '@angular/router';
 import * as c from "../../../services/route-paths"; 
-
+//typed
 @Component({
   selector: 'getready-copy-questions',
   templateUrl: './copy-questions.component.html',

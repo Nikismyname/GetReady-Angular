@@ -1,12 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormInputData, FormData } from "../../../../services/models/other";
+import { FormInputData } from "../../../../services/models/others/form-input-data";
+import { FormData } from "../../../../services/models/others/form-data";
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../../../crud/reducers';
 import { CudActions } from "../../../../crud/actions/cud.actions";
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { Validators } from '@angular/forms';
-
+import { ICreateSheet } from 'src/app/services/models/question-sheet/create-sheet';
+//typed
 @Component({
   selector: 'getready-create-dir-internal',
   templateUrl: './create-dir-internal.component.html',
@@ -41,7 +43,7 @@ export class CreateDirInternalComponent implements OnInit {
           this.folderCreatedEmitter.emit(data.createdId);
       }
     });
-  }
+  } 
 
   generateFormData(): FormData{
     let inputData = [
@@ -80,8 +82,8 @@ export class CreateDirInternalComponent implements OnInit {
     );
   }
 
-  async onFormSubmit(input) {
-    input.parentSheetId = this.parentId;
+  async onFormSubmit(input: ICreateSheet) {
+    input.parentSheetId = Number(this.parentId);
     console.log("CREATE DATA", input);
     let data: IScopedData = { data: input, global: this.global };
     this.store.dispatch(new CudActions.createQSheet(data));

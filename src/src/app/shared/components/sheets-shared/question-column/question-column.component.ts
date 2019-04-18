@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQGlobalIndex } from 'src/app/services/models/question/q-global-index';
-import { IUserStatus } from 'src/app/services/models/other';
-
+import { IUserStatus } from "src/app/services/models/others/user-status";
+//typed
 @Component({
   selector: 'getready-question-column',
   templateUrl: './question-column.component.html',
@@ -29,9 +29,5 @@ export class QuestionColumnComponent implements OnInit {
   onDropped(event) {
     this.onDroppedEmitter.emit(event);
   }
-
-  onClickQuestion(event, id) {
-    
-  } 
 
 }

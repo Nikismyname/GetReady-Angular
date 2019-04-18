@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IFolderSelectData } from 'src/app/services/models/contracts/selectors';
-import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
-
+import { IFolderSelectData } from 'src/app/services/models/others/selectors';
+import { IButtonsRenderInformation } from 'src/app/services/models/others/button-renderer';
+//typed
 @Component({
   selector: 'getready-folder-selector',
   templateUrl: './folder-selector.component.html',
@@ -16,7 +16,6 @@ export class FolderSelectorComponent implements OnInit {
   @Input() isGlobal: boolean;
   @Input("folders") set foldersSetter(incFolders: IFolderSelectData[]) { 
     this.folders = incFolders;
-    console.log("FOLDER CHANGE HERE: ", this.folders);
   };
   @Output() folderSelectedEmitter: EventEmitter<number> = new EventEmitter();
   @Output() folderCreatedRefresh: EventEmitter<void> = new EventEmitter();
@@ -24,8 +23,7 @@ export class FolderSelectorComponent implements OnInit {
   areCreatingFolder: boolean = false;
 
   loaded: boolean = false;
-  //data: any;
-  root: any;
+  root: IFolderSelectData;
   selectedId: number = null;
   foldedFolders: number[] = [];
 

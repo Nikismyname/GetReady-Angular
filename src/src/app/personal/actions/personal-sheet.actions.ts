@@ -1,8 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
+import { IReorderData } from 'src/app/services/models/question/question-reorder';
 import { INewScoreData } from 'src/app/services/models/question/new-score-data';
-import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
-
+import { IPQForUserReview } from 'src/app/services/models/others/pq-for-user-review';
+import { IQsPersonalIndex } from 'src/app/services/models/question-sheet/qs-personal-index';
+//done
 export namespace PersonalSheetActionTypes {
     export const LOAD = "[PersonalSheet] load";
     export const LOAD_SUCCESS = "[PersonalSheet] loaded";
@@ -32,18 +33,11 @@ export namespace PersonalSheetActionTypes {
     export const GET_ANSWERED_QUESTIONS_SUCCESS = "[PersonalSheet] get answered questions success";
     export const GET_ANSWERED_QUESTIONS_FAILED = "[PersonalSheet] get answered questions failed";
 
-    // export const QUESTION_DELETED = "[PersonalSheet] question deleted";
-    // export const QUESTION_ADDED = "[PersonalSheet] question added";
-    // export const SHEET_DELETED = "[PersonalSheet] sheet deleted";
-    // export const SHEET_ADDED = "[PersonalSheet] sheet added";
-
     export const CLEAR_SUCCESSES = "[PersonalSheet][test] clear successes";
 
     export const INCREMENT_CURRENT_IND = "[PersonalSheet][test] increment current ind";
 
     export const CLEAR_CURRENT_ID_STATE = "[PersonalSheet][test] clear current ind state";
-
-    export const SAVE_LATEST_ID = "[PersonalSheet] save latest id";
 }
 
 // export const GlobalSheetLoadAction = createAction(
@@ -53,264 +47,137 @@ export namespace PersonalSheetActionTypes {
 
 
 /* #region  Load Actions */
-class LoadAction implements Action {
-    public type = PersonalSheetActionTypes.LOAD;
-    public payload: number;
-
-    constructor(
-        public sheetId: number,
-    ) {
-        this.payload = sheetId;
-    }
+class LoadAction implements Action {//x
+    public readonly type = PersonalSheetActionTypes.LOAD;
+    constructor(/**sheet id */public readonly payload: number) { }
 }
 
-class LoadSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.LOAD_SUCCESS;
-    public payload;
-
-    constructor(
-        public sheet: any,
-    ) {
-        this.payload = sheet;
-    }
+class LoadSuccessAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.LOAD_SUCCESS;
+    constructor(/**sheet */public readonly payload: IQsPersonalIndex) { }
 }
 
-class LoadFailedAction implements Action {
-    public type = PersonalSheetActionTypes.LOAD_FAILED;
-    public payload;
-
-    constructor(
-        public sheet: any,
-    ) {
-        this.payload = sheet;
-    }
+class LoadFailedAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.LOAD_FAILED;
+    constructor(/**error any */public readonly payload: any) { }
 }
 /* #endregion */
 
 /* #region GLOBAL_QUESTION_REORDER_ACTIONS */
-class QuestionsReorderAction implements Action {
-    public type = PersonalSheetActionTypes.QUESTIONS_REORDER;
-    public payload: IQuestionReorder;
-
-    constructor(
-        public reorderings: IQuestionReorder,
-    ) {
-        this.payload = reorderings;
-    }
+class QuestionsReorderAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.QUESTIONS_REORDER;
+    constructor(/**reorderings*/public readonly payload: IReorderData) { }
 }
 
-class QuestionsReorderSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
-    public payload: any[];
-
-    constructor(
-        public reorderings: any[],
-    ) {
-        this.payload = reorderings;
-    }
+class QuestionsReorderSuccessAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 
-class QuestionsReorderFailAction implements Action {
-    public type = PersonalSheetActionTypes.QUESTIONS_REORDER_FAILED;
-    public payload: any[];
-
-    constructor(
-        public reorderings: any[],
-    ) {
-        this.payload = reorderings;
-    }
+class QuestionsReorderFailAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.QUESTIONS_REORDER_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 /* #endregion */
 
 /* #region  CHILD_SHEETS_REORDER_ACTION */
-class SheetReorderAction implements Action {
-    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER;
-    public payload: any;
-
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
+class SheetReorderAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER;
+    constructor(/**reorderings */public readonly payload: IReorderData) { }
 }
 
-class SheetReorderSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
+class SheetReorderSuccessAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 
-class SheetReorderFailAction implements Action {
-    public type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
-}
-/* #endregion */
-
-/* #region  SAVE_LATEST_ID */
-class SaveLatestIdAction implements Action {
-    public type = PersonalSheetActionTypes.SAVE_LATEST_ID;
-    public payload: [];
-
-    constructor(
-        public latestId: any,
-    ) {
-        this.payload = latestId;
-    }
+class SheetReorderFailAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 /* #endregion */
 
 /* #region  GET_QUESTION_IDS_FOR_SHEET */
-class GetQIdsForSheetAction implements Action {
-    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET;
-    public payload: number;
-
-    constructor(
-        public data: number,
-    ) {
-        this.payload = data;
-    }
+class GetQIdsForSheetAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET;
+    constructor(/**sheet id*/public readonly payload: number) { }
 }
 
-class GetQIdsForSheetSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_SUCCESS;
-    public payload: number[];
-
-    constructor(
-        public data: number[],
-    ) {
-        this.payload = data;
-    }
+class GetQIdsForSheetSuccessAction implements Action {//x 
+    public readonly  type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_SUCCESS;
+    constructor(/**qIds*/public readonly payload: number[]) { }
 }
 
-class GetQIdsForSheetFailedAction implements Action {
-    public type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_FAILED;
-}
-
-class ClearSuccessesAction implements Action {
-    public type = PersonalSheetActionTypes.CLEAR_SUCCESSES;
+class GetQIdsForSheetFailedAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.GET_Q_IDS_FOR_SHEET_FAILED;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 /* #endregion */
 
 /* #region  ADD_NEW_SCORE */
-class AddNewScoreAction implements Action {
-    public type = PersonalSheetActionTypes.ADD_NEW_SCORE;
-    public payload: INewScoreData;
-
-    constructor(
-        public data: INewScoreData,
-    ) {
-        this.payload = data;
-    }
+class AddNewScoreAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.ADD_NEW_SCORE;
+    constructor(public readonly payload: INewScoreData) { }
 }
 
-class AddNewScoreSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.ADD_NEW_SCORE_SUCCESS;
-    public payload: any = null;
+class AddNewScoreSuccessAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.ADD_NEW_SCORE_SUCCESS;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 
-class AddNewScoreFailedAction implements Action {
-    public type = PersonalSheetActionTypes.ADD_NEW_SCORE_FALIED;
-    public payload: any = null;
+class AddNewScoreFailedAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.ADD_NEW_SCORE_FALIED;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 /* #endregion */
 
 /* #region  SUGGEST_FOR_PUBLISHING */
-class SuggestForPublishingAction implements Action {
-    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING;
-    public payload: number;
-
-    constructor(
-        public data: number,
-    ) {
-        this.payload = data;
-    }
+class SuggestForPublishingAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING;
+    constructor(/**question id*/public readonly payload: number) { }
 }
 
-class SuggestForPublishingSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_SUCCESS;
-    public payload = null;
+class SuggestForPublishingSuccessAction implements Action {//x 
+    public readonly  type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_SUCCESS;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 
-class SuggestForPublishingFailedAction implements Action {
-    public type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_FAILED;
-    public payload: any;
-
-    constructor(
-        public error: any,
-    ) {
-        this.payload = error;
-    }
+class SuggestForPublishingFailedAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.SUGGEST_FOR_PUBLISHING_FAILED;
+    constructor(/**error any */public readonly payload: any ) { }
 }
 /* #endregion */
 
 /* #region  GET_ANSWERED_QUESTIONS */
-class GetAnsweredQuestionsAction implements Action {
-    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS;
-    public payload = null;
+class GetAnsweredQuestionsAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS;
+    constructor(public readonly payload: null = null) { }
 }
 
-class GetAnsweredQuestionsSuccessAction implements Action {
-    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_SUCCESS;
-    public payload: IPQForUserReview[];
-
-    constructor(
-        public data: IPQForUserReview[],
-    ) {
-        this.payload = data;
-    }
+class GetAnsweredQuestionsSuccessAction implements Action {//x 
+    public readonly  type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_SUCCESS;
+    constructor(public readonly payload: IPQForUserReview[]) { }
 }
 
-class GetAnsweredQuestionsFailedAction implements Action {
-    public type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_FAILED;
-    public payload: any;
-
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
+class GetAnsweredQuestionsFailedAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.GET_ANSWERED_QUESTIONS_FAILED;
+    constructor(public readonly payload: any) { }
 }
 /* #endregion */
 
-/* #region  State Managment */
-// class QuestionDeletedAction implements Action {
-//     public type = PersonalSheetActionTypes.QUESTION_DELETED;
-//     constructor(public payload: number) { }
-// }
-
-// class QuestionAddedAction implements Action {
-//     public type = PersonalSheetActionTypes.QUESTION_ADDED;
-//     constructor(public payload: IQPersonalIndex) { }
-// }
-
-// class SheetDeletedAction implements Action {
-//     public type = PersonalSheetActionTypes.SHEET_DELETED;
-//     constructor(public payload: number) { }
-// }
-
-// class SheetAddedAction implements Action {
-//     public type = PersonalSheetActionTypes.SHEET_ADDED;
-//     constructor(public payload: IQsChildIndex) { }
-// }
-/* #endregion */
-
-class IncrementCurrentIndexAction implements Action {
-    public type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
-    public payload: number;
-
-    constructor(
-        public data: number,
-    ) {
-        this.payload = data;
-    }
+class IncrementCurrentIndexAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.INCREMENT_CURRENT_IND;
+    constructor(/**amount can be neg */public readonly payload: number) { }
 }
 
-class ClearCurrentIndexStateAction implements Action {
-    public type = PersonalSheetActionTypes.CLEAR_CURRENT_ID_STATE;
-    public payload: number;
+class ClearCurrentIndexStateAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.CLEAR_CURRENT_ID_STATE;
+    constructor(public readonly payload: null = null) { }
+}
 
-    constructor(
-        public data = null,
-    ) {
-        this.payload = data;
-    }
+class ClearSuccessesAction implements Action {//x
+    public readonly  type = PersonalSheetActionTypes.CLEAR_SUCCESSES;
+    constructor(/**void */public readonly payload: null = null) { }
 }
 
 export namespace PersonalSheetActions {
@@ -342,17 +209,33 @@ export namespace PersonalSheetActions {
     export const getAnsweredQuestionsSuccess = GetAnsweredQuestionsSuccessAction;
     export const getAnsweredQuestionFailed = GetAnsweredQuestionsFailedAction;
 
-    // export const questionDeleted = QuestionDeletedAction;
-    // export const questionAdded = QuestionAddedAction; 
-    // export const sheetDeleted = SheetDeletedAction;
-    // export const sheetAdded = SheetAddedAction;
-
     export const clearSuccesses = ClearSuccessesAction;
 
     export const incrementCurrentIndex = IncrementCurrentIndexAction;
 
-    export const saveLatestId = SaveLatestIdAction;
-
     export const clearCurrentIndState = ClearCurrentIndexStateAction;
 };
+
+export type PersonalSheetActionType
+    = LoadAction
+    | LoadSuccessAction
+    | LoadFailedAction
+
+    | QuestionsReorderAction
+    | QuestionsReorderSuccessAction
+    | QuestionsReorderFailAction
+    
+    | SheetReorderAction
+    | SheetReorderSuccessAction
+    | SheetReorderFailAction;
+
+export type QuestionRevoewActionType
+    = ClearSuccessesAction
+    | GetAnsweredQuestionsSuccessAction;
+    
+export type TestActionType
+    = GetQIdsForSheetSuccessAction
+    | ClearSuccessesAction
+    | IncrementCurrentIndexAction
+    | ClearCurrentIndexStateAction;
 

@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-//1 
+import { IApproveQuestionData } from 'src/app/services/models/others/approve-question-data';
+//1 union typed doced
 export namespace AdminActionTypes {
     export const GET_IDS_FOR_APPROVAL = "[Admin] get ids for approval";
     export const GET_IDS_FOR_APPROVAL_SUCCESS = "[Admin] get ids for approval success";
@@ -18,63 +19,57 @@ export namespace AdminActionTypes {
 
 /* #region  GET_IDS_FOR_APPROVAL */
 class GetIdsForApprovalAction implements Action {
-    public type = AdminActionTypes.GET_IDS_FOR_APPROVAL;
-    constructor(public payload: null = null){}
+    public readonly type = AdminActionTypes.GET_IDS_FOR_APPROVAL;
+    constructor(public readonly payload: null = null){}
 }
 
 class GetIdsForApprovalSuccessAction implements Action {
     public readonly type = AdminActionTypes.GET_IDS_FOR_APPROVAL_SUCCESS;
-    constructor(public readonly payload: number[]){}
+    constructor(/** question ids */public readonly payload: number[]){}
 }
 
 class GetIdsForApprovalFailedAction implements Action {
-    public type = AdminActionTypes.GET_IDS_FOR_APPROVAL_FAILED;
-    constructor(public payload: any){}
-
+    public readonly type = AdminActionTypes.GET_IDS_FOR_APPROVAL_FAILED;
+    constructor(/** error any */ public readonly payload: any){}
 }
 /* #endregion */
 
 /* #region APPROVE_/_REJECT_QUESTION */
 class ApproveQuestionAction implements Action {
-    public type = AdminActionTypes.APPROVE_QUESTION;
-    constructor(public payload: any){}
-
+    public readonly type = AdminActionTypes.APPROVE_QUESTION;
+    constructor(public readonly payload: IApproveQuestionData){}
 }
 
 class ApproveQuestionSuccessAction implements Action {
-    public type = AdminActionTypes.APPROVE_QUESTION_SUCCESS;
-    constructor(public payload: null = null){}
+    public readonly type = AdminActionTypes.APPROVE_QUESTION_SUCCESS;
+    constructor(public readonly payload: null = null){}
 }
 
 class ApproveQuestionFailedAction implements Action {
-    public type = AdminActionTypes.APPROVE_QUESTION_FAILED;
-    constructor(public payload: any){}
-
+    public readonly type = AdminActionTypes.APPROVE_QUESTION_FAILED;
+    constructor(/** error any */public readonly payload: any){}
 }
 
 //REJECT
 class RejectQuestionAction implements Action {
-    public type = AdminActionTypes.REJECT_QUESTION;
-    constructor(public payload: any){}
-
+    public readonly type = AdminActionTypes.REJECT_QUESTION;
+    constructor(/** question id */ public readonly payload: number){}
 }
 
 class RejectQuestionSuccessAction implements Action {
-    public type = AdminActionTypes.REJECT_QUESTION_SUCCESS;
-    constructor(public payload: null = null){}
-
+    public readonly type = AdminActionTypes.REJECT_QUESTION_SUCCESS;
+    constructor(public readonly payload: null = null){}
 }
 
 class RejectQuestionFailedAction implements Action {
     public readonly type = AdminActionTypes.REJECT_QUESTION_FAILED;
-    constructor(public readonly payload: any){}
-
+    constructor(/** error any */ public readonly payload: any){}
 }
 /* #endregion */
 
 class ClearSuccessesAction implements Action {
-    public type = AdminActionTypes.CLEAR_SUCCESSES;
-    constructor(public payload:null = null){}
+    public readonly type = AdminActionTypes.CLEAR_SUCCESSES;
+    constructor(public readonly payload:null = null){}
 }
 
 export namespace AdminActions {
@@ -93,25 +88,20 @@ export namespace AdminActions {
     export const clearSuccesses = ClearSuccessesAction;
 }
 
-// export type AdminActionType =
-//     GetIdsForApprovalAction |
-//     GetIdsForApprovalSuccessAction |
-//     GetIdsForApprovalFailedAction |
+export type AdminActionType
+    =GetIdsForApprovalAction 
+    |GetIdsForApprovalSuccessAction 
+    |GetIdsForApprovalFailedAction 
 
-//     ApproveQuestionAction |
-//     ApproveQuestionSuccessAction |
-//     ApproveQuestionFailedAction |
+    |ApproveQuestionAction 
+    |ApproveQuestionSuccessAction 
+    |ApproveQuestionFailedAction 
 
-//     RejectQuestionAction |
-//     RejectQuestionSuccessAction |
-//     RejectQuestionFailedAction |
+    |RejectQuestionAction 
+    |RejectQuestionSuccessAction 
+    |RejectQuestionFailedAction 
 
-//     ClearSuccessesAction;
-
-
-export type AdminActionType =
-    GetIdsForApprovalSuccessAction |
-    ClearSuccessesAction;
+    |ClearSuccessesAction;
 
     
 

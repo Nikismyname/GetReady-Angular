@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IPQForUserReview } from 'src/app/services/models/contracts/pq-for_user-review';
+import { IPQForUserReview } from 'src/app/services/models/others/pq-for-user-review';
 import { map, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as c from "../../../services/route-paths";
-
+//typed
 @Component({
   selector: 'getready-review-questions',
   templateUrl: './review-questions.component.html',
@@ -25,7 +25,7 @@ export class ReviewQuestionsComponent {
     private router: Router,
   ) {
     this.questions$ = this.store
-      .select(x => x.personal.test.questionsForReview.questions)
+      .select(x => x.personal.questionReview.questions)
       .pipe(take(1));
   }
 

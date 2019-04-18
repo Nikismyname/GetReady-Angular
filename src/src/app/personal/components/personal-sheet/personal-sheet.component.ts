@@ -8,9 +8,10 @@ import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
 
 import * as c from "../../../services/route-paths";
 import { IAppState } from 'src/app/store/reducers';
-import { IUserStatus } from 'src/app/services/models/other';
+import { IUserStatus } from "src/app/services/models/others/user-status";
 import { take } from 'rxjs/operators';
-
+import { IReorderData } from 'src/app/services/models/question/question-reorder';
+//typed
 @Component({
   selector: 'getready-personal-sheet',
   templateUrl: './personal-sheet.component.html',
@@ -36,7 +37,7 @@ export class PersonalSheetComponent {
             this.isAdmin = user ? user.role === "Admin" ? true : false : false;
         });
 
-        this.store.select(x => x.personal.latestId).pipe(take(1)).subscribe(x => { 
+        this.store.select(x => x.personal.currentPersonalIndex.id).pipe(take(1)).subscribe(x => { 
             let newPath = c.personalQuestionSheetsPath + "/" + x;
             window.history.pushState(null, null, newPath);
         })
@@ -47,7 +48,7 @@ export class PersonalSheetComponent {
         return data;
     }
     
-    async fetchSheet(id) {
+    async fetchSheet(id: number) {
         if (id === null || id === undefined) {
             return;
         }
@@ -58,24 +59,24 @@ export class PersonalSheetComponent {
         window.history.pushState(null, null, newPath);
     }
 
-    onClickChild(id) {
+    onClickChild(id: number) {
         this.fetchSheet(id);
     }
 
-    onClickQuestion(e, id) {
+    onClickQuestion(e, id: number) {
         this.router.navigate([`/${c.viewGlobalQuestion}/${id}`]);
     }
 
-    onClickCurrentSheet(id) {
+    onClickCurrentSheet(id: number) {
         this.fetchSheet(id);
     }
 
-    onDroppedQuestions(questionReorder) {
+    onDroppedQuestions(questionReorder: IReorderData) {
         // console.log("::QUESTION::", questionReorder);
         this.store.dispatch(new PersonalSheetActions.questionReorder(questionReorder));
     }
 
-    onDroppedSheets(sheetReorder) {
+    onDroppedSheets(sheetReorder: IReorderData) {
         console.log("::SHEET::", sheetReorder);
         this.store.dispatch(new PersonalSheetActions.sheetReorder(sheetReorder));
     }

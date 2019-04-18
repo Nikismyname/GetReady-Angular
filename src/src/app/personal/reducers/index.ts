@@ -1,19 +1,19 @@
-import { personalIndexReducer, latestIdReducer, testReducer, testState } from "./personal-sheet.reducer";
+import { personalIndexReducer } from "./personal-sheet.reducer";
+import { testReducer, ITestState } from "./test.reducer";
+import {  IQuestionReviewState, reviewReducer } from "./question-review.reducer";
 import { ActionReducerMap } from '@ngrx/store';
 import { IQsPersonalIndex } from "../../services/models/question-sheet/qs-personal-index";
-
-
 
 export interface IPersonalState {
     personal: {
         currentPersonalIndex: IQsPersonalIndex,
-        latestId: number,
-        test: testState,
+        test: ITestState,
+        questionReview: IQuestionReviewState,
     }
 }
 
 export const reducers: ActionReducerMap<any, any> = {
     currentPersonalIndex: personalIndexReducer,
-    latestId: latestIdReducer,
     test: testReducer,
+    questionReview: reviewReducer,
 }

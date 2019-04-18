@@ -4,15 +4,17 @@ import { IAppState } from "../../../store/reducers/index";
 import { Store } from '@ngrx/store';
 import { ReadActions } from "../../../crud/actions/read.actions";
 import { PersonalSheetActions } from "../../actions/personal-sheet.actions";
-import { IScopedData } from "../../../services/models/contracts/scoped-data";
+import { IScopedData } from "../../../services/models/others/scoped-data";
 import { Subscription, Observable } from 'rxjs';
 import * as c from 'src/app/services/route-paths';
 import {
   IButtonsRenderInformation,
   IButtonRenderInformation
-} from 'src/app/services/models/contracts/button-renderer';
+} from 'src/app/services/models/others/button-renderer';
 import { filter, take } from 'rxjs/operators';
-
+import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
+import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
+//typed
 @Component({
   selector: 'getready-test',
   templateUrl: './test.component.html',
@@ -25,7 +27,7 @@ export class TestComponent implements OnDestroy {
   isSingle: boolean;
   indexSub: Subscription;
   currentInd: number;
-  currentQuestion$: Observable<any>;
+  currentQuestion$: Observable<IGlobalQuestion|IPersonalQuestion>;
   PRLoaded: boolean = false;
   firstQuestionLoaded: boolean = false;
   loaded: boolean = false;

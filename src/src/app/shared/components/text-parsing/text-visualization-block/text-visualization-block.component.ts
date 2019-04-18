@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trimEnds } from "../../../../utilities/text-formatting-helpers";
-import { ParsingData } from "../../../../services/models/other";
-
+import { ParsingData } from "../../../../services/models/others/parsing-data";
+//typed
 @Component({
   selector: 'getready-text-visualization-block',
   templateUrl: './text-visualization-block.component.html',
@@ -56,13 +56,6 @@ export class TextVisualizationBlockComponent implements OnInit {
       };
       result = newResult;
     };
-
-    // for (let i = 0; i < result.length; i++) {
-    //   if (result[i][1] === false) {
-    //     result[i][0] = makePre(parseInlineElements(result[i][0], inlineMappings));
-    //     result[i][1] = true;
-    //   }
-    // };
 
     return result;
   }

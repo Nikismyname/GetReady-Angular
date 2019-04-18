@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IItemSelectData } from 'src/app/services/models/contracts/selectors';
-import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
-
+import { IItemSelectData } from 'src/app/services/models/others/selectors';
+import { IButtonsRenderInformation } from 'src/app/services/models/others/button-renderer';
+//typed;
 export interface IItemsPickedData { 
   parentDirId: number,
   dirSelected: boolean,
@@ -21,8 +21,7 @@ export class ItemSelectorComponent implements OnInit {
   @Output() selectedItemsEmitter: EventEmitter<number[]> = new EventEmitter(); 
 
   loaded: boolean = false;
-  //data: any;
-  root: any;
+  root: IItemSelectData;
   foldedFolders: number[] = [];
  
   ngOnInit() {
@@ -82,7 +81,7 @@ export class ItemSelectorComponent implements OnInit {
     }
   }
 
-  itemsFinalSelection = ():void => { 
+  itemsFinalSelection = () => { 
     let ids = this.folders.map(x => x.items
         .filter(x=> x.selected === true)
         .map(y => y.id))

@@ -1,16 +1,15 @@
-import { Action } from "@ngrx/store";
-import { AuthActionTypes } from "../actions/auth.actions";
-import { IUser } from 'src/app/services/models/other';
-//1
+import { AuthActionTypes, AuthActionType } from "../actions/auth.actions";
+import { IUser } from "src/app/services/models/others/user";
+//1 //done
 export function authReducer(
     state: IReducerState = Object.assign({}, initialAuthState),
-    action: Action,
+    action: AuthActionType,
 ) {
     switch (action.type) {
         //EDIT
         case AuthActionTypes.LOGIN_SUCCESS:
-            let user = action["payload"];
-            let token = user["token"];
+            let user = action.payload;
+            let token = user.token;
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             let lgState = Object.assign({}, state);

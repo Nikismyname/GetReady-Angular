@@ -1,21 +1,24 @@
 <div *ngIf="PRLoaded&&(question$|async) as question">
 
-    <h1>Name</h1>
-    {{question.name}}
+    <div class="section text-center">
+        <h3>{{question.name}}</h3>
+    </div>
 
-    <h1>Question</h1>
-    <getready-text-visualisation-tblock 
-        [text]="question.question"
-    ></getready-text-visualisation-tblock>
-
-    <div *ngIf="showCommentb">
+    <div class="section">
+        <h1>Question</h1>
+        <getready-text-visualisation-tblock 
+            [text]="question.question"
+        ></getready-text-visualisation-tblock>
+    </div>
+ 
+    <div class="section" *ngIf="showCommentb">
         <h1>Comment</h1>
         <getready-text-visualisation-tblock 
             [text]="question.comment"
         ></getready-text-visualisation-tblock>
     </div>
 
-    <div *ngIf="showAnswerb">
+    <div class="section" *ngIf="showAnswerb">
         <h1>Answer</h1>
         <getready-text-visualisation-tblock 
             [text]="question.answer"

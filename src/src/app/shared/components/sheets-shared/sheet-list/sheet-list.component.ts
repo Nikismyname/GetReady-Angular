@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IQsChildIndex } from 'src/app/services/models/question-sheet/qs-child-index';
-import { IUserStatus } from 'src/app/services/models/other';
+import { IUserStatus } from "src/app/services/models/others/user-status";
 import { ReorderService } from 'src/app/services/reorder-service';
-import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
-
+import { IReorderData } from 'src/app/services/models/question/question-reorder';
+//typed
 @Component({
   selector: 'getready-sheet-list',
   templateUrl: './sheet-list.component.html',
@@ -38,7 +38,7 @@ export class SheetListComponent implements OnInit {
     let currentIndex = e.currentIndex;
     let prevIndex = e.previousIndex;
     let orderings = this.reorderService.generateReorderingsSheet(this.sheets, currentIndex, prevIndex);
-    let qr: IQuestionReorder = {
+    let qr: IReorderData = {
       orderings: orderings,
       sheetId: this.sheetId,
     };

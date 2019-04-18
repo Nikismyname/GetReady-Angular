@@ -1,4 +1,7 @@
 import { Action } from '@ngrx/store';
+import { ILoginData } from 'src/app/services/models/others/login-data';
+import { ILoginResponse } from 'src/app/services/models/others/login-response';
+import { IRegisterData } from 'src/app/services/models/others/register-data';
 //1
 export namespace AuthActionTypes {
     export const LOGIN = "[auth] login";
@@ -16,19 +19,18 @@ export namespace AuthActionTypes {
 
 /* #region  LOGIN */
 class LoginAction implements Action {
-    public type = AuthActionTypes.LOGIN;
-    constructor(public payload: any) { }
+    public readonly type = AuthActionTypes.LOGIN;
+    constructor(public readonly payload: ILoginData) { }
 }
 
 class LoginSuccessAction implements Action {
-    public type = AuthActionTypes.LOGIN_SUCCESS;
-    constructor(public payload: any) { }
-
+    public readonly type = AuthActionTypes.LOGIN_SUCCESS;
+    constructor(public readonly payload: ILoginResponse) { }
 }
 
 class LoginFailAction implements Action {
-    public type = AuthActionTypes.LOGIN_FAIL;
-    constructor(public payload: null = null) { }
+    public readonly type = AuthActionTypes.LOGIN_FAIL;
+    constructor(/** error any */public readonly payload: any) { }
 }
 /* #endregion */
 
@@ -36,19 +38,18 @@ class LoginFailAction implements Action {
 /* #region  REGISTER */
 
 class RegisterAction implements Action {
-    public type = AuthActionTypes.REGISTER;
-    constructor(public payload: any) { }
-
+    public readonly type = AuthActionTypes.REGISTER;
+    constructor(public readonly payload: IRegisterData) { }
 }
 
 class RegisterSuccessAction implements Action {
-    public type = AuthActionTypes.REGISTER_SUCCESS;
-    constructor(public payload: null = null) { }
+    public readonly type = AuthActionTypes.REGISTER_SUCCESS;
+    constructor(public readonly payload: null = null) { }
 }
 
 class RegisterFailAction implements Action {
-    public type = AuthActionTypes.REGISTER_FAIL;
-    constructor(public payload: null = null) { }
+    public readonly type = AuthActionTypes.REGISTER_FAIL;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 
 /* #endregion */
@@ -57,13 +58,13 @@ class RegisterFailAction implements Action {
 /* #region  OTHER */
 
 class LogoutAction implements Action {
-    public type = AuthActionTypes.LOGOUT;
-    constructor(public payload: null = null) { }
+    public readonly type = AuthActionTypes.LOGOUT;
+    constructor(public readonly payload: null = null) { }
 }
 
 class ClearAuthState implements Action {
-    public type = AuthActionTypes.CLEAR_AUTH_STATE;
-    constructor(public payload: null = null) { }
+    public readonly type = AuthActionTypes.CLEAR_AUTH_STATE;
+    constructor(public readonly payload: null = null) { }
 }
 
 /* #endregion */
@@ -80,4 +81,15 @@ export namespace AuthActions {
     export const logout = LogoutAction;
     export const clear = ClearAuthState;
 };
+
+export type AuthActionType 
+    = LoginAction
+    | LoginSuccessAction
+    | LoginFailAction
+    | RegisterAction
+    | RegisterSuccessAction
+    | RegisterFailAction
+    | LogoutAction
+    | ClearAuthState
+    
 

@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
 import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
 import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
-import { ISheetForAllItems } from 'src/app/services/models/contracts/sheet-for-all-items';
-import { ISheetForAllFolders } from 'src/app/services/models/contracts/sheet-for-all-folders';
-//12
+import { ISheetForAllItems } from 'src/app/services/models/others/sheet-for-all-items';
+import { ISheetForAllFolders } from 'src/app/services/models/others/sheet-for-all-folders';
+//12 // done
 export namespace ReadActionTypes {
     export const QUESTION = "[read] question";
     export const QUESTION_SUCCESS = "[read] question-success";
@@ -27,42 +27,36 @@ export namespace ReadActionTypes {
 }
 
 /* #region Question */
-/** data: question id */
 class QuestionAction implements Action {
-    public type = ReadActionTypes.QUESTION;
-    constructor(public payload: IScopedData<number>) { }
+    public readonly type = ReadActionTypes.QUESTION;
+    constructor(/** data: question id */public readonly payload: IScopedData<number>) { }
 }
 
-/** question */
 class QuestionSuccessAction implements Action {
-    public type = ReadActionTypes.QUESTION_SUCCESS;
-    constructor(public payload: IGlobalQuestion|IPersonalQuestion) { }
+    public readonly type = ReadActionTypes.QUESTION_SUCCESS;
+    constructor(/** question */public readonly payload: IGlobalQuestion|IPersonalQuestion) { }
 }
 
-/**error*/
 class QuestionActionFail implements Action {
-    public type = ReadActionTypes.QUESTION_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = ReadActionTypes.QUESTION_FAILED;
+    constructor(/**error any */public readonly payload: any) { }
 }
 /* #endregion */
 
 /* #region  Q Sheet */
-/** data: sheet id */
 class QuestionSheetAction implements Action {
-    public type = ReadActionTypes.QUESTION_SHEET;
-    constructor(public payload: IScopedData<number>) { }
+    public readonly type = ReadActionTypes.QUESTION_SHEET;
+    constructor(/** data: sheet id */public readonly payload: IScopedData<number>) { }
 }
 
-/** question sheet */
 class QuestionSheetSuccessAction implements Action {
-    public type = ReadActionTypes.QUESTION_SHEET_SUCCESS;
-    constructor(public payload: IQuestionSheet) { }
+    public readonly type = ReadActionTypes.QUESTION_SHEET_SUCCESS;
+    constructor(/** question sheet */public readonly payload: IQuestionSheet) { }
 }
 
-/**error */
-class QuestionSheetFailAction implements Action {
-    public type = ReadActionTypes.QUESTION_SHEET_FAILED;
-    constructor(public payload: any) { }
+class QuestionSheetFailedAction implements Action {
+    public readonly type = ReadActionTypes.QUESTION_SHEET_FAILED;
+    constructor(/**error any*/public readonly payload: any) { }
 }
 /* #endregion */
 
@@ -70,81 +64,81 @@ class QuestionSheetFailAction implements Action {
 
 //ITEMS 
 
-/** isGlobal */
 class GetAllItemsAction implements Action {
-    public type = ReadActionTypes.GET_ALL_ITEMS;
-    constructor(public payload: boolean) { }
+    public readonly type = ReadActionTypes.GET_ALL_ITEMS;
+    constructor(/** isGlobal */public readonly payload: boolean) { }
 }
 
-/** array of for all items */
 class GetAllItemsSuccessAction implements Action {
-    public type = ReadActionTypes.GET_ALL_ITEMS_SUCCESS;
-    constructor(public payload: ISheetForAllItems[]) { }
+    public readonly type = ReadActionTypes.GET_ALL_ITEMS_SUCCESS;
+    constructor(/**all sheets with items*/public readonly payload: ISheetForAllItems[]) { }
 }
 
-/** error */
 class GetAllItemsFailedAction implements Action {
-    public type = ReadActionTypes.GET_ALL_ITEMS_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = ReadActionTypes.GET_ALL_ITEMS_FAILED;
+    constructor(/** error any*/ public readonly payload: any) { }
 }
 
 //FOLDERS
 
-/** isGlobal */
 class GetAllFoldersAction implements Action {
-    public type = ReadActionTypes.GET_ALL_FOLDERS;
-    constructor(public payload: boolean) { }
-
+    public readonly type = ReadActionTypes.GET_ALL_FOLDERS;
+    constructor(/** isGlobal */public readonly payload: boolean) { }
 }
 
-/** array of for all folders */
 class GetAllFoldersSuccessAction implements Action {
-    public type = ReadActionTypes.GET_ALL_FOLDERS_SUCCESS;
-    constructor(public payload: ISheetForAllFolders[]) { }
+    public readonly type = ReadActionTypes.GET_ALL_FOLDERS_SUCCESS;
+    constructor(/** array of for all folders */public readonly payload: ISheetForAllFolders[]) { }
 }
 
-/** errors */
 class GetAllFoldersFailedAction implements Action {
-    public type = ReadActionTypes.GET_ALL_FOLDERS_FAILED;
-    constructor(public payload: any) { }
+    public readonly type = ReadActionTypes.GET_ALL_FOLDERS_FAILED;
+    constructor(/** errors any */ public readonly payload: any) { }
 }
 
 /* #endregion */
 
 class ClearReadSuccessesAction implements Action {
-    public type = ReadActionTypes.CLEAR_READ_SUCCESSES;
-    constructor(public payload: null = null) { }
+    public readonly type = ReadActionTypes.CLEAR_READ_SUCCESSES;
+    constructor(public readonly payload: null = null) { }
 }
 
 export namespace ReadActions {
-    /** data: question id */
     export const Question = QuestionAction;
-    /** question */
     export const QuestionsSuccess = QuestionSuccessAction;
-    /**error*/
     export const QuestionFail = QuestionActionFail;
 
-    /** data: sheet id */
     export const QuestionSheet = QuestionSheetAction;
-    /** question sheet */
     export const QuestionSheetSuccess = QuestionSheetSuccessAction;
-    /**error */
-    export const QuestionSheetFail = QuestionSheetFailAction
+    export const QuestionSheetFail = QuestionSheetFailedAction
 
-    /** isGlobal */
     export const GetAllFolders = GetAllFoldersAction; 
-    /** array of for all items */
     export const GetAllFoldersSuccess = GetAllFoldersSuccessAction; 
-    /** error */
     export const GetAllFoldersFailed = GetAllFoldersFailedAction;
     
-    /** isGlobal */
     export const GetAllItems = GetAllItemsAction;
-    /** array of for all folders */
     export const GetAllItemsSuccess = GetAllItemsSuccessAction; 
-    /** errors */
     export const GetAllItemsFailed = GetAllItemsFailedAction;
 
     export const ClearReadSuccesses = ClearReadSuccessesAction;
 };
+
+export type ReadActionType
+    =QuestionAction
+    |QuestionSuccessAction
+    | QuestionActionFail
+    
+    |QuestionSheetAction
+    |QuestionSheetSuccessAction
+    |QuestionSheetFailedAction
+
+    |GetAllFoldersAction
+    |GetAllFoldersSuccessAction
+    |GetAllFoldersFailedAction
+
+    |GetAllItemsAction
+    |GetAllItemsSuccessAction
+    |GetAllItemsFailedAction
+
+    |ClearReadSuccessesAction
 

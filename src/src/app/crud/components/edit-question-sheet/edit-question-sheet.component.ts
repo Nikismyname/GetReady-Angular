@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { ActivatedRoute } from "@angular/router"; 
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { IQuestionSheet } from 'src/app/services/models/question-sheet/question-sheet';
-
+import { IEditSheet } from 'src/app/services/models/question-sheet/edit-sheet';
+//typed
 @Component({
   selector: 'getready-edit-question-sheet',
   templateUrl: './edit-question-sheet.component.html',
@@ -20,9 +22,7 @@ export class EditQuestionSheetComponent {
 
   global: boolean;
   id: number;
-  errors: object = {};
   formData: FormData;
-  // loaded: boolean = false;
   resultSub: ISubscription;
 
   constructor(
@@ -96,8 +96,8 @@ export class EditQuestionSheetComponent {
     );
   }
 
-  onFormSubmit(input) {
-    input["id"] = this.id;
+  onFormSubmit(input: IEditSheet) {
+    input.id = this.id;
     let data: IScopedData = { data: input, global: this.global };
     this.store.dispatch(new CudActions.editQSheet(data));
   }

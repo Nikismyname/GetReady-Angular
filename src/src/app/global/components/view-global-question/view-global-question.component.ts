@@ -3,9 +3,11 @@ import { Location } from "@angular/common";
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
+import { IButtonsRenderInformation } from 'src/app/services/models/others/button-renderer';
 import { take } from 'rxjs/operators';
-
+import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
+import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
+//typed
 @Component({
   selector: 'getready-view-global-question',
   templateUrl: './view-global-question.component.html',
@@ -13,7 +15,7 @@ import { take } from 'rxjs/operators';
 })
 export class ViewGlobalQuestionComponent {
 
-  question$: Observable<any>;
+  question$: Observable<IGlobalQuestion|IPersonalQuestion>;
   PRLoaded: boolean = false;
 
   showCommentb: boolean = false; 

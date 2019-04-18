@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { ActivatedRoute } from "@angular/router";
 import { ICrudState } from "../../reducers";
 import { Store } from "@ngrx/store";
 import { CudActions } from "../../actions/cud.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { take } from 'rxjs/operators';
- 
+import { IEditQuestion } from 'src/app/services/models/question/edit-question';
+ //typed
 @Component({
   selector: 'getready-edit-question',
   templateUrl: './edit-question.component.html',
@@ -52,8 +54,8 @@ export class EditQuestionComponent {
     });
   }
 
-  async onFormSubmit(input) {
-    input["id"] = this.id;
+  async onFormSubmit(input: IEditQuestion) {
+    input.id = this.id;
     let data = { data: input, global: this.global };
     this.store.dispatch(new CudActions.editQuestion(data));
   }

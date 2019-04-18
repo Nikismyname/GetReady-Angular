@@ -1,0 +1,35 @@
+.section{
+    border: 3px solid black;
+    border-radius: 25px;
+    background-color: #32383e;
+    padding: 2em; 
+    margin-bottom: 2em; 
+}
+
+textarea {
+    background-color: #272b30;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+.div-ceterer {
+    text-align: center;
+}
+
+.your-answer {
+    border: 2px solid greenyellow;
+}
+
+.question {
+    border: 2px solid rgb(172, 47, 145)
+}
+
+.comment {
+    border: 2px solid rgb(150, 139, 147)
+}
+
+.answer {
+    border: 2px solid rgb(255, 175, 70)
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { trimEnds, replaceTags } from "../../../../utilities/text-formatting-helpers";
-
+import { InlineParsingData } from "src/app/services/models/others/inline-parsing-data";
+//typed
 @Component({
   selector: 'getready-text-visualization-inline',
   templateUrl: './text-visualization-inline.component.html',
@@ -11,15 +12,15 @@ export class TextVisualizationInlineComponent implements OnInit {
   constructor() { }
 
   @Input() text: string;
-  formatetText: any[] = [];
+  parsedItems: InlineParsingData[] = [];
   loaded: boolean = false;
-  
+
   ngOnInit() {
-    this.formatetText = this.parseInlineElements(this.text);
+    this.parsedItems = this.parseInlineElements(this.text);
     this.loaded = true;
   }
 
-  parseInlineElements(text) {
+  parseInlineElements(text): InlineParsingData[] {
     let tags = ["<<em>>", "<<s>>"];
     let lines = [];
     let currentIndexForLine = [];
@@ -38,7 +39,7 @@ export class TextVisualizationInlineComponent implements OnInit {
       }
     };
 
-    let result = [];
+    let result:InlineParsingData[] = [];
     let prevIndex = 0;
 
     while (true) {

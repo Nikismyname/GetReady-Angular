@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../../reducers';
 import { AuthActions } from "../../actions/auth.actions";
@@ -7,7 +8,8 @@ import { Subscription } from 'rxjs';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as c from "../../../services/route-paths";
-//1
+import { IRegisterData } from 'src/app/services/models/others/register-data';
+//1 //typed
 @Component({
   selector: 'getready-register',
   templateUrl: './register.component.html',
@@ -70,7 +72,7 @@ export class RegisterComponent implements OnDestroy {
       "Register Form", "Register", false, false);
   }
 
-  onFormSubmit(data) {
+  onFormSubmit(data: IRegisterData) {
     this.store.dispatch(new AuthActions.register(data));
   }
 

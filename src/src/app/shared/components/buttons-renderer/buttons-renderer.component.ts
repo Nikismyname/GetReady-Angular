@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IButtonsRenderInformation } from 'src/app/services/models/contracts/button-renderer';
-
+import { IButtonsRenderInformation } from 'src/app/services/models/others/button-renderer';
+//typed
 @Component({
   selector: 'getready-buttons-renderer',
   templateUrl: './buttons-renderer.component.html',

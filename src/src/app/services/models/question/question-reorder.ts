@@ -1,4 +1,4 @@
-export interface IQuestionReorder { 
+export interface IReorderData { 
 
     sheetId: number,
     

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { ActivatedRoute } from "@angular/router";
 import { ICrudState } from "../../reducers";
 import { Store } from "@ngrx/store";
@@ -8,7 +9,7 @@ import { CudActions } from "../../actions/cud.actions";
 import { ISubscription } from "rxjs/Subscription";
 import { Validators } from '@angular/forms';
 import { ICreateQuestion } from 'src/app/services/models/question/create-question';
-
+//typed
 @Component({
   selector: 'getready-create-question',
   templateUrl: './create-question.component.html',

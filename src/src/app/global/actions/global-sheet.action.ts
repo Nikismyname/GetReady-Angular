@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
-import { IQuestionReorder } from 'src/app/services/models/question/question-reorder';
+import { IReorderData } from 'src/app/services/models/question/question-reorder';
 import { ICopyQuestionData } from 'src/app/services/models/question/copy-questions-data';
-
+import { IQsGlobalIndex } from 'src/app/services/models/question-sheet/qs-global-index';
+//done
 export namespace GlobalSheetActionTypes {
     export const LOAD = "[GlobalSheet] load";
     export const LOAD_SUCCESS = "[GlobalSheet] loaded";
@@ -20,150 +21,79 @@ export namespace GlobalSheetActionTypes {
     export const COPY_QUESTIONS_FAILED = "[GlobalShet] copy questions failed";
 
     export const CLEAR_SUCCESS_STATES = "[GlobalShet] clear success states";
-
-    export const SAVE_LATEST_ID = "[GlobalSheet] save latest id";
 }
-
-// export const GlobalSheetLoadAction = createAction(
-//    GlobalSheetActionTypes.LOAD,
-//     props<{ currentGlobalIndex: QsGlobalIndex }>()
-// );
-
 
 /* #region  Load Actions */
 class GlobalSheetLoadAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD;
-    public payload: number;
-
-    constructor(
-        public sheetId: number,
-    ) {
-        this.payload = sheetId;
-    }
+    public readonly type = GlobalSheetActionTypes.LOAD;
+    constructor(/**sheet id*/public readonly payload: number){}
 }
 
 class GlobalSheetLoadSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD_SUCCESS;
-    public payload;
-
-    constructor(
-        public sheet: any,
-    ) {
-        this.payload = sheet;
-    }
+    public readonly type = GlobalSheetActionTypes.LOAD_SUCCESS;
+    constructor(/**sheet id*/public readonly payload: IQsGlobalIndex){}
 }
 
 class GlobalSheetLoadFailedAction implements Action {
-    public type = GlobalSheetActionTypes.LOAD_FAILED;
-    public payload;
-
-    constructor(
-        public sheet: any,
-    ) {
-        this.payload = sheet;
-    }
+    public readonly type = GlobalSheetActionTypes.LOAD_FAILED;
+    constructor(/**error any*/public readonly payload: any){}
 }
 /* #endregion */
 
 /* #region GLOBAL_QUESTION_REORDER_ACTIONS */
 class QuestionsReorderAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER;
-    public payload: IQuestionReorder;
-
-    constructor(
-        public reorderings: IQuestionReorder,
-    ) {
-        this.payload = reorderings;
-    }
+    public readonly type = GlobalSheetActionTypes.QUESTIONS_REORDER;
+    constructor(/**questions reorder data*/public readonly payload: IReorderData){}
 }
 
 class QuestionsReorderSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
-    public payload: any[];
-
-    constructor(
-        public reorderings: any[],
-    ) {
-        this.payload = reorderings;
-    }
+    public readonly type = GlobalSheetActionTypes.QUESTIONS_REORDER_SUCCESS;
+    constructor(/**void*/public readonly payload: null = null){}
 }
 
 class QuestionsReorderFailAction implements Action {
-    public type = GlobalSheetActionTypes.QUESTIONS_REORDER_FAILED;
-    public payload: any[];
-
-    constructor(
-        public reorderings: any[],
-    ) {
-        this.payload = reorderings;
-    }
+    public readonly type = GlobalSheetActionTypes.QUESTIONS_REORDER_FAILED;
+    constructor(/**error any*/public readonly payload: any){}
 }
 /* #endregion */
 
 /* #region  CHILD_SHEETS_REORDER_ACTION */
 class SheetReorderAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER;
-    public payload: any;
-
-    constructor(
-        public data: any,
-    ) {
-        this.payload = data;
-    }
+    public readonly type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER;
+    constructor(public readonly payload: IReorderData ){}
 }
 
 class SheetReorderSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
+    public readonly type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_SUCCESS;
+    constructor(/** void */public readonly payload: null = null ){}
 }
 
 class SheetReorderFailAction implements Action {
-    public type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
+    public readonly type = GlobalSheetActionTypes.SUBDIRECTORIES_REORDER_FAILED;
+    constructor(/** error any */public readonly payload: any ){}
 }
 /* #endregion */
 
 /* #region  COPY QUESTIONS */
 class CopyQuestionsAction implements Action {
-    public type = GlobalSheetActionTypes.COPY_QUESTIONS;
-    public payload: ICopyQuestionData;
-
-    constructor(
-        public latestId: ICopyQuestionData,
-    ) {
-        this.payload = latestId;
-    }
+    public readonly type = GlobalSheetActionTypes.COPY_QUESTIONS;
+    constructor(public readonly payload: ICopyQuestionData){}
 }
 
 class CopyQuestionsSuccessAction implements Action {
-    public type = GlobalSheetActionTypes.COPY_QUESTIONS_SUCCESS;
-    public payload = null;
+    public readonly type = GlobalSheetActionTypes.COPY_QUESTIONS_SUCCESS;
+    constructor(/** void */public readonly payload: null = null ){}
 }
 
 class CopyQuestionsFailedAction implements Action {
-    public type = GlobalSheetActionTypes.COPY_QUESTIONS_FAILED;
-    public payload: any;
-
-    constructor(
-        public error: any,
-    ) {
-        this.payload = error;
-    }
+    public readonly type = GlobalSheetActionTypes.COPY_QUESTIONS_FAILED;
+    constructor(/**error any*/public readonly payload: any){}
 }
 /* #endregion */
 
-class SaveLatestIdAction implements Action {
-    public type = GlobalSheetActionTypes.SAVE_LATEST_ID;
-    public payload: [];
-
-    constructor(
-        public latestId: any,
-    ) {
-        this.payload = latestId;
-    }
-}
-
 class ClearSuccessesAction implements Action {
-    public type = GlobalSheetActionTypes.CLEAR_SUCCESS_STATES;
-    public payload = null;
+    public readonly type = GlobalSheetActionTypes.CLEAR_SUCCESS_STATES;
+    constructor(public readonly payload: null = null){}
 }
 
 export namespace GlobalSheetActions {
@@ -183,11 +113,25 @@ export namespace GlobalSheetActions {
     export const copyQuestionsSuccess = CopyQuestionsSuccessAction;
     export const copyQuestionsFailed = CopyQuestionsFailedAction;
 
-    export const saveLatestId = SaveLatestIdAction;
-
     export const clearSuccesses = ClearSuccessesAction;
 };
 
-// export type GlobalSheetAction = GlobalSheetLoadAction /* | otherActionName*/
+export type GlobalSheetActionType 
+    =GlobalSheetLoadAction
+    |GlobalSheetLoadSuccessAction
+    |GlobalSheetLoadFailedAction
 
+    |QuestionsReorderAction
+    |QuestionsReorderSuccessAction
+    |QuestionsReorderFailAction
+
+    |SheetReorderAction
+    |SheetReorderSuccessAction
+    |SheetReorderFailAction
+
+    |CopyQuestionsAction
+    |CopyQuestionsSuccessAction
+    |CopyQuestionsFailedAction
+
+    |ClearSuccessesAction
 

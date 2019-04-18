@@ -47,9 +47,9 @@ import { ToastrModule } from "ngx-toastr";
     StoreDevtoolsModule.instrument({
       name:"GetReady", 
     }),
-
+ 
     ToastrModule.forRoot(),
-  ], 
+  ],  
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

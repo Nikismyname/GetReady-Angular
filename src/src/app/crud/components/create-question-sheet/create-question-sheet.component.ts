@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormInputData, FormData } from "../../../services/models/other";
+import { FormInputData } from "../../../services/models/others/form-input-data";
+import { FormData } from "../../../services/models/others/form-data";
 import { ActivatedRoute } from "@angular/router"; 
 import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { ICrudState } from '../../reducers';
 import { Location } from '@angular/common';
 import { CudActions } from "../../actions/cud.actions";
-import { IScopedData } from 'src/app/services/models/contracts/scoped-data';
+import { IScopedData } from 'src/app/services/models/others/scoped-data';
 import { Validators } from '@angular/forms';
-
+import { ICreateSheet } from 'src/app/services/models/question-sheet/create-sheet';
+//typed
 @Component({
   selector: 'getready-create-question-sheet',
   templateUrl: './create-question-sheet.component.html',
@@ -77,8 +79,8 @@ export class CreateQuestionSheetComponent implements OnInit {
     });
   }
 
-  async onFormSubmit(input) {
-    input.parentSheetId = this.parentId;
+  async onFormSubmit(input: ICreateSheet) {
+    input.parentSheetId = Number(this.parentId);
     console.log("CREATE DATA", input);
     let data: IScopedData = { data: input, global: this.global };
     this.store.dispatch(new CudActions.createQSheet(data));

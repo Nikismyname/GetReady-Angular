@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
-import { IScopedData } from './models/contracts/scoped-data';
-import { httpFactory } from '@angular/http/src/http_module';
-import { IQuestionReorder } from './models/question/question-reorder';
+import { IScopedData } from './models/others/scoped-data';
+import { IReorderData } from './models/question/question-reorder';
 import { INewScoreData } from './models/question/new-score-data';
 import { ICopyQuestionData } from './models/question/copy-questions-data';
-import { IPQForUserReview } from './models/contracts/pq-for_user-review';
+import { IPQForUserReview } from './models/others/pq-for-user-review';
 
 @Injectable({
     providedIn: "root",
@@ -55,11 +54,11 @@ export class QuestionService {
     //     return this.http.post(path, JSON.stringify(d.data));
     // }
 
-    reorderGlobalObs = (d: IQuestionReorder) => { 
+    reorderGlobalObs = (d: IReorderData) => { 
         return this.http.post("Question/ReorderGlobal", JSON.stringify(d));
     }
 
-    reorderPersonalObs = (d: IQuestionReorder) => { 
+    reorderPersonalObs = (d: IReorderData) => { 
         return this.http.post("Question/ReorderPersonal", JSON.stringify(d));
     }
 
