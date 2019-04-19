@@ -22,15 +22,19 @@ export class AdminGuard implements CanActivate {
         let user: IUser;
         this.store.select(x => x.auth.user).pipe(take(1)).subscribe(x => {
             user = x;
-            console.log("GUARD GOT USER");
         })
 
-        if (user.role === "Admin") {
+        if (user && user.role === "Admin") {
             return true;
         }
 
-        this.router.navigate([""]).then
-            (x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
+        if (user) {
+            this.router.navigate([""])
+                .then(x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
+        } else {
+            this.router.navigate(["/auth/login"])
+                .then(x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
+        }
 
         return false;
     }

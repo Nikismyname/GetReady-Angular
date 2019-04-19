@@ -22,30 +22,30 @@ export const textFormattingMappings = [
 //]
 
 ///AUTH
-export const loginPath      = "auth/login";
-export const registerPath   = "auth/register";
+export const loginPath      = "auth/login"; //X
+export const registerPath   = "auth/register"; //X
 ///---
 ///CRUD 
-export const createSheetPath    = "crud/question-sheet/create";
-export const editSheetPath      = "crud/question-sheet/edit";
-export const deleteSheetPath    = "crud/question-sheet/delete";
+export const createSheetPath    = "crud/question-sheet/create"; //x
+export const editSheetPath      = "crud/question-sheet/edit";//x
+export const deleteSheetPath    = "crud/question-sheet/delete";//x
 
-export const createQuestionPath = "crud/question/create";
-export const editQuestionPath   = "crud/question/edit";
-export const deleteQuestionPath = "crud/question/delete";
+export const createQuestionPath = "crud/question/create";//x
+export const editQuestionPath   = "crud/question/edit";//x
+export const deleteQuestionPath = "crud/question/delete";//x
 ///...
 ///PERSONAL
-export const personalQuestionSheetsPath = "personal/question-sheet";
-export const testPath                   = "personal/test";
-export const reviewQuestionsPath        = "personal/questions/review";
+export const personalQuestionSheetsPath = "personal/question-sheet";//x
+export const testPath                   = "personal/test";//x
+export const reviewQuestionsPath        = "personal/questions/review";//x
 ///...
 ///GLOBAL
-export const globalQuestionSheetsPath    = "global/question-sheet";
-export const viewGlobalQuestion          = "global/question/global/view";
-export const copyQuestionsPath           = "global/question/copy";
+export const globalQuestionSheetsPath    = "global/question-sheet";//x
+export const viewGlobalQuestion          = "global/question/global/view";//x
+export const copyQuestionsPath           = "global/question/copy";//x
 ///...
 ///ADMIN
-export const filterQuestionsPath = "admin/questions/filter";
+export const filterQuestionsPath = "admin/questions/filter";//x
 ///...
 
 

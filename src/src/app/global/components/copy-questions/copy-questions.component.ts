@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IAppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { ReadActions } from "../../../crud/actions/read.actions";
+import { PersonalSheetActions } from "../../../personal/actions/personal-sheet.actions"; 
 import { map } from 'rxjs/operators';
 import { IFolderSelectData, IItemSelectData } from 'src/app/services/models/others/selectors';
 import { Observable, Subscription } from 'rxjs';
@@ -81,8 +82,8 @@ export class CopyQuestionsComponent {
     }));
 
     this.successSub = this.store.select(x => x.global.copyQuestionsSuccess).subscribe(x => {
-      console.log("COPY_QUESTIONS_SUCCESS_",x);
       if (x) {
+        this.store.dispatch(new PersonalSheetActions.load(this.selectedFolder));
         this.router.navigate([c.personalQuestionSheetsPath+"/"+ this.selectedFolder]);
       }
     });

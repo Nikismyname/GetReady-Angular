@@ -1,6 +1,6 @@
-<div *ngIf="loaded" cdkDropList (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="colNumber">
+<div *ngIf="loaded" cdkDropList [cdkDropListDisabled]="!user.isAdmin" (cdkDropListDropped)="onDropped($event)" [cdkDropListData]="colNumber">
   <ng-template ngFor let-question [ngForOf]="questions">
-        <div cdkDrag>
+        <div cdkDrag >
             <div class="box-custom-placeholder" *cdkDragPlaceholder></div>
             <getready-question
               [question]="question"

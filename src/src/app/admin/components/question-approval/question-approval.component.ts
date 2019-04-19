@@ -14,6 +14,8 @@ import { IApproveQuestionData } from 'src/app/services/models/others/approve-que
 import { IGlobalQuestion } from 'src/app/services/models/question/global-question';
 import { IPersonalQuestion } from 'src/app/services/models/question/personal-question';
 import { IFolderSelectData } from 'src/app/services/models/others/selectors';
+import { take, filter } from 'rxjs/operators';
+import { GlobalSheetActions } from 'src/app/global/actions/global-sheet.action';
 //typed
 @Component({
   selector: 'getready-question-approval',
@@ -25,7 +27,6 @@ export class QuestionApprovalComponent implements OnDestroy {
   questionIds: number[];
   id: string;
   dataSub: Subscription;
-  questionSuccessSub: Subscription;
   currentQuestion$: Observable<IGlobalQuestion | IPersonalQuestion>;
   PRLoaded: boolean = false;
   firstQuestionLoaded: boolean = false;
@@ -33,6 +34,7 @@ export class QuestionApprovalComponent implements OnDestroy {
   foldersLoaded: boolean = false;
   folders: IFolderSelectData[];
   folderSub: Subscription;
+  currentGlobalId: number;
 
   shouldShowComment: boolean = false;
   shouldShowAnswer: boolean = false;
@@ -46,14 +48,16 @@ export class QuestionApprovalComponent implements OnDestroy {
   ) {
     this.currentQuestion$ = this.store.select(x => x.crud.read.question.question);
 
-    this.questionSuccessSub = store
+    store
       .select(x => x.crud.read.question.success)
+      .pipe(filter(x=> x),take(1))
       .subscribe(x => {
-        if (x) {
           this.firstQuestionLoaded = true;
-          this.questionSuccessSub.unsubscribe();
-        }
       });
+
+    this.store.select(x => x.global.currentGlobalIndex.id).pipe(take(1)).subscribe(x => {
+      this.currentGlobalId = x;
+    })
 
     this.store.dispatch(new AdminActions.getIdsForApproval());
     this.dataSub = this.store.select(x => x.admin.idsForApproval).subscribe(x => {
@@ -103,6 +107,11 @@ export class QuestionApprovalComponent implements OnDestroy {
 
   folderSelected(id: number) {
     this.selectingDir = false;
+    if (id === this.currentGlobalId) {
+      this.store.select(x => x.admin.questionApproved.success).pipe(filter(x => x), take(1)).subscribe(x => {
+        this.store.dispatch(new GlobalSheetActions.load(id));
+      })
+    };
     let data: IApproveQuestionData = { globalParentSheetId: id, questionId: this.questionIds[this.index] };
     this.store.dispatch(new AdminActions.approveQuestion(data));
     this.next();
@@ -150,7 +159,6 @@ export class QuestionApprovalComponent implements OnDestroy {
     if (this.dataSub) {
       this.dataSub.unsubscribe();
     }
-    this.questionSuccessSub.unsubscribe();
     if (this.folderSub) {
       this.folderSub.unsubscribe();
     }

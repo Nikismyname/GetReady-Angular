@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { IRegisterData } from './models/others/register-data';
+import { ILoginData } from './models/others/login-data';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    constructor(private http: HttpClient) {
+
+    constructor(
+        private http: HttpClient) {
     }
 
-    registerObs = (data) => {
-        return this.http.post("User/Register", JSON.stringify(data));
+    registerObs = (data: IRegisterData) => { 
+        return this.http.post<void>("User/Register", JSON.stringify(data));
     }
 
-    loginObs = (data) => {
-        return this.http.post("User/Login", JSON.stringify(data));
-    } 
+    loginObs = (data: ILoginData) => {
+        return this.http.post<void>("User/Login", JSON.stringify(data));
+    }
 }

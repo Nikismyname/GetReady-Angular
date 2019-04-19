@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
-
+import { IApproveQuestionData } from './models/others/approve-question-data';
+//typed
 @Injectable({
     providedIn: "root",
 })
@@ -11,14 +12,14 @@ export class AdminService {
     }
 
     getQuestionIdsForApprovalObs = () => { 
-        return this.http.get("Question/GetQuestionIdsForApproval");
+        return this.http.get<number[]>("Question/GetQuestionIdsForApproval");
     }
 
-    approveQuestionObs = (data: any) => { 
-        return this.http.post("Question/ApproveQuestion", JSON.stringify(data));
+    approveQuestionObs = (data: IApproveQuestionData) => { 
+        return this.http.post<void>("Question/ApproveQuestion", JSON.stringify(data));
     }
 
     rejectQuestionObs = (id: number) => { 
-        return this.http.post("Question/RejectQuestion", JSON.stringify(id));
+        return this.http.post<void>("Question/RejectQuestion", JSON.stringify(id));
     }
 }

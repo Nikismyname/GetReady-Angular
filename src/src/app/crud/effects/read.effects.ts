@@ -1,5 +1,5 @@
-import { Effect, Actions, ofType } from "@ngrx/effects";
-import { Observable, of } from 'rxjs';
+import { Effect, Actions } from "@ngrx/effects";
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ReadActionTypes, ReadActions } from "../actions/read.actions";
 import { QuestionSheetService } from 'src/app/services/question-sheet-service';

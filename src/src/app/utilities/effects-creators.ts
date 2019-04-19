@@ -77,7 +77,7 @@ export function createEffect(
                                     return of(new GeneralErrorWasIgnoredAction(response));
                                 }
                                 if (d.useToastrForGErr) {
-                                    if (typeof response.error === "string") {
+                                    if (typeof response.error === "string" && response.error.length<500) {
                                         d.toastr.error(response.error, "Error");
                                     }
                                 }

@@ -8,6 +8,7 @@ import { PublicSheetGuard } from '../services/data-guards/public-sheet.guard';
 import { AllFoldersGuard } from '../services/data-guards/all-folders.guard';
 import { AllItemsGuard } from '../services/data-guards/all-items.guard';
 import { QuestionGuard3 } from '../services/data-guards/question.guard.3';
+import { UserGuard } from '../services/guards/user.guard';
 //guarded
 const routes: Routes = [
     {
@@ -24,7 +25,7 @@ const routes: Routes = [
     {
         path: c.forFeatureRouting(c.copyQuestionsPath) + "/:id",
         component: CopyQuestionsComponent,
-        canActivate: [AllFoldersGuard, AllItemsGuard], 
+        canActivate: [UserGuard, AllFoldersGuard, AllItemsGuard], 
         data: {folders: false, items: true}
       },
 ]

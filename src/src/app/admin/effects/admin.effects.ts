@@ -48,7 +48,7 @@ export class AdminEffects {
         actions: this.actions,
         serviceMethod: this.adminService.approveQuestionObs,
         actionType: AdminActionTypes.APPROVE_QUESTION,
-        successActions: [AdminActions.approveQuestionSuccess],
+        successActions: [AdminActions.approveQuestionSuccess, AdminActions.clearSuccesses],
         toastr: this.toastr,
         validationErrorAction: null,
         errorAction: AdminActions.approveQuestionFailed,

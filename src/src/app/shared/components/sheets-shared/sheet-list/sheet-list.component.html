@@ -1,4 +1,4 @@
-<div *ngIf="loaded" cdkDropList (cdkDropListDropped)="onDropped($event)">
+<div *ngIf="loaded" [cdkDropListDisabled]="!user.isAdmin" cdkDropList (cdkDropListDropped)="onDropped($event)">
   <ng-template ngFor let-child [ngForOf]="sheets">
     <!-- <pre>{{child | json}}</pre> -->
     <div cdkDrag>

@@ -32,15 +32,21 @@ export class CrudGuard implements CanActivate {
             if (user && user.role === "Admin") {
                 return true;
             } else {
-                this.router.navigate([""]).then
-                    (x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
-                return false;
+                if (user) {
+                    this.router.navigate([""]).
+                        then(x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
+                    return false;
+                } else {
+                    this.router.navigate(["/auth/login"]).
+                        then(x => this.toastr.info("Please log as admin to access that page!", "Admin Required"));
+                    return false;
+                }
             }
         } else {
             if (user) {
                 return true;
             } else {
-                this.router.navigate([""]).then
+                this.router.navigate(["/auth/login"]).then
                 (x => this.toastr.info("Please log in to access that page!", "User Required"));
                 return false;
             }
