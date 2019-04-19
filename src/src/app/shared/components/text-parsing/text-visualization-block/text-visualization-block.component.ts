@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { trimEnds } from "../../../../utilities/text-formatting-helpers";
+import { trimEnds, replaceTags } from "../../../../utilities/text-formatting-helpers";
 import { ParsingData } from "../../../../services/models/others/parsing-data";
 //typed
 @Component({
@@ -9,7 +9,7 @@ import { ParsingData } from "../../../../services/models/others/parsing-data";
 })
 export class TextVisualizationBlockComponent implements OnInit {
 
-  constructor() { }
+  constructor() { } 
 
   @Input() text: string;
   parsedData: ParsingData[];
@@ -46,6 +46,7 @@ export class TextVisualizationBlockComponent implements OnInit {
           if (i % 2 === toEqual) {
             chunk = trimEnds(chunk);
             if (tag === "<<c>>") {
+              chunk = replaceTags(chunk);
               chunk = window["PR"].prettyPrintOne(chunk);
             }
             newResult = newResult.concat(new ParsingData(chunk, true, tag));

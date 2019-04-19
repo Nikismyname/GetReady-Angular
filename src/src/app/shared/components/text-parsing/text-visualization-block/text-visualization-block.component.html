@@ -13,6 +13,12 @@
         [innerHTML] = "section.text"
       ></code>
 
+      <div
+        class="pl-1 pr-1"
+        style="white-space: pre; background-color: #272b30; display: inline-block" 
+        *ngIf="section.type==='<<e>>'"
+      >{{section.text}}</div>
+
       <br *ngIf="section.type==='<br>'" />
     </span>
 </div>

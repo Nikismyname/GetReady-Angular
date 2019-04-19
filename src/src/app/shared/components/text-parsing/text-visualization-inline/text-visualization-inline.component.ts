@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { trimEnds, replaceTags } from "../../../../utilities/text-formatting-helpers";
 import { InlineParsingData } from "src/app/services/models/others/inline-parsing-data";
-//typed
+//typed 
 @Component({
   selector: 'getready-text-visualization-inline',
   templateUrl: './text-visualization-inline.component.html',
@@ -84,7 +84,7 @@ export class TextVisualizationInlineComponent implements OnInit {
       let specialText = text.slice(startIndex + tagLength, endIndex);
       specialText = replaceTags(specialText);
       specialText = trimEnds(specialText);
-      if (currTag = "<<s>>") {
+      if (currTag === "<<s>>") {
         specialText = window["PR"].prettyPrintOne(specialText); 
       }
       result = result.concat({ text: specialText, type: currTag });
